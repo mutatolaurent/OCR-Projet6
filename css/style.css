@@ -1,0 +1,403 @@
+/**
+ * Reset css.
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/**
+ * Déclaration des couleurs.
+ */
+/* :root {
+  --backgroundColor: #f1f0eb;
+  --headerColor: #d79922;
+  --headerPaleColor: #efe1ba;
+  --titleColor: #f13c1f;
+  --dateColor: #3f56a4;
+  --quoteColor: #c5cbe4;
+  --commentPaleColor: #99a140;
+  --commentColor: #255e33;
+} */
+:root {
+  --Gris-clair: #f5f3ef;
+  --Gris-fonc: #292929;
+  --Vert-principal: #00ac66;
+  --gap-col-nos-livres: 38px;
+  --gap-row-nos-livres: 48px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 1440px;
+  background: var(--Background-light, #faf9f7);
+  /* min-width: 1024px; */
+}
+
+/* Titre principale de la page */
+h1 {
+  color: #000;
+  font-family: "Playfair Display";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* HEADER GLOBAL */
+.site-header {
+  width: 100%;
+  /* max-width: 1440px; */
+  height: 80px;
+  background: var(--Gris-clair);
+  display: flex;
+  align-items: center;
+  /* margin: 0 auto; */
+  padding-left: clamp(40px, 10.42vw, 150px);
+  padding-right: clamp(40px, 10.42vw, 150px);
+  white-space: nowrap;
+  font-family: Inter, sans-serif;
+}
+
+/* LOGO */
+.logo-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.logo-square {
+  width: 51px;
+  height: 51px;
+  border-radius: 8.5px;
+  background: var(--Vert-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-svg {
+  width: 32.311px;
+  height: 25.5px;
+}
+
+.logo-text {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--Vert-principal);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* BASE MENU ITEM = CONTENEUR FLEX FIXE */
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  color: var(--Gris-fonc);
+  font-size: 14px;
+  letter-spacing: 0.28px;
+  flex: 0 0 auto; /* ne s’étire pas */
+  /* flex-shrink: 0; ne se compresse pas */
+}
+
+/* TEXTE À L’INTÉRIEUR DU CONTENEUR FIXE */
+.menu-label {
+  display: block;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Largeurs fixes par item (en ch, pour absorber le gras sans bouger les voisins) */
+.menu-accueil {
+  width: 7ch; /* "Accueil" */
+}
+
+.menu-livres {
+  width: 18ch; /* "Nos livres à l’échange" */
+}
+
+.menu-messagerie {
+  width: 9ch; /* "Messagerie" */
+}
+
+.menu-compte {
+  width: 10ch; /* "Mon compte" */
+}
+
+.menu-connexion {
+  width: 9ch; /* "Connexion" */
+}
+
+/* Survol : gras, mais la largeur du conteneur reste fixe */
+.menu-item:hover .menu-label {
+  font-weight: 600;
+}
+
+/* ESPACEMENTS EXACTS (avec adaptation) */
+
+/* Accueil : 78px à droite du bloc logo */
+.menu-accueil {
+  margin-left: clamp(40px, 5.41vw, 78px);
+}
+
+/* Nos livres à l’échange : 44px à droite d’Accueil */
+.menu-livres {
+  margin-left: clamp(20px, 3.05vw, 44px);
+}
+
+/* Barre verticale : 208px à droite de "Nos livres à l’échange" */
+.separator {
+  width: 1px;
+  height: 19px;
+  background: #a6a6a6;
+  opacity: 0.2;
+  margin-left: clamp(40px, 14.44vw, 208px);
+  /* margin-right: clamp(40px, 10vw, 58px);  */
+  /* margin-left: 208px; */
+  /* margin-right: 58px; */
+}
+
+/* MESSAGERIE */
+.messagerie-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 58px;
+}
+
+.messagerie-icon {
+  width: 15px;
+  height: 13.129px;
+  flex-shrink: 0;
+}
+
+.msg-counter {
+  width: 10.5px;
+  height: 15px;
+  border-radius: 6.75px;
+  background: var(--Gris-fonc);
+  color: var(--Gris-clair);
+  font-size: 8.25px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Réserver l’espace même si non affiché */
+.msg-counter.hidden {
+  visibility: hidden;
+}
+
+/* MON COMPTE : 58px à droite de Messagerie */
+.compte-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 4px;
+  margin-left: clamp(30px, 4.02vw, 58px);
+  flex-shrink: 0;
+}
+
+.compte-icon {
+  width: 9.286px;
+  height: 9.286px;
+  border-radius: 9.286px;
+  background: #d9d9d9;
+  flex-shrink: 0;
+}
+
+/* CONNEXION : 58px à droite de Mon compte */
+.menu-connexion {
+  margin-left: clamp(40px, 4.02vw, 58px);
+}
+
+/* FOOTER GLOBAL */
+.main-footer {
+  display: flex;
+  width: 1440px;
+  height: 61px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+  background: #fff;
+}
+
+.main-footer a {
+  text-decoration: none;
+  color: var(--Gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.main-footer img {
+  padding-right: 46px;
+}
+
+/**
+  * Page Nos livres à l'échange 
+  */
+.main-nos-livres {
+  /* width: 100%; */
+  margin-left: clamp(20px, 18.26vw, 263px);
+  margin-right: clamp(20px, 18.26vw, 263px);
+  margin-top: 130px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container du titre et du formulaire de recherche */
+.entete-nos-livres {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Container du formulaire de recherche */
+.search-form {
+  display: flex;
+  align-items: center;
+  /* gap: 10px; */
+  width: 322px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+  background: #fff;
+}
+
+/* Icone qui lance la recherche */
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+  /* padding: 17px 29.4px 17.9px 12px; */
+  /* stroke-width: 1px; */
+  /* stroke: var(--Gris-texte, #a6a6a6); */
+  width: 50px;
+  height: 50px;
+}
+
+.search-btn img {
+  width: 15.854px;
+  height: 15.146px;
+}
+
+/* Champ de saisie des critères de recherche */
+.search-input {
+  color: var(--Gris-texte, #a6a6a6);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  /* line-height: normal; */
+  border: none;
+  outline: none;
+  width: 100%;
+  padding-right: 10px;
+}
+
+/* Style du placeholder de la balise INPUT */
+.search-form input::placeholder {
+  color: var(--Gris-texte, #a6a6a6);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Container de la section des cards des livres */
+.cards-nos-livres {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--gap-col-nos-livres);
+  row-gap: var(--gap-row-nos-livres);
+  padding-top: 72px;
+  padding-bottom: 80px;
+}
+
+.cards-nos-livres a {
+  flex: 0 1 calc(25% - (var(--gap-col-nos-livres) * 3 / 4));
+  display: flex;
+  text-decoration: none;
+}
+
+.cards-nos-livres .card {
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1)); */
+}
+
+.cards-nos-livres .card img {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
+
+.cards-nos-livres .book-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 14px;
+  padding-top: 20px;
+  padding-right: 14px;
+  flex-grow: 1;
+}
+
+.cards-nos-livres .book-author {
+  padding-left: 14px;
+  padding-top: 11px;
+  padding-right: 14px;
+  color: var(--Gris-texte, #a6a6a6);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.cards-nos-livres .book-owner {
+  padding-left: 14px;
+  padding-top: 25px;
+  padding-right: 14px;
+  padding-bottom: 23px;
+  color: var(--Gris-texte, #a6a6a6);
+  font-family: Inter;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+}

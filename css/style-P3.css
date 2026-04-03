@@ -1,0 +1,723 @@
+/****** General ***********/
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+:root {
+  --main-color: #0065fc;
+  --main-bg-color: #f2f2f2;
+  --filter-bg-color: #deebff;
+  --filter-border-color: #d9d9d9;
+  --gap-standard: 30px;
+  --prc-space-by-hebergement-card: 50%;
+}
+
+.fa-solid {
+  color: var(--main-color);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 1440px;
+  min-width: 1024px;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section-title {
+  margin: 0 0 30px 0;
+  font-size: 22px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px;
+  filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1));
+}
+
+.card img {
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 16px;
+}
+
+.menu-item {
+  font-size: 16px;
+}
+
+.euro {
+  font-weight: 700;
+}
+
+.neutral-star {
+  color: var(--main-bg-color);
+}
+
+.search-filter-text {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* 
+Titre principal de la page
+*/
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+/* 
+Texte dans les balises P (paragraphe)
+*/
+p {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0px;
+}
+
+/****************************/
+/* ETAPE 3 : Entete du site */
+/****************************/
+/* 
+Entête de page avec logo et menu de navigation
+. Hauteur fixe de 79px (cf. spc maquette : 30px padding top + 19px image + 30px padding bottom)
+. Affichage flex et row pour une répartition horizontale du logo et de la barre de menu
+. space-between : les éléments sont étirés sur tout l'axe ce qui permet d'avoir le logo à gauche et la barre de menu à droite 
+*/
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 79px;
+  margin-bottom: 30px;
+}
+
+/* 
+Image du logo dans le header
+. Hauteur de l'image du logo fxée à 19px (cf. spec maquette)
+. Padding : marge intérieure : pas de padding à droite et à gauche, padding de 30px au dessus et au dessous de l'image 
+*/
+.main-header img {
+  height: 19px;
+  padding: 30px 0px;
+}
+
+/* 
+Liste des items du menu
+. list-style: none => on supprime les puces pour chaque item de la liste
+. display: flex et direction row (par défaut) => pour que les items s'affiche horizontalement 
+. gap: 68px : écart entre chaque item de la liste (cf. spec maquette) 
+. margin:0 : suppression des marges extérieures pour un alignement parfait avec le conteneur header 
+*/
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  column-gap: 68px;
+  margin: 0;
+  padding-bottom: 50px;
+}
+
+/* 
+item du menu de type ancre
+. display: flex => pour transformer un élément de type inline en un élément de type block 
+    et ainsi pouvoir utiliser les propriétés de dimensionnement comme height, 
+    mais aussi les propriétés de positionnement comme align-items 
+. On force la hauteur à 35px => positionne le texte du lien au bon endroit et permettra d'afficher 
+    la bordure bleu au bon endroit lors du survol avec la souris.
+. box-sizing:border-box : la bordure est inclu dans la hauteur de 35px
+. align-items: flex-end => affiche le texte du lien en bas de la zone réservée pour la balise a 
+*/
+.main-nav ul a {
+  display: flex;
+  height: 35px;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+/* 
+Affichage dynamique lorsque la souris survole un item du menu
+. Border-top => on fait apparaître la bordure du haut d'une épaisseur de 2 px.
+. Comme l'élément A est initialisé avec box-sizing:border-box on évite un effet visuel 
+  de décalage du texte vers le bas lorsque la bordure apparaît.
+*/
+.main-nav ul a:hover {
+  color: var(--main-color);
+  border-top: var(--main-color) solid 2px;
+}
+
+/********************************/
+/* ETAPE 4 : Barre de recherche */
+/********************************/
+
+/*
+Barre et Formulaire de recherche
+Affichage de type Flex (direction row par défaut) pour que les éléments s'affichent horizontalement
+et que l'on puisse leur appliquer des propriétés de dimensionnement.
+*/
+.search-bar {
+  display: flex;
+  margin: 35px 0;
+  height: 49px;
+}
+
+/*
+Icon de localisation
+Affichage de type flex également qu'il ne soit plus de type inline 
+de façon à pouvoir appliquer des propriétés de dimensionnement et de positionnement
+*/
+.search-bar i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  background-color: var(--main-bg-color);
+  border-radius: 15px 0 0 15px;
+  color: black;
+  border: 1px solid var(--main-bg-color);
+}
+
+/*
+Affichage de type flex également pour le conteneur du formulaire pour quand les éléments s'affichent côte à côté.
+Align-items:stretch : pour que l'espace occupé par les champs s'étirent sur toute la hauteur disponible. 
+*/
+.search-form {
+  display: flex;
+  align-items: stretch;
+  /* font-size: 18px;
+    font-weight: 700;  */
+}
+
+/*
+Champ de saisie des critères de recherche
+On applique les propriétés de mise en forme requises par la maquette : 
+. Marge intérieur (padding) gauche et droite de 24px
+. Style de la bordure : pointillés
+. Couleur de la bordure.
+. Epaisseur de la bordure : 1px pour la bordure haute et basse, 0px pour les bordures gauche et droite pour les faire disparaître
+*/
+.search-form input {
+  padding: 0 24px;
+  border-style: dotted;
+  border-color: var(--main-bg-color);
+  border-width: 1px 0;
+}
+
+/*
+Effet visuel lors du focus dans le champ input
+Non demandé dans la maquette (=> à débattre)
+Suppression du comportement par défaut lors du focus : une bordure pleine de 2px qui entoure tout le champ
+au profit du changement de couleur des pointillés haut et bas
+*/
+.search-form input:focus {
+  outline: none;
+  border-color: var(--main-bg-color);
+  border-width: 2px 0;
+  border-style: solid;
+}
+
+/*
+Style du placeholder de la balise INPUT
+*/
+.search-form input::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+/*
+Bouton de lancement de la recherche
+On applique les propriétés de mise en forme requises par la maquette : 
+. Marges intérieures (padding) gauche et droite de 16px
+. Bords arrondis à droite 
+. Non demandé dans la maquette (à débattre) : j'ai modifié l'aspect sur pointeur de la souris lors du survol du bouton
+  de façon à ce qu'il soit conforme à l'affichage des CTA de type lien (plus intuitif pour l'utilisateur à mon sens).
+*/
+.search-form button {
+  padding: 0 16px;
+  color: white;
+  border-radius: 0 15px 15px 0;
+  border: 1px solid var(--main-color);
+  background: var(--main-color);
+  cursor: pointer;
+}
+
+/*
+Les champs de formulaire n'héritent pas naturellement des propriétés de style fixées au niveau des balises parentes.
+On force l'héritage en utilisant la valeur inherit.
+*/
+.search-form input,
+.search-form button {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/******************************/
+/* ETAPE 5 : Barre de filtres */
+/******************************/
+/* 
+Container de la Barre de filtres
+Affichage de type Flex (direction row par défaut) pour que les éléments s'alignent horizontalement
+et qu'ils puissent hériter des propriétrés d'étirement sur toute la hauteur (stretch).
+*/
+.filter-bar {
+  display: flex;
+  height: 50px;
+  column-gap: 15px;
+  margin-bottom: 35px;
+  align-items: stretch; /* par défaut */
+}
+
+/*
+Texte d'introduction des filtres
+Affichage de type flex pour qu'il soit parfaitement alignée verticalement 
+avec le texte des boutons de filtres
+Les propriétés de font sont héritées du parent.
+*/
+.filter-bar span {
+  display: flex;
+  align-items: center;
+}
+
+/*
+Bouton des filtres
+Display flex pour pouvoir centrer le texte du bouton verticalement
+*/
+.filter-bar a {
+  border-radius: 25px;
+  border: 2px solid var(--filter-border-color);
+  padding: 0 19px;
+  display: flex;
+  align-items: center;
+}
+
+/*
+Effet au survol du bouton de filtre avec la souris
+On change la coulour du fond
+*/
+.filter-bar a:hover {
+  background: var(--filter-bg-color);
+}
+
+/*
+On applique une marge extérieure à droite de l'icône pour créer un espace avec le texte du bouton (cf. maquette)
+*/
+.filter-bar i {
+  margin: 0 10px 0 0;
+}
+
+/* 
+Container de la Barre d'information
+Affichage de type Flex (direction row par défaut) pour que les éléments s'alignet horizontalement
+*/
+.search-result-info {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+/*
+Icône d'information
+Affichage de type flex pour qu'il soit parfaitement aligné avec le texte du paragraphe associé
+*/
+.search-result-info i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/****** Hebergements And Populaires ***********/
+.hebergements-and-populaires {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hebergements-and-populaires section {
+  background-color: var(--main-bg-color);
+  border-radius: 20px;
+  /* padding: 30px; */
+  box-sizing: border-box;
+}
+
+/*************************************/
+/* ETAPE 6 et 7 : cards Hébergements */
+/*************************************/
+/* 
+La largeur de la zone d'affichage des informations sur 
+les hébergements est initialisée 
+à 65% de la largeur de son container
+*/
+.hebergements {
+  width: 65%;
+  padding: 30px;
+}
+
+/*
+Le type de la zone d'affichage des cards d'hébergement est 
+initialisé à FLEX pour que les cards s'affichent horizontalement 
+les unes à côté des autres.
+La proprité flex-wrap:wrap permet de continuer l'affichage sur la ligne
+suivante s'il n'y a plus de place sur la ligne courante.
+Column-gap fixe l'espace entre chaque cards de la ligne
+Row-gap fixe l'expace entre chaque ligne
+*/
+.hebergements-cards {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--gap-standard);
+  row-gap: var(--gap-standard);
+  /* justify-content: space-between; */
+}
+
+/*
+On gère ici le nombre de cards à afficher sur une ligne
+On souhaite :
+. les cards aient toujours la même largeur
+. même s'il n'y en a que 1 ou 2 sur la dernière ligne
+. et qu'elles ne s'étirent pas pour remplir toute la ligne
+[flex-grow] = 0  => ne pas s'étirer
+[flex-shrink] = 1 => peut rétrécir si nécessaire
+[flex-basis] = calc(33.33% - 20px) => largeur de cards calculée en tenant compte 
+des espaces entre chaque card : 30px (cf. propriété column-gap de la classe parente).
+Principe: pour 3 colonnes, il n'y a que 2 espaces de 30px. Le calcul exact pour une 
+précision parfaite est : flex: 0 1 calc(33.33% - (30px * 2 / 3)); soit calc(33.33% - 20px).
+*/
+.hebergements-cards a {
+  /* flex: 0 1 calc(33.33% - 20px); */
+  flex: 0 1 calc(33.33% - (var(--gap-standard) * 2 / 3));
+  display: flex; /* new */
+}
+
+/*
+On force la hauteur de la card à s'étirer sur toute la hauteur de son parent la balise A.
+Ceci pour que toutes les cards d'une même ligne soient parfaitement alignées
+en haut et en bas, même si le contenu d'une card de la ligne est plus chargé 
+que celui des autres cards
+*/
+.hebergements-cards .card {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+Style du lien "Afficher plus de cards"
+*/
+.hebergements-plus-de-cards {
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+/*
+Style du titre des cards
+On adapte la classe .card-title existante, avec des valeurs
+de marges internes propres aux cards d'hébergement.
+flex-grow: 1 => le titre s'étire sur tout l'espace disponible (verticalement), ce qui permet d'aligner 
+les sous-titre et les étoiles de toutes les cards d'une ligne au cas où
+le titre de l'une d'entre elles occupe plusieurs lignes
+*/
+.hebergements-cards .card-title {
+  margin: 4px 0 8px 15px;
+  flex-grow: 1;
+}
+
+/*
+Style du sous titre des cards
+On adapte la classe .card-subtitle existante, avec des valeurs
+de marges internes propres aux cards d'hébergement
+*/
+.hebergements-cards .card-subtitle {
+  margin-left: 15px;
+}
+
+/*
+Style des notes utilisateurs des cards
+On adapte la classe .card-rating existante, avec des valeurs
+de marges internes propres aux cards d'hébergement
+*/
+.hebergements-cards .card-rating {
+  margin-top: 8px;
+  margin-left: 15px;
+}
+
+/*
+Style des images des cards hébergement
+*/
+.hebergements-cards img {
+  width: 100%;
+  height: 124px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/********************/
+/* Cards populaires */
+/********************/
+.populaires {
+  width: 32%;
+  padding: 30px;
+}
+
+.populaires-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.populaires-title i {
+  padding-bottom: 30px;
+}
+
+/*
+LS: Changement effectué vs la version initiale pour bénéficier de la propriété row-gap (idem hebergement-card)
+et faire porter la marge sous le titre H2 par la classe section-title
+*/
+.populaires-cards {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--gap-standard);
+}
+
+.populaires-cards .card {
+  display: flex;
+  /* margin-top: 30px; */ /* Pris en chage par la propriété row-gap */
+}
+
+.populaires-cards img {
+  width: 33%;
+  height: 136px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.populaires-cards .card-content {
+  width: 67%;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.populaires-cards .card-title {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.populaires-cards .card-subtitle {
+  margin: 0;
+}
+
+.populaires-cards .card-rating {
+  margin-bottom: 5px;
+}
+
+/*****************************/
+/* ETAPE 8 : Cards activités */
+/*****************************/
+/* 
+Initialisation des marges internes de la section des activités
+*/
+.activites {
+  padding: 35px 30px 30px 30px;
+}
+
+/*
+Container qui accueille les cards des activités
+display:flex : les cards s'affichent en ligne côte-à-côte.
+column-gap: espace entre chaque card.
+row-gap: espace entre chaque ligne.
+flex-wrap:wrap : passe à la ligne suivante si plus de place sur la ligne courante
+*/
+.activites-cards {
+  display: flex;
+  column-gap: var(--gap-standard);
+  row-gap: var(--gap-standard);
+  flex-wrap: wrap;
+}
+
+/*
+On gère ici le nombre de cards à afficher sur une ligne
+On souhaite :
+. les cards aient toujours la même largeur
+. même s'il n'y en a que 1 ou 2 sur la dernière ligne
+. et qu'elles ne s'étirent pas pour remplir toute la ligne
+  [flex-grow] = 0  => ne pas s'étirer
+  [flex-shrink] = 1 => peut rétrécir si nécessaire
+  [flex-basis] = calc(25% - 22.5px) => largeur de cards calculée en tenant compte 
+  des espaces entre chaque card : 30px (cf. propriété column-gap de la classe parente).
+  Principe: pour 4 colonnes, il n'y a que 3 espaces de 30px. Le calcul exact pour une 
+  précision parfaite est : flex: 0 1 calc(25% - (30px * 3 / 4)); soit calc(25% - 22.5px).
+  Style de la balise A qui encapsule les cards et fait donc office de container.
+On donne également  ce container la propriété display:flex pour que l'on puisse
+forcer ces flex-item de s'étirer sur tout l'esapce disponible
+*/
+.activites-cards a {
+  /* flex: 0 1 calc(25% - 22.5px); */
+  flex: 0 1 calc(25% - (var(--gap-standard) * 3 / 4));
+  display: flex;
+}
+
+/*
+On fixe la hauteur de la card.
+flex-grow:1 => permet à card de s'étirer sur tout l'espace réserver à la card
+Sans cette propriété, la largeur de la carte dépend de la largeur de l'image même si object-fit=cover
+Display:flex pour que ce soit un container flex et que ces enfants puissent bénéficier 
+des propriétés de positionnement des item-flex .
+*/
+.activites-cards .card {
+  height: 439px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+/*
+Style de l'image de la card
+*/
+.activites-cards img {
+  height: 380px;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/*
+Style du titre de la card
+Display:flex pour pouvoir centrer le texte verticalement
+*/
+.activites-cards .card-title {
+  margin: 0;
+  padding: 0 19px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/**************************/
+/* ETAPE 9 : Pied de page */
+/**************************/
+/* Le container principal est de type Flex, pour que les blocs de menus s'affichent horizontalement */
+.main-footer {
+  display: flex;
+  background-color: var(--main-bg-color);
+}
+
+/* 3 blocs de menus répartis équitablement sur toute la largeur du conteneur principal */
+.menu-footer {
+  width: 33.33%;
+  padding: 20px;
+}
+
+/* Style du titre d'un bloc de menu */
+.menu-footer .card-title {
+  padding: 0;
+  margin: 0;
+}
+
+/* 
+On utilise la structure des listes à puces pour afficher les points de menu .
+On supprime les puces, et les marges internes et externes
+*/
+.menu-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-footer li {
+  margin-top: 15px;
+}
+
+/* Le code ci-dessous correspond à la version responsive uniquement */
+
+/****** Media queries ***********/
+/* Medium devices (tablets, less/equal than 1024px) */
+@media (max-width: 1024px) {
+  .hebergements-and-populaires {
+    flex-direction: column;
+  }
+
+  .hebergements {
+    width: 100%;
+  }
+
+  .populaires {
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  /*
+    LS: j'ai supprimé la propriété justify-content:space-between au profit column-gap: 30px
+    parce que j'utilise flex-wrap: wrap, ce qui permet de passer à la ligne si on a plus de 3 cards, 
+    et surtout cela permet de garder l'alignement à gauche des cards.
+    Si je conserve justify-content:space-between, si il n'y a que 2 cards sur une ligne, l'une s'affiche à gauche 
+    et l'autre à droite, laissant un trou d'une card au milieu.
+    */
+  .populaires-cards {
+    display: flex;
+    flex-direction: row;
+    row-gap: var(--gap-standard); /* nouveau vs version initiales */
+    column-gap: var(--gap-standard); /* nouveau vs version initial */
+    flex-wrap: wrap; /* nouveau vs version initial */
+    /* justify-content: space-between; */ /* version initial */
+  }
+
+  /*
+    LS: j'ai remplacé width: 30% par calc(33.33% - 20px) pour avoir un espace de 30px
+    entre chaque card populaire et ainsi être parfaitement aligné avec les cards hébergement.
+    L'option flex:0 permet que les cards ne s'étirent pas sur toute la largeur si il n'y en a que une ou deux sur la ligne
+    */
+  .populaires-cards a {
+    /* width: 30%; */ /* version initial */
+    flex: 0 1 calc(33.33% - (var(--gap-standard) * 2 / 3)); /* nouveau vs version initial */
+    /* flex: 0 1 calc(33.33% - 20px);   */
+  }
+
+  .populaires-cards .card-title {
+    font-size: 14px;
+  }
+
+  .populaires-cards .card-subtitle {
+    font-size: 13px;
+  }
+
+  /* 
+    LS: On passe les cards des activités de 4 colonnes à 3 colonnes 
+    Elles sont parfaitement alignées avec les cards hébergement et populaires
+    */
+  /* .activites-cards a { 
+        flex: 0 1 calc(33.33% - 20px);
+    } */
+
+  .activites-cards .card {
+    height: 269px;
+  }
+
+  .activites-cards img {
+    height: 200px;
+  }
+}
+
+/* Small devices (phones, less than 768px) */
+@media (max-width: 767.98px) {
+  /* ... */
+}
