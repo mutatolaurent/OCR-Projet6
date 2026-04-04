@@ -3,14 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nos livres à l'échange</title>
+    <title>Accueil Tom Troc</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-
   <body>
     <div class="main-container">
       <header class="site-header">
-        <!-- LOGO -->
         <a href="#" class="logo-block">
           <div class="logo-square">
             <img
@@ -22,17 +20,16 @@
           <span class="logo-text">Tom Troc</span>
         </a>
 
-        <!-- NAV -->
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Navigation principale">
           <a href="#" class="menu-item menu-accueil">
             <span class="menu-label">Accueil</span>
           </a>
 
           <a href="#" class="menu-item menu-livres">
-            <span class="menu-label">Nos livres à l’échange</span>
+            <span class="menu-label">Nos livres à l'échange</span>
           </a>
 
-          <div class="separator"></div>
+          <div class="separator" aria-hidden="true"></div>
 
           <a href="#" class="messagerie-block">
             <img
@@ -62,27 +59,30 @@
           </a>
         </nav>
       </header>
-      <main>
-        <div class="main-nos-livres">
-          <div class="entete-nos-livres">
-            <h1>Nos livres</h1>
-            <!-- Barre de recherches -->
-            <!-- <div class="search-bar"> -->
-            <form class="search-form">
-              <button type="submit" class="search-btn">
-                <img src="images/icones/search.svg" alt="Rechercher" />
-              </button>
-              <input
-                class="search-input"
-                type="text"
-                name="search-query"
-                placeholder="Rechercher un livre"
-              />
-            </form>
-          </div>
 
-          <section class="cards-nos-livres">
-            <!-- Livre 1 -->
+      <main>
+        <section class="home-sect1">
+          <div class="home-sect1-left">
+            <h1>Rejoignez nos <br />lecteurs passionnés</h1>
+            <p>
+              Donnez une nouvelle vie à vos livres en les échangeant avec
+              d'autres amoureux de la lecture. Nous croyons en la magie du
+              partage de connaissances et d'histoires à travers les livres.
+            </p>
+            <a href="#" class="btn btn-sect1"><span>Découvrir</span></a>
+          </div>
+          <div class="home-sect1-right">
+            <img src="images/home/home1.jpg" alt="" />
+            <p>Hamza</p>
+          </div>
+        </section>
+
+        <section class="home-sect2">
+          <h2>Les derniers livres ajoutés</h2>
+          <div
+            class="cards-nos-livres cards-home-sect2"
+            aria-label="Liste des livres"
+          >
             <a href="#">
               <article class="card">
                 <img
@@ -95,7 +95,6 @@
               </article>
             </a>
 
-            <!-- Livre 2 -->
             <a href="#">
               <article class="card">
                 <img
@@ -103,17 +102,16 @@
                   alt="Company of one"
                 />
                 <h3 class="book-title">Company of one</h3>
-                <p class="book-author">PAul Jarvis PAul Jarvis PAul Jarvis</p>
+                <p class="book-author">Paul Jarvis Paul Jarvis Paul Jarvis</p>
                 <p class="book-owner">Vendu par : VictoireFabr925</p>
               </article>
             </a>
 
-            <!-- Livre 3 -->
             <a href="#">
               <article class="card">
                 <img
                   src="./images/books/minimalist-graphcs.jpg"
-                  alt="A book of full hope"
+                  alt="Minimalist graphics"
                 />
                 <h3 class="book-title">A book of full hope</h3>
                 <p class="book-author">Rupi Kaur</p>
@@ -123,46 +121,21 @@
               </article>
             </a>
 
-            <!-- Livre 4 -->
             <a href="#">
               <article class="card">
-                <img src="./images/books/innovation.jpg" alt="Company of one" />
+                <img src="./images/books/innovation.jpg" alt="Innovation" />
                 <h3 class="book-title">Company of one</h3>
-                <p class="book-author">PAul Jarvis</p>
+                <p class="book-author">Paul Jarvis</p>
                 <p class="book-owner">Vendu par : VictoireFabr925</p>
               </article>
             </a>
-
-            <!-- Livre 5 -->
-            <a href="#">
-              <article class="card">
-                <img
-                  src="./images/books/milk-and-honey.jpg"
-                  alt="A book of full hope"
-                />
-                <h3 class="book-title">A book of full hope</h3>
-                <p class="book-author">Rupi Kaur</p>
-                <p class="book-owner">Vendu par : Lou&Ben50</p>
-              </article>
-            </a>
-
-            <!-- Livre 6 -->
-            <a href="#">
-              <article class="card">
-                <img
-                  src="./images/books/company-of-one.jpg"
-                  alt="Company of one"
-                />
-                <h3 class="book-title">Company of one</h3>
-                <p class="book-author">PAul Jarvis</p>
-                <p class="book-owner">Vendu par : VictoireFabr925</p>
-              </article>
-            </a>
-          </section>
-        </div>
+          </div>
+          <a href="#" class="btn btn-sect2"
+            ><span>Voir tous les livres</span></a
+          >
+        </section>
       </main>
 
-      <!-- Pied de page -->
       <footer class="main-footer">
         <a href="#">Politique de confidentialité</a>
         <a href="#">Mentions légales</a>

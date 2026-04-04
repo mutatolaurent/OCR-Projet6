@@ -8,89 +8,49 @@
 }
 
 :root {
-  --gris-clair: #f5f3ef;
-  --gris-fonc: #292929;
-  --vert-principal: #00ac66;
-  --vert-hover: #006d41;
-  --gris-texte: #a6a6a6;
+  --Gris-clair: #f5f3ef;
+  --Gris-fonc: #292929;
+  --Vert-principal: #00ac66;
   --gap-col-nos-livres: 38px;
   --gap-row-nos-livres: 48px;
-  --background-light: #faf9f7;
-  --max-width: 1440px;
-  --header-height: 80px;
-  --footer-height: 61px;
-  --radius: 6px;
 }
 
 body {
-  /* min-height: 100vh; */
   display: flex;
   justify-content: center;
-  font-family: Inter, sans-serif;
-  color: var(--gris-fonc);
+  margin: 0;
 }
 
 .main-container {
   width: 100%;
-  max-width: var(--max-width);
-  background: var(--background-light);
+  max-width: 1440px;
+  background: var(--Background-light, #faf9f7);
+  /* min-width: 1024px; */
 }
 
-/* COMPOSANTS COMMUNS */
 /* Titre principale de la page */
 h1 {
-  /* color: #000; */
+  color: #000;
   font-family: "Playfair Display";
   font-size: 36px;
+  font-style: normal;
   font-weight: 400;
-}
-
-/* Titre secondaire niveau 2*/
-h2 {
-  color: var(--Gris-fonc, #292929);
-  text-align: center;
-  font-family: "Playfair Display";
-  font-size: 32px;
-  /* font-style: normal; */
-  font-weight: 400;
-  /* line-height: normal; */
-}
-
-/* Boutons génériques */
-.btn {
-  display: inline-flex;
-  border-radius: 10px;
-  background: var(--vert-principal);
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-}
-
-/* Style commun à tous les boutons, 
-   pour le texte à l’intérieur */
-.btn span {
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-/* Survol : foncé, mais pas de changement de taille */
-.btn:hover {
-  background: var(--vert-hover);
+  line-height: normal;
 }
 
 /* HEADER GLOBAL */
 .site-header {
   width: 100%;
+  /* max-width: 1440px; */
   height: 80px;
-  background: var(--gris-clair);
+  background: var(--Gris-clair);
   display: flex;
   align-items: center;
-  padding: 0 clamp(40px, 10.42vw, 150px);
-  /* padding-right: clamp(40px, 10.42vw, 150px); */
+  /* margin: 0 auto; */
+  padding-left: clamp(40px, 10.42vw, 150px);
+  padding-right: clamp(40px, 10.42vw, 150px);
   white-space: nowrap;
-  /* font-family: Inter, sans-serif; */
+  font-family: Inter, sans-serif;
 }
 
 /* LOGO */
@@ -106,7 +66,7 @@ h2 {
   width: 51px;
   height: 51px;
   border-radius: 8.5px;
-  background: var(--vert-principal);
+  background: var(--Vert-principal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,14 +81,14 @@ h2 {
   font-family: "Playfair Display", serif;
   font-size: 20px;
   font-weight: 600;
-  color: var(--vert-principal);
+  color: var(--Vert-principal);
 }
 
 /* NAVBAR */
 .navbar {
   display: flex;
   align-items: center;
-  /* margin-left: auto; */
+  margin-left: auto;
   white-space: nowrap;
 }
 
@@ -138,10 +98,11 @@ h2 {
   align-items: center;
   justify-content: flex-start;
   text-decoration: none;
-  color: var(--gris-fonc);
+  color: var(--Gris-fonc);
   font-size: 14px;
   letter-spacing: 0.28px;
   flex: 0 0 auto; /* ne s’étire pas */
+  /* flex-shrink: 0; ne se compresse pas */
 }
 
 /* TEXTE À L’INTÉRIEUR DU CONTENEUR FIXE */
@@ -154,12 +115,10 @@ h2 {
 /* Largeurs fixes par item (en ch, pour absorber le gras sans bouger les voisins) */
 .menu-accueil {
   width: 7ch; /* "Accueil" */
-  margin-left: clamp(40px, 5.41vw, 78px);
 }
 
 .menu-livres {
   width: 18ch; /* "Nos livres à l’échange" */
-  margin-left: clamp(20px, 3.05vw, 44px);
 }
 
 .menu-messagerie {
@@ -172,12 +131,23 @@ h2 {
 
 .menu-connexion {
   width: 9ch; /* "Connexion" */
-  margin-left: clamp(40px, 4.02vw, 58px);
 }
 
 /* Survol : gras, mais la largeur du conteneur reste fixe */
 .menu-item:hover .menu-label {
   font-weight: 600;
+}
+
+/* ESPACEMENTS EXACTS (avec adaptation) */
+
+/* Accueil : 78px à droite du bloc logo */
+.menu-accueil {
+  margin-left: clamp(40px, 5.41vw, 78px);
+}
+
+/* Nos livres à l’échange : 44px à droite d’Accueil */
+.menu-livres {
+  margin-left: clamp(20px, 3.05vw, 44px);
 }
 
 /* Barre verticale : 208px à droite de "Nos livres à l’échange" */
@@ -187,19 +157,19 @@ h2 {
   background: #a6a6a6;
   opacity: 0.2;
   margin-left: clamp(40px, 14.44vw, 208px);
+  /* margin-right: clamp(40px, 10vw, 58px);  */
+  /* margin-left: 208px; */
+  /* margin-right: 58px; */
 }
 
 /* MESSAGERIE */
-.messagerie-block,
-.compte-block {
+.messagerie-block {
   display: flex;
   align-items: center;
   text-decoration: none;
   gap: 4px;
   flex-shrink: 0;
-}
-.messagerie-block {
-  margin-left: clamp(30px, 4.02vw, 58px);
+  margin-left: 58px;
 }
 
 .messagerie-icon {
@@ -212,8 +182,8 @@ h2 {
   width: 10.5px;
   height: 15px;
   border-radius: 6.75px;
-  background: var(--gris-fonc);
-  color: var(--gris-clair);
+  background: var(--Gris-fonc);
+  color: var(--Gris-clair);
   font-size: 8.25px;
   font-weight: 700;
   display: flex;
@@ -229,7 +199,12 @@ h2 {
 
 /* MON COMPTE : 58px à droite de Messagerie */
 .compte-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 4px;
   margin-left: clamp(30px, 4.02vw, 58px);
+  flex-shrink: 0;
 }
 
 .compte-icon {
@@ -240,12 +215,16 @@ h2 {
   flex-shrink: 0;
 }
 
+/* CONNEXION : 58px à droite de Mon compte */
+.menu-connexion {
+  margin-left: clamp(40px, 4.02vw, 58px);
+}
+
 /* FOOTER GLOBAL */
 .main-footer {
   display: flex;
-  width: 100%;
-  height: var(--footer-height);
-  max-width: var(--max-width);
+  width: 1440px;
+  height: 61px;
   justify-content: flex-end;
   align-items: center;
   gap: 40px;
@@ -254,7 +233,7 @@ h2 {
 
 .main-footer a {
   text-decoration: none;
-  color: var(--gris-fonc, #292929);
+  color: var(--Gris-fonc, #292929);
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
@@ -267,77 +246,13 @@ h2 {
 }
 
 /**
-  * Page Accueil
-  */
-.home-sect1 {
-  display: flex;
-  /* flex-direction: column; */
-  padding: 80px 310px 101px 290px;
-  background: var(--gris-clair);
-}
-
-.home-sect1-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-right: 105px;
-}
-
-.btn-sect1 {
-  width: 152px;
-  height: 63px;
-  padding: 22px 38px;
-}
-
-.home-sect1-left p {
-  color: #000;
-  font-size: 16px;
-  font-weight: 300;
-  margin-top: 16px;
-  margin-bottom: 40px;
-}
-
-.home-sect1-right p {
-  display: flex;
-  justify-content: flex-end;
-  color: var(--Gris-texte);
-  /* font-family: Inter; */
-  font-size: 12px;
-  font-style: italic;
-  font-weight: 400;
-  padding-top: 12px;
-  /* line-height: normal; */
-}
-
-.home-sect1-right {
-  display: flex;
-  flex-direction: column;
-}
-
-.home-sect1-right img {
-  width: 404px;
-  height: 539px;
-}
-
-.home-sect2 {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  padding: 80px 263px 64px 263px;
-  background: var(--background-light);
-}
-
-.btn-sect2 {
-  width: 218px;
-  height: 63px;
-  padding: 22px 38px;
-}
-/**
   * Page Nos livres à l'échange 
   */
 .main-nos-livres {
-  margin: 130px clamp(20px, 18.26vw, 263px);
+  /* width: 100%; */
+  margin-left: clamp(20px, 18.26vw, 263px);
+  margin-right: clamp(20px, 18.26vw, 263px);
+  margin-top: 130px;
   display: flex;
   flex-direction: column;
 }
@@ -353,13 +268,13 @@ h2 {
 .search-form {
   display: flex;
   align-items: center;
+  /* gap: 10px; */
   width: 322px;
   height: 50px;
-  /* box-sizing: border-box; */
-  border-radius: var(--radius);
+  box-sizing: border-box;
+  border-radius: 6px;
   border: 1px solid #f0f0f0;
   background: #fff;
-  overflow: hidden;
 }
 
 /* Icone qui lance la recherche */
@@ -371,6 +286,9 @@ h2 {
   border: none;
   cursor: pointer;
   padding: 0px;
+  /* padding: 17px 29.4px 17.9px 12px; */
+  /* stroke-width: 1px; */
+  /* stroke: var(--Gris-texte, #a6a6a6); */
   width: 50px;
   height: 50px;
 }
@@ -383,9 +301,9 @@ h2 {
 /* Champ de saisie des critères de recherche */
 .search-input {
   color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
+  font-family: Inter;
   font-size: 14px;
-  /* font-style: normal; */
+  font-style: normal;
   font-weight: 400;
   /* line-height: normal; */
   border: none;
@@ -399,24 +317,18 @@ h2 {
   color: var(--Gris-texte, #a6a6a6);
   font-family: Inter;
   font-size: 14px;
-  /* font-style: normal; */
+  font-style: normal;
   font-weight: 400;
 }
 
 /* Container de la section des cards des livres */
-/* TODO => a rendre générique*/
 .cards-nos-livres {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gap-row-nos-livres) var(--gap-col-nos-livres);
-  padding: 72px 0 80px;
-}
-
-/* Padding spécifique pour la section des cards, */
-/* pour compenser le padding plus petit que sur les autres sections */
-.cards-home-sect2 {
-  padding-top: 80px;
-  padding-bottom: 48px;
+  column-gap: var(--gap-col-nos-livres);
+  row-gap: var(--gap-row-nos-livres);
+  padding-top: 72px;
+  padding-bottom: 80px;
 }
 
 .cards-nos-livres a {
@@ -441,11 +353,11 @@ h2 {
 
 .cards-nos-livres .book-title {
   color: #000;
-  /* font-family: Inter; */
+  font-family: Inter;
   font-size: 16px;
-  /* font-style: normal; */
+  font-style: normal;
   font-weight: 400;
-  /* line-height: normal; */
+  line-height: normal;
   padding-left: 14px;
   padding-top: 20px;
   padding-right: 14px;
@@ -457,11 +369,11 @@ h2 {
   padding-top: 11px;
   padding-right: 14px;
   color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
+  font-family: Inter;
   font-size: 14px;
-  /* font-style: normal; */
+  font-style: normal;
   font-weight: 400;
-  /* line-height: normal; */
+  line-height: normal;
 }
 
 .cards-nos-livres .book-owner {
@@ -470,9 +382,9 @@ h2 {
   padding-right: 14px;
   padding-bottom: 23px;
   color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
+  font-family: Inter;
   font-size: 10px;
   font-style: italic;
   font-weight: 400;
-  /* line-height: normal; */
+  line-height: normal;
 }
