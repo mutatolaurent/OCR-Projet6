@@ -22,6 +22,7 @@
   --radius: 6px;
 }
 
+/* Styles globaux au body de la pa */
 body {
   /* min-height: 100vh; */
   display: flex;
@@ -30,6 +31,7 @@ body {
   color: var(--gris-fonc);
 }
 
+/* Container global de la page, pour limiter la largeur et centrer le contenu */
 .main-container {
   width: 100%;
   max-width: var(--max-width);
@@ -56,6 +58,28 @@ h2 {
   line-height: normal;
 }
 
+/* Titre secondaire niveau 3*/
+h3 {
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Titre secondaire niveau 4*/
+h4 {
+  color: var(--Gris-fonc);
+  font-family: Inter;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+/* Paragraphe */
 p {
   color: var(--gris-fonc, #292929);
   font-family: Inter;
@@ -76,6 +100,7 @@ p {
   padding: 22px 38px;
 }
 
+/* Deux variantes de boutons : rempli ou vide */
 .btn-filled {
   background: var(--vert-principal);
   color: #fff;
@@ -87,16 +112,7 @@ p {
   color: var(--vert-principal);
 }
 
-/* Style commun à tous les boutons, 
-   pour le texte à l’intérieur */
-/* .btn span { */
-/* color: #fff; */
-/* text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-} */
-
-/* Survol : foncé, mais pas de changement de taille */
+/* Survol : foncé pour les 2 types de boutons */
 .btn-filled:hover {
   background: var(--vert-hover);
 }
@@ -157,7 +173,9 @@ p {
   white-space: nowrap;
 }
 
-/* BASE MENU ITEM = CONTENEUR FLEX FIXE */
+/* Chaque item du menu est un conteneur flex 
+avec une largeur fixe, pour éviter que le survol 
+en gras ne fasse bouger les autres items */
 .menu-item {
   display: flex;
   align-items: center;
@@ -174,6 +192,14 @@ p {
   display: block;
   font-weight: 400;
   white-space: nowrap;
+}
+
+/* Point de menu affiché directement en gras
+pour indiquer la page active, mais sans changer 
+la largeur du conteneur */
+.menu-label-bold {
+  font-weight: 600;
+  font-size: 14px;
 }
 
 /* Largeurs fixes par item (en ch, pour absorber le gras sans bouger les voisins) */
@@ -277,6 +303,7 @@ p {
   background: #fff;
 }
 
+/* Lien "Mentions légales" et "Contact" */
 .main-footer a {
   text-decoration: none;
   color: var(--gris-fonc, #292929);
@@ -298,26 +325,31 @@ p {
   padding: 72px 0 80px;
 }
 
+/* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
+et un conteneur flex pour aligner les éléments à l’intérieur */
 .cards-nos-livres a {
   flex: 0 1 calc(25% - (var(--gap-col-nos-livres) * 3 / 4));
   display: flex;
   text-decoration: none;
 }
 
+/* Contenu de chaque card : image, titre, auteur, propriétaire */
 .cards-nos-livres .card {
   background-color: white;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  /* filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1)); */
 }
 
+/* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
 .cards-nos-livres .card img {
   object-fit: cover;
   width: 100%;
   height: 200px;
 }
 
+/* Titre du livre : on laisse le texte s’étendre sur plusieurs lignes si besoin, 
+et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
 .cards-nos-livres .book-title {
   color: #000;
   font-size: 16px;
@@ -328,34 +360,36 @@ p {
   flex-grow: 1;
 }
 
+/* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
+et on ajoute un peu d’espace en haut pour séparer du titre */
 .cards-nos-livres .book-author {
   padding-left: 14px;
   padding-top: 11px;
   padding-right: 14px;
   color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
   font-size: 14px;
-  /* font-style: normal; */
   font-weight: 400;
-  /* line-height: normal; */
 }
 
+/* Propriétaire du livre : on utilise une couleur plus claire et un style italique 
+pour différencier du titre et de l’auteur,
+et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu */
 .cards-nos-livres .book-owner {
   padding-left: 14px;
   padding-top: 25px;
   padding-right: 14px;
   padding-bottom: 23px;
   color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
   font-size: 10px;
   font-style: italic;
   font-weight: 400;
-  /* line-height: normal; */
 }
 
 /**
   * Page Accueil
   */
+
+/* Container de la section d’introduction avec le texte à gauche et l’image à droite */
 .home-sect1 {
   display: flex;
   /* flex-direction: column; */
@@ -363,6 +397,8 @@ p {
   background: var(--gris-clair);
 }
 
+/* Conteneur du texte à gauche : on utilise flex-direction: column pour empiler les éléments, 
+et justify-content: center pour les centrer verticalement */
 .home-sect1-left {
   display: flex;
   flex-direction: column;
@@ -370,9 +406,11 @@ p {
   padding-right: 105px;
 }
 
+/* Le bouton "Découvrir" ne prend pas toute la largeur du conteneur et est aligné à gauche */
 .btn-sect1 {
-  width: 152px;
-  height: 63px;
+  /* width: 152px;
+  height: 63px; */
+  align-self: flex-start;
 }
 
 .home-sect1-left p {
@@ -403,6 +441,7 @@ p {
   height: 539px;
 }
 
+/* Container de la section avec les cards des livres */
 .home-sect2 {
   display: flex;
   flex-direction: column;
@@ -412,17 +451,10 @@ p {
 }
 
 /* Padding spécifique pour la section des cards, */
-/* pour compenser le padding plus petit que sur les autres sections */
 .cards-home-sect2 {
   padding-top: 80px;
   padding-bottom: 48px;
 }
-
-/* .btn-sect2 {
-  width: 218px;
-  height: 63px;
-  padding: 22px 38px;
-} */
 
 .home-sect3 {
   display: flex;
@@ -570,4 +602,122 @@ p {
   font-size: 14px;
   /* font-style: normal; */
   font-weight: 400;
+}
+
+/* 
+ * Page Single Livre
+ */
+.breadcrump {
+  padding: 16px 150px 16px 150px;
+  /* width: 100%; */
+  background-color: var(--gris-clair);
+}
+
+.breadcrump a {
+  text-decoration: none;
+  color: var(--gris-text);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.single-livre-container {
+  display: flex;
+  /* width: 100%; */
+}
+
+.single-livre-container .livre-image {
+  /* display: flex; */
+  width: 720px;
+  height: auto;
+  object-fit: cover;
+}
+
+.single-livre-container .livre-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 59px 150px 80px 85px;
+}
+
+.single-livre-container .livre-info h1 {
+  padding-bottom: 16px;
+}
+
+.single-livre-container .livre-info h3 {
+  padding-bottom: 32.5px;
+}
+
+.single-livre-container .livre-info .line-separator {
+  margin-bottom: 32.5px;
+  width: 27px;
+  height: 1px;
+}
+
+.single-livre-container .livre-info h4 {
+  padding-bottom: 16px;
+}
+
+.single-livre-container .livre-info p {
+  padding-bottom: 32px;
+}
+
+.single-livre-container .picto-owner {
+  display: inline-flex;
+  padding: 6px 17px 6px 6px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 114px;
+  background: #fff;
+  height: 60px;
+  /* align-self: flex-start; */
+  width: fit-content;
+  text-decoration: none;
+  position: relative;
+}
+
+.single-livre-container .livre-info .picto-owner {
+  margin-bottom: 80px;
+  flex: 0;
+}
+
+.img-owner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  object-fit: cover;
+  /* transition: filter 0.3s ease;  */
+}
+
+.pseudo-owner {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  font-weight: 400;
+}
+
+.picto-owner:hover .pseudo-owner {
+  color: var(--vert-principal);
+  font-weight: 500;
+}
+
+/* On crée un calque invisible par défaut au-dessus de l'image */
+.picto-owner::before {
+  content: "";
+  position: absolute;
+  top: 6px; /* Correspond au padding-top */
+  left: 6px; /* Correspond au padding-left */
+  width: 48px; /* Taille de l'image */
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--vert-principal);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1; /* S'assure que le voile est au-dessus de l'image */
+}
+
+.picto-owner:hover::before {
+  opacity: 0.4; /* Ajuste la transparence du voile ici (0.4 = 40%) */
 }
