@@ -47,37 +47,62 @@ h1 {
 
 /* Titre secondaire niveau 2*/
 h2 {
-  color: var(--Gris-fonc, #292929);
+  color: var(--gris-fonc, #292929);
   text-align: center;
   font-family: "Playfair Display";
   font-size: 32px;
-  /* font-style: normal; */
+  font-style: normal;
   font-weight: 400;
-  /* line-height: normal; */
+  line-height: normal;
+}
+
+p {
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
 }
 
 /* Boutons génériques */
 .btn {
   display: inline-flex;
   border-radius: 10px;
-  background: var(--vert-principal);
+  /* background: var(--vert-principal); */
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  padding: 22px 38px;
+}
+
+.btn-filled {
+  background: var(--vert-principal);
+  color: #fff;
+}
+
+.btn-empty {
+  border: 1px solid var(--vert-principal);
+  background: var(--gris-clair);
+  color: var(--vert-principal);
 }
 
 /* Style commun à tous les boutons, 
    pour le texte à l’intérieur */
-.btn span {
-  color: #fff;
-  text-align: center;
+/* .btn span { */
+/* color: #fff; */
+/* text-align: center;
   font-size: 16px;
   font-weight: 600;
-}
+} */
 
 /* Survol : foncé, mais pas de changement de taille */
-.btn:hover {
+.btn-filled:hover {
   background: var(--vert-hover);
+}
+.btn-empty:hover {
+  background: var(--vert-hover);
+  color: var(--gris-clair);
 }
 
 /* HEADER GLOBAL */
@@ -257,13 +282,75 @@ h2 {
   color: var(--gris-fonc, #292929);
   font-family: Inter;
   font-size: 12px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
 }
 
 .main-footer img {
   padding-right: 46px;
+}
+
+/* CARDS DES LIVRES */
+/* Container de la section des cards des livres */
+.cards-nos-livres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-row-nos-livres) var(--gap-col-nos-livres);
+  padding: 72px 0 80px;
+}
+
+.cards-nos-livres a {
+  flex: 0 1 calc(25% - (var(--gap-col-nos-livres) * 3 / 4));
+  display: flex;
+  text-decoration: none;
+}
+
+.cards-nos-livres .card {
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1)); */
+}
+
+.cards-nos-livres .card img {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
+
+.cards-nos-livres .book-title {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  padding-left: 14px;
+  padding-top: 20px;
+  padding-right: 14px;
+  flex-grow: 1;
+}
+
+.cards-nos-livres .book-author {
+  padding-left: 14px;
+  padding-top: 11px;
+  padding-right: 14px;
+  color: var(--Gris-texte, #a6a6a6);
+  /* font-family: Inter; */
+  font-size: 14px;
+  /* font-style: normal; */
+  font-weight: 400;
+  /* line-height: normal; */
+}
+
+.cards-nos-livres .book-owner {
+  padding-left: 14px;
+  padding-top: 25px;
+  padding-right: 14px;
+  padding-bottom: 23px;
+  color: var(--Gris-texte, #a6a6a6);
+  /* font-family: Inter; */
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 400;
+  /* line-height: normal; */
 }
 
 /**
@@ -286,13 +373,10 @@ h2 {
 .btn-sect1 {
   width: 152px;
   height: 63px;
-  padding: 22px 38px;
 }
 
 .home-sect1-left p {
   color: #000;
-  font-size: 16px;
-  font-weight: 300;
   margin-top: 16px;
   margin-bottom: 40px;
 }
@@ -322,17 +406,102 @@ h2 {
 .home-sect2 {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   padding: 80px 263px 64px 263px;
   background: var(--background-light);
 }
 
-.btn-sect2 {
+/* Padding spécifique pour la section des cards, */
+/* pour compenser le padding plus petit que sur les autres sections */
+.cards-home-sect2 {
+  padding-top: 80px;
+  padding-bottom: 48px;
+}
+
+/* .btn-sect2 {
   width: 218px;
   height: 63px;
   padding: 22px 38px;
+} */
+
+.home-sect3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 236px 64px 236px;
+  background: var(--gris-clair);
 }
+
+.home-sect3 h2 {
+  padding-bottom: 24px;
+}
+
+.home-sect3 p {
+  width: 397px;
+}
+
+.howto-home-sect3 {
+  display: flex;
+  column-gap: 36px;
+  margin-bottom: 48px;
+  margin-top: 40px;
+}
+
+.howto-home-sect3 p {
+  display: flex;
+  align-items: center;
+  width: 215px;
+  height: 139px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--Gris-fonc, #292929);
+  text-align: center;
+  padding-inline: 18px;
+  padding-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.home-sect4 {
+  /* padding-bottom: 64px; */
+  width: 100%;
+}
+
+.home-sect5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 80px 436px 89px 542px;
+  background: var(--gris-clair);
+}
+.home-sect5 h2 {
+  padding-bottom: 29px;
+}
+
+.home-sect5 p {
+  width: 392px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.signature-home-sect5 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signature-home-sect5 span {
+  padding-top: 39px;
+  color: var(--gris-texte);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.signature-home-sect5 img {
+  padding-top: 25px;
+}
+
 /**
   * Page Nos livres à l'échange 
   */
@@ -401,78 +570,4 @@ h2 {
   font-size: 14px;
   /* font-style: normal; */
   font-weight: 400;
-}
-
-/* Container de la section des cards des livres */
-/* TODO => a rendre générique*/
-.cards-nos-livres {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap-row-nos-livres) var(--gap-col-nos-livres);
-  padding: 72px 0 80px;
-}
-
-/* Padding spécifique pour la section des cards, */
-/* pour compenser le padding plus petit que sur les autres sections */
-.cards-home-sect2 {
-  padding-top: 80px;
-  padding-bottom: 48px;
-}
-
-.cards-nos-livres a {
-  flex: 0 1 calc(25% - (var(--gap-col-nos-livres) * 3 / 4));
-  display: flex;
-  text-decoration: none;
-}
-
-.cards-nos-livres .card {
-  background-color: white;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  /* filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1)); */
-}
-
-.cards-nos-livres .card img {
-  object-fit: cover;
-  width: 100%;
-  height: 200px;
-}
-
-.cards-nos-livres .book-title {
-  color: #000;
-  /* font-family: Inter; */
-  font-size: 16px;
-  /* font-style: normal; */
-  font-weight: 400;
-  /* line-height: normal; */
-  padding-left: 14px;
-  padding-top: 20px;
-  padding-right: 14px;
-  flex-grow: 1;
-}
-
-.cards-nos-livres .book-author {
-  padding-left: 14px;
-  padding-top: 11px;
-  padding-right: 14px;
-  color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
-  font-size: 14px;
-  /* font-style: normal; */
-  font-weight: 400;
-  /* line-height: normal; */
-}
-
-.cards-nos-livres .book-owner {
-  padding-left: 14px;
-  padding-top: 25px;
-  padding-right: 14px;
-  padding-bottom: 23px;
-  color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
-  font-size: 10px;
-  font-style: italic;
-  font-weight: 400;
-  /* line-height: normal; */
 }
