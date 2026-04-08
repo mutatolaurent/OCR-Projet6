@@ -20,43 +20,43 @@
           <span class="logo-text">Tom Troc</span>
         </a>
 
-        <nav class="navbar" aria-label="Navigation principale">
-          <a href="#" class="menu-item menu-accueil">
-            <span class="menu-label">Accueil</span>
-          </a>
+        <input type="checkbox" id="menu-cb" />
+        <label for="menu-cb" class="burger-menu">
+          <img src="images/icones/icon-menu.svg" alt="Menu" />
+        </label>
 
-          <a href="#" class="menu-item menu-livres">
-            <span class="menu-label">Nos livres à l'échange</span>
-          </a>
+        <nav class="navbar">
+          <a href="#" class="nav-link"
+            ><span data-text="Accueil">Accueil</span></a
+          >
+          <a href="#" class="nav-link"
+            ><span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            ></a
+          >
 
-          <div class="separator" aria-hidden="true"></div>
-
-          <a href="#" class="messagerie-block">
+          <a href="#" class="nav-link complex-link">
             <img
               src="images/icones/messagerie.svg"
-              alt="Messagerie"
+              alt=""
               class="messagerie-icon"
             />
-            <span class="menu-item menu-messagerie">
-              <span class="menu-label">Messagerie</span>
-            </span>
-            <span class="msg-counter">12</span>
+            <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
+            <div class="msg-counter">3</div>
           </a>
 
-          <a href="#" class="compte-block">
+          <a href="#" class="nav-link complex-link">
             <img
               src="images/icones/mon-compte.svg"
-              alt="Mon compte"
+              alt=""
               class="compte-icon"
             />
-            <span class="menu-item menu-compte">
-              <span class="menu-label">Mon compte</span>
-            </span>
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
           </a>
 
-          <a href="#" class="menu-item menu-connexion">
-            <span class="menu-label">Connexion</span>
-          </a>
+          <a href="#" class="nav-link"
+            ><span data-text="Connexion">Connexion</span></a
+          >
         </nav>
       </header>
 
@@ -81,10 +81,7 @@
 
         <section class="home-sect2">
           <h2>Les derniers livres ajoutés</h2>
-          <div
-            class="cards-nos-livres cards-home-sect2"
-            aria-label="Liste des livres"
-          >
+          <div class="cards-nos-livres cards-home-sect2">
             <a href="#">
               <article class="card">
                 <img
@@ -160,7 +157,7 @@
         </section>
 
         <div class="home-sect4">
-          <img src="images/home/home2.jpg" alt="" width="1440px" />
+          <!-- <img src="images/home/home2.jpg" alt="" width="1440px" /> -->
         </div>
 
         <section class="home-sect5">

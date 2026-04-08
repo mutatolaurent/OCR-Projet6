@@ -98,6 +98,7 @@ p {
   align-items: center;
   text-decoration: none;
   padding: 22px 38px;
+  font-weight: 600;
 }
 
 /* Deux variantes de boutons : rempli ou vide */
@@ -121,17 +122,39 @@ p {
   color: var(--gris-clair);
 }
 
-/* HEADER GLOBAL */
+/* 2. HEADER ET BARRE VERTICALE */
 .site-header {
   width: 100%;
   height: 80px;
   background: var(--gris-clair);
   display: flex;
   align-items: center;
-  padding: 0 clamp(40px, 10.42vw, 150px);
-  /* padding-right: clamp(40px, 10.42vw, 150px); */
+  padding-left: clamp(40px, 10.42vw, 150px);
+  padding-right: clamp(40px, 10.42vw, 150px);
+  position: relative;
   white-space: nowrap;
-  /* font-family: Inter, sans-serif; */
+}
+
+/* Barre verticale fixe à 833px (Desktop uniquement) */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 833px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 19px;
+  background-color: var(--gris-fonc);
+  z-index: 10;
+}
+
+/* LOGIQUE BURGER (Caché sur Desktop) */
+#menu-cb {
+  display: none;
+}
+.burger-menu {
+  display: none;
+  cursor: pointer;
 }
 
 /* LOGO */
@@ -165,100 +188,51 @@ p {
   color: var(--vert-principal);
 }
 
-/* NAVBAR */
+/* 4. NAVIGATION ET LIENS DESKTOP */
 .navbar {
   display: flex;
   align-items: center;
-  /* margin-left: auto; */
-  white-space: nowrap;
+  flex: 1;
 }
 
-/* Chaque item du menu est un conteneur flex 
-avec une largeur fixe, pour éviter que le survol 
-en gras ne fasse bouger les autres items */
-.menu-item {
-  display: flex;
+.nav-link {
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
   text-decoration: none;
-  color: var(--gris-fonc);
-  font-size: 14px;
-  letter-spacing: 0.28px;
-  flex: 0 0 auto; /* ne s’étire pas */
-}
-
-/* TEXTE À L’INTÉRIEUR DU CONTENEUR FIXE */
-.menu-label {
-  display: block;
+  color: black;
   font-weight: 400;
-  white-space: nowrap;
-}
-
-/* Point de menu affiché directement en gras
-pour indiquer la page active, mais sans changer 
-la largeur du conteneur */
-.menu-label-bold {
-  font-weight: 600;
   font-size: 14px;
+  gap: 4px;
 }
 
-/* Largeurs fixes par item (en ch, pour absorber le gras sans bouger les voisins) */
-.menu-accueil {
-  width: 7ch; /* "Accueil" */
-  margin-left: clamp(40px, 5.41vw, 78px);
+/* TECHNIQUE ANTI-DÉCALAGE */
+.nav-link span,
+.nav-link .text-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.menu-livres {
-  width: 18ch; /* "Nos livres à l’échange" */
-  margin-left: clamp(20px, 3.05vw, 44px);
-}
-
-.menu-messagerie {
-  width: 9ch; /* "Messagerie" */
-}
-
-.menu-compte {
-  width: 10ch; /* "Mon compte" */
-}
-
-.menu-connexion {
-  width: 9ch; /* "Connexion" */
-  margin-left: clamp(40px, 4.02vw, 58px);
-}
-
-/* Survol : gras, mais la largeur du conteneur reste fixe */
-.menu-item:hover .menu-label {
+.nav-link span::after,
+.nav-link .text-wrapper::after {
+  content: attr(data-text);
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
   font-weight: 600;
 }
 
-/* Barre verticale : 208px à droite de "Nos livres à l’échange" */
-.separator {
-  width: 1px;
-  height: 19px;
-  background: #a6a6a6;
-  opacity: 0.2;
-  margin-left: clamp(40px, 14.44vw, 208px);
+.nav-link:hover {
+  font-weight: 600;
 }
 
-/* MESSAGERIE */
-.messagerie-block,
-.compte-block {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  gap: 4px;
-  flex-shrink: 0;
-}
-.messagerie-block {
-  margin-left: clamp(30px, 4.02vw, 58px);
-}
-
+/* COMPOSANTS (Messagerie & Compte) */
 .messagerie-icon {
   width: 15px;
   height: 13.129px;
-  flex-shrink: 0;
 }
-
 .msg-counter {
   width: 10.5px;
   height: 15px;
@@ -272,23 +246,28 @@ la largeur du conteneur */
   justify-content: center;
   flex-shrink: 0;
 }
-
-/* Réserver l’espace même si non affiché */
-.msg-counter.hidden {
-  visibility: hidden;
-}
-
-/* MON COMPTE : 58px à droite de Messagerie */
-.compte-block {
-  margin-left: clamp(30px, 4.02vw, 58px);
-}
-
 .compte-icon {
   width: 9.286px;
   height: 9.286px;
   border-radius: 9.286px;
   background: #d9d9d9;
-  flex-shrink: 0;
+}
+
+/* ESPACEMENTS PRÉCIS DESKTOP */
+.navbar .nav-link:nth-child(1) {
+  margin-left: 78px;
+}
+.navbar .nav-link:nth-child(2) {
+  margin-left: 44px;
+}
+.navbar .nav-link:nth-child(3) {
+  margin-left: 285px;
+}
+.navbar .nav-link:nth-child(4) {
+  margin-left: 58px;
+}
+.navbar .nav-link:nth-child(5) {
+  margin-left: 58px;
 }
 
 /* FOOTER GLOBAL */
@@ -358,6 +337,8 @@ et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
   padding-top: 20px;
   padding-right: 14px;
   flex-grow: 1;
+  font-family: Inter;
+  text-align: left;
 }
 
 /* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
@@ -460,7 +441,7 @@ et justify-content: center pour les centrer verticalement */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 236px 64px 236px;
+  padding: 80px 236px 80px 236px;
   background: var(--gris-clair);
 }
 
@@ -494,9 +475,17 @@ et justify-content: center pour les centrer verticalement */
   font-weight: 400;
 }
 
+/* Container de la section avec la grande image : on fixe la largeur et la hauteur,et on utilise background-image pour 
+que l’image remplisse tout le container sans déformation, en masquant tout ce qui dépasse grâce à overflow: hidden */
 .home-sect4 {
-  /* padding-bottom: 64px; */
   width: 100%;
+  height: 230px;
+  overflow: hidden; /* masque tout ce qui dépasse */
+  background-image: url("../images/home/home2-banniere.jpg");
+  background-size: cover; /* l’image remplit le container */
+  background-position: center; /* on montre la partie centrale */
+  background-repeat: no-repeat;
+  background-position: 50% 40%;
 }
 
 .home-sect5 {
@@ -584,11 +573,8 @@ et justify-content: center pour les centrer verticalement */
 /* Champ de saisie des critères de recherche */
 .search-input {
   color: var(--Gris-texte, #a6a6a6);
-  /* font-family: Inter; */
   font-size: 14px;
-  /* font-style: normal; */
   font-weight: 400;
-  /* line-height: normal; */
   border: none;
   outline: none;
   width: 100%;
@@ -644,8 +630,22 @@ et justify-content: center pour les centrer verticalement */
   padding-bottom: 16px;
 }
 
+.single-livre-container .livre-info h2 {
+  padding-bottom: 32.5px;
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+}
+
 .single-livre-container .livre-info h3 {
   padding-bottom: 32.5px;
+  color: var(--Gris-fonc);
+  font-family: Inter;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.64px;
 }
 
 .single-livre-container .livre-info .line-separator {
@@ -662,7 +662,7 @@ et justify-content: center pour les centrer verticalement */
   padding-bottom: 32px;
 }
 
-.single-livre-container .picto-owner {
+.picto-owner {
   display: inline-flex;
   padding: 6px 17px 6px 6px;
   align-items: center;
@@ -720,4 +720,284 @@ et justify-content: center pour les centrer verticalement */
 
 .picto-owner:hover::before {
   opacity: 0.4; /* Ajuste la transparence du voile ici (0.4 = 40%) */
+}
+
+/* 
+ * Page compte public 
+ */
+
+/* container principal de la page */
+.cpt-public-sect {
+  display: flex;
+  gap: 28px;
+  padding-left: clamp(20px, 10.42vw, 150px);
+  padding-right: clamp(20px, 10.42vw, 150px);
+  padding-top: 103px;
+  padding-bottom: 212px;
+}
+
+/* Container de la partie gauche avec les infos du propriétaire des livres*/
+.cpt-public-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 341px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 19px;
+  padding-bottom: 56px;
+}
+
+/* Container de l’image de profil du propriétaire */
+.cpt-img-profil-container {
+  width: 143px;
+  height: 193px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image de profil du propriétaire des livres, avec une taille fixe, 
+un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-radius de 50% pour la rendre ronde */
+.cpt-img-profil {
+  width: 143px;
+  height: 143px;
+  border-radius: 50%;
+  background: white;
+  object-fit: cover;
+}
+
+/* Nom du propriétaire des livres */
+.cpt-owner {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: "Playfair Display";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 89px;
+}
+
+/* Ancienneté du proriétaire sur le site */
+.cpt-time {
+  color: var(--gris-texte);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 11px;
+}
+
+/* Style du mot BIBLIOTHEQUE */
+.cpt-bib {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: Inter;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin-top: 21px;
+}
+
+/* Container du nombre de livres dans la bibliothèque du propriétaire, avec l’icône de livre à côté */
+.cpt-count-container {
+  display: flex;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+/* Icône de livre à côté du nombre de livres dans la bibliothèque du propriétaire */
+.cpt-count-img {
+  width: 10.41px;
+  height: 13.714px;
+}
+
+/* Nombre de livres dans la bibliothèque du propriétaire */
+.cpt-count {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Bouton accès page pour écrire un message au propriétaire */
+.cpt-public-left .btn {
+  margin-top: 46px;
+}
+
+/* Container de la partie droite avec la liste des livres du propriétaire */
+.cpt-public-right {
+  width: 771px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 33px;
+  padding-bottom: 10px;
+  /* padding-inline: 66px; */
+}
+
+/* Tableau pour la liste des livres du propriétaire : 
+on utilise border-collapse: collapse pour éviter les doubles bordures,
+et table-layout: fixed pour que les largeurs des colonnes soient respectées même si le contenu dépasse */
+.cpt-public-right table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Styles communs TH et TD */
+.cpt-public-right th,
+.cpt-public-right td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Gestion des largeurs et des marges simulées (66px) */
+/* Colonne 1 (Image) */
+/* .cpt-public-right th:first-child, */
+.cpt-public-right td:first-child {
+  width: 225px; /* 159px + 66px */
+  padding-left: 66px;
+}
+
+/* Colonnes centrales (Titre et Auteur) */
+.cpt-public-right th:nth-child(2),
+.cpt-public-right td:nth-child(2),
+.cpt-public-right th:nth-child(3),
+.cpt-public-right td:nth-child(3) {
+  width: 159px;
+}
+
+/* Colonne 4 (Description) */
+/* .cpt-public-right th:last-child, */
+.cpt-public-right td:last-child {
+  width: 225px; /* 159px + 66px */
+  padding-right: 66px;
+}
+
+/* Hauteurs des lignes : 20px pour l’en-tête, 130px pour les lignes de contenu */
+.cpt-public-right thead tr {
+  height: 20px;
+}
+
+/* Styles spécifiques pour les en-têtes de colonne */
+.cpt-public-right th {
+  color: var(--gris-fonc);
+  font-family: "Inter", sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.64px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #f5f3ef;
+}
+
+/* Styles spécifiques pour les lignes de contenu */
+.cpt-public-right tbody tr {
+  height: 130px;
+}
+
+/* Alternance de couleur pour les lignes du tableau */
+.cpt-public-right tbody tr:nth-child(even) {
+  background-color: #edf2f6;
+}
+
+/* Styles spécifiques pour les cellules de contenu */
+.cpt-public-right tbody td {
+  color: var(--gris-fonc, #292929);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Image dans la première colonne : taille fixe, avec object-fit: fill pour remplir le cadre sans conserver les proportions */
+.cpt-public-right tbody td img {
+  width: 77px;
+  height: 77px;
+  display: block;
+  object-fit: fill;
+}
+
+/* Titre du livre dans la deuxième colonne : on utilise un lien pour que le titre 
+soit cliquable,et on utilise display: inline-block pour que le lien prenne 
+uniquement la place du texte et non toute la cellule */
+.cpt-public-right tbody td a {
+  display: inline-block;
+}
+
+/* 5. VERSION MOBILE (375px) */
+@media (max-width: 375px) {
+  .site-header {
+    height: 56px;
+    padding: 0 20px;
+    justify-content: flex-start; /* Aligne les éléments au début (gauche) */
+  }
+
+  .site-header::after {
+    display: none;
+  }
+
+  /* Affichage Burger à DROITE */
+  .burger-menu {
+    display: block;
+    margin-left: auto; /* Pousse le bouton burger tout à fait à droite */
+  }
+
+  /* Logo réduit à GAUCHE */
+  .logo-block {
+    gap: 7.55px;
+  }
+  .logo-square {
+    width: 25.665px;
+    height: 25.665px;
+    border-radius: 4.277px;
+  }
+  .logo-svg {
+    width: 16.26px;
+    height: 12.832px;
+  }
+  .logo-text {
+    font-size: 10.065px;
+  }
+
+  /* Navigation Mobile déroulante */
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    /* background: var(--gris-clair); */
+    background: white;
+    z-index: 100;
+  }
+
+  /* Checkbox Hack pour ouvrir le menu */
+  #menu-cb:checked ~ .navbar {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    height: 56px;
+    padding-left: 20px;
+    margin-left: 0 !important;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: 600;
+    justify-content: flex-start;
+  }
+
+  .nav-link span::after,
+  .nav-link .text-wrapper::after {
+    display: none;
+  }
 }

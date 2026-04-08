@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Menu horizontal</title>
+
+    <style>
+      /* 1. RESET ET VARIABLES */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --Gris-clair: #f5f3ef;
+        --Gris-fonc: #292929;
+        --Vert-principal: #00ac66;
+        --gap-col-nos-livres: 38px;
+        --gap-row-nos-livres: 48px;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        font-family: "Inter", sans-serif;
+      }
+
+      .main-container {
+        width: 100%;
+        max-width: 1440px;
+        background-color: bisque; /* Couleur de test pour visualiser le container */
+      }
+
+      /* 2. HEADER ET BARRE VERTICALE */
+      .site-header {
+        width: 100%;
+        height: 80px;
+        background: var(--Gris-clair);
+        display: flex;
+        align-items: center;
+        padding-left: clamp(40px, 10.42vw, 150px);
+        padding-right: clamp(40px, 10.42vw, 150px);
+        position: relative; /* Indispensable pour positionner la barre verticale */
+        white-space: nowrap;
+      }
+
+      /* La barre verticale fixe à 833px du bord gauche */
+      .site-header::after {
+        content: "";
+        position: absolute;
+        left: 833px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 19px;
+        background-color: var(--Gris-fonc);
+        z-index: 10;
+      }
+
+      /* 3. LOGO */
+      .logo-block {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        gap: 15px;
+        flex-shrink: 0;
+      }
+
+      .logo-square {
+        width: 51px;
+        height: 51px;
+        border-radius: 8.5px;
+        background: var(--Vert-principal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-svg {
+        width: 32.311px;
+        height: 25.5px;
+      }
+
+      .logo-text {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--Vert-principal);
+      }
+
+      /* 4. NAVIGATION ET LIENS */
+      .navbar {
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+
+      /* Style de base des liens */
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+        font-weight: 400;
+        font-size: 14px;
+        gap: 4px; /* Espace entre icône / texte / compteur */
+        transition: font-weight 0.1s ease;
+      }
+
+      /* TECHNIQUE ANTI-DÉCALAGE : 
+   On crée un élément invisible qui force la largeur du texte en gras (600) dès le départ. */
+      .nav-link span,
+      .nav-link .text-wrapper {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-link span::after,
+      .nav-link .text-wrapper::after {
+        content: attr(data-text); /* Récupère dynamiquement le texte du HTML */
+        height: 0;
+        visibility: hidden;
+        overflow: hidden;
+        user-select: none;
+        pointer-events: none;
+        font-weight: 600; /* C'est cette ligne qui réserve l'espace */
+      }
+
+      /* Changement de graisse au survol sans mouvement des voisins */
+      .nav-link:hover {
+        font-weight: 600;
+      }
+
+      /* 5. COMPOSANTS SPÉCIFIQUES (Messagerie & Compte) */
+      .messagerie-icon {
+        width: 15px;
+        height: 13.129px;
+      }
+
+      .msg-counter {
+        width: 10.5px;
+        height: 15px;
+        border-radius: 6.75px;
+        background: var(--Gris-fonc);
+        color: var(--Gris-clair);
+        font-size: 8.25px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .compte-icon {
+        width: 9.286px;
+        height: 9.286px;
+        border-radius: 9.286px;
+        background: #d9d9d9;
+      }
+
+      /* 6. ESPACEMENTS PRÉCIS (MARGIN-LEFT) */
+      .navbar .nav-link:nth-child(1) {
+        margin-left: 78px;
+      } /* Accueil */
+      .navbar .nav-link:nth-child(2) {
+        margin-left: 44px;
+      } /* Nos livres */
+      .navbar .nav-link:nth-child(3) {
+        margin-left: 285px;
+      } /* Messagerie */
+      .navbar .nav-link:nth-child(4) {
+        margin-left: 58px;
+      } /* Mon compte */
+      .navbar .nav-link:nth-child(5) {
+        margin-left: 58px;
+      } /* Connexion */
+
+      /* On force la graisse à 600 pour l'élément actif */
+      .nav-link.active {
+        font-weight: 600;
+        cursor: default; /* Indique visuellement que ce n'est pas cliquable */
+        pointer-events: none; /* Sécurité pour empêcher tout événement de clic */
+      }
+
+      /* On s'assure que le survol ne change rien puisque c'est déjà en gras */
+      .nav-link.active:hover {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-container">
+      <header class="site-header">
+        <a href="#" class="logo-block">
+          <div class="logo-square">
+            <img
+              src="images/logo/logoTT.svg"
+              alt="Logo Tom Troc"
+              class="logo-svg"
+            />
+          </div>
+          <span class="logo-text">Tom Troc</span>
+        </a>
+        <nav class="navbar">
+          <span class="nav-link active"
+            ><span data-text="Accueil">Accueil</span></span
+          >
+
+          <a href="#" class="nav-link"
+            ><span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            ></a
+          >
+
+          <span class="nav-link complex-link active">
+            <img
+              src="images/icones/messagerie.svg"
+              alt=""
+              class="messagerie-icon"
+            />
+            <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
+            <div class="msg-counter">3</div>
+          </span>
+
+          <a href="#" class="nav-link complex-link">
+            <img
+              src="images/icones/mon-compte.svg"
+              alt=""
+              class="compte-icon"
+            />
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
+          </a>
+
+          <a href="#" class="nav-link"
+            ><span data-text="Connexion">Connexion</span></a
+          >
+        </nav>
+      </header>
+    </div>
+  </body>
+</html>

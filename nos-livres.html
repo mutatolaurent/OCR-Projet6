@@ -20,43 +20,43 @@
           <span class="logo-text">Tom Troc</span>
         </a>
 
-        <nav class="navbar" aria-label="Navigation principale">
-          <a href="#" class="menu-item menu-accueil">
-            <span class="menu-label">Accueil</span>
-          </a>
+        <input type="checkbox" id="menu-cb" />
+        <label for="menu-cb" class="burger-menu">
+          <img src="images/icones/icon-menu.svg" alt="Menu" />
+        </label>
 
-          <a href="#" class="menu-item menu-livres">
-            <span class="menu-label">Nos livres à l'échange</span>
-          </a>
+        <nav class="navbar">
+          <a href="#" class="nav-link"
+            ><span data-text="Accueil">Accueil</span></a
+          >
+          <a href="#" class="nav-link"
+            ><span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            ></a
+          >
 
-          <div class="separator" aria-hidden="true"></div>
-
-          <a href="#" class="messagerie-block">
+          <a href="#" class="nav-link complex-link">
             <img
               src="images/icones/messagerie.svg"
-              alt="Messagerie"
+              alt=""
               class="messagerie-icon"
             />
-            <span class="menu-item menu-messagerie">
-              <span class="menu-label">Messagerie</span>
-            </span>
-            <span class="msg-counter">12</span>
+            <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
+            <div class="msg-counter">3</div>
           </a>
 
-          <a href="#" class="compte-block">
+          <a href="#" class="nav-link complex-link">
             <img
               src="images/icones/mon-compte.svg"
-              alt="Mon compte"
+              alt=""
               class="compte-icon"
             />
-            <span class="menu-item menu-compte">
-              <span class="menu-label">Mon compte</span>
-            </span>
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
           </a>
 
-          <a href="#" class="menu-item menu-connexion">
-            <span class="menu-label">Connexion</span>
-          </a>
+          <a href="#" class="nav-link"
+            ><span data-text="Connexion">Connexion</span></a
+          >
         </nav>
       </header>
 
@@ -65,7 +65,7 @@
           <div class="entete-nos-livres">
             <h1>Nos livres</h1>
             <form class="search-form" action="#" method="get">
-              <button type="submit" class="search-btn" aria-label="Rechercher">
+              <button type="submit" class="search-btn">
                 <img src="images/icones/search.svg" alt="Rechercher" />
               </button>
               <input
@@ -77,14 +77,14 @@
             </form>
           </div>
 
-          <div class="cards-nos-livres" aria-label="Liste des livres">
+          <div class="cards-nos-livres">
             <a href="#">
               <article class="card">
                 <img
                   src="./images/books/a-book-of-full-hope.jpg"
                   alt="A book of full hope"
                 />
-                <h3 class="book-title">A book of full hope of full hope</h3>
+                <h2 class="book-title">A book of full hope of full hope</h2>
                 <p class="book-author">Rupi Kaur</p>
                 <p class="book-owner">Vendu par : Lou&Ben50</p>
               </article>
@@ -96,7 +96,7 @@
                   src="./images/books/company-of-one.jpg"
                   alt="Company of one"
                 />
-                <h3 class="book-title">Company of one</h3>
+                <h2 class="book-title">Company of one</h2>
                 <p class="book-author">Paul Jarvis Paul Jarvis Paul Jarvis</p>
                 <p class="book-owner">Vendu par : VictoireFabr925</p>
               </article>
@@ -108,7 +108,7 @@
                   src="./images/books/minimalist-graphcs.jpg"
                   alt="Minimalist graphics"
                 />
-                <h3 class="book-title">A book of full hope</h3>
+                <h2 class="book-title">A book of full hope</h2>
                 <p class="book-author">Rupi Kaur</p>
                 <p class="book-owner">
                   Vendu par : Lou&Ben50 et ses très bons amis
@@ -119,7 +119,7 @@
             <a href="#">
               <article class="card">
                 <img src="./images/books/innovation.jpg" alt="Innovation" />
-                <h3 class="book-title">Company of one</h3>
+                <h2 class="book-title">Company of one</h2>
                 <p class="book-author">Paul Jarvis</p>
                 <p class="book-owner">Vendu par : VictoireFabr925</p>
               </article>
@@ -131,7 +131,7 @@
                   src="./images/books/milk-and-honey.jpg"
                   alt="Milk and Honey"
                 />
-                <h3 class="book-title">A book of full hope</h3>
+                <h2 class="book-title">A book of full hope</h2>
                 <p class="book-author">Rupi Kaur</p>
                 <p class="book-owner">Vendu par : Lou&Ben50</p>
               </article>
@@ -143,7 +143,7 @@
                   src="./images/books/company-of-one.jpg"
                   alt="Company of one"
                 />
-                <h3 class="book-title">Company of one</h3>
+                <h2 class="book-title">Company of one</h2>
                 <p class="book-author">Paul Jarvis</p>
                 <p class="book-owner">Vendu par : VictoireFabr925</p>
               </article>
