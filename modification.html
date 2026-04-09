@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifier les informations</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <header class="site-header">
+        <a href="#" class="logo-block">
+          <div class="logo-square">
+            <img
+              src="images/logo/logoTT.svg"
+              alt="Logo Tom Troc"
+              class="logo-svg"
+            />
+          </div>
+          <span class="logo-text">Tom Troc</span>
+        </a>
+
+        <input type="checkbox" id="menu-cb" />
+        <label for="menu-cb" class="burger-menu">
+          <img src="images/icones/icon-menu.svg" alt="Menu" />
+        </label>
+
+        <nav class="navbar">
+          <a href="#" class="nav-link"
+            ><span data-text="Accueil">Accueil</span></a
+          >
+          <a href="#" class="nav-link"
+            ><span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            ></a
+          >
+
+          <a href="#" class="nav-link complex-link">
+            <img
+              src="images/icones/messagerie.svg"
+              alt=""
+              class="messagerie-icon"
+            />
+            <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
+            <div class="msg-counter">3</div>
+          </a>
+
+          <a href="#" class="nav-link complex-link">
+            <img
+              src="images/icones/mon-compte.svg"
+              alt=""
+              class="compte-icon"
+            />
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
+          </a>
+
+          <a href="#" class="nav-link"
+            ><span data-text="Connexion">Connexion</span></a
+          >
+        </nav>
+      </header>
+
+      <main>
+        <section class="modif-infos-main-sect">
+          <a href="#"
+            ><img src="images/icones/retour.svg" alt="Lien retour" /><span></span>
+            retour</span
+            ></a
+          >
+          <h1>Modifier les informations</h1>
+
+          <div class="modif-book-infos">
+            <div class="modif-book-infos-left">
+              <p>Photo</p>
+              <img
+                src="images/books/the-kinfolk-table.jpg"
+                alt="The kinfolk table"
+              />
+              <a href="#" class="edit-link">Modifier la photo</a>
+            </div>
+            <div class="modif-book-infos-right">
+              <form action="#" method="POST">
+                <div class="champ-formulaire">
+                  <label for="title">Titre</label>
+                  <input
+                    class="input-error"
+                    type="text"
+                    name="title"
+                    id="title"
+                    value="The kinfolk Table"
+                    required
+                  />
+                  <span class="text-error">Message en cas d'erreur</span>
+                </div>
+                <div class="champ-formulaire">
+                  <label for="author">Auteur</label>
+                  <input type="text" name="author" id="author" required />
+                  <span class="text-error">Message en cas d'erreur</span>
+                </div>
+                <div class="champ-formulaire">
+                  <label for="description">Commentaire</label>
+                  <textarea
+                    name="description"
+                    id="description"
+                    required
+                  ></textarea>
+                  <span class="text-error">Message en cas d'erreur</span>
+                </div>
+                <div class="champ-formulaire">
+                  <label for="book-state">Disponibilité</label>
+                  <select name="book-state" id="book-state">
+                    <option value="disponible">Disponible</option>
+                    <option value="non-dispo">Non dispo</option>
+                  </select>
+                </div>
+                <button class="btn btn-filled">Valider</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="main-footer">
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">Tom Troc©</a>
+        <a href="#"
+          ><img src="images/logo/logoTT-vert.svg" alt="Logo Tom Troc vert"
+        /></a>
+      </footer>
+    </div>
+  </body>
+</html>

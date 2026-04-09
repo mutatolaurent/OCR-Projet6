@@ -99,6 +99,7 @@ p {
   padding: 22px 38px;
   font-weight: 600;
   font-size: 16px;
+  cursor: pointer;
 }
 
 /* Deux variantes de boutons : rempli ou vide */
@@ -385,6 +386,22 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
 }
 
 .champ-formulaire input {
+  /* flex: 1; */
+  width: 100%;
+  height: 50px;
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire select {
   flex: 1;
   width: 100%;
   height: 50px;
@@ -394,7 +411,26 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   padding-left: 14px;
   padding-top: 16px;
   padding-bottom: 17px;
-  color: var(--Gris-fonc, #292929);
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire textarea {
+  /* flex: 1; */
+  width: 100%;
+  max-width: 100%;
+  height: 356px;
+  max-height: 356px;
+  resize: none;
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc, #292929);
   font-family: Inter;
   font-size: 14px;
   font-weight: 400;
@@ -1142,7 +1178,7 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
 }
 
 /* 
- * Page Inscription 
+ * Pages Inscription et connexion
  */
 
 /* container principal de la page */
@@ -1187,6 +1223,68 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   width: 720px;
   height: 100%;
   object-fit: cover;
+}
+
+/* 
+ * Page Modifier les informations
+ */
+/* container principal de la page */
+.modif-infos-main-sect {
+  display: flex;
+  flex-direction: column;
+  row-gap: 23px;
+  padding: 40px 149px 92px 150px;
+  background: var(--background-light);
+}
+
+.modif-infos-main-sect a {
+  text-decoration: none;
+  color: var(--gris-text);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.modif-book-infos {
+  display: flex;
+  width: 1141px;
+  border-radius: 20px;
+  background: #fff;
+  column-gap: 117px;
+  padding: 56px 50px 68px 50px;
+}
+
+.modif-book-infos-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modif-book-infos-left p {
+  padding-bottom: 10px;
+  color: var(--gris-texte);
+  font-size: 14px;
+}
+
+.modif-book-infos-left img {
+  width: 488px;
+  height: 100%;
+  object-fit: cover;
+  padding-bottom: 20px;
+}
+
+.modif-book-infos-left .edit-link {
+  align-self: flex-end;
+}
+
+.modif-book-infos-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.modif-book-infos-right .btn {
+  width: 246px;
 }
 
 /* VERSION MOBILE (375px) */
