@@ -1,3 +1,8 @@
+/* Cette feuille de styles est organisée en 2 parties : 
+1 - les propriétés communes à plusieurs pages
+2 - les propriétés spécifiques à chaque page
+*/
+
 /**
  * Reset css.
  */
@@ -1237,7 +1242,7 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   background: var(--background-light);
 }
 
-.modif-infos-main-sect a {
+.return-link {
   text-decoration: none;
   color: var(--gris-text);
   font-size: 14px;
@@ -1309,6 +1314,7 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   .logo-block {
     gap: 7.55px;
   }
+
   .logo-square {
     width: 25.665px;
     height: 25.665px;
