@@ -13,14 +13,31 @@ try {
     switch ($action) {
         // Pages accessibles à tous.
         case 'home':
-            $articleController = new ArticleController();
+            $articleController = new BookController();
             $articleController->showHome();
             break;
 
-        case 'apropos':
-            $articleController = new ArticleController();
-            $articleController->showApropos();
+        case 'library':
+            $articleController = new BookController();
+            $articleController->showLibrary();
             break;
+
+            // case 'connexion':
+            //     $userController = new UserController();
+            //     $userController->showConnexionForm();
+            //     break;
+            // case 'inscription':
+            //     $userController = new UserController();
+            //     $userController->showInscriptionForm();
+            //     break;
+            // case 'message':
+            //     $messageController = new MessageController();
+            //     $messageController->showMessages();
+            //     break;
+            // case 'moncompte':
+            //     $userController = new UserController();
+            //     $userController->showMonCompte();
+            //     break;
 
 
         default:

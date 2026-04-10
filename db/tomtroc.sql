@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `book` (
   CONSTRAINT `fk_book_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_book_state` FOREIGN KEY (`id_state`) REFERENCES `book_state` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB;
+ALTER TABLE book ADD FULLTEXT idx_search (title, author);
 
 -- structure de la table conversation 
 DROP TABLE IF EXISTS `thread`;

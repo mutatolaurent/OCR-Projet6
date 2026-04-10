@@ -331,7 +331,7 @@ et un conteneur flex pour aligner les éléments à l’intérieur */
 /* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
 .cards-nos-livres .card img {
   object-fit: cover;
-  width: 100%;
+  width: 200px;
   height: 200px;
 }
 

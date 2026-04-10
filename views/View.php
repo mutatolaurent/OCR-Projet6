@@ -28,6 +28,10 @@ class View
     public function render(string $viewName, array $params = []): void
     {
 
+        // echo "<pre>";
+        // var_dump($params);
+        // echo "</pre>";
+
         // On s'occupe de la vue envoyée
         $viewPath = $this->buildViewPath($viewName);
 
