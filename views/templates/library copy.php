@@ -20,15 +20,15 @@
         </form>
     </div>
     
-    <?php if (!empty($books['options'])) { ?>
+    <?php if (!empty($options)) { ?>
         <p class="search-info">
-            <?= $books['options']['resultcount'] ?> résultat(s) trouvé(s) pour la recherche : <strong><?= $books['options']['searchterms'] ?></strong>
+            <?= $options['resultcount'] ?> résultat(s) trouvé(s) pour la recherche : <strong><?= $options['searchterms'] ?></strong>
         </p>    
     <?php } ?>
 
     <div class="cards-nos-livres">
-        <?php if ($books['list'] !== false) { ?>     
-            <?php foreach ($books['list'] as $book) { ?>
+        <?php if ($books !== false) { ?>     
+            <?php foreach ($books as $book) { ?>
                 <a href="indexphp?action=book&id=<?= $book->getId() ?>">
                     <article class="card">
                         <img

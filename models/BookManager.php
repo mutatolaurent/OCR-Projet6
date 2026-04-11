@@ -16,22 +16,82 @@ class BookManager extends AbstractEntityManager
         $books = [];
 
         // Préparation de la requête SQL pour récupérer les livres avec les infos du propriétaire
-        $sql = "select a.*, b.pseudo, b.email 
-                from book a, user b 
-                where a.id_user = b.id
-                order by created_at desc";
+        $sql = "SELECT a.*, b.pseudo, b.email 
+                FROM book a, user b 
+                WHERE a.id_user = b.id
+                ORDER BY created_at DESC";
         if ($nbBooks !== null) {
-            $sql .= " limit " . (int)$nbBooks;
+            $sql .= " LIMIT " . (int)$nbBooks;
         }
 
         // Exécution de la requête et construction des objets Book avec les infos du propriétaire
         $result = $this->db->query($sql);
 
+        return $this->buildBooksWithOwner($result);
+    }
 
-        // Parcours des résultats et création des objets Book avec les infos du propriétaire
+    /**
+     * Récupère un livre par son ID.
+     * @param int $id : l'ID du livre à récupérer.
+     * @return array|bool : un tableau contenant l'objet Book avec l'objet User du propriétaire, ou false si aucun livre trouvé.
+     */
+    public function getBookById(int $id): array|bool
+    {
+        // Préparation de la requête SQL pour récupérer le livre avec les infos du propriétaire
+        $sql = "SELECT a.*, b.pseudo, b.email 
+                FROM book a, user b 
+                WHERE a.id = :id AND a.id_user = b.id";
+
+        // Exécution de la requête avec le paramètre ID
+        $result = $this->db->query($sql, ['id' => $id]);
+
+        // Construction des objets Book avec les infos du propriétaire
+        $books = $this->buildBooksWithOwner($result);
+
+        // Retourne le tableau si un livre est trouvé, sinon false
+        return !empty($books) ? $books : false;
+    }
+
+    /**
+    * Recherche des livres en fonction de termes de recherche.
+    * La recherche est effectuée sur les champs title et author.
+    * @param string $terms : les termes de recherche
+    * @return array|bool : un tableau d'objets Book composé avec l'objet User du propriétaire du livre, ou false si aucun livre trouvé
+    */
+    public function searchBooks(string $terms): array|bool
+    {
+        $books = [];
+
+        // 1. Préparation de la requête avec jointure pour l'utilisateur
+        // On récupère le score pour pouvoir trier
+        $sql = "SELECT a.*, u.pseudo, u.email,
+            MATCH(a.title, a.author) AGAINST(:terms) AS score
+            FROM book a
+            INNER JOIN user u ON a.id_user = u.id
+            WHERE MATCH(a.title, a.author) AGAINST(:terms IN NATURAL LANGUAGE MODE)
+            ORDER BY score DESC";
+
+        $result = $this->db->query($sql, ['terms' => $terms]);
+
+        // --- LA LOGIQUE DE RETOUR ---
+        // Si le tableau est vide, on retourne false, sinon on retourne le tableau.
+        $books = $this->buildBooksWithOwner($result);
+        return !empty($books) ? $books : false;
+    }
+
+    /**
+     * Construit un tableau d'objets Book à partir d'un résultat de requête.
+     * Chaque Book est associé à son objet User propriétaire.
+     * @param PDOStatement $result : le résultat de la requête SQL
+     * @return array : un tableau d'objets Book avec leurs User associés
+     */
+    private function buildBooksWithOwner($result): array
+    {
+        $books = [];
+
         while ($book = $result->fetch()) {
 
-            //
+            // Extraction des données spécifiques au livre
             $bookData = array_intersect_key(
                 $book,
                 array_flip(['id', 'id_user', 'title', 'author', 'description', 'id_state', 'photo', 'created_at'])
@@ -50,66 +110,5 @@ class BookManager extends AbstractEntityManager
         }
 
         return $books;
-    }
-
-    public function searchBooks(string $terms): array|bool
-    {
-        $books = [];
-
-        // 1. Préparation de la requête avec jointure pour l'utilisateur
-        // On récupère le score pour pouvoir trier
-        $sql = "SELECT b.*, u.pseudo,
-            MATCH(b.title, b.author) AGAINST(:terms) AS score
-            FROM book b
-            INNER JOIN user u ON b.id_user = u.id
-            WHERE MATCH(b.title, b.author) AGAINST(:terms IN NATURAL LANGUAGE MODE)
-            ORDER BY score DESC";
-
-        $result = $this->db->query($sql, ['terms' => $terms]);
-        // $result->execute(['terms' => $terms]);
-
-        // Parcours des résultats et création des objets Book avec les infos du propriétaire
-        while ($book = $result->fetch()) {
-
-            //
-            $bookData = array_intersect_key(
-                $book,
-                array_flip(['id', 'id_user', 'title', 'author', 'description', 'id_state', 'photo', 'created_at'])
-            );
-            $bookObject = new Book($bookData);
-
-            // Création de l'objet User pour le propriétaire du livre
-            $owner = new User([
-                'pseudo' => $book['pseudo'] ?? '',
-                'email' => $book['email'] ?? ''
-            ]);
-
-            // Association de l'objet User au livre
-            $bookObject->setOwner($owner);
-            $books[] = $bookObject;
-        }
-
-
-        // while ($data = $stmt->fetch()) {
-        //     // 2. Hydratation de l'objet Book
-        //     $book = new Book();
-        //     $book->setId($data['id']);
-        //     $book->setTitle($data['title']);
-        //     $book->setAuthor($data['author']);
-        //     // ... autres setters ...
-
-        //     // 3. Hydratation de l'objet User (Propriétaire)
-        //     $user = new User();
-        //     $user->setId($data['idUser']);
-        //     $user->setPseudo($data['pseudo']);
-
-        //     $book->setOwner($user);
-
-        //     $books[] = $book;
-        // }
-
-        // --- LA LOGIQUE DE RETOUR ---
-        // Si le tableau est vide, on retourne false, sinon on retourne le tableau.
-        return !empty($books) ? $books : false;
     }
 }

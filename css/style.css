@@ -800,6 +800,10 @@ que l’image remplisse tout le container sans déformation, en masquant tout ce
   font-weight: 400;
 }
 
+.search-info strong {
+  font-weight: 600;
+}
+
 /* 
  * Page Single Livre
  */

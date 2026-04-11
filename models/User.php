@@ -84,11 +84,14 @@ class User extends AbstractEntity
     }
 
     /**
-     * Setter pour la date de création.
-     * @param DateTime|null $created_at
-     */
-    public function setCreatedAt(?DateTime $created_at): void
+    * Setter pour la date de création.
+    * @param DateTime|string $created_at
+    */
+    public function setCreatedAt(string|DateTime $created_at, string $format = 'Y-m-d H:i:s'): void
     {
+        if (is_string($created_at)) {
+            $created_at = DateTime::createFromFormat($format, $created_at);
+        }
         $this->created_at = $created_at;
     }
 

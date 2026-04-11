@@ -37,25 +37,50 @@ class BookController
         // On vérifie si une recherche a été effectuée.
         $searchTerms = Utils::request('search-query', null);
 
+        $options = [];
+        $list = [];
+        $books = [];
+
         if ($searchTerms) {
             // Si une recherche a été effectuée, on récupère les livres correspondants.
             $bookManager = new BookManager();
-            $books = $bookManager->searchBooks($searchTerms);
+            $list = $bookManager->searchBooks($searchTerms);
+            $options = [
+                'resultcount' => ($list) ? count($list) : 0,
+                'searchterms' => $searchTerms
+                ];
         } else {
             // Sinon, on récupère tous les livres.
             $bookManager = new BookManager();
-            $books = $bookManager->getAllBooks();
+            $list = $bookManager->getAllBooks();
         }
+        $books['list'] = $list;
+        $books['options'] = $options;
 
-        // On récupère les 4 derniers livres partagés.
-        // $bookManager = new BookManager();
-        // $books = $bookManager->getAllBooks();
+
+        // if ($searchTerms) {
+        //     // Si une recherche a été effectuée, on récupère les livres correspondants.
+        //     $bookManager = new BookManager();
+        //     $books = $bookManager->searchBooks($searchTerms);
+        //     $options = [
+        //         'resultcount' => ($books) ? count($books) : 0,
+        //         'searchterms' => $searchTerms
+        //         ];
+        // } else {
+        //     // Sinon, on récupère tous les livres.
+        //     $bookManager = new BookManager();
+        //     $books = $bookManager->getAllBooks();
+        // }
+
+        // echo "<pre>";
+        // var_dump($books);
+        // echo "</pre>";
 
         // On affiche la page d'administration.
         $view = new View("Nos livres");
         $view->render("library", [
             'books' => $books
-        ]);
+        ], $options);
     }
 
 }
