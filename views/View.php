@@ -25,7 +25,7 @@ class View
      * @param array $params : les paramètres que le controlleur a envoyé à la vue.
      * @return string
      */
-    public function render(string $viewName, array $params = [], array $options = []): void
+    public function render(string $viewName, array $params = []): void
     {
 
         // echo "<pre>";
@@ -36,7 +36,7 @@ class View
         $viewPath = $this->buildViewPath($viewName);
 
         // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le template principal.
-        $content = $this->_renderViewFromTemplate($viewPath, $params, $options);
+        $content = $this->_renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
         ob_start();
         require(MAIN_VIEW_PATH);
@@ -50,7 +50,7 @@ class View
      * @throws Exception : si la vue n'existe pas.
      * @return string : le contenu de la vue.
      */
-    private function _renderViewFromTemplate(string $viewPath, array $params = [], array $options = []): string
+    private function _renderViewFromTemplate(string $viewPath, array $params = []): string
     {
         if (file_exists($viewPath)) {
             // On transforme les diverses variables stockées dans

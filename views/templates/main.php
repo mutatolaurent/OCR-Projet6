@@ -8,6 +8,7 @@
  *      $content string : le contenu de la page.
  */
 
+$action = Utils::request('action', 'home');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -38,13 +39,32 @@
             </label>
 
             <nav class="navbar">
-                <a href="index.php?action=home" class="nav-link">
-                    <span data-text="Accueil">Accueil</span>
-                </a>
-                <a href="index.php?action=library" class="nav-link">
-                    <span data-text="Nos livres à l'échange">Nos livres à l'échange</span>
-                </a>
 
+                <!-- Point de menu Accueil-->
+                <?php if ($action === "home") { ?>
+                    <span class="nav-link active">
+                        <span data-text="Accueil">Accueil</span>
+                    </span>
+                <?php } else { ?>
+                    <a href="index.php?action=home" class="nav-link">
+                        <span data-text="Accueil">Accueil</span>
+                    </a>
+                <?php } ?>
+
+
+                <!-- Point de menu Nos livres -->
+                <?php if ($action === "library") { ?>
+                    <span class="nav-link active">
+                        <span data-text="Nos livres à l'échange">Nos livres à l'échange</span>
+                    </span>
+
+                <?php } else { ?>
+                    <a href="index.php?action=library" class="nav-link">
+                        <span data-text="Nos livres à l'échange">Nos livres à l'échange</span>
+                    </a>
+                <?php } ?>                
+
+                <!-- Point de menu Messagerie -->                
                 <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=message' : 'index.php?action=connexion' ?>" class="nav-link complex-link">
                     <img
                         src="images/icones/messagerie.svg"
@@ -55,6 +75,7 @@
                     <div class="msg-counter">3</div>
                 </a>
 
+                <!-- Point de menu Mon compte -->                
                 <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=moncompte' : 'index.php?action=connexion' ?>" class="nav-link complex-link">
                     <img
                         src="images/icones/mon-compte.svg"
@@ -64,6 +85,7 @@
                     <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
                 </a>
 
+                <!-- Point de menu Connexion -->                
                 <a href="index.php?action=connexion" class="nav-link">
                     <span data-text="Connexion">Connexion</span>
                 </a>

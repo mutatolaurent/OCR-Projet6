@@ -6,7 +6,7 @@
 class BookController
 {
     /**
-     * Affiche la page d'administration.
+     * Affiche la page d'accueil
      * @return void
      */
     public function showHome(): void
@@ -26,7 +26,7 @@ class BookController
     }
 
     /**
-     * Affiche la page d'administration.
+     * Affiche la page Nos livres (la bibliothèque)
      * @return void
      */
     public function showLibrary(): void
@@ -57,30 +57,42 @@ class BookController
         $books['list'] = $list;
         $books['options'] = $options;
 
-
-        // if ($searchTerms) {
-        //     // Si une recherche a été effectuée, on récupère les livres correspondants.
-        //     $bookManager = new BookManager();
-        //     $books = $bookManager->searchBooks($searchTerms);
-        //     $options = [
-        //         'resultcount' => ($books) ? count($books) : 0,
-        //         'searchterms' => $searchTerms
-        //         ];
-        // } else {
-        //     // Sinon, on récupère tous les livres.
-        //     $bookManager = new BookManager();
-        //     $books = $bookManager->getAllBooks();
-        // }
-
-        // echo "<pre>";
-        // var_dump($books);
-        // echo "</pre>";
-
         // On affiche la page d'administration.
         $view = new View("Nos livres");
         $view->render("library", [
             'books' => $books
         ], $options);
+    }
+
+    /**
+     * Affiche la page d'information sur un livre
+     * @return void
+     */
+    public function showSingleBook(): void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        // $this->checkIfUserIsConnected();
+
+        // Si on ne récupère pas un ID de livre valide, on redirige vers la HP
+        $idbook = Utils::request('id', null);
+        if (filter_var($idbook, FILTER_VALIDATE_INT) === false) {
+            Utils::redirect("home");
+        }
+
+        // On récupère les 4 derniers livres partagés.
+        $bookManager = new BookManager();
+        $books = $bookManager->getBookById($idbook);
+
+        // Si aucun livre trouvé ALORS aon redirige vers la HP
+        if ($books === false) {
+            Utils::redirect("home");
+        }
+
+        // On affiche la page d'administration.
+        $view = new View($books[0]->getTitle());
+        $view->render("singlebook", [
+            'books' => $books
+        ]);
     }
 
 }

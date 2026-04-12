@@ -20,12 +20,14 @@
         </form>
     </div>
     
+    <!-- Affichage des résultats de recherche si une recherche a été effectuée -->
     <?php if (!empty($books['options'])) { ?>
         <p class="search-info">
             <?= $books['options']['resultcount'] ?> résultat(s) trouvé(s) pour la recherche : <strong><?= $books['options']['searchterms'] ?></strong>
         </p>    
     <?php } ?>
 
+    <!-- Affichage de la liste des livres -->
     <div class="cards-nos-livres">
         <?php if ($books['list'] !== false) { ?>     
             <?php foreach ($books['list'] as $book) { ?>

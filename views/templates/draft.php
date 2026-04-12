@@ -27,3 +27,14 @@
             INNER JOIN user u ON b.id_user = u.id
             WHERE MATCH(b.title, b.author) AGAINST(:terms IN NATURAL LANGUAGE MODE)
             ORDER BY score DESC";
+
+                            <?php if ($action === "home") { ?>
+                    <span class="nav-link active"
+                    ><span data-text="Accueil">Accueil</span></span
+                    >
+
+                <?php } else { ?>
+                <a href="index.php?action=home" class="nav-link">
+                    <span data-text="Accueil">Accueil</span>
+                </a>
+                <?php } ?>

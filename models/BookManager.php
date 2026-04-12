@@ -16,7 +16,7 @@ class BookManager extends AbstractEntityManager
         $books = [];
 
         // Préparation de la requête SQL pour récupérer les livres avec les infos du propriétaire
-        $sql = "SELECT a.*, b.pseudo, b.email 
+        $sql = "SELECT a.*, b.pseudo, b.email, b.photo as profilpict
                 FROM book a, user b 
                 WHERE a.id_user = b.id
                 ORDER BY created_at DESC";
@@ -38,7 +38,7 @@ class BookManager extends AbstractEntityManager
     public function getBookById(int $id): array|bool
     {
         // Préparation de la requête SQL pour récupérer le livre avec les infos du propriétaire
-        $sql = "SELECT a.*, b.pseudo, b.email 
+        $sql = "SELECT a.*, b.pseudo, b.email, b.photo as profilpict
                 FROM book a, user b 
                 WHERE a.id = :id AND a.id_user = b.id";
 
@@ -64,7 +64,7 @@ class BookManager extends AbstractEntityManager
 
         // 1. Préparation de la requête avec jointure pour l'utilisateur
         // On récupère le score pour pouvoir trier
-        $sql = "SELECT a.*, u.pseudo, u.email,
+        $sql = "SELECT a.*, u.pseudo, u.email, b.photo as profilpict
             MATCH(a.title, a.author) AGAINST(:terms) AS score
             FROM book a
             INNER JOIN user u ON a.id_user = u.id
@@ -101,7 +101,8 @@ class BookManager extends AbstractEntityManager
             // Création de l'objet User pour le propriétaire du livre
             $owner = new User([
                 'pseudo' => $book['pseudo'] ?? '',
-                'email' => $book['email'] ?? ''
+                'email' => $book['email'] ?? '',
+                'photo' => $book['profilpict'] ?? ''
             ]);
 
             // Association de l'objet User au livre

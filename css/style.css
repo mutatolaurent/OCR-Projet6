@@ -38,7 +38,7 @@ body {
 
 /* Container global de la page, pour limiter la largeur et centrer le contenu */
 .main-container {
-  width: 100%;
+  /* width: 100%; */
   max-width: var(--max-width);
   background: var(--background-light);
 }
@@ -276,6 +276,18 @@ p {
 }
 .navbar .nav-link:nth-child(5) {
   margin-left: 58px;
+}
+
+/* On force la graisse à 600 pour l'élément actif */
+.nav-link.active {
+  font-weight: 600;
+  cursor: default; /* Indique visuellement que ce n'est pas cliquable */
+  pointer-events: none; /* Sécurité pour empêcher tout événement de clic */
+}
+
+/* On s'assure que le survol ne change rien puisque c'est déjà en gras */
+.nav-link.active:hover {
+  font-weight: 600;
 }
 
 /* FOOTER GLOBAL */
@@ -760,6 +772,10 @@ que l’image remplisse tout le container sans déformation, en masquant tout ce
   border: 1px solid #f0f0f0;
   background: #fff;
   overflow: hidden;
+}
+
+.search-form:focus-within {
+  border: 2px solid var(--gris-texte);
 }
 
 /* Icone qui lance la recherche */

@@ -22,6 +22,11 @@ try {
             $articleController->showLibrary();
             break;
 
+        case 'book':
+            $articleController = new BookController();
+            $articleController->showSingleBook();
+            break;
+
             // case 'connexion':
             //     $userController = new UserController();
             //     $userController->showConnexionForm();
