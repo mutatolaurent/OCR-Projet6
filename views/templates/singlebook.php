@@ -5,7 +5,7 @@
  */
 ?>
 <div class="breadcrump">
-    <a href="index.php?action=library">Nos livres à l'échange</a>><a href="index.php?action=singlebook&<?= $books[0]->getId() ?>"><?= $books[0]->getTitle() ?></a>
+    <a href="index.php?action=library">Nos livres à l'échange</a>><a href="index.php?action=book&id=<?= $books[0]->getId() ?>"><?= $books[0]->getTitle() ?></a>
 </div>
 <section class="single-livre-container">
     <img
@@ -24,7 +24,7 @@
         <h3>DESCRIPTION</h3>
         <p><?= $books[0]->getDescription() ?></p>
         <h3>PROPRIETAIRE</h3>
-        <a href="#" class="picto-owner">
+        <a href="index.php?action=owner&id=<?= $books[0]->getOwner()->getId() ?>" class="picto-owner">
             <img
                 class="img-owner"
                 src="<?= $books[0]->getOwner()->getPhoto() ?>"

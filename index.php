@@ -27,6 +27,32 @@ try {
             $articleController->showSingleBook();
             break;
 
+        case 'owner':
+            $articleController = new UserController();
+            $articleController->showOwnerPublicInfo();
+            break;
+
+        case 'connectionForm':
+            $adminController = new AuthController();
+            $adminController->showConnectionForm();
+            break;
+
+        case 'connectUser':
+            $adminController = new AuthController();
+            $adminController->connectUser();
+            break;
+
+        case 'disconnectUser':
+            $adminController = new AuthController();
+            $adminController->disconnectUser();
+            break;
+
+        case 'registerForm':
+            $adminController = new AuthController();
+            $adminController->showRegisterForm();
+            break;
+
+
             // case 'connexion':
             //     $userController = new UserController();
             //     $userController->showConnexionForm();

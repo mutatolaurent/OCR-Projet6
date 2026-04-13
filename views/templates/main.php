@@ -65,7 +65,7 @@ $action = Utils::request('action', 'home');
                 <?php } ?>                
 
                 <!-- Point de menu Messagerie -->                
-                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=message' : 'index.php?action=connexion' ?>" class="nav-link complex-link">
+                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=message' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link">
                     <img
                         src="images/icones/messagerie.svg"
                         alt=""
@@ -76,7 +76,7 @@ $action = Utils::request('action', 'home');
                 </a>
 
                 <!-- Point de menu Mon compte -->                
-                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=moncompte' : 'index.php?action=connexion' ?>" class="nav-link complex-link">
+                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=moncompte' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link">
                     <img
                         src="images/icones/mon-compte.svg"
                         alt=""
@@ -86,7 +86,7 @@ $action = Utils::request('action', 'home');
                 </a>
 
                 <!-- Point de menu Connexion -->                
-                <a href="index.php?action=connexion" class="nav-link">
+                <a href="index.php?action=connectionForm" class="nav-link">
                     <span data-text="Connexion">Connexion</span>
                 </a>
             </nav>

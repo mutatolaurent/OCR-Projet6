@@ -18,7 +18,7 @@ class BookController
         $bookManager = new BookManager();
         $books = $bookManager->getAllBooks(4);
 
-        // On affiche la page d'administration.
+        // On affiche la page d'accueil
         $view = new View("Accueil Tom Troc");
         $view->render("home", [
             'books' => $books
@@ -57,7 +57,7 @@ class BookController
         $books['list'] = $list;
         $books['options'] = $options;
 
-        // On affiche la page d'administration.
+        // On affiche la page avec tous les livres de bibliothèque
         $view = new View("Nos livres");
         $view->render("library", [
             'books' => $books
@@ -79,16 +79,16 @@ class BookController
             Utils::redirect("home");
         }
 
-        // On récupère les 4 derniers livres partagés.
+        // On récupère les infos du livre.
         $bookManager = new BookManager();
         $books = $bookManager->getBookById($idbook);
 
-        // Si aucun livre trouvé ALORS aon redirige vers la HP
+        // Si aucun livre trouvé ALORS on redirige vers la HP
         if ($books === false) {
             Utils::redirect("home");
         }
 
-        // On affiche la page d'administration.
+        // On affiche la page d'information sur le livre
         $view = new View($books[0]->getTitle());
         $view->render("singlebook", [
             'books' => $books

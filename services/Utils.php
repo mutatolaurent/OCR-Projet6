@@ -25,6 +25,35 @@ class Utils
     }
 
     /**
+     * Calcule la différence entre deux dates et retourne une chaîne de caractères
+     * indiquant la différence en jours, mois ou années.
+     * @param DateTime $date1 : la première date.
+     * @param DateTime $date2 : la deuxième date.
+     * @return string : la différence entre les deux dates au format "X jours", "Y mois" ou "Z ans".
+     */
+    public static function formatDateDiff(DateTime $date1, ?DateTime $date2 = null): string
+    {
+        if ($date2 === null) {
+            $date2 = new DateTime();
+        }
+
+        $diff = $date2->diff($date1);
+
+        $days = $diff->days;
+        $months = ($diff->y * 12) + $diff->m;
+        $years = $diff->y;
+
+        if ($days < 30) {
+            return $days . " jours";
+        } elseif ($months < 12) {
+            return $months . " mois";
+        } else {
+            return $years . " ans";
+        }
+    }
+
+
+    /**
      * Redirige vers une URL.
      * @param string $action : l'action que l'on veut faire (correspond aux actions dans le routeur).
      * @param array $params : Facultatif, les paramètres de l'action

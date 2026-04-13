@@ -11,6 +11,9 @@ class User extends AbstractEntity
     private ?string $photo = null;
     private ?DateTime $created_at = null;
 
+    // Cette propriété contiendra un tableau d'objets Book
+    private array $books = [];
+
     /**
      * Setter pour l'email.
      * @param string $email
@@ -102,5 +105,21 @@ class User extends AbstractEntity
     public function getCreatedAt(): ?DateTime
     {
         return $this->created_at;
+    }
+
+    /**
+     * Setter pour les livres de l'utilisateur.
+     * @param Book $book
+     */    public function setBooks(Book $book): void
+    {
+        $this->books[] = $book;
+    }
+
+    /**
+     * Getter pour les livres de l'utilisateur.
+     * @return array
+     */    public function getBooks(): array
+    {
+        return $this->books;
     }
 }

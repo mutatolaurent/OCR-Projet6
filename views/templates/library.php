@@ -35,9 +35,9 @@
                     <article class="card">
                         <img
                             src="<?= $book->getPhoto() ?>"
-                            alt="<?= $book->getTitle() ?>"
+                            alt="Image lien vers la page d'information du livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?>"
                         />
-                        <h3 class="book-title"><?= $book->getTitle() ?></h3>
+                        <h2 class="book-title"><?= $book->getTitle() ?></h2>
                         <p class="book-author"><?= $book->getAuthor() ?></p>    
                         <p class="book-owner">
                             Vendu par : <?= $book->getOwner()->getPseudo() ?>   
