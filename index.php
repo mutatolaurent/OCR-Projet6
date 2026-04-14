@@ -13,45 +13,49 @@ try {
     switch ($action) {
         // Pages accessibles à tous.
         case 'home':
-            $articleController = new BookController();
-            $articleController->showHome();
+            $bookController = new BookController();
+            $bookController->showHome();
             break;
 
         case 'library':
-            $articleController = new BookController();
-            $articleController->showLibrary();
+            $bookController = new BookController();
+            $bookController->showLibrary();
             break;
 
         case 'book':
-            $articleController = new BookController();
-            $articleController->showSingleBook();
+            $bookController = new BookController();
+            $bookController->showSingleBook();
             break;
 
         case 'owner':
-            $articleController = new UserController();
-            $articleController->showOwnerPublicInfo();
+            $userController = new UserController();
+            $userController->showOwnerPublicInfo();
             break;
 
         case 'connectionForm':
-            $adminController = new AuthController();
-            $adminController->showConnectionForm();
+            $authController = new AuthController();
+            $authController->showConnectionForm();
             break;
 
         case 'connectUser':
-            $adminController = new AuthController();
-            $adminController->connectUser();
+            $authController = new AuthController();
+            $authController->connectUser();
             break;
 
         case 'disconnectUser':
-            $adminController = new AuthController();
-            $adminController->disconnectUser();
+            $authController = new AuthController();
+            $authController->disconnectUser();
             break;
 
         case 'registerForm':
-            $adminController = new AuthController();
-            $adminController->showRegisterForm();
+            $authController = new AuthController();
+            $authController->showRegisterForm();
             break;
 
+        case 'myAccount':
+            $userController = new UserController();
+            $userController->showMyAccount();
+            break;
 
             // case 'connexion':
             //     $userController = new UserController();

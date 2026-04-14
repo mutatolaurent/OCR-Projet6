@@ -31,8 +31,18 @@ class UserController
 
         // On affiche la page d'information sur le livre
         $view = new View($user[0]->getPseudo());
-        $view->render("compte-public", [
+        $view->render("ownerInfo", [
             'user' => $user
         ]);
+    }
+
+    /**TODO
+     * Affichage du formulaire d'inscription.
+     * @return void
+     */
+    public function showMyAccount(): void
+    {
+        $view = new View("Mon compte");
+        $view->render("myAccount");
     }
 }

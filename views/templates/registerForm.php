@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Template pour afficher le formulaire de connexion
+ * Template pour afficher le formulaire d'inscription
  */
 ?>
 <section class="insc-main-sect">
     <div class="insc-part-left">
-    <h1>Connexion</h1>
+    <h1>Inscription</h1>
     <form action="#" method="POST">
         <div class="champ-formulaire">
             <label for="pseudo">Pseudo</label>

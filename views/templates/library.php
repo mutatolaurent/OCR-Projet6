@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template pour afficher la page de la bibliothèque.
+ * Template pour afficher la page privée de mon compte.
  */
 ?>
 <section class="main-nos-livres">

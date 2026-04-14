@@ -7,25 +7,44 @@
 <section class="insc-main-sect">
     <div class="insc-part-left">
         <h1>Connexion</h1>
-        <form action="#" method="POST">
+        <form action="index.php?action=connectUser" method="POST">
+
+            <!-- Champ de saisie de l'adresse email -->
             <div class="champ-formulaire">
                 <label for="email">Adresse mail</label>
                 <input
-                    class="input-error"
+                    <?= isset($formData['error']['email']) ? 'class="input-error"' : '' ?>
                     type="text"
                     name="email"
                     id="email"
-                    value="nathalie@gmail.com"
-                    required
+                    <?= isset($formData['credential']['email']) ? 'value="'.$formData['credential']['email'].'"' : '' ?>
                 />
-                <span class="text-error">Message en cas d'erreur</span>
+                <?php if (isset($formData['error']['email'])): ?>
+                    <span class="text-error"><?= $formData['error']['email'] ?></span>
+                <?php endif; ?>
             </div>
+
+            <!-- Champ de saisie du mot de passe -->
             <div class="champ-formulaire">
                 <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password" required />
-                <span class="text-error">Message en cas d'erreur</span>
+                <input
+                    <?= isset($formData['error']['password']) ? 'class="input-error"' : '' ?>
+                    type="password" 
+                    name="password" 
+                    id="password"
+                    <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
+                />
+                <?php if (isset($formData['error']['password'])): ?>
+                    <span class="text-error"><?= $formData['error']['password'] ?></span>
+                <?php endif; ?>
             </div>
+
+            <!-- Bouton de soumission du formulaire -->
             <button class="btn btn-filled">Se connecter</button>
+            <?php if (isset($formData['error']['auth'])): ?>
+                <span class="text-error auth-error"><?= $formData['error']['auth'] ?></span>
+            <?php endif; ?>
+
         </form>
         <span
             >Pas de compte ?
@@ -33,6 +52,6 @@
         >
     </div>
     <div class="insc-part-right">
-    <img src="images/inscription/bibliotheque.jpg" alt="" />
+        <img src="images/inscription/bibliotheque.jpg" alt="" />
     </div>
 </section>

@@ -62,14 +62,23 @@ class BookManager extends AbstractEntityManager
     {
         $books = [];
 
+        $terms = implode('* ', explode(' ', $terms)) . '*';
+
         // 1. Préparation de la requête avec jointure pour l'utilisateur
         // On récupère le score pour pouvoir trier
-        $sql = "SELECT a.*, u.id as user_id, u.pseudo, u.email, b.photo as profilpict
+        $sql = "SELECT a.*, u.id as user_id, u.pseudo, u.email, u.photo as profilpict,
             MATCH(a.title, a.author) AGAINST(:terms) AS score
             FROM book a
             INNER JOIN user u ON a.id_user = u.id
-            WHERE MATCH(a.title, a.author) AGAINST(:terms IN NATURAL LANGUAGE MODE)
+            WHERE MATCH(a.title, a.author) AGAINST(:terms IN BOOLEAN MODE)
             ORDER BY score DESC";
+
+        // $sql = "SELECT a.*, u.id as user_id, u.pseudo, u.email, u.photo as profilpict,
+        //     MATCH(a.title, a.author) AGAINST(:terms) AS score
+        //     FROM book a
+        //     INNER JOIN user u ON a.id_user = u.id
+        //     WHERE MATCH(a.title, a.author) AGAINST(:terms IN NATURAL LANGUAGE MODE)
+        //     ORDER BY score DESC";
 
         $result = $this->db->query($sql, ['terms' => $terms]);
 

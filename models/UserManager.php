@@ -10,10 +10,10 @@ class UserManager extends AbstractEntityManager
      * @param string $login
      * @return ?User
      */
-    public function getUserByLogin(string $login): ?User
+    public function getUserByLogin(string $email): ?User
     {
-        $sql = "SELECT * FROM user WHERE login = :login";
-        $result = $this->db->query($sql, ['login' => $login]);
+        $sql = "SELECT * FROM user WHERE email = :email";
+        $result = $this->db->query($sql, ['email' => $email]);
         $user = $result->fetch();
         if ($user) {
             return new User($user);

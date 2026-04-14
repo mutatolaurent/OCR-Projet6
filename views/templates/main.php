@@ -76,7 +76,7 @@ $action = Utils::request('action', 'home');
                 </a>
 
                 <!-- Point de menu Mon compte -->                
-                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=moncompte' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link">
+                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=myAccount' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link">
                     <img
                         src="images/icones/mon-compte.svg"
                         alt=""
@@ -86,8 +86,8 @@ $action = Utils::request('action', 'home');
                 </a>
 
                 <!-- Point de menu Connexion -->                
-                <a href="index.php?action=connectionForm" class="nav-link">
-                    <span data-text="Connexion">Connexion</span>
+                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=disconnectUser' : 'index.php?action=connectionForm' ?>" class="nav-link">
+                    <span data-text="Connexion"><?= (isset($_SESSION['user'])) ? 'Déconnexion' : 'Connexion' ?></span>
                 </a>
             </nav>
         </header>

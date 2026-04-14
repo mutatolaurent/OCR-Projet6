@@ -5,7 +5,7 @@
  */
 ?>
 <div class="breadcrump">
-    <a href="index.php?action=library">Nos livres à l'échange</a>><a href="index.php?action=book&id=<?= $books[0]->getId() ?>"><?= $books[0]->getTitle() ?></a>
+    <a href="index.php?action=library">Nos livres à l'échange</a> > <a href="index.php?action=book&id=<?= $books[0]->getId() ?>"><?= $books[0]->getTitle() ?></a>
 </div>
 <section class="single-livre-container">
     <img

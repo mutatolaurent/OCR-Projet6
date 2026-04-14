@@ -15,9 +15,11 @@
 :root {
   --gris-clair: #f5f3ef;
   --gris-fonc: #292929;
-  --vert-principal: #00ac66;
+  --vert-principal-spec: #00ac66;
+  --vert-principal: #00804d; /* Contraste OK WCAG AA */
   --vert-hover: #006d41;
-  --gris-texte: #a6a6a6;
+  --gris-texte-spec: #a6a6a6;
+  --gris-texte: #737373; /* Contraste OK WCAG AA */
   --gap-col-nos-livres: 38px;
   --gap-row-nos-livres: 48px;
   --background-light: #faf9f7;
@@ -367,7 +369,7 @@ et on ajoute un peu d’espace en haut pour séparer du titre */
   padding-left: 14px;
   padding-top: 11px;
   padding-right: 14px;
-  color: var(--Gris-texte, #a6a6a6);
+  color: var(--gris-texte);
   font-size: 14px;
   font-weight: 400;
 }
@@ -380,7 +382,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   padding-top: 25px;
   padding-right: 14px;
   padding-bottom: 23px;
-  color: var(--Gris-texte, #a6a6a6);
+  color: var(--gris-texte);
   font-size: 10px;
   font-style: italic;
   font-weight: 400;
@@ -457,7 +459,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   border: 2px solid red;
 }
 
-.champ-formulaire .text-error {
+.text-error {
   color: red;
   font-family: Inter;
   font-size: 10px;
@@ -465,6 +467,10 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   font-weight: 400;
   min-height: 12px;
   display: block;
+}
+.auth-error {
+  margin-top: -30px;
+  padding-bottom: 20px;
 }
 
 /* TABLEAUX */
@@ -495,7 +501,7 @@ thead tr {
 th {
   color: var(--gris-fonc);
   font-family: "Inter", sans-serif;
-  font-size: 8px;
+  font-size: 11px; /* 8px sur la spec mais trop petit pour WCAG AA */
   font-weight: 600;
   letter-spacing: 0.64px;
   padding-bottom: 9px;
@@ -518,6 +524,10 @@ tbody td {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;
+}
+
+.description-td {
+  font-style: italic;
 }
 
 /* Image dans la première colonne : taille fixe, avec object-fit: fill pour remplir le cadre sans conserver les proportions */
@@ -871,9 +881,9 @@ que l’image remplisse tout le container sans déformation, en masquant tout ce
 
 .single-livre-container .livre-info h3 {
   padding-bottom: 32.5px;
-  color: var(--Gris-fonc);
+  color: var(--gris-fonc);
   font-family: Inter;
-  font-size: 8px;
+  font-size: 11px; /* 8px dans la spec mais trop petit pour WCAG AA */
   font-weight: 600;
   letter-spacing: 0.64px;
 }
@@ -1028,7 +1038,7 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   color: var(--gris-fonc);
   text-align: center;
   font-family: Inter;
-  font-size: 8px;
+  font-size: 11px; /* 8px sur la spec mais trop petit pour WCAG AA */
   font-style: normal;
   font-weight: 600;
   line-height: normal;

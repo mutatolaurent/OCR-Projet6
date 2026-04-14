@@ -52,7 +52,8 @@
                         </td>
                         <td><?= $book->getTitle() ?></td>
                         <td><?= $book->getAuthor() ?></td>
-                        <td><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
+
+                        <td class="description-td"><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
                     </tr>
                 <?php } ?>
             <?php } ?>
