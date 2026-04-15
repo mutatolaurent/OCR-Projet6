@@ -7,19 +7,31 @@
 ?>
 <div class="mon-cpt-main">
     <h1>Mon compte</h1>
-    <section class="mon-cpt-sect1">
+    <section>
+    <!-- <section class="mon-cpt-sect1"> -->
+    <form action="index.php?action=updateMyAccount" method="POST" class="form-account">
+
     <div class="mon-cpt-sect1-left">
         <div class="cpt-img-profil-container">
             <img
                 class="cpt-img-profil"
-                src="images/users/yvredelivres.jpg"
-                alt="image profil YvreDeLivres"
+                src="<?= $user[0]->getPhoto() ?>"
+                alt="image du profil de <?= $user[0]->getPseudo() ?>"
             />
-            <a href="#">Modifier</a>
+            <!-- <a href="#">Modifier</a> -->
+            <label for="avatar" class="link-upload">Modifier</label>
+            <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                accept="image/*"
+                class="input-upload"
+            >
+            <span class="info-upload">Une fois la nouvelle photo sélectionnée, cliquer sur "Enregistrer" pour la visualiser</span>
         </div>
 
-        <h2 class="cpt-owner">Alexlecture</h2>
-        <p class="cpt-time">Membre depuis 1 an</p>
+        <h2 class="cpt-owner"><?= $user[0]->getPseudo() ?></h2>
+        <p class="cpt-time">Membre depuis <?= Utils::formatDateDiff($user[0]->getCreatedAt()) ?></p>
         <p class="cpt-bib">BIBLIOTHEQUE</p>
         <div class="cpt-count-container">
             <img
@@ -27,49 +39,67 @@
                 src="images/icones/bibliotheque.svg"
                 alt=""
             />
-            <p class="cpt-count">10 livres</p>
+            <p class="cpt-count"><?= count($user[0]->getBooks()) ?> livres</p>
         </div>
     </div>
     <div class="mon-cpt-sect1-right">
         <p>Vos informations personnelles</p>
-        <form action="#" method="POST">
-        <div class="champ-formulaire">
-            <label for="email">Adresse mail</label>
-            <input
-            class="input-error"
-            type="text"
-            name="email"
-            id="email"
-            value="nathalie@gmail.com"
-            required
-            />
-            <span class="text-error">Message en cas d'erreur</span>
-        </div>
-        <div class="champ-formulaire">
-            <label for="password">Mot de passe</label>
-            <input
-            type="password"
-            name="password"
-            id="password"
-            required
-            />
-            <span class="text-error">Message en cas d'erreur</span>
-        </div>
-        <div class="champ-formulaire">
-            <label for="pseudo">Pseudo</label>
-            <input
-            type="text"
-            name="pseudo"
-            id="pseudo"
-            value="nathalire"
-            required
-            />
-            <span class="text-error">Message en cas d'erreur</span>
-        </div>
-        <button class="btn btn-empty">Enregistrer</button>
-        </form>
+        <!-- <form action="index.php?action=updateMyAccount" method="POST"> -->
+
+            <!-- Adresse mail -->
+            <div class="champ-formulaire">
+                <label for="email">Adresse mail</label>
+                <input
+                    class="<?= isset($user[1]['error']['email']) ? 'input-error' : '' ?>"
+                    type="text"
+                    name="email"
+                    id="email"
+                    value="<?= isset($user[1]['error']['email']) ? $user[1]['credential']['email'] : $user[0]->getEmail() ?>"
+                />
+                <?php if (isset($user[1]['error']['email'])): ?>
+                    <span class="text-error"><?= $user[1]['error']['email'] ?></span>
+                <?php endif; ?>
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="champ-formulaire">
+                <label for="password">Mot de passe</label>
+                <input
+                    class="<?= isset($user[1]['error']['password']) ? 'input-error' : '' ?>"
+                    type="password"
+                    name="password"
+                    id="password"
+                    value="<?= isset($user[1]['error']['password']) ? $user[1]['credential']['password'] : '' ?>"
+                />
+                <?php if (isset($user[1]['error']['password'])): ?>
+                    <span class="text-error"><?= $user[1]['error']['password'] ?></span>
+                <?php endif; ?>
+            </div>
+
+            <!-- Pseudo -->
+            <div class="champ-formulaire">
+                <label for="pseudo">Pseudo</label>
+                <input
+                    class="<?= isset($user[1]['error']['pseudo']) ? 'input-error' : '' ?>"
+                    type="text"
+                    name="pseudo"
+                    id="pseudo"
+                    value="<?= isset($user[1]['error']['pseudo']) ? $user[1]['credential']['pseudo'] : $user[0]->getPseudo() ?>"
+                />
+                <?php if (isset($user[1]['error']['pseudo'])): ?>
+                    <span class="text-error"><?= $user[1]['error']['pseudo'] ?></span>
+                <?php endif; ?>
+            </div>
+            <button class="btn btn-empty" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir enregistrer ces modifications ?") ?>>Enregistrer</button>
+            <?php if ($user[1]['updated'] === true): ?>
+                <span class="feedback-info">Vos informations ont bien été mises à jour</span>
+            <?php endif; ?>
+
+        <!-- </form> -->
     </div>
-    </section>
+    </form> 
+            </section>
+    <!-- </section> -->
 
     <section class="mon-cpt-sect2">
     <table>
@@ -84,54 +114,29 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <a href="#">
-                    <img
-                    src="images/books/a-book-of-full-hope.jpg"
-                    alt="A book of full hope"
-                    />
-                </a>
-            </td>
-            <td>
-            A book of full hope A book of full hope A book of full hope
-            </td>
-            <td>Nathan Williams</td>
-            <td>
-            J'ai récemment plongé dans les pages de 'The Kinfolk Table'
-            et j'ai été enchanté pa...
-            </td>
-            <td><span class="book-state-available">Disponible</span></td>
-            <td>
-            <a href="#" class="edit-link">Editer</a>
-            <a href="#" class="delete-link">Supprimer</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <a href="#">
-                <img
-                src="images/books/a-book-of-full-hope.jpg"
-                alt="A book of full hope"
-                />
-            </a>
-            </td>
-            <td>
-            A book of full hope A book of full hope A book of full hope
-            </td>
-            <td>Nathan Williams</td>
-            <td>
-            J'ai récemment plongé dans les pages de 'The Kinfolk Table'
-            et j'ai été enchanté pa...
-            </td>
-            <td>
-            <span class="book-state-unavailable">Indisponible</span>
-            </td>
-            <td>
-            <a href="#" class="edit-link">Editer</a>
-            <a href="#" class="delete-link">Supprimer</a>
-            </td>
-        </tr>
+            <?php if ($user[0]->getBooks() !== false) { ?>     
+                <?php foreach ($user[0]->getBooks() as $book) { ?>
+                    <tr>
+                        <td>            
+                            <a href="index.php?action=book&id=<?= $book->getId() ?>">
+                                <img
+                                src="<?= $book->getPhoto() ?>"
+                                alt="Image lien vers la page d'information du livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?>"
+                                />
+                            </a>
+                        </td>
+                        <td><?= $book->getTitle() ?></td>
+                        <td><?= $book->getAuthor() ?></td>
+
+                        <td class="description-td"><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
+                        <td><span class="book-state-available">Disponible</span></td>
+                        <td>
+                            <a href="#" class="edit-link">Editer</a>
+                            <a href="#" class="delete-link">Supprimer</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            <?php } ?>
         </tbody>
     </table>
     </section>

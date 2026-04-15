@@ -150,11 +150,19 @@ class AuthController
         $error = [];
         $hasError = false;
 
+        $userManager = new UserManager();
+
         // --- LOGIQUE DE VALIDATION ---
 
         // Le champ pseudo doit obligatoirement être renseigné et avoir au moins 3 caratères
         if (mb_strlen($credential['pseudo']) < PSEUDO_MIN_LENGTH) {
             $error['pseudo'] = "! Le pseudo doit contenir au moins ".PSEUDO_MIN_LENGTH." caractères";
+            $hasError = true;
+        }
+
+        // Le pseudo ne doit pas être déjà utilisé
+        if (!$hasError && $userManager->getUserByPseudo($credential['pseudo']) !== null) {
+            $error['pseudo'] = "! Ce pseudo est déjà utilisé";
             $hasError = true;
         }
 
@@ -167,6 +175,12 @@ class AuthController
         // Le champ email doit respecter le pattern d'un email
         if (!$hasError && !filter_var(trim($credential['email']), FILTER_VALIDATE_EMAIL)) {
             $error['email'] = "! L'email n'est pas correct.";
+            $hasError = true;
+        }
+
+        // L'email ne doit pas être déjà utilisé
+        if (!$hasError && $userManager->getUserByLogin($credential['email']) !== null) {
+            $error['email'] = "! Cet email est déjà utilisé";
             $hasError = true;
         }
 

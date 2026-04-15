@@ -473,6 +473,17 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   padding-bottom: 20px;
 }
 
+.feedback-info {
+  color: red;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  display: block;
+  margin-top: 20px;
+}
+
 /* TABLEAUX */
 /* Tableau pour la liste des livres du propriétaire : 
 on utilise border-collapse: collapse pour éviter les doubles bordures,
@@ -1129,6 +1140,12 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   gap: 32px;
 }
 
+.form-account {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
 .mon-cpt-sect1-left {
   display: flex;
   flex-direction: column;
@@ -1140,7 +1157,8 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   padding-bottom: 93px;
 }
 
-.cpt-img-profil-container a {
+.cpt-img-profil-container a,
+.cpt-img-profil-container .link-upload {
   color: var(--gris-texte);
   text-align: center;
   font-family: Inter;
@@ -1154,6 +1172,26 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+  cursor: pointer;
+}
+
+.cpt-img-profil-container .input-upload {
+  display: none;
+}
+
+.info-upload {
+  display: none;
+  color: red;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  text-align: center;
+}
+
+.cpt-img-profil-container:hover .info-upload {
+  display: block;
 }
 
 .mon-cpt-sect1-right {

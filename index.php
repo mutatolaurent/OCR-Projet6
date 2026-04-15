@@ -1,7 +1,8 @@
 <?php
 
-require_once 'config/config.php';
 require_once 'config/autoload.php';
+require_once 'config/config.php';
+
 
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
@@ -62,23 +63,10 @@ try {
             $userController->showMyAccount();
             break;
 
-            // case 'connexion':
-            //     $userController = new UserController();
-            //     $userController->showConnexionForm();
-            //     break;
-            // case 'inscription':
-            //     $userController = new UserController();
-            //     $userController->showInscriptionForm();
-            //     break;
-            // case 'message':
-            //     $messageController = new MessageController();
-            //     $messageController->showMessages();
-            //     break;
-            // case 'moncompte':
-            //     $userController = new UserController();
-            //     $userController->showMonCompte();
-            //     break;
-
+        case 'updateMyAccount':
+            $userController = new UserController();
+            $userController->updateMyAccount();
+            break;
 
         default:
             throw new Exception("La page demandée n'existe pas.");

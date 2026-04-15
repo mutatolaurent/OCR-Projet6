@@ -6,8 +6,8 @@
 class UserManager extends AbstractEntityManager
 {
     /**
-     * Récupère un user par son login.
-     * @param string $login
+     * Récupère un user par son login = som email
+     * @param string $email
      * @return ?User
      */
     public function getUserByLogin(string $email): ?User
@@ -20,6 +20,23 @@ class UserManager extends AbstractEntityManager
         }
         return null;
     }
+
+    /**
+     * Récupère un user par son pseudo.
+     * @param string $pseudo
+     * @return ?User
+     */
+    public function getUserByPseudo(string $pseudo): ?User
+    {
+        $sql = "SELECT * FROM user WHERE pseudo = :pseudo";
+        $result = $this->db->query($sql, ['pseudo' => $pseudo]);
+        $user = $result->fetch();
+        if ($user) {
+            return new User($user);
+        }
+        return null;
+    }
+
 
     /**
      * Récupère un user et ses livres associés, par son ID.
@@ -92,6 +109,31 @@ class UserManager extends AbstractEntityManager
 
         // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
         $this->db->query($sql, ['pseudo' => $pseudo, 'email' => $email, 'hash' => $hash]);
+
+        // On retourne un objet User
+        return $this->getUserByLogin($email);
+
+    }
+
+    /**
+     * Met à jour les informations de compte d'un utilisateur
+     * @param array $credential Informations récupérées du formulaire de modification
+     * @return ?User
+     */
+    public function updateUser(array $credential): ?User
+    {
+
+        // Initialisation des informations requises pour créer le compte de l'utilisateur
+        $pseudo = $credential['pseudo'];
+        $email = $credential['email'];
+        $hash = $credential['password'];
+        $idUser = $credential['idUser'];
+
+        // Requête SQL préparée pour modification du compte en BD
+        $sql = "UPDATE user SET pseudo = :pseudo, email = :email, password = :hash WHERE id = :idUser";
+
+        // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
+        $this->db->query($sql, ['pseudo' => $pseudo, 'email' => $email, 'hash' => $hash, 'idUser' => $idUser]);
 
         // On retourne un objet User
         return $this->getUserByLogin($email);
