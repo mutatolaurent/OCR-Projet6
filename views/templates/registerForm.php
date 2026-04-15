@@ -7,36 +7,58 @@
 <section class="insc-main-sect">
     <div class="insc-part-left">
     <h1>Inscription</h1>
-    <form action="#" method="POST">
+    <form action="index.php?action=registerUser" method="POST">
+
+        <!-- Champ de saisie du pseudo -->
         <div class="champ-formulaire">
             <label for="pseudo">Pseudo</label>
             <input
+                <?= isset($formData['error']['pseudo']) ? 'class="input-error"' : '' ?>
                 type="text"
                 name="pseudo"
                 id="pseudo"
-                value="nathalire"
-                required
+                placeholder="ex: YvreDeLivres (<?= PSEUDO_MIN_LENGTH ?> caractères minimum)"
+                <?= isset($formData['credential']['pseudo']) ? 'value="'.$formData['credential']['pseudo'].'"' : '' ?>
             />
-            <span class="text-error"></span>
+            <?php if (isset($formData['error']['pseudo'])): ?>
+                <span class="text-error"><?= $formData['error']['pseudo'] ?></span>
+            <?php endif; ?>
         </div>
+
+        <!-- Champ de saisie de l'adresse email -->
         <div class="champ-formulaire">
             <label for="email">Adresse mail</label>
             <input
-                class="input-error"
+                <?= isset($formData['error']['email']) ? 'class="input-error"' : '' ?>
                 type="text"
                 name="email"
                 id="email"
-                value="nathalie@gmail.com"
-                required
+                placeholder="ex: alex.durand@orange.fr"
+                <?= isset($formData['credential']['email']) ? 'value="'.$formData['credential']['email'].'"' : '' ?>
             />
-            <span class="text-error">Message en cas d'erreur</span>
+            <?php if (isset($formData['error']['email'])): ?>
+                <span class="text-error"><?= $formData['error']['email'] ?></span>
+            <?php endif; ?>
         </div>
+        <!-- Champ de saisie du mot de passe -->
         <div class="champ-formulaire">
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" required />
-            <span class="text-error">Message en cas d'erreur</span>
+            <input
+                <?= isset($formData['error']['password']) ? 'class="input-error"' : '' ?>
+                type="password" 
+                name="password" 
+                id="password"
+                placeholder="<?= PASSWORD_MIN_LENGTH ?> caractères minimum"
+                <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
+            />
+            <?php if (isset($formData['error']['password'])): ?>
+                <span class="text-error"><?= $formData['error']['password'] ?></span>
+            <?php endif; ?>
         </div>
+
+        <!-- Bouton de soumission du formulaire -->
         <button class="btn btn-filled">S'inscrire</button>
+
     </form>
     <span
         >Déjà inscrit ?

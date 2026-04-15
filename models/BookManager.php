@@ -13,8 +13,6 @@ class BookManager extends AbstractEntityManager
     public function getAllBooks(?int $nbBooks = null): array
     {
 
-        $books = [];
-
         // Préparation de la requête SQL pour récupérer les livres avec les infos du propriétaire
         $sql = "SELECT a.*, b.id as user_id, b.pseudo, b.email, b.photo as profilpict
                 FROM book a, user b 

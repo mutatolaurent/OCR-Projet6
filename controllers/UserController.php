@@ -22,7 +22,7 @@ class UserController
 
         // On récupère les infos du livre.
         $userManager = new UserManager();
-        $user = $userManager->getOwnerById($idowner);
+        $user = $userManager->getUserById($idowner);
 
         // Si aucun propriétaire trouvé ALORS on redirige vers la HP
         if ($user === false) {

@@ -52,6 +52,11 @@ try {
             $authController->showRegisterForm();
             break;
 
+        case 'registerUser':
+            $authController = new AuthController();
+            $authController->registerUser();
+            break;
+
         case 'myAccount':
             $userController = new UserController();
             $userController->showMyAccount();

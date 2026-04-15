@@ -26,7 +26,7 @@ class UserManager extends AbstractEntityManager
      * @param int $id
      * @return ?User
      */
-    public function getOwnerById(int $id): array|bool
+    public function getUserById(int $id): array|bool
     {
         $sql = "SELECT u.*, b.id AS book_id, b.title, b.photo as book_photo, b.author, b.description 
             FROM user u 
@@ -73,4 +73,30 @@ class UserManager extends AbstractEntityManager
         return $owner[0] !== null ? $owner : false;
 
     }
+
+    /**
+     * Crée un nouvel utilisateur
+     * @param array $credential Informations récupérées du formulaire d'enregistrement
+     * @return ?User
+     */
+    public function createUser(array $credential): ?User
+    {
+
+        // Initialisation des informations requises pour créer le compte de l'utilisateur
+        $pseudo = $credential['pseudo'];
+        $email = $credential['email'];
+        $hash = password_hash($credential['password'], PASSWORD_DEFAULT);
+
+        // Requête SQL préparée pour insertion du compte en BD
+        $sql = "INSERT INTO user (pseudo, email, password) VALUES (:pseudo, :email, :hash)";
+
+        // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
+        $this->db->query($sql, ['pseudo' => $pseudo, 'email' => $email, 'hash' => $hash]);
+
+        // On retourne un objet User
+        return $this->getUserByLogin($email);
+
+    }
+
+
 }
