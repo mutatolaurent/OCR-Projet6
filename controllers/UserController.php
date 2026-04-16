@@ -37,7 +37,7 @@ class UserController
     }
 
     /**
-     * Affichage du formulaire d'inscription.
+     * Affichage des informations du compte utilisateur
      * @return void
      */
     public function showMyAccount(): void
@@ -69,11 +69,23 @@ class UserController
 
         $user[] = $formData;
 
-        // On affiche la page d'information sur le livre
-        $view = new View("Compte ".$user[0]->getPseudo());
-        $view->render("myAccount", [
-            'user' => $user
-        ]);
+        //
+        if (Utils::request('zoom', null) == 'viewAvatar') {
+
+            // On affiche la page d'information sur le livre
+            $view = new View("Avatar ".$user[0]->getPseudo());
+            $view->render("myAvatar", [
+                'user' => $user
+            ]);
+
+        } else {
+
+            // On affiche la page d'information sur le livre
+            $view = new View("Compte ".$user[0]->getPseudo());
+            $view->render("myAccount", [
+                'user' => $user
+            ]);
+        }
     }
 
     /**
@@ -175,7 +187,6 @@ class UserController
 
             // $userManager = new UserManager();
             $userChanged = $userManager->updateUser($credential);
-
             if ($userChanged) {
                 $_SESSION['user'] = $userChanged;
                 $_SESSION['idUser'] = $userChanged->getId();
@@ -187,4 +198,80 @@ class UserController
         }
     }
 
+
+    /**
+     * Modification des informations du compte d'un utilisateur
+     * @return void
+     */
+    public function updateMyAvatar(): void
+    {
+
+        // On vérifie que l'utilisateur est connecté
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        //
+        $user = $_SESSION['user'];
+
+        // RAZ du tableau des erreurs
+        $error = [];
+        $hasError = false;
+
+
+        if (!empty($_FILES['avatar']['name'])) {
+
+            // Taille max 1 Mo
+            $maxSize = 1 * 1024 * 1024;
+
+            if ($_FILES['avatar']['size'] > $maxSize) {
+                $error['avatar'] = "L’image ne doit pas dépasser 1 Mo.";
+                $hasError = true;
+            }
+
+            // Types autorisés
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            if (!$hasError && !in_array($_FILES['avatar']['type'], $allowedTypes)) {
+                $error['avatar'] = "Format d’image non autorisé (jpg, png, webp).";
+                $hasError = true;
+            }
+
+            // Si pas d’erreur → on enregistre
+            $uploadDir = 'images/users/';
+            $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+
+            // Nom unique basé sur l'utilisateur
+            $fileName = 'user_' . $user->getId() . '.' . $extension;
+
+            $destination = $uploadDir . $fileName;
+
+            if (!$hasError && !move_uploaded_file($_FILES['avatar']['tmp_name'], $destination)) {
+                $error['avatar'] = "Erreur lors de l’upload de l’image.";
+                $hasError = true;
+            }
+
+            // Mise à jour en BD
+            $userManager = new UserManager();
+            $userManager->updateAvatar($user->getId(), $destination);
+            // if (!$userChanged) {
+            //     $error['avatar'] = "Erreur lors de la mise à jour en BD.";
+            //     $hasError = true;
+            // } else {
+            //     $_SESSION['user'] = $userChanged;
+            // }
+
+            // if (!empty($error)) {
+            if ($hasError) {
+                // On stocke les messages d'erreurs et les données saisies en session
+                // ce qui permettra au formulaire de récupérer le contexte et aisni :
+                // . de conserver les données saisie par l'utilisateur de façon à ce qu'il n'ait pas à les re-saisir
+                // . de désigner les champs en erreur et les causes d'erreur.
+                $_SESSION['error'] = $error;
+            }
+        }
+
+        // Retour à la page de gestion de l'avatar
+        Utils::redirect("myAccount", ['zoom' => 'viewAvatar']);
+
+    }
 }

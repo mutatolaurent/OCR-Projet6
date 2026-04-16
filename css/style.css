@@ -407,7 +407,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
 .champ-formulaire input {
   /* flex: 1; */
   width: 100%;
-  height: 50px;
+  /* height: 50px; */
   border-radius: var(--radius);
   border: 1px solid #f0f0f0;
   background: #edf2f6;
@@ -423,7 +423,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
 .champ-formulaire select {
   flex: 1;
   width: 100%;
-  height: 50px;
+  /* height: 50px; */
   border-radius: var(--radius);
   border: 1px solid #f0f0f0;
   background: #edf2f6;
@@ -457,6 +457,24 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
 
 .champ-formulaire input.input-error {
   border: 2px solid red;
+}
+
+champ-formulaire input.input-upload {
+  /* flex: 1; */
+  height: 200px;
+}
+
+/* Style du bouton interne */
+.input-upload::file-selector-button {
+  background: var(--vert-principal);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-right: 12px;
+  border-radius: var(--radius);
+  font-family: Inter;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .text-error {
@@ -1180,14 +1198,13 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
 }
 
 .info-upload {
-  display: none;
-  color: red;
+  color: var(--gris-fonc);
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   min-height: 12px;
-  text-align: center;
+  margin-top: 10px;
 }
 
 .cpt-img-profil-container:hover .info-upload {

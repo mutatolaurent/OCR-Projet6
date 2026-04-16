@@ -7,9 +7,9 @@
 ?>
 <div class="mon-cpt-main">
     <h1>Mon compte</h1>
-    <section>
-    <!-- <section class="mon-cpt-sect1"> -->
-    <form action="index.php?action=updateMyAccount" method="POST" class="form-account">
+    <!-- <section> -->
+    <section class="mon-cpt-sect1">
+    <!-- <form action="index.php?action=updateMyAccount" method="POST" class="form-account"> -->
 
     <div class="mon-cpt-sect1-left">
         <div class="cpt-img-profil-container">
@@ -18,8 +18,8 @@
                 src="<?= $user[0]->getPhoto() ?>"
                 alt="image du profil de <?= $user[0]->getPseudo() ?>"
             />
-            <!-- <a href="#">Modifier</a> -->
-            <label for="avatar" class="link-upload">Modifier</label>
+            <a href="index.php?action=myAccount&zoom=viewAvatar">Modifier</a>
+            <!-- <label for="avatar" class="link-upload">Modifier</label>
             <input
                 type="file"
                 name="avatar"
@@ -27,7 +27,7 @@
                 accept="image/*"
                 class="input-upload"
             >
-            <span class="info-upload">Une fois la nouvelle photo sélectionnée, cliquer sur "Enregistrer" pour la visualiser</span>
+            <span class="info-upload">(i) Une fois la nouvelle photo sélectionnée, cliquer sur "Enregistrer" pour la visualiser</span> -->
         </div>
 
         <h2 class="cpt-owner"><?= $user[0]->getPseudo() ?></h2>
@@ -44,7 +44,7 @@
     </div>
     <div class="mon-cpt-sect1-right">
         <p>Vos informations personnelles</p>
-        <!-- <form action="index.php?action=updateMyAccount" method="POST"> -->
+        <form action="index.php?action=updateMyAccount" method="POST">
 
             <!-- Adresse mail -->
             <div class="champ-formulaire">
@@ -95,11 +95,11 @@
                 <span class="feedback-info">Vos informations ont bien été mises à jour</span>
             <?php endif; ?>
 
-        <!-- </form> -->
+        </form>
     </div>
     </form> 
-            </section>
-    <!-- </section> -->
+            <!-- </section> -->
+    </section>
 
     <section class="mon-cpt-sect2">
     <table>
@@ -131,8 +131,8 @@
                         <td class="description-td"><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
                         <td><span class="book-state-available">Disponible</span></td>
                         <td>
-                            <a href="#" class="edit-link">Editer</a>
-                            <a href="#" class="delete-link">Supprimer</a>
+                            <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="edit-link">Editer</a>
+                            <a href="index.php?action=deleteBook&id=<?= $book->getId() ?>" class="delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>Supprimer</a>
                         </td>
                     </tr>
                 <?php } ?>

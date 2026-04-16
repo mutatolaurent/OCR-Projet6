@@ -95,4 +95,38 @@ class BookController
         ]);
     }
 
+    /**
+     * Affiche le formulaire de modification des informations sur un livre
+     * @return void
+     */
+    public function showBookForUpdate(): void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        // Si on ne récupère pas un ID de livre valide, on redirige vers la HP
+        $idbook = Utils::request('id', null);
+        if (filter_var($idbook, FILTER_VALIDATE_INT) === false) {
+            Utils::redirect("home");
+        }
+
+        // On récupère les infos du livre.
+        $bookManager = new BookManager();
+        $books = $bookManager->getBookById($idbook);
+        $book = $books[0];
+
+        // Si aucun livre trouvé ALORS on redirige vers la HP
+        if ($book === false) {
+            Utils::redirect("home");
+        }
+
+        // On affiche la page d'information sur le livre
+        $view = new View("Modifications ".$book->getTitle());
+        $view->render("myBook", [
+            'book' => $book
+        ]);
+    }
+
 }

@@ -68,6 +68,21 @@ try {
             $userController->updateMyAccount();
             break;
 
+        case 'updateMyAvatar':
+            $userController = new UserController();
+            $userController->updateMyAvatar();
+            break;
+
+        case 'showBookForUpdate':
+            $bookController = new BookController();
+            $bookController->showBookForUpdate();
+            break;
+
+        case 'UpdateBook':
+            $bookController = new BookController();
+            $bookController->updateBook();
+            break;
+
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

@@ -140,5 +140,26 @@ class UserManager extends AbstractEntityManager
 
     }
 
+    /**
+     * Met à jour les informations de compte d'un utilisateur
+     * @param array $credential Informations récupérées du formulaire de modification
+     * @return ?User
+     */
+    public function updateAvatar(int $idUser, string $avatarPathFile): void
+    {
+
+        // Requête SQL préparée pour modification du compte en BD
+        $sql = "UPDATE user SET photo = :photo WHERE id = :idUser";
+
+        // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
+        $this->db->query($sql, ['photo' => $avatarPathFile, 'idUser' => $idUser]);
+
+        // var_dump($statement);
+
+        // On retourne un objet User
+        // return $this->getUserByLogin($email);
+
+    }
+
 
 }
