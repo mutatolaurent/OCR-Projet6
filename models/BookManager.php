@@ -10,17 +10,22 @@ class BookManager extends AbstractEntityManager
      * @param int|null $nbBooks : le nombre de livres à récupérer, ou null pour tous les livres.
      * @return array : un tableau d'objets Livre composé avec l'objet User du propriétaire du livre.
      */
-    public function getAllBooks(?int $nbBooks = null): array
+    public function getAllBooks(?int $nbBooks = null, int $excludeStateFilter = 0): array
     {
 
         // Préparation de la requête SQL pour récupérer les livres avec les infos du propriétaire
         $sql = "SELECT a.*, b.id as user_id, b.pseudo, b.email, b.photo as profilpict
                 FROM book a, user b 
-                WHERE a.id_user = b.id
-                ORDER BY created_at DESC";
-        if ($nbBooks !== null) {
-            $sql .= " LIMIT " . (int)$nbBooks;
+                WHERE a.id_user = b.id";
+        if ($excludeStateFilter > 0) {
+            $sql .= ' and a.id_state <> '. (int)$excludeStateFilter;
         }
+        if ($nbBooks !== null) {
+            $sql .= " ORDER BY created_at DESC LIMIT " . (int)$nbBooks;
+        } else {
+            $sql .= " ORDER BY created_at DESC";
+        }
+
 
         // Exécution de la requête et construction des objets Book avec les infos du propriétaire
         $result = $this->db->query($sql);
@@ -119,5 +124,80 @@ class BookManager extends AbstractEntityManager
         }
 
         return $books;
+    }
+
+    /**
+     * Récupère les états possibles pour les livres.
+     * @return array : un tableau des états possibles pour les livres.
+     */
+    public function getBookStates(): array
+    {
+
+        // Préparation de la requête SQL pour récupérer la liste des états des livres
+        $sql = "SELECT id, state FROM book_state";
+
+        // Exécution de la requête et construction des objets Book avec les infos du propriétaire
+        $result = $this->db->query($sql);
+
+        $bookStates = [];
+
+        while ($bookState = $result->fetch()) {
+
+            $bookStates[] = new BookState($bookState);
+
+        }
+
+        return !empty($bookStates) ? $bookStates : false;
+    }
+
+
+    /**
+     * Met à jour les informations sur un livre
+     * @param array $credential Informations récupérées du formulaire de modification
+     * @param int îd ID du livre en BD
+     * @return ?Book
+     */
+    public function updateBook(array $bookInfo, int $id): void
+    {
+
+        // Initialisation des informations requises pour créer le compte de l'utilisateur
+        $title = $bookInfo['title'];
+        $author = $bookInfo['author'];
+        $description = $bookInfo['description'];
+        $idstate = $bookInfo['idstate'];
+
+        // Requête SQL préparée pour modification du compte en BD
+        $sql = "UPDATE book SET 
+            title = :title, 
+            author = :author, 
+            description = :description, 
+            id_state = :idstate
+            WHERE id = :idBook";
+
+        // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
+        $this->db->query(
+            $sql,
+            ['idBook' => $id,
+            'title' => $title,
+            'author' => $author,
+            'description' => $description,
+            'idstate' => $idstate]
+        );
+    }
+
+    /**
+     * Supprime un livre de la BD
+     * @param array $credential Informations récupérées du formulaire de modification
+     * @param int îd ID du livre en BD
+     * @return ?Book
+     */
+    public function deleteBook(int $id): void
+    {
+
+        // Requête SQL préparée pour modification du compte en BD
+        $sql = "DELETE FROM book WHERE id = :idBook";
+
+        // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
+        $this->db->query($sql, ['idBook' => $id]);
     }
 }

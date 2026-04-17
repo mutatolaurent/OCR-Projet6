@@ -12,6 +12,7 @@ class Book extends AbstractEntity
     private string $description = "";
     private int $idState;
     private ?string $photo = "";
+    private ?string $stateLabel = "";
     private ?DateTime $created_at = null;
 
     private ?User $owner = null;
@@ -104,6 +105,24 @@ class Book extends AbstractEntity
     public function getIdState(): int
     {
         return $this->idState;
+    }
+
+    /**
+    * Setter pour le label de l'état
+    * @param int $stateLabel
+    */
+    public function setStateLabel(string $stateLabel): void
+    {
+        $this->stateLabel = $stateLabel;
+    }
+
+    /**
+    * Getter pour le label de l'état
+    * @return string
+    */
+    public function getStateLabel(): string
+    {
+        return $this->stateLabel;
     }
 
     /**

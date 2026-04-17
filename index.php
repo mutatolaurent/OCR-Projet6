@@ -78,9 +78,14 @@ try {
             $bookController->showBookForUpdate();
             break;
 
-        case 'UpdateBook':
+        case 'updateBook':
             $bookController = new BookController();
-            $bookController->updateBook();
+            $bookController->updateBookInfo();
+            break;
+
+        case 'deleteBook':
+            $bookController = new BookController();
+            $bookController->deleteBook();
             break;
 
         default:

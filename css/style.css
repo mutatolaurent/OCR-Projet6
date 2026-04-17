@@ -575,7 +575,8 @@ tbody td a {
 }
 
 /* sticker état des livres */
-.book-state-available {
+/* Disponible */
+.book-state-2 {
   display: inline-flex;
   padding: 3.698px 13.313px;
   border-radius: 29.583px;
@@ -585,7 +586,8 @@ tbody td a {
   font-weight: 500;
 }
 
-.book-state-unavailable {
+/* Non Disponible */
+.book-state-1 {
   display: inline-flex;
   padding: 3.698px 13.313px;
   border-radius: 29.583px;

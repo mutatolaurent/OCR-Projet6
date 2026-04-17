@@ -97,7 +97,6 @@
 
         </form>
     </div>
-    </form> 
             <!-- </section> -->
     </section>
 
@@ -129,7 +128,7 @@
                         <td><?= $book->getAuthor() ?></td>
 
                         <td class="description-td"><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
-                        <td><span class="book-state-available">Disponible</span></td>
+                        <td><span class="book-state-<?= $book->getIdState() ?>"><?= $book->getStateLabel() ?></span></td>
                         <td>
                             <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="edit-link">Editer</a>
                             <a href="index.php?action=deleteBook&id=<?= $book->getId() ?>" class="delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>Supprimer</a>

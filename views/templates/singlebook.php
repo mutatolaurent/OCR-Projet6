@@ -22,7 +22,7 @@
             alt=""
         />
         <h3>DESCRIPTION</h3>
-        <p><?= $books[0]->getDescription() ?></p>
+        <p><?= nl2br($books[0]->getDescription()) ?></p>
         <h3>PROPRIETAIRE</h3>
         <a href="index.php?action=owner&id=<?= $books[0]->getOwner()->getId() ?>" class="picto-owner">
             <img

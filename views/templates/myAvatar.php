@@ -32,7 +32,7 @@
                         accept="image/*"
                         class="input-upload"
                     >
-                    <span class="info-upload">1 MO maximum. Formats autorisés jpg, webp, png.</span>
+                    <span class="info-upload">2 MO maximum. Formats autorisés jpg, webp, png.</span>
                     <?php if (isset($user[1]['error']['avatar'])): ?>
                         <span class="text-error"><?= $user[1]['error']['avatar'] ?></span>
                     <?php endif; ?>

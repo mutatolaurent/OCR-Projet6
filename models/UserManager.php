@@ -41,16 +41,23 @@ class UserManager extends AbstractEntityManager
     /**
      * Récupère un user et ses livres associés, par son ID.
      * @param int $id
+     * @param int $excludeStateFilter
      * @return ?User
      */
-    public function getUserById(int $id): array|bool
+    public function getUserById(int $id, int $excludeStateFilter = 0): array|bool
     {
-        $sql = "SELECT u.*, b.id AS book_id, b.title, b.photo as book_photo, b.author, b.description 
+        // Une seule requête qui ramène les infos sur l'utilisateur et sur les livres qu'il partage
+        $sql = "SELECT u.*, b.id AS book_id, b.title, b.photo as book_photo, b.author, b.description, b.id_state, c.state as stateLabel
             FROM user u 
-            LEFT JOIN book b ON u.id = b.id_user 
+            LEFT JOIN book b ON u.id = b.id_user
+            LEFT JOIN book_state c ON b.id_state = c.id 
             WHERE u.id = :id";
-
-        $result = $this->db->query($sql, ['id' => $id]);
+        if ($excludeStateFilter > 0) {
+            $sql .= ' and b.id_state <> :stateFilter';
+            $result = $this->db->query($sql, ['id' => $id, 'stateFilter' => $excludeStateFilter]);
+        } else {
+            $result = $this->db->query($sql, ['id' => $id]);
+        }
 
         // Initialisation des variables pour stocker l'utilisateur et ses livres
         $userObject = null;
@@ -76,7 +83,9 @@ class UserManager extends AbstractEntityManager
                 'title' => $user['title'] ?? '[titre absent]',
                 'author' => $user['author'] ?? '[titre absent]',
                 'photo' => $user['book_photo'] ?? '',
-                'description' => $user['description'] ?? '[description absente]'
+                'description' => $user['description'] ?? '[description absente]',
+                'idState' => $user['id_state'] ?? '',
+                'stateLabel' => $user['stateLabel'] ?? ''
                 ]);
 
                 $userObject->setBooks($bookObject);
@@ -137,7 +146,6 @@ class UserManager extends AbstractEntityManager
 
         // On retourne un objet User
         return $this->getUserByLogin($email);
-
     }
 
     /**

@@ -11,8 +11,6 @@ class UserController
      */
     public function showOwnerPublicInfo(): void
     {
-        // On vérifie que l'utilisateur est connecté.
-        // $this->checkIfUserIsConnected();
 
         // Si on ne récupère pas un ID de livre valide, on redirige vers la HP
         $idowner = Utils::request('id', null);
@@ -22,7 +20,8 @@ class UserController
 
         // On récupère les infos sur le propriétaire y compris les livres qui luis sont rattachés
         $userManager = new UserManager();
-        $user = $userManager->getUserById($idowner);
+        $filterOnBookState = 1;
+        $user = $userManager->getUserById($idowner, $filterOnBookState);
 
         // Si aucun propriétaire trouvé ALORS on redirige vers la HP
         if ($user === false) {
@@ -222,7 +221,7 @@ class UserController
         if (!empty($_FILES['avatar']['name'])) {
 
             // Taille max 1 Mo
-            $maxSize = 1 * 1024 * 1024;
+            $maxSize = 2 * 1024 * 1024;
 
             if ($_FILES['avatar']['size'] > $maxSize) {
                 $error['avatar'] = "L’image ne doit pas dépasser 1 Mo.";
