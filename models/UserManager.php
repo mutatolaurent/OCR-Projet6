@@ -149,9 +149,9 @@ class UserManager extends AbstractEntityManager
     }
 
     /**
-     * Met à jour les informations de compte d'un utilisateur
-     * @param array $credential Informations récupérées du formulaire de modification
-     * @return ?User
+     * Met à jour la photo de profil utilisateur
+     * @param int $idUser Identifiant de l'utilisateur en BD
+     * @param string $avatarPathFile Chemin d'accès à la photo
      */
     public function updateAvatar(int $idUser, string $avatarPathFile): void
     {
@@ -168,6 +168,4 @@ class UserManager extends AbstractEntityManager
         // return $this->getUserByLogin($email);
 
     }
-
-
 }

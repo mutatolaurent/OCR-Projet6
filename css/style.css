@@ -1464,8 +1464,8 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   .cards-nos-livres {
     display: flex;
     flex-wrap: wrap;
-    gap: 15 15.8;
-    padding: 34px 0 80px;
+    gap: 14px;
+    padding: 34px 0px 80.8px;
   }
 
   /* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
@@ -1476,15 +1476,64 @@ et un conteneur flex pour aligner les éléments à l’intérieur */
     text-decoration: none;
   }
 
+  /* Contenu de chaque card : image, titre, auteur, propriétaire */
+  .cards-nos-livres .card {
+    background-color: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
+  .cards-nos-livres .card img {
+    object-fit: cover;
+    width: 160px;
+    height: 160px;
+  }
+
+  /* Titre du livre : on laisse le texte s’étendre sur plusieurs lignes si besoin, 
+et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
+  .cards-nos-livres .book-title {
+    font-size: 13px;
+    padding-left: 11.2px;
+    padding-top: 16px;
+    /* padding-right: 14px; */
+    text-align: left;
+  }
+
+  /* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
+et on ajoute un peu d’espace en haut pour séparer du titre */
+  .cards-nos-livres .book-author {
+    padding-left: 11.2px;
+    padding-top: 4px;
+    /* padding-right: 14px; */
+    font-size: 13px;
+  }
+
+  /* Propriétaire du livre : on utilise une couleur plus claire et un style italique 
+pour différencier du titre et de l’auteur,
+et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu */
+  .cards-nos-livres .book-owner {
+    padding-left: 11.2px;
+    padding-top: 18.2px;
+    /* padding-right: 14px; */
+    padding-bottom: 18.4px;
+    font-size: 8px;
+  }
+
   h1 {
     font-size: 30px;
+  }
+
+  h2 {
+    font-size: 28px;
   }
 
   .btn {
     align-self: stretch;
   }
 
-  /* Page d'accueil */
+  /* Adaptations Page d'accueil */
   .home-sect1 {
     flex-direction: column-reverse;
     padding: 0;
@@ -1503,7 +1552,7 @@ et un conteneur flex pour aligner les éléments à l’intérieur */
   }
 
   .home-sect2 {
-    display: none;
+    padding: 48px 21px 80.8px 20px;
   }
 
   .home-sect3 {

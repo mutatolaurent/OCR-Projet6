@@ -83,6 +83,11 @@ try {
             $bookController->updateBookInfo();
             break;
 
+        case 'updateBookPicture':
+            $bookController = new BookController();
+            $bookController->updateBookPicture();
+            break;
+
         case 'deleteBook':
             $bookController = new BookController();
             $bookController->deleteBook();

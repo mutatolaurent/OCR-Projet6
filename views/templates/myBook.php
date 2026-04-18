@@ -19,7 +19,7 @@
             src="<?= $books[0]->getPhoto() ?>"
             alt="Image de couverture du livre <?= $books[0]->getTitle() ?> de <?= $books[0]->getAuthor() ?>"
             />
-            <a href="#" class="edit-link">Modifier la photo</a>
+            <a href="index.php?action=showBookForUpdate&zoom=viewPicture&id=<?= $books[0]->getId() ?>" class="edit-link">Modifier la photo</a>
         </div>
         <div class="modif-book-infos-right">
             <form action="index.php?action=updateBook" method="POST">

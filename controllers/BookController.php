@@ -141,11 +141,21 @@ class BookController
         // On ajoute la liste des différents états aux données qui seront transmises à la vue
         $books[] = $bookStates;
 
-        // On affiche la page d'information sur le livre
-        $view = new View("Modifications ".$books[0]->getTitle());
-        $view->render("myBook", [
-            'books' => $books
-        ]);
+        // Sélection de la vue
+        if (Utils::request('zoom', null) == 'viewPicture') {
+
+            // On affiche la page de modification de l'image associée au livre
+            $view = new View("Modifications ".$books[0]->getTitle());
+            $view->render("bookPicture", [
+                'books' => $books
+            ]);
+        } else {
+            // On affiche la page d'information sur le livre
+            $view = new View("Modifications ".$books[0]->getTitle());
+            $view->render("myBook", [
+                'books' => $books
+            ]);
+        }
     }
 
     /**
@@ -273,5 +283,81 @@ class BookController
         $bookManager->deleteBook($idbook);
         Utils::redirect("myAccount");
 
+    }
+
+    /**
+     * Modification de la photo associée à un livre
+     * @return void
+     */
+    public function updateBookPicture(): void
+    {
+
+        // On vérifie que l'utilisateur est connecté
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        // On récupère l'objet Book
+        $book = $_SESSION['book'];
+
+        // RAZ du tableau des erreurs
+        $error = [];
+        $hasError = false;
+
+        // Si aucun fichier sélectionné on on retourne au formulaire de modification des informations du livre
+        if (empty($_FILES['picture']['name'])) {
+            Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
+        }
+
+        // Taille max 1 Mo
+        // TODO : créer une constante dans config.php
+        $maxSize = 2 * 1024 * 1024;
+
+        if ($_FILES['picture']['size'] > $maxSize) {
+
+            // TODO : remplacer 2 par la constante
+            $error['picture'] = "L’image ne doit pas dépasser 2 Mo.";
+            $hasError = true;
+        }
+
+        // Types autorisés
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!$hasError && !in_array($_FILES['picture']['type'], $allowedTypes)) {
+            $error['avatar'] = "Format d’image non autorisé (jpg, png, webp).";
+            $hasError = true;
+        }
+
+        // Si pas d’erreur → on enregistre
+        $uploadDir = 'images/books/';
+        $extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+
+        // Nom unique basé sur l'id du livre
+        $fileName = 'pict_' . $book->getId() . '.' . $extension;
+
+        // Chemin complet d'accès à la nouvelle image de profil
+        $destination = $uploadDir . $fileName;
+
+        // Transfert de l'image vers le dossier cible
+        if (!$hasError && !move_uploaded_file($_FILES['picture']['tmp_name'], $destination)) {
+            $error['picture'] = "Erreur lors de l’upload de l’image.";
+            $hasError = true;
+        }
+
+        // Mise à jour en BD
+        if (!$hasError) {
+
+            // Mise à jour en BD avec le chemin vers la nouvelle photo de profil
+            $bookManager = new BookManager();
+            $bookManager->updatePicture($book->getId(), $destination);
+            // Retour à la page de gestion de l'image du livre
+            Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
+
+        } else {
+
+            // Init variable de session pour affichage message d'erreur lors de l'affichage du formulaire
+            $_SESSION['error'] = $error;
+            // Retour à la page de gestion de l'image du livre
+            Utils::redirect("showBookForUpdate", ['zoom' => 'viewPicture', 'id' => $book->getId() ]);
+        }
     }
 }
