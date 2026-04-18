@@ -154,7 +154,7 @@ p {
   transform: translateY(-50%);
   width: 1px;
   height: 19px;
-  background-color: var(--gris-fonc);
+  background-color: var(--gris-texte);
   z-index: 10;
 }
 
@@ -290,6 +290,13 @@ p {
 /* On s'assure que le survol ne change rien puisque c'est déjà en gras */
 .nav-link.active:hover {
   font-weight: 600;
+}
+
+/* Masque les points de menu non accessibles hors connexion */
+.user-disconnected .complex-link {
+  visibility: hidden; /* Rend invisible mais garde l'espace */
+  pointer-events: none; /* Empêche de cliquer sur le lien invisible */
+  user-select: none; /* Empêche de sélectionner le texte invisible */
 }
 
 /* FOOTER GLOBAL */
@@ -1445,6 +1452,73 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
 
   .nav-link span::after,
   .nav-link .text-wrapper::after {
+    display: none;
+  }
+
+  .user-disconnected .complex-link {
+    display: none;
+  }
+
+  /* CARDS DES LIVRES */
+  /* Container de la section des cards des livres */
+  .cards-nos-livres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15 15.8;
+    padding: 34px 0 80px;
+  }
+
+  /* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
+et un conteneur flex pour aligner les éléments à l’intérieur */
+  .cards-nos-livres a {
+    flex: 0 1 calc(50% - (var(--gap-col-nos-livres) * 1 / 2));
+    display: flex;
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .btn {
+    align-self: stretch;
+  }
+
+  /* Page d'accueil */
+  .home-sect1 {
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+
+  .home-sect1-left {
+    padding: 52px 20px 48px 20px;
+  }
+
+  .home-sect1-right img {
+    width: 375px;
+  }
+
+  .home-sect1-right p {
+    margin-right: 27px;
+  }
+
+  .home-sect2 {
+    display: none;
+  }
+
+  .home-sect3 {
+    display: none;
+  }
+
+  .home-sect4 {
+    display: none;
+  }
+
+  .home-sect5 {
+    display: none;
+  }
+
+  .main-footer {
     display: none;
   }
 }

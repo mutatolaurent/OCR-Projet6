@@ -38,7 +38,7 @@ $action = Utils::request('action', 'home');
                 <img src="images/icones/icon-menu.svg" alt="Menu" />
             </label>
 
-            <nav class="navbar">
+            <nav class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>">
 
                 <!-- Point de menu Accueil-->
                 <?php if ($action === "home") { ?>

@@ -69,6 +69,7 @@
                     type="password"
                     name="password"
                     id="password"
+                    placeholder="******"
                     value="<?= isset($user[1]['error']['password']) ? $user[1]['credential']['password'] : '' ?>"
                 />
                 <?php if (isset($user[1]['error']['password'])): ?>

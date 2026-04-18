@@ -66,9 +66,10 @@ class UserController
             Utils::redirect("disconnectUser");
         }
 
+        // On ajoute les valeurs des champs du formulaire au données transmises à la vue
         $user[] = $formData;
 
-        //
+        // Sélection de la vue
         if (Utils::request('zoom', null) == 'viewAvatar') {
 
             // On affiche la page d'information sur le livre
@@ -104,19 +105,32 @@ class UserController
         $credential['email'] = htmlspecialchars(Utils::request("email"));
         $credential['password'] = htmlspecialchars(Utils::request("password"));
 
-        // On récupère en Session les données du compte de l'utilisateur et on repère les infos qui ont changé
+        // On récupère en Session les données du compte de l'utilisateur
         $user = $_SESSION['user'];
-        ($user->getEmail() != $credential['email']) ? $emailHasChanged = true : $emailHasChanged = false;
-        (!empty($credential['password'])) ? $passwordHasChanged = true : $passwordHasChanged = false;
-        ($user->getPseudo() != $credential['pseudo']) ? $pseudoHasChanged = true : $pseudoHasChanged = false;
+
+        // On vérifie s'il y a eu des changements
+        $emailHasChanged = ($user->getEmail() !== $credential['email']);
+        $passwordHasChanged = (!empty($credential['password']));
+        $pseudoHasChanged = ($user->getPseudo() != $credential['pseudo']);
+
+        // ($user->getEmail() != $credential['email']) ? $emailHasChanged = true : $emailHasChanged = false;
+        // (!empty($credential['password'])) ? $passwordHasChanged = true : $passwordHasChanged = false;
+        // ($user->getPseudo() != $credential['pseudo']) ? $pseudoHasChanged = true : $pseudoHasChanged = false;
+
+        // Si aucun changement on réaffiche la page des informations du compte client
+        if (!$emailHasChanged && !$passwordHasChanged && !$pseudoHasChanged) {
+            Utils::redirect("myAccount");
+            $_SESSION['updated'] = false;
+        }
+
+        // --- LOGIQUE DE VALIDATION ---
 
         // RAZ du tableau des erreurs
         $error = [];
         $hasError = false;
 
+        // Init du manager des user
         $userManager = new UserManager();
-
-        // --- LOGIQUE DE VALIDATION ---
 
         // Le champ pseudo doit obligatoirement être renseigné et avoir au moins 3 caratères
         if (mb_strlen($credential['pseudo']) < PSEUDO_MIN_LENGTH) {
@@ -124,7 +138,7 @@ class UserController
             $hasError = true;
         }
 
-        // Si le pseudo a été changé, il ne doit pas être déjà utilisé
+        // Si le pseudo a été changé, il ne doit pas être déjà utilisé par un autre compte
         if (!$hasError && $pseudoHasChanged && $userManager->getUserByPseudo($credential['pseudo']) !== null) {
             $error['pseudo'] = "! Ce pseudo est déjà utilisé";
             $hasError = true;
@@ -165,30 +179,23 @@ class UserController
             $_SESSION['error'] = $error;
             $_SESSION['credential'] = $credential;
 
-            // On revient au formulaire de connexion.
+            // On réaffiche la page Mon compte avec les erreurs détectées
             Utils::redirect("myAccount");
 
-            // Update du compte du nouvel utilisateur
         } else {
 
-            if (!$emailHasChanged) {
-                $credential['email'] = $user->getEmail();
-            }
+            // Si un nouveau mot de passe a été renseigné, il faut le chiffrer
             if (!$passwordHasChanged) {
                 $credential['password'] = $user->getPassword();
             } else {
                 $credential['password'] = password_hash($credential['password'], PASSWORD_DEFAULT);
             }
-            if (!$pseudoHasChanged) {
-                $credential['pseudo'] = $user->getPseudo();
-            }
             $credential['idUser'] = $user->getId();
 
-            // $userManager = new UserManager();
+            // Mise à jour des informations du compte utilisateur
             $userChanged = $userManager->updateUser($credential);
             if ($userChanged) {
-                $_SESSION['user'] = $userChanged;
-                $_SESSION['idUser'] = $userChanged->getId();
+                // $_SESSION['user'] = $userChanged;
                 $_SESSION['updated'] = true;
                 Utils::redirect("myAccount");
             } else {
@@ -199,7 +206,7 @@ class UserController
 
 
     /**
-     * Modification des informations du compte d'un utilisateur
+     * Modification de la photo de profil d'un utilisateur
      * @return void
      */
     public function updateMyAvatar(): void
@@ -221,10 +228,13 @@ class UserController
         if (!empty($_FILES['avatar']['name'])) {
 
             // Taille max 1 Mo
+            // TODO : créer une constante dans config.php
             $maxSize = 2 * 1024 * 1024;
 
             if ($_FILES['avatar']['size'] > $maxSize) {
-                $error['avatar'] = "L’image ne doit pas dépasser 1 Mo.";
+
+                // TODO : remplacer 2 par la constante
+                $error['avatar'] = "L’image ne doit pas dépasser 2 Mo.";
                 $hasError = true;
             }
 
@@ -242,31 +252,27 @@ class UserController
             // Nom unique basé sur l'utilisateur
             $fileName = 'user_' . $user->getId() . '.' . $extension;
 
+            // Chemin complet d'accès à la nouvelle image de profil
             $destination = $uploadDir . $fileName;
 
+            // Transfert de l'image vers le dossier cible
             if (!$hasError && !move_uploaded_file($_FILES['avatar']['tmp_name'], $destination)) {
                 $error['avatar'] = "Erreur lors de l’upload de l’image.";
                 $hasError = true;
             }
 
             // Mise à jour en BD
-            $userManager = new UserManager();
-            $userManager->updateAvatar($user->getId(), $destination);
-            // if (!$userChanged) {
-            //     $error['avatar'] = "Erreur lors de la mise à jour en BD.";
-            //     $hasError = true;
-            // } else {
-            //     $_SESSION['user'] = $userChanged;
-            // }
+            if (!$hasError) {
 
-            // if (!empty($error)) {
-            if ($hasError) {
-                // On stocke les messages d'erreurs et les données saisies en session
-                // ce qui permettra au formulaire de récupérer le contexte et aisni :
-                // . de conserver les données saisie par l'utilisateur de façon à ce qu'il n'ait pas à les re-saisir
-                // . de désigner les champs en erreur et les causes d'erreur.
+                // Mise à jour en BD avec le chemin vers la nouvelle photo de profil
+                $userManager = new UserManager();
+                $userManager->updateAvatar($user->getId(), $destination);
+            } else {
+
+                // Init variable de session pour affichage message d'erreur lors de l'affichage du formulaire
                 $_SESSION['error'] = $error;
             }
+
         }
 
         // Retour à la page de gestion de l'avatar

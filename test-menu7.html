@@ -181,6 +181,12 @@
         margin-left: 58px;
       }
 
+      .user-disconnected .complex-link {
+        visibility: hidden; /* Rend invisible mais garde l'espace */
+        pointer-events: none; /* Empêche de cliquer sur le lien invisible */
+        user-select: none; /* Empêche de sélectionner le texte invisible */
+      }
+
       /* 5. VERSION MOBILE (375px) */
       @media (max-width: 375px) {
         .site-header {
@@ -248,6 +254,10 @@
         .nav-link .text-wrapper::after {
           display: none;
         }
+
+        .user-disconnected .complex-link {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -271,7 +281,7 @@
           <img src="images/icones/icon-menu.svg" alt="Menu" />
         </label>
 
-        <nav class="navbar">
+        <nav class="navbar user-disconnected">
           <a href="#" class="nav-link"
             ><span data-text="Accueil">Accueil</span></a
           >

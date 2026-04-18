@@ -132,13 +132,13 @@ class BookController
         // $_SESSION['idbook'] = $books[0]->getId();
         $_SESSION['book'] = $books[0];
 
-        // On ajoute les données du formulaire au tableau qui sera transmis à la vue
+        // On ajoute les données du formulaire au aux données qui seront transmises à la vue
         $books[] = $formData;
 
         // On récupère les différents états possibles pour un livre
         $bookStates = $bookManager->getBookStates();
 
-        // On ajoute la liste des différents états au tableau qui sera transmis à la vue
+        // On ajoute la liste des différents états aux données qui seront transmises à la vue
         $books[] = $bookStates;
 
         // On affiche la page d'information sur le livre
@@ -170,19 +170,12 @@ class BookController
         $bookInput['idstate'] = htmlspecialchars(Utils::request("idstate"));
 
         // On vérifie s'il y a eu des changements
-        $hasChange = false;
-        if ($book->getTitle() != $bookInput['title']) {
-            $hasChange = true;
-        }
-        if (!$hasChange && $book->getAuthor() != $bookInput['author']) {
-            $hasChange = true;
-        }
-        if (!$hasChange && $book->getDescription() != $bookInput['description']) {
-            $hasChange = true;
-        }
-        if (!$hasChange && $book->getIdState() != $bookInput['idstate']) {
-            $hasChange = true;
-        }
+        $hasChange = (
+            $book->getTitle() !== $bookInput['title'] ||
+            $book->getAuthor() !== $bookInput['author'] ||
+            $book->getDescription() !== $bookInput['description'] ||
+            $book->getIdState() !== $bookInput['idstate']
+        );
 
         // Si aucun changement on réaffiche la page des informations du livre
         if (!$hasChange) {

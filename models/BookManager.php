@@ -26,7 +26,6 @@ class BookManager extends AbstractEntityManager
             $sql .= " ORDER BY created_at DESC";
         }
 
-
         // Exécution de la requête et construction des objets Book avec les infos du propriétaire
         $result = $this->db->query($sql);
 
