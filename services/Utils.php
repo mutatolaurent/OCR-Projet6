@@ -119,4 +119,78 @@ class Utils
     {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
+
+    /**
+     * Upload un fichier et le place dans le dossier de destination.
+     * @param string $fieldName : le nom du champ du formulaire contenant le fichier
+     * @param string $uploadDir : le chemin du dossier de destination (ex: 'images/books/')
+     * @param int $maxSize : la taille maximale en bytes (par défaut 2 Mo)
+     * @param array $allowedTypes : les types MIME autorisés (ex: ['image/jpeg', 'image/png'])
+     * @param bool $useIdAsFilename : si true, utilise un id unique pour le nom du fichier
+     * @param mixed $id : l'id à utiliser pour le nom du fichier (si useIdAsFilename = true)
+     * @return array : ['success' => bool, 'message' => string, 'filename' => string (si succès)]
+     */
+    public static function uploadFile(
+        string $fieldName,
+        string $uploadDir,
+        int $maxSize = 2097152,
+        array $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'],
+        bool $useIdAsFilename = false,
+        mixed $id = null
+    ): array {
+
+        // Vérifier si le fichier a été uploadé
+        if (!isset($_FILES[$fieldName]) || empty($_FILES[$fieldName]['name'])) {
+            return [
+                'success' => false,
+                'message' => "Aucun fichier sélectionné."
+            ];
+        }
+
+        $file = $_FILES[$fieldName];
+
+        // Vérifier la taille du fichier
+        if ($file['size'] > $maxSize) {
+            $maxSizeMb = $maxSize / (1024 * 1024);
+            return [
+                'success' => false,
+                'message' => "L'image ne doit pas dépasser " . round($maxSizeMb, 1) . " Mo."
+            ];
+        }
+
+        // Vérifier le type MIME
+        if (!in_array($file['type'], $allowedTypes)) {
+            $typesStr = implode(', ', array_map(fn ($t) => strtoupper(explode('/', $t)[1]), $allowedTypes));
+            return [
+                'success' => false,
+                'message' => "Format de fichier non autorisé ($typesStr)."
+            ];
+        }
+
+        // Générer le nom du fichier
+        // TODO remplacer pict par une variable passée en paramètre
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $fileName = $useIdAsFilename && $id !== null
+            ? $fieldName . '_' . $id . '.' . $extension
+            : uniqid('file_') . '.' . $extension;
+        // $fileName = $useIdAsFilename && $id !== null
+        //     ? 'pict_' . $id . '.' . $extension
+        //     : uniqid('file_') . '.' . $extension;
+
+        $destination = $uploadDir . $fileName;
+
+        // Transférer le fichier
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            return [
+                'success' => false,
+                'message' => "Erreur lors de l'upload du fichier."
+            ];
+        }
+
+        return [
+            'success' => true,
+            'filename' => $destination,
+            'message' => "Fichier uploadé avec succès."
+        ];
+    }
 }

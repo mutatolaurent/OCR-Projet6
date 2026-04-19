@@ -311,53 +311,79 @@ class BookController
 
         // Taille max 1 Mo
         // TODO : créer une constante dans config.php
-        $maxSize = 2 * 1024 * 1024;
+        // $maxSize = 2 * 1024 * 1024;
 
-        if ($_FILES['picture']['size'] > $maxSize) {
+        // if ($_FILES['picture']['size'] > $maxSize) {
 
-            // TODO : remplacer 2 par la constante
-            $error['picture'] = "L’image ne doit pas dépasser 2 Mo.";
-            $hasError = true;
-        }
+        //     // TODO : remplacer 2 par la constante
+        //     $error['picture'] = "L’image ne doit pas dépasser 2 Mo.";
+        //     $hasError = true;
+        // }
 
-        // Types autorisés
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        if (!$hasError && !in_array($_FILES['picture']['type'], $allowedTypes)) {
-            $error['avatar'] = "Format d’image non autorisé (jpg, png, webp).";
-            $hasError = true;
-        }
+        // // Types autorisés
+        // $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        // if (!$hasError && !in_array($_FILES['picture']['type'], $allowedTypes)) {
+        //     $error['picture'] = "Format d’image non autorisé (jpg, png, webp).";
+        //     $hasError = true;
+        // }
 
-        // Si pas d’erreur → on enregistre
-        $uploadDir = 'images/books/';
-        $extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+        // // Si pas d’erreur → on enregistre
+        // $uploadDir = 'images/books/';
+        // $extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
 
-        // Nom unique basé sur l'id du livre
-        $fileName = 'pict_' . $book->getId() . '.' . $extension;
+        // // Nom unique basé sur l'id du livre
+        // $fileName = 'pict_' . $book->getId() . '.' . $extension;
 
-        // Chemin complet d'accès à la nouvelle image de profil
-        $destination = $uploadDir . $fileName;
+        // // Chemin complet d'accès à la nouvelle image de profil
+        // $destination = $uploadDir . $fileName;
 
-        // Transfert de l'image vers le dossier cible
-        if (!$hasError && !move_uploaded_file($_FILES['picture']['tmp_name'], $destination)) {
-            $error['picture'] = "Erreur lors de l’upload de l’image.";
-            $hasError = true;
+        // // Transfert de l'image vers le dossier cible
+        // if (!$hasError && !move_uploaded_file($_FILES['picture']['tmp_name'], $destination)) {
+        //     $error['picture'] = "Erreur lors de l’upload de l’image.";
+        //     $hasError = true;
+        // }
+
+        // Appel de la méthode
+        $result = Utils::uploadFile(
+            'picture',                                      // nom du champ
+            'images/books/',                                // dossier destination
+            2 * 1024 * 1024,                               // max 2 Mo TODO créer une constante
+            ['image/jpeg', 'image/png', 'image/webp'],    // types autorisés
+            true,                                           // utiliser l'id comme nom TODO à supprimer au profit du fieldname
+            $book->getId()                                 // l'id du livre
+        );
+
+        // Traiter le résultat
+        if (!$result['success']) {
+            $_SESSION['error']['picture'] = $result['message'];
+        } else {
+            // Mise à jour en BD avec le chemin retourné
+            $bookManager = new BookManager();
+            $bookManager->updatePicture($book->getId(), $result['filename']);
+            $_SESSION['error']['picture'] = $result['message'];
+
         }
 
         // Mise à jour en BD
-        if (!$hasError) {
+        // if (!$hasError) {
 
-            // Mise à jour en BD avec le chemin vers la nouvelle photo de profil
-            $bookManager = new BookManager();
-            $bookManager->updatePicture($book->getId(), $destination);
-            // Retour à la page de gestion de l'image du livre
-            Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
+        //     // Mise à jour en BD avec le chemin vers la nouvelle photo de profil
+        //     $bookManager = new BookManager();
+        //     $bookManager->updatePicture($book->getId(), $destination);
+        //     // Retour à la page de gestion de l'image du livre
+        //     // Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
 
-        } else {
+        //     // TODO : message de feedback
 
-            // Init variable de session pour affichage message d'erreur lors de l'affichage du formulaire
-            $_SESSION['error'] = $error;
-            // Retour à la page de gestion de l'image du livre
-            Utils::redirect("showBookForUpdate", ['zoom' => 'viewPicture', 'id' => $book->getId() ]);
-        }
+        // } else {
+
+        //     // Init variable de session pour affichage message d'erreur lors de l'affichage du formulaire
+        //     $_SESSION['error'] = $error;
+        //     // Retour à la page de gestion de l'image du livre
+        // }
+
+        // Retour à la page de gestion de l'image du livre
+        Utils::redirect("showBookForUpdate", ['zoom' => 'viewPicture', 'id' => $book->getId() ]);
+
     }
 }
