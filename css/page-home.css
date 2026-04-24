@@ -1,0 +1,156 @@
+/**
+  * Page Accueil
+  */
+
+/* Container de la section d’introduction avec le texte à gauche et l’image à droite */
+.home-sect1 {
+  display: flex;
+  /* flex-direction: column; */
+  padding: 80px 310px 101px 290px;
+  background: var(--gris-clair);
+}
+
+/* Conteneur du texte à gauche : on utilise flex-direction: column pour empiler les éléments, 
+et justify-content: center pour les centrer verticalement */
+.home-sect1-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 105px;
+}
+
+/* Le bouton "Découvrir" ne prend pas toute la largeur du conteneur et est aligné à gauche */
+.btn-sect1 {
+  /* width: 152px;
+  height: 63px; */
+  align-self: flex-start;
+}
+
+.home-sect1-left p {
+  color: #000;
+  margin-top: 16px;
+  margin-bottom: 40px;
+}
+
+.home-sect1-right p {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--Gris-texte);
+  /* font-family: Inter; */
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  padding-top: 12px;
+  /* line-height: normal; */
+}
+
+.home-sect1-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-sect1-right img {
+  width: 404px;
+  height: 539px;
+}
+
+/* Container de la section avec les cards des livres */
+.home-sect2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 263px 64px 263px;
+  background: var(--background-light);
+}
+
+/* Padding spécifique pour la section des cards, */
+.cards-home-sect2 {
+  padding-top: 80px;
+  padding-bottom: 48px;
+}
+
+.home-sect3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 236px 80px 236px;
+  background: var(--gris-clair);
+}
+
+.home-sect3 h2 {
+  padding-bottom: 24px;
+}
+
+.home-sect3 p {
+  width: 397px;
+}
+
+.howto-home-sect3 {
+  display: flex;
+  column-gap: 36px;
+  margin-bottom: 48px;
+  margin-top: 40px;
+}
+
+.howto-home-sect3 p {
+  display: flex;
+  align-items: center;
+  width: 215px;
+  height: 139px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--Gris-fonc, #292929);
+  text-align: center;
+  padding-inline: 18px;
+  padding-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Container de la section avec la grande image : on fixe la largeur et la hauteur,et on utilise background-image pour 
+que l’image remplisse tout le container sans déformation, en masquant tout ce qui dépasse grâce à overflow: hidden */
+.home-sect4 {
+  width: 100%;
+  height: 230px;
+  overflow: hidden; /* masque tout ce qui dépasse */
+  background-image: url("../images/home/home2-banniere.jpg");
+  background-size: cover; /* l’image remplit le container */
+  background-position: center; /* on montre la partie centrale */
+  background-repeat: no-repeat;
+  background-position: 50% 40%;
+}
+
+.home-sect5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 80px 436px 89px 542px;
+  background: var(--gris-clair);
+}
+.home-sect5 h2 {
+  padding-bottom: 29px;
+}
+
+.home-sect5 p {
+  width: 392px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.signature-home-sect5 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signature-home-sect5 span {
+  padding-top: 39px;
+  color: var(--gris-texte);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.signature-home-sect5 img {
+  padding-top: 25px;
+}

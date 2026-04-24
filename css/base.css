@@ -1,0 +1,162 @@
+/**
+ * Reset css.
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gris-clair: #f5f3ef;
+  --gris-fonc: #292929;
+  --vert-principal-spec: #00ac66;
+  --vert-principal: #00804d; /* Contraste OK WCAG AA */
+  --vert-hover: #006d41;
+  --gris-texte-spec: #a6a6a6;
+  --gris-texte: #737373; /* Contraste OK WCAG AA */
+  --gap-col-nos-livres: 38px;
+  --gap-row-nos-livres: 48px;
+  --background-light: #faf9f7;
+  --max-width: 1440px;
+  --header-height: 80px;
+  --footer-height: 61px;
+  --radius: 6px;
+}
+
+/* Styles globaux au body de la pa */
+body {
+  display: flex;
+  justify-content: center;
+  font-family: Inter, sans-serif;
+  color: var(--gris-fonc);
+}
+
+/* Container global de la page, pour limiter la largeur et centrer le contenu */
+.main-container {
+  /* width: 100%; */
+  max-width: var(--max-width);
+  background: var(--background-light);
+}
+
+/* COMPOSANTS COMMUNS */
+/* Titre principale de la page */
+h1 {
+  font-family: "Playfair Display";
+  font-size: 36px;
+  font-weight: 400;
+}
+
+/* Titre secondaire niveau 2*/
+h2 {
+  color: var(--gris-fonc, #292929);
+  text-align: center;
+  font-family: "Playfair Display";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Titre secondaire niveau 3*/
+h3 {
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Titre secondaire niveau 4*/
+h4 {
+  color: var(--Gris-fonc);
+  font-family: Inter;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+/* Paragraphe */
+p {
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+/* TABLEAUX */
+/* Tableau pour la liste des livres du propriétaire : 
+on utilise border-collapse: collapse pour éviter les doubles bordures,
+et table-layout: fixed pour que les largeurs des colonnes soient respectées même si le contenu dépasse */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Styles communs TH et TD */
+th,
+td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hauteurs des lignes : 20px pour l’en-tête, 130px pour les lignes de contenu */
+thead tr {
+  height: 20px;
+}
+
+/* Styles spécifiques pour les en-têtes de colonne */
+th {
+  color: var(--gris-fonc);
+  font-family: "Inter", sans-serif;
+  font-size: 11px; /* 8px sur la spec mais trop petit pour WCAG AA */
+  font-weight: 600;
+  letter-spacing: 0.64px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #f5f3ef;
+}
+
+/* Styles spécifiques pour les lignes de contenu */
+tbody tr {
+  height: 130px;
+}
+
+/* Alternance de couleur pour les lignes du tableau */
+tbody tr:nth-child(even) {
+  background-color: #edf2f6;
+}
+
+/* Styles spécifiques pour les cellules de contenu */
+tbody td {
+  color: var(--gris-fonc, #292929);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.description-td {
+  font-style: italic;
+}
+
+/* Image dans la première colonne : taille fixe, avec object-fit: fill pour remplir le cadre sans conserver les proportions */
+tbody td img {
+  width: 77px;
+  height: 77px;
+  display: block;
+  object-fit: fill;
+}
+
+/* Titre du livre dans la deuxième colonne : on utilise un lien pour que le titre 
+soit cliquable,et on utilise display: inline-block pour que le lien prenne 
+uniquement la place du texte et non toute la cellule */
+tbody td a {
+  display: inline-block;
+}

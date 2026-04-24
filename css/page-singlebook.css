@@ -1,0 +1,131 @@
+/* 
+ * Page Single Livre
+ */
+.breadcrump {
+  padding: 16px 150px 16px 150px;
+  /* width: 100%; */
+  background-color: var(--gris-clair);
+}
+
+.breadcrump a {
+  text-decoration: none;
+  color: var(--gris-text);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.single-livre-container {
+  display: flex;
+  /* width: 100%; */
+}
+
+.single-livre-container .livre-image {
+  /* display: flex; */
+  width: 720px;
+  height: auto;
+  object-fit: cover;
+}
+
+.single-livre-container .livre-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 59px 150px 80px 85px;
+}
+
+.single-livre-container .livre-info h1 {
+  padding-bottom: 16px;
+}
+
+.single-livre-container .livre-info h2 {
+  padding-bottom: 32.5px;
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.single-livre-container .livre-info h3 {
+  padding-bottom: 32.5px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 11px; /* 8px dans la spec mais trop petit pour WCAG AA */
+  font-weight: 600;
+  letter-spacing: 0.64px;
+}
+
+.single-livre-container .livre-info .line-separator {
+  margin-bottom: 32.5px;
+  width: 27px;
+  height: 1px;
+}
+
+.single-livre-container .livre-info h4 {
+  padding-bottom: 16px;
+}
+
+.single-livre-container .livre-info p {
+  padding-bottom: 32px;
+}
+
+.picto-owner {
+  display: inline-flex;
+  padding: 6px 17px 6px 6px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 114px;
+  background: #fff;
+  height: 60px;
+  /* align-self: flex-start; */
+  width: fit-content;
+  text-decoration: none;
+  position: relative;
+}
+
+.single-livre-container .livre-info .picto-owner {
+  margin-bottom: 80px;
+  flex: 0;
+}
+
+.img-owner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  object-fit: cover;
+  /* transition: filter 0.3s ease;  */
+}
+
+.pseudo-owner {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  font-weight: 400;
+}
+
+.picto-owner:hover .pseudo-owner {
+  color: var(--vert-principal);
+  font-weight: 500;
+}
+
+/* On crée un calque invisible par défaut au-dessus de l'image */
+.picto-owner::before {
+  content: "";
+  position: absolute;
+  top: 6px; /* Correspond au padding-top */
+  left: 6px; /* Correspond au padding-left */
+  width: 48px; /* Taille de l'image */
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--vert-principal);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1; /* S'assure que le voile est au-dessus de l'image */
+}
+
+.picto-owner:hover::before {
+  opacity: 0.4; /* Ajuste la transparence du voile ici (0.4 = 40%) */
+}

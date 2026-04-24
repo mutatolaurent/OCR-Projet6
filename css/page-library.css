@@ -1,0 +1,74 @@
+/**
+  * Page Nos livres à l'échange 
+  */
+.main-nos-livres {
+  margin: 130px clamp(20px, 18.26vw, 263px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container du titre et du formulaire de recherche */
+.entete-nos-livres {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Container du formulaire de recherche */
+.search-form {
+  display: flex;
+  align-items: center;
+  width: 322px;
+  height: 50px;
+  /* box-sizing: border-box; */
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.search-form:focus-within {
+  border: 2px solid var(--gris-texte);
+}
+
+/* Icone qui lance la recherche */
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+  width: 50px;
+  height: 50px;
+}
+
+.search-btn img {
+  width: 15.854px;
+  height: 15.146px;
+}
+
+/* Champ de saisie des critères de recherche */
+.search-input {
+  color: var(--Gris-texte, #a6a6a6);
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding-right: 10px;
+}
+
+/* Style du placeholder de la balise INPUT */
+.search-form input::placeholder {
+  color: var(--Gris-texte, #a6a6a6);
+  font-family: Inter;
+  font-size: 14px;
+  /* font-style: normal; */
+  font-weight: 400;
+}
+
+.search-info strong {
+  font-weight: 600;
+}

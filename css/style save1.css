@@ -1,0 +1,1758 @@
+/* Cette feuille de styles est organisée en 2 parties : 
+1 - les propriétés communes à plusieurs pages
+2 - les propriétés spécifiques à chaque page
+*/
+
+/**
+ * Reset css.
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gris-clair: #f5f3ef;
+  --gris-fonc: #292929;
+  --vert-principal-spec: #00ac66;
+  --vert-principal: #00804d; /* Contraste OK WCAG AA */
+  --vert-hover: #006d41;
+  --gris-texte-spec: #a6a6a6;
+  --gris-texte: #737373; /* Contraste OK WCAG AA */
+  --gap-col-nos-livres: 38px;
+  --gap-row-nos-livres: 48px;
+  --background-light: #faf9f7;
+  --max-width: 1440px;
+  --header-height: 80px;
+  --footer-height: 61px;
+  --radius: 6px;
+}
+
+/* Styles globaux au body de la pa */
+body {
+  /* min-height: 100vh; */
+  display: flex;
+  justify-content: center;
+  font-family: Inter, sans-serif;
+  color: var(--gris-fonc);
+}
+
+/* Container global de la page, pour limiter la largeur et centrer le contenu */
+.main-container {
+  /* width: 100%; */
+  max-width: var(--max-width);
+  background: var(--background-light);
+}
+
+/* COMPOSANTS COMMUNS */
+/* Titre principale de la page */
+h1 {
+  /* color: #000; */
+  font-family: "Playfair Display";
+  font-size: 36px;
+  font-weight: 400;
+}
+
+/* Titre secondaire niveau 2*/
+h2 {
+  color: var(--gris-fonc, #292929);
+  text-align: center;
+  font-family: "Playfair Display";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Titre secondaire niveau 3*/
+h3 {
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Titre secondaire niveau 4*/
+h4 {
+  color: var(--Gris-fonc);
+  font-family: Inter;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+/* Paragraphe */
+p {
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+/* Boutons génériques */
+.btn {
+  display: inline-flex;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 22px 38px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Deux variantes de boutons : rempli ou vide */
+.btn-filled {
+  border: 1px solid var(--vert-principal);
+  background: var(--vert-principal);
+  color: #fff;
+}
+
+.btn-empty {
+  border: 1px solid var(--vert-principal);
+  background: var(--gris-clair);
+  color: var(--vert-principal);
+}
+
+/* Survol : foncé pour les 2 types de boutons */
+.btn-filled:hover {
+  background: var(--vert-hover);
+}
+
+.btn-empty:hover {
+  background: var(--vert-hover);
+  color: var(--gris-clair);
+}
+
+/* HEADER ET BARRE DE MENU VERTICALE */
+.site-header {
+  width: 100%;
+  height: 80px;
+  background: var(--gris-clair);
+  display: flex;
+  align-items: center;
+  padding-left: clamp(40px, 10.42vw, 150px);
+  padding-right: clamp(40px, 10.42vw, 150px);
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Barre verticale fixe à 833px (Desktop uniquement) */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 833px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 19px;
+  background-color: var(--gris-texte);
+  z-index: 10;
+}
+
+/* Menu BURGER (Caché sur Desktop) */
+#menu-cb {
+  display: none;
+}
+.burger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+/* LOGO */
+.logo-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.logo-square {
+  width: 51px;
+  height: 51px;
+  border-radius: 8.5px;
+  background: var(--vert-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-svg {
+  width: 32.311px;
+  height: 25.5px;
+}
+
+.logo-text {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vert-principal);
+}
+
+/* NAVIGATION ET LIENS DESKTOP */
+.navbar {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  font-size: 14px;
+  gap: 4px;
+}
+
+/* TECHNIQUE ANTI-DÉCALAGE */
+.nav-link span,
+.nav-link .text-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-link span::after,
+.nav-link .text-wrapper::after {
+  content: attr(data-text);
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  font-weight: 600;
+}
+
+/* COMPOSANTS (Messagerie & Compte) */
+.messagerie-icon {
+  width: 15px;
+  height: 13.129px;
+}
+.msg-counter {
+  width: 10.5px;
+  height: 15px;
+  border-radius: 6.75px;
+  background: var(--gris-fonc);
+  color: var(--gris-clair);
+  font-size: 8.25px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.compte-icon {
+  width: 9.286px;
+  height: 9.286px;
+  border-radius: 9.286px;
+  background: #d9d9d9;
+}
+
+/* ESPACEMENTS PRÉCIS DESKTOP */
+.navbar .nav-link:nth-child(1) {
+  margin-left: 78px;
+}
+.navbar .nav-link:nth-child(2) {
+  margin-left: 44px;
+}
+.navbar .nav-link:nth-child(3) {
+  margin-left: 285px;
+}
+.navbar .nav-link:nth-child(4) {
+  margin-left: 58px;
+}
+.navbar .nav-link:nth-child(5) {
+  margin-left: 58px;
+}
+
+/* On force la graisse à 600 pour l'élément actif */
+.nav-link.active {
+  font-weight: 600;
+  cursor: default; /* Indique visuellement que ce n'est pas cliquable */
+  pointer-events: none; /* Sécurité pour empêcher tout événement de clic */
+}
+
+/* On s'assure que le survol ne change rien puisque c'est déjà en gras */
+.nav-link.active:hover {
+  font-weight: 600;
+}
+
+/* Masque les points de menu non accessibles hors connexion */
+.user-disconnected .complex-link {
+  visibility: hidden; /* Rend invisible mais garde l'espace */
+  pointer-events: none; /* Empêche de cliquer sur le lien invisible */
+  user-select: none; /* Empêche de sélectionner le texte invisible */
+}
+
+/* FOOTER GLOBAL */
+.main-footer {
+  display: flex;
+  width: 100%;
+  height: var(--footer-height);
+  max-width: var(--max-width);
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+  background: #fff;
+}
+
+/* Lien "Mentions légales" et "Contact" */
+.main-footer a {
+  text-decoration: none;
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.main-footer img {
+  padding-right: 46px;
+}
+
+/* CARDS DES LIVRES */
+/* Container de la section des cards des livres */
+.cards-nos-livres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-row-nos-livres) var(--gap-col-nos-livres);
+  padding: 72px 0 80px;
+}
+
+/* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
+et un conteneur flex pour aligner les éléments à l’intérieur */
+.cards-nos-livres a {
+  flex: 0 1 calc(25% - (var(--gap-col-nos-livres) * 3 / 4));
+  display: flex;
+  text-decoration: none;
+}
+
+/* Contenu de chaque card : image, titre, auteur, propriétaire */
+.cards-nos-livres .card {
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
+.cards-nos-livres .card img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+/* Titre du livre : on laisse le texte s’étendre sur plusieurs lignes si besoin, 
+et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
+.cards-nos-livres .book-title {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  padding-left: 14px;
+  padding-top: 20px;
+  padding-right: 14px;
+  flex-grow: 1;
+  font-family: Inter;
+  text-align: left;
+}
+
+/* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
+et on ajoute un peu d’espace en haut pour séparer du titre */
+.cards-nos-livres .book-author {
+  padding-left: 14px;
+  padding-top: 11px;
+  padding-right: 14px;
+  color: var(--gris-texte);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Propriétaire du livre : on utilise une couleur plus claire et un style italique 
+pour différencier du titre et de l’auteur,
+et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu */
+.cards-nos-livres .book-owner {
+  padding-left: 14px;
+  padding-top: 25px;
+  padding-right: 14px;
+  padding-bottom: 23px;
+  color: var(--gris-texte);
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* FORMULAIRES */
+.champ-formulaire {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 22px;
+}
+
+.champ-formulaire label {
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+.champ-formulaire input {
+  /* flex: 1; */
+  width: 100%;
+  /* height: 50px; */
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire select {
+  flex: 1;
+  width: 100%;
+  /* height: 50px; */
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire textarea {
+  /* flex: 1; */
+  width: 100%;
+  max-width: 100%;
+  height: 356px;
+  max-height: 356px;
+  resize: none;
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire input.input-error {
+  border: 2px solid red;
+}
+
+champ-formulaire input.input-upload {
+  /* flex: 1; */
+  height: 200px;
+}
+
+/* Style du bouton interne */
+.input-upload::file-selector-button {
+  background: var(--vert-principal);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-right: 12px;
+  border-radius: var(--radius);
+  font-family: Inter;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.text-error {
+  color: red;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  display: block;
+}
+.auth-error {
+  margin-top: -30px;
+  padding-bottom: 20px;
+}
+
+.feedback-info {
+  color: red;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  display: block;
+  margin-top: 20px;
+}
+
+/* TABLEAUX */
+/* Tableau pour la liste des livres du propriétaire : 
+on utilise border-collapse: collapse pour éviter les doubles bordures,
+et table-layout: fixed pour que les largeurs des colonnes soient respectées même si le contenu dépasse */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Styles communs TH et TD */
+th,
+td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hauteurs des lignes : 20px pour l’en-tête, 130px pour les lignes de contenu */
+thead tr {
+  height: 20px;
+}
+
+/* Styles spécifiques pour les en-têtes de colonne */
+th {
+  color: var(--gris-fonc);
+  font-family: "Inter", sans-serif;
+  font-size: 11px; /* 8px sur la spec mais trop petit pour WCAG AA */
+  font-weight: 600;
+  letter-spacing: 0.64px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #f5f3ef;
+}
+
+/* Styles spécifiques pour les lignes de contenu */
+tbody tr {
+  height: 130px;
+}
+
+/* Alternance de couleur pour les lignes du tableau */
+tbody tr:nth-child(even) {
+  background-color: #edf2f6;
+}
+
+/* Styles spécifiques pour les cellules de contenu */
+tbody td {
+  color: var(--gris-fonc, #292929);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.description-td {
+  font-style: italic;
+}
+
+/* Image dans la première colonne : taille fixe, avec object-fit: fill pour remplir le cadre sans conserver les proportions */
+tbody td img {
+  width: 77px;
+  height: 77px;
+  display: block;
+  object-fit: fill;
+}
+
+/* Titre du livre dans la deuxième colonne : on utilise un lien pour que le titre 
+soit cliquable,et on utilise display: inline-block pour que le lien prenne 
+uniquement la place du texte et non toute la cellule */
+tbody td a {
+  display: inline-block;
+}
+
+/* sticker état des livres */
+/* Disponible */
+.book-state-2 {
+  display: inline-flex;
+  padding: 3.698px 13.313px;
+  border-radius: 29.583px;
+  background: #6dc5a1;
+  color: #fff;
+  font-size: 8.875px;
+  font-weight: 500;
+}
+
+/* Non Disponible */
+.book-state-1 {
+  display: inline-flex;
+  padding: 3.698px 13.313px;
+  border-radius: 29.583px;
+  background: #c56d6d;
+  color: #fff;
+  font-size: 8.875px;
+  font-weight: 500;
+}
+
+/* Style de liens spécifiques */
+.edit-link {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.delete-link {
+  color: #cb2d2d;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+/**
+
+  * Page Accueil
+  */
+
+/* Container de la section d’introduction avec le texte à gauche et l’image à droite */
+.home-sect1 {
+  display: flex;
+  /* flex-direction: column; */
+  padding: 80px 310px 101px 290px;
+  background: var(--gris-clair);
+}
+
+/* Conteneur du texte à gauche : on utilise flex-direction: column pour empiler les éléments, 
+et justify-content: center pour les centrer verticalement */
+.home-sect1-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 105px;
+}
+
+/* Le bouton "Découvrir" ne prend pas toute la largeur du conteneur et est aligné à gauche */
+.btn-sect1 {
+  /* width: 152px;
+  height: 63px; */
+  align-self: flex-start;
+}
+
+.home-sect1-left p {
+  color: #000;
+  margin-top: 16px;
+  margin-bottom: 40px;
+}
+
+.home-sect1-right p {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--Gris-texte);
+  /* font-family: Inter; */
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  padding-top: 12px;
+  /* line-height: normal; */
+}
+
+.home-sect1-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-sect1-right img {
+  width: 404px;
+  height: 539px;
+}
+
+/* Container de la section avec les cards des livres */
+.home-sect2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 263px 64px 263px;
+  background: var(--background-light);
+}
+
+/* Padding spécifique pour la section des cards, */
+.cards-home-sect2 {
+  padding-top: 80px;
+  padding-bottom: 48px;
+}
+
+.home-sect3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 236px 80px 236px;
+  background: var(--gris-clair);
+}
+
+.home-sect3 h2 {
+  padding-bottom: 24px;
+}
+
+.home-sect3 p {
+  width: 397px;
+}
+
+.howto-home-sect3 {
+  display: flex;
+  column-gap: 36px;
+  margin-bottom: 48px;
+  margin-top: 40px;
+}
+
+.howto-home-sect3 p {
+  display: flex;
+  align-items: center;
+  width: 215px;
+  height: 139px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--Gris-fonc, #292929);
+  text-align: center;
+  padding-inline: 18px;
+  padding-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Container de la section avec la grande image : on fixe la largeur et la hauteur,et on utilise background-image pour 
+que l’image remplisse tout le container sans déformation, en masquant tout ce qui dépasse grâce à overflow: hidden */
+.home-sect4 {
+  width: 100%;
+  height: 230px;
+  overflow: hidden; /* masque tout ce qui dépasse */
+  background-image: url("../images/home/home2-banniere.jpg");
+  background-size: cover; /* l’image remplit le container */
+  background-position: center; /* on montre la partie centrale */
+  background-repeat: no-repeat;
+  background-position: 50% 40%;
+}
+
+.home-sect5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 80px 436px 89px 542px;
+  background: var(--gris-clair);
+}
+.home-sect5 h2 {
+  padding-bottom: 29px;
+}
+
+.home-sect5 p {
+  width: 392px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.signature-home-sect5 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signature-home-sect5 span {
+  padding-top: 39px;
+  color: var(--gris-texte);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.signature-home-sect5 img {
+  padding-top: 25px;
+}
+
+/**
+  * Page Nos livres à l'échange 
+  */
+.main-nos-livres {
+  margin: 130px clamp(20px, 18.26vw, 263px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container du titre et du formulaire de recherche */
+.entete-nos-livres {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Container du formulaire de recherche */
+.search-form {
+  display: flex;
+  align-items: center;
+  width: 322px;
+  height: 50px;
+  /* box-sizing: border-box; */
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.search-form:focus-within {
+  border: 2px solid var(--gris-texte);
+}
+
+/* Icone qui lance la recherche */
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+  width: 50px;
+  height: 50px;
+}
+
+.search-btn img {
+  width: 15.854px;
+  height: 15.146px;
+}
+
+/* Champ de saisie des critères de recherche */
+.search-input {
+  color: var(--Gris-texte, #a6a6a6);
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding-right: 10px;
+}
+
+/* Style du placeholder de la balise INPUT */
+.search-form input::placeholder {
+  color: var(--Gris-texte, #a6a6a6);
+  font-family: Inter;
+  font-size: 14px;
+  /* font-style: normal; */
+  font-weight: 400;
+}
+
+.search-info strong {
+  font-weight: 600;
+}
+
+/* 
+ * Page Single Livre
+ */
+.breadcrump {
+  padding: 16px 150px 16px 150px;
+  /* width: 100%; */
+  background-color: var(--gris-clair);
+}
+
+.breadcrump a {
+  text-decoration: none;
+  color: var(--gris-text);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.single-livre-container {
+  display: flex;
+  /* width: 100%; */
+}
+
+.single-livre-container .livre-image {
+  /* display: flex; */
+  width: 720px;
+  height: auto;
+  object-fit: cover;
+}
+
+.single-livre-container .livre-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 59px 150px 80px 85px;
+}
+
+.single-livre-container .livre-info h1 {
+  padding-bottom: 16px;
+}
+
+.single-livre-container .livre-info h2 {
+  padding-bottom: 32.5px;
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.single-livre-container .livre-info h3 {
+  padding-bottom: 32.5px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 11px; /* 8px dans la spec mais trop petit pour WCAG AA */
+  font-weight: 600;
+  letter-spacing: 0.64px;
+}
+
+.single-livre-container .livre-info .line-separator {
+  margin-bottom: 32.5px;
+  width: 27px;
+  height: 1px;
+}
+
+.single-livre-container .livre-info h4 {
+  padding-bottom: 16px;
+}
+
+.single-livre-container .livre-info p {
+  padding-bottom: 32px;
+}
+
+.picto-owner {
+  display: inline-flex;
+  padding: 6px 17px 6px 6px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 114px;
+  background: #fff;
+  height: 60px;
+  /* align-self: flex-start; */
+  width: fit-content;
+  text-decoration: none;
+  position: relative;
+}
+
+.single-livre-container .livre-info .picto-owner {
+  margin-bottom: 80px;
+  flex: 0;
+}
+
+.img-owner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  object-fit: cover;
+  /* transition: filter 0.3s ease;  */
+}
+
+.pseudo-owner {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  font-weight: 400;
+}
+
+.picto-owner:hover .pseudo-owner {
+  color: var(--vert-principal);
+  font-weight: 500;
+}
+
+/* On crée un calque invisible par défaut au-dessus de l'image */
+.picto-owner::before {
+  content: "";
+  position: absolute;
+  top: 6px; /* Correspond au padding-top */
+  left: 6px; /* Correspond au padding-left */
+  width: 48px; /* Taille de l'image */
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--vert-principal);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1; /* S'assure que le voile est au-dessus de l'image */
+}
+
+.picto-owner:hover::before {
+  opacity: 0.4; /* Ajuste la transparence du voile ici (0.4 = 40%) */
+}
+
+/* 
+ * Page compte public 
+ */
+
+/* container principal de la page */
+.cpt-public-sect {
+  display: flex;
+  gap: 28px;
+  padding-left: clamp(20px, 10.42vw, 150px);
+  padding-right: clamp(20px, 10.42vw, 150px);
+  padding-top: 103px;
+  padding-bottom: 212px;
+}
+
+/* Container de la partie gauche avec les infos du propriétaire des livres*/
+.cpt-public-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 341px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 19px;
+  padding-bottom: 56px;
+}
+
+/* Container de l’image de profil du propriétaire */
+.cpt-img-profil-container {
+  width: 143px;
+  height: 193px;
+  display: flex;
+  row-gap: 5px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image de profil du propriétaire des livres, avec une taille fixe, 
+un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-radius de 50% pour la rendre ronde */
+.cpt-img-profil {
+  width: 143px;
+  height: 143px;
+  border-radius: 50%;
+  background: white;
+  object-fit: cover;
+}
+
+/* Nom du propriétaire des livres */
+.cpt-owner {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: "Playfair Display";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 89px;
+}
+
+/* Ancienneté du proriétaire sur le site */
+.cpt-time {
+  color: var(--gris-texte);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 11px;
+}
+
+/* Style du mot BIBLIOTHEQUE */
+.cpt-bib {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: Inter;
+  font-size: 11px; /* 8px sur la spec mais trop petit pour WCAG AA */
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin-top: 21px;
+}
+
+/* Container du nombre de livres dans la bibliothèque du propriétaire, avec l’icône de livre à côté */
+.cpt-count-container {
+  display: flex;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+/* Icône de livre à côté du nombre de livres dans la bibliothèque du propriétaire */
+.cpt-count-img {
+  width: 10.41px;
+  height: 13.714px;
+}
+
+/* Nombre de livres dans la bibliothèque du propriétaire */
+.cpt-count {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Bouton accès page pour écrire un message au propriétaire */
+.cpt-public-left .btn {
+  margin-top: 46px;
+}
+
+/* Container de la partie droite avec la liste des livres du propriétaire */
+.cpt-public-right {
+  width: 771px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 33px;
+  padding-bottom: 10px;
+  /* padding-inline: 66px; */
+}
+
+/* Gestion des largeurs et des marges simulées (66px) */
+/* Colonne 1 (Image) */
+.cpt-public-right th:first-child,
+.cpt-public-right td:first-child {
+  width: 225px; /* 159px + 66px */
+  padding-left: 66px;
+}
+
+/* Colonnes centrales (Titre et Auteur) */
+.cpt-public-right th:nth-child(2),
+.cpt-public-right td:nth-child(2),
+.cpt-public-right th:nth-child(3),
+.cpt-public-right td:nth-child(3) {
+  width: 159px;
+}
+
+/* Colonne 4 (Description) */
+.cpt-public-right th:last-child,
+.cpt-public-right td:last-child {
+  width: 225px; /* 159px + 66px */
+  padding-right: 66px;
+}
+
+/* 
+ * Page Mon compte 
+ */
+
+/* container principal de la page */
+.mon-cpt-main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-left: clamp(20px, 10.42vw, 150px);
+  padding-right: clamp(20px, 10.42vw, 150px);
+  padding-top: 90px;
+  padding-bottom: 102px;
+}
+
+.mon-cpt-sect1 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.form-account {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.mon-cpt-sect1-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 547px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 21.5px;
+  padding-bottom: 93px;
+}
+
+.cpt-img-profil-container a,
+.cpt-img-profil-container .link-upload {
+  color: var(--gris-texte);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  cursor: pointer;
+}
+
+.cpt-img-profil-container .input-upload {
+  display: none;
+}
+
+.info-upload {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  margin-top: 10px;
+}
+
+.cpt-img-profil-container:hover .info-upload {
+  display: block;
+}
+
+.mon-cpt-sect1-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 555px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 36px;
+  padding-bottom: 37px;
+  padding-inline: 116px;
+}
+
+.mon-cpt-sect1-right p {
+  padding-bottom: 26px;
+}
+
+.mon-cpt-sect2 {
+  width: 1140px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 33px;
+  padding-bottom: 10px;
+}
+
+/* Gestion des largeurs et des marges simulées (66px) */
+/* Colonne 1 (Image) */
+.mon-cpt-sect2 th:first-child,
+.mon-cpt-sect2 td:first-child {
+  width: 223px; /* 168px + 66px */
+  padding-left: 66px;
+}
+
+/* Colonnes centrales (Titre et Auteur) */
+.mon-cpt-sect2 th:nth-child(2),
+.mon-cpt-sect2 td:nth-child(2),
+.mon-cpt-sect2 th:nth-child(3),
+.mon-cpt-sect2 td:nth-child(3),
+.mon-cpt-sect2 th:nth-child(4),
+.mon-cpt-sect2 td:nth-child(4),
+.mon-cpt-sect2 th:nth-child(5),
+.mon-cpt-sect2 td:nth-child(5) {
+  width: 168px;
+  padding-right: 20px;
+}
+
+/* Colonne 4 (Description) */
+.mon-cpt-sect2 th:last-child,
+.mon-cpt-sect2 td:last-child {
+  width: 234px; /* 168px + 66px */
+  padding-right: 66px;
+}
+
+.mon-cpt-sect2 .edit-link {
+  padding-right: 28px;
+}
+
+/* 
+ * Pages Inscription et connexion
+ */
+
+/* container principal de la page */
+.insc-main-sect {
+  display: flex;
+  background: var(--background-light);
+}
+
+.insc-part-left {
+  display: flex;
+  width: 720px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding-top: 130px;
+  padding-bottom: 205px;
+  padding-left: clamp(10px, 10.42vw, 150px);
+  padding-right: clamp(10px, 17.22vw, 248px);
+}
+
+.insc-part-left h1 {
+  padding-bottom: 56px;
+}
+
+.insc-part-left button {
+  align-self: stretch;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.insc-part-left span,
+.insc-part-left .edit-link {
+  font-size: 14px;
+}
+
+.insc-part-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.insc-part-right img {
+  width: 720px;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 
+ * Page Modifier les informations
+ */
+/* container principal de la page */
+.modif-infos-main-sect {
+  display: flex;
+  flex-direction: column;
+  row-gap: 23px;
+  padding: 40px 149px 92px 150px;
+  background: var(--background-light);
+}
+
+.return-link {
+  text-decoration: none;
+  color: var(--gris-text);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.modif-book-infos {
+  display: flex;
+  width: 1141px;
+  border-radius: 20px;
+  background: #fff;
+  column-gap: 117px;
+  padding: 56px 50px 68px 50px;
+}
+
+.modif-book-infos-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modif-book-infos-left p {
+  padding-bottom: 10px;
+  color: var(--gris-texte);
+  font-size: 14px;
+}
+
+.modif-book-infos-left img {
+  width: 488px;
+  height: 100%;
+  object-fit: cover;
+  padding-bottom: 20px;
+}
+
+.modif-book-infos-left .edit-link {
+  align-self: flex-end;
+}
+
+.modif-book-infos-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.modif-book-infos-right .btn {
+  width: 246px;
+}
+
+/* Page messagerie */
+
+/* Container principal de la page */
+.msg-container {
+  display: flex;
+  padding-inline: 150px;
+  background-color: var(--gris-clair);
+}
+
+.sect-thread {
+  display: flex;
+  flex-direction: column;
+  padding-top: 55px;
+  background-color: var(--background-light);
+  width: 308px;
+}
+
+.sect-thread h1 {
+  font-size: 26px;
+  padding-left: 34px;
+  padding-bottom: 27px;
+}
+
+.nav-thread {
+  display: flex;
+  padding: 21px 42px 21px 30px;
+  text-decoration: none;
+}
+
+.active-thread {
+  background-color: white;
+}
+
+.thread-context {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+  justify-content: center;
+}
+
+.thread-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thread-info .thread-owner {
+  font-size: 14px;
+  color: var(--gris-fonc);
+}
+
+.thread-info .thread-time {
+  font-size: 12px;
+  color: var(--gris-fonc);
+}
+
+.thread-context .thread-last-msg {
+  font-size: 12px;
+  color: var(--gris-texte);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sect-bubbles {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: var(--gris-clair);
+  padding-left: 44px;
+  height: calc(100vh - 61px - 80px); /* 61px = footer , 80px = headeer */
+}
+
+.contact-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-top: 45px;
+  padding-bottom: 15px;
+}
+
+.contact-pseudo {
+  color: var(--gris-fonc);
+  font-weight: 600;
+}
+
+.bubbles-zone {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse; /* messages en bas */
+  gap: 12px;
+  margin-bottom: 98px;
+}
+
+/* Bloc message (gauche ou droite) */
+.bubble-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+
+/* Alignement selon le type */
+.bubble-block.left {
+  align-self: flex-start;
+}
+
+.bubble-block.right {
+  align-self: flex-end;
+  text-align: right;
+}
+
+/* Métadonnées (avatar + date + heure) */
+.msg-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+/* Avatar du correspondant */
+.bubble-block.left .msg-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Pas d’avatar pour les messages à droite */
+.bubble-block.right .msg-avatar {
+  display: none;
+}
+
+.bubble-block.right .msg-meta {
+  justify-content: flex-end;
+}
+
+/* Date + heure */
+.msg-date,
+.msg-time {
+  font-size: 12px;
+  color: var(--gris-texte);
+}
+
+/* Style commun à toutes les bulles */
+.bubble {
+  max-width: 500px;
+  padding: 10px 18px 9px 18px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: normal;
+  word-wrap: break-word;
+}
+
+/* Messages du correspondant (à gauche) */
+.bubble-left {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid #e5e5e5;
+}
+
+/* Messages émetteur (à droite) */
+.bubble-right {
+  align-self: flex-end;
+  background: #edf2f6;
+  border: 1px solid #d8dfe6;
+}
+
+.msg-input-zone {
+  display: flex;
+  gap: 21px;
+  height: 49px;
+  margin-bottom: 98px;
+}
+
+.msg-input {
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+  flex: 1;
+  padding-left: 42px;
+  color: var(--gris-texte);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* VERSION MOBILE (375px) */
+@media (max-width: 375px) {
+  .site-header {
+    height: 56px;
+    padding: 0 20px;
+    justify-content: flex-start; /* Aligne les éléments au début (gauche) */
+  }
+
+  .site-header::after {
+    display: none;
+  }
+
+  /* Affichage Burger à DROITE */
+  .burger-menu {
+    display: block;
+    margin-left: auto; /* Pousse le bouton burger tout à fait à droite */
+  }
+
+  /* Logo réduit à GAUCHE */
+  .logo-block {
+    gap: 7.55px;
+  }
+
+  .logo-square {
+    width: 25.665px;
+    height: 25.665px;
+    border-radius: 4.277px;
+  }
+  .logo-svg {
+    width: 16.26px;
+    height: 12.832px;
+  }
+  .logo-text {
+    font-size: 10.065px;
+  }
+
+  /* Navigation Mobile déroulante */
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    /* background: var(--gris-clair); */
+    background: white;
+    z-index: 100;
+  }
+
+  /* Checkbox Hack pour ouvrir le menu */
+  #menu-cb:checked ~ .navbar {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    height: 56px;
+    padding-left: 20px;
+    margin-left: 0 !important;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: 600;
+    justify-content: flex-start;
+  }
+
+  .nav-link span::after,
+  .nav-link .text-wrapper::after {
+    display: none;
+  }
+
+  .user-disconnected .complex-link {
+    display: none;
+  }
+
+  /* CARDS DES LIVRES */
+  /* Container de la section des cards des livres */
+  .cards-nos-livres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 34px 0px 80.8px;
+  }
+
+  /* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
+et un conteneur flex pour aligner les éléments à l’intérieur */
+  .cards-nos-livres a {
+    flex: 0 1 calc(50% - (var(--gap-col-nos-livres) * 1 / 2));
+    display: flex;
+    text-decoration: none;
+  }
+
+  /* Contenu de chaque card : image, titre, auteur, propriétaire */
+  .cards-nos-livres .card {
+    background-color: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
+  .cards-nos-livres .card img {
+    object-fit: cover;
+    width: 160px;
+    height: 160px;
+  }
+
+  /* Titre du livre : on laisse le texte s’étendre sur plusieurs lignes si besoin, 
+et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
+  .cards-nos-livres .book-title {
+    font-size: 13px;
+    padding-left: 11.2px;
+    padding-top: 16px;
+    /* padding-right: 14px; */
+    text-align: left;
+  }
+
+  /* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
+et on ajoute un peu d’espace en haut pour séparer du titre */
+  .cards-nos-livres .book-author {
+    padding-left: 11.2px;
+    padding-top: 4px;
+    /* padding-right: 14px; */
+    font-size: 13px;
+  }
+
+  /* Propriétaire du livre : on utilise une couleur plus claire et un style italique 
+pour différencier du titre et de l’auteur,
+et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu */
+  .cards-nos-livres .book-owner {
+    padding-left: 11.2px;
+    padding-top: 18.2px;
+    /* padding-right: 14px; */
+    padding-bottom: 18.4px;
+    font-size: 8px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .btn {
+    align-self: stretch;
+  }
+
+  /* Adaptations Page d'accueil */
+  .home-sect1 {
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+
+  .home-sect1-left {
+    padding: 52px 20px 48px 20px;
+  }
+
+  .home-sect1-right img {
+    width: 375px;
+  }
+
+  .home-sect1-right p {
+    margin-right: 27px;
+  }
+
+  .home-sect2 {
+    padding: 48px 21px 80.8px 20px;
+  }
+
+  .home-sect3 {
+    display: none;
+  }
+
+  .home-sect4 {
+    display: none;
+  }
+
+  .home-sect5 {
+    display: none;
+  }
+
+  .main-footer {
+    display: none;
+  }
+}

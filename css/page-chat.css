@@ -1,0 +1,184 @@
+/* Page messagerie */
+
+/* Container principal de la page */
+.msg-container {
+  display: flex;
+  padding-inline: 150px;
+  background-color: var(--gris-clair);
+}
+
+.sect-thread {
+  display: flex;
+  flex-direction: column;
+  padding-top: 55px;
+  background-color: var(--background-light);
+  width: 308px;
+}
+
+.sect-thread h1 {
+  font-size: 26px;
+  padding-left: 34px;
+  padding-bottom: 27px;
+}
+
+.nav-thread {
+  display: flex;
+  padding: 21px 42px 21px 30px;
+  text-decoration: none;
+}
+
+.active-thread {
+  background-color: white;
+}
+
+.thread-context {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+  justify-content: center;
+}
+
+.thread-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thread-info .thread-owner {
+  font-size: 14px;
+  color: var(--gris-fonc);
+}
+
+.thread-info .thread-time {
+  font-size: 12px;
+  color: var(--gris-fonc);
+}
+
+.thread-context .thread-last-msg {
+  font-size: 12px;
+  color: var(--gris-texte);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sect-bubbles {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: var(--gris-clair);
+  padding-left: 44px;
+  height: calc(100vh - 61px - 80px); /* 61px = footer , 80px = headeer */
+}
+
+.contact-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-top: 45px;
+  padding-bottom: 15px;
+}
+
+.contact-pseudo {
+  color: var(--gris-fonc);
+  font-weight: 600;
+}
+
+.bubbles-zone {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse; /* messages en bas */
+  gap: 12px;
+  margin-bottom: 98px;
+}
+
+/* Bloc message (gauche ou droite) */
+.bubble-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+
+/* Alignement selon le type */
+.bubble-block.left {
+  align-self: flex-start;
+}
+
+.bubble-block.right {
+  align-self: flex-end;
+  text-align: right;
+}
+
+/* Métadonnées (avatar + date + heure) */
+.msg-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+/* Avatar du correspondant */
+.bubble-block.left .msg-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Pas d’avatar pour les messages à droite */
+.bubble-block.right .msg-avatar {
+  display: none;
+}
+
+.bubble-block.right .msg-meta {
+  justify-content: flex-end;
+}
+
+/* Date + heure */
+.msg-date,
+.msg-time {
+  font-size: 12px;
+  color: var(--gris-texte);
+}
+
+/* Style commun à toutes les bulles */
+.bubble {
+  max-width: 500px;
+  padding: 10px 18px 9px 18px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: normal;
+  word-wrap: break-word;
+}
+
+/* Messages du correspondant (à gauche) */
+.bubble-left {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid #e5e5e5;
+}
+
+/* Messages émetteur (à droite) */
+.bubble-right {
+  align-self: flex-end;
+  background: #edf2f6;
+  border: 1px solid #d8dfe6;
+}
+
+.msg-input-zone {
+  display: flex;
+  gap: 21px;
+  height: 49px;
+  margin-bottom: 98px;
+}
+
+.msg-input {
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+  flex: 1;
+  padding-left: 42px;
+  color: var(--gris-texte);
+  font-size: 14px;
+  font-weight: 400;
+}

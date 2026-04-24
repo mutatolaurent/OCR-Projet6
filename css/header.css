@@ -1,0 +1,166 @@
+/* HEADER ET BARRE DE MENU VERTICALE */
+.site-header {
+  width: 100%;
+  height: 80px;
+  background: var(--gris-clair);
+  display: flex;
+  align-items: center;
+  padding-left: clamp(40px, 10.42vw, 150px);
+  padding-right: clamp(40px, 10.42vw, 150px);
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Barre verticale fixe à 833px (Desktop uniquement) */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 833px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 19px;
+  background-color: var(--gris-texte);
+  z-index: 10;
+}
+
+/* Menu BURGER (Caché sur Desktop) */
+#menu-cb {
+  display: none;
+}
+.burger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+/* LOGO */
+.logo-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.logo-square {
+  width: 51px;
+  height: 51px;
+  border-radius: 8.5px;
+  background: var(--vert-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-svg {
+  width: 32.311px;
+  height: 25.5px;
+}
+
+.logo-text {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vert-principal);
+}
+
+/* NAVIGATION ET LIENS DESKTOP */
+.navbar {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  font-size: 14px;
+  gap: 4px;
+}
+
+/* TECHNIQUE ANTI-DÉCALAGE */
+.nav-link span,
+.nav-link .text-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-link span::after,
+.nav-link .text-wrapper::after {
+  content: attr(data-text);
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  font-weight: 600;
+}
+
+/* COMPOSANTS (Messagerie & Compte) */
+.messagerie-icon {
+  width: 15px;
+  height: 13.129px;
+}
+.msg-counter {
+  width: 10.5px;
+  height: 15px;
+  border-radius: 6.75px;
+  background: var(--gris-fonc);
+  color: var(--gris-clair);
+  font-size: 8.25px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.compte-icon {
+  width: 9.286px;
+  height: 9.286px;
+  border-radius: 9.286px;
+  background: #d9d9d9;
+}
+
+/* ESPACEMENTS PRÉCIS DESKTOP */
+.navbar .nav-link:nth-child(1) {
+  margin-left: 78px;
+}
+.navbar .nav-link:nth-child(2) {
+  margin-left: 44px;
+}
+.navbar .nav-link:nth-child(3) {
+  margin-left: 285px;
+}
+.navbar .nav-link:nth-child(4) {
+  margin-left: 58px;
+}
+.navbar .nav-link:nth-child(5) {
+  margin-left: 58px;
+}
+
+/* On force la graisse à 600 pour l'élément actif */
+.nav-link.active {
+  font-weight: 600;
+  cursor: default; /* Indique visuellement que ce n'est pas cliquable */
+  pointer-events: none; /* Sécurité pour empêcher tout événement de clic */
+}
+
+/* On s'assure que le survol ne change rien puisque c'est déjà en gras */
+.nav-link.active:hover {
+  font-weight: 600;
+}
+
+/* Masque les points de menu non accessibles hors connexion */
+.user-disconnected .complex-link {
+  visibility: hidden; /* Rend invisible mais garde l'espace */
+  pointer-events: none; /* Empêche de cliquer sur le lien invisible */
+  user-select: none; /* Empêche de sélectionner le texte invisible */
+}

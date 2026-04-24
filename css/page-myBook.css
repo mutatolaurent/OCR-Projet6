@@ -1,0 +1,61 @@
+/* 
+ * Page Modifier les informations
+ */
+/* container principal de la page */
+.modif-infos-main-sect {
+  display: flex;
+  flex-direction: column;
+  row-gap: 23px;
+  padding: 40px 149px 92px 150px;
+  background: var(--background-light);
+}
+
+.return-link {
+  text-decoration: none;
+  color: var(--gris-text);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.modif-book-infos {
+  display: flex;
+  width: 1141px;
+  border-radius: 20px;
+  background: #fff;
+  column-gap: 117px;
+  padding: 56px 50px 68px 50px;
+}
+
+.modif-book-infos-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modif-book-infos-left p {
+  padding-bottom: 10px;
+  color: var(--gris-texte);
+  font-size: 14px;
+}
+
+.modif-book-infos-left img {
+  width: 488px;
+  height: 100%;
+  object-fit: cover;
+  padding-bottom: 20px;
+}
+
+.modif-book-infos-left .edit-link {
+  align-self: flex-end;
+}
+
+.modif-book-infos-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.modif-book-infos-right .btn {
+  width: 246px;
+}

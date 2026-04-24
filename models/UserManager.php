@@ -168,4 +168,25 @@ class UserManager extends AbstractEntityManager
         // return $this->getUserByLogin($email);
 
     }
+
+    /**
+     * Récupère un user par son ID.
+     * @param int $id
+     * @return ?User
+     */
+    public function getOnlyUserById(int $id): User|null
+    {
+        // Une seule requête qui ramène les infos sur l'utilisateur
+        $sql = "SELECT * FROM user u WHERE u.id = :id";
+        $result = $this->db->query($sql, ['id' => $id]);
+        $user = $result->fetch();
+
+        if ($user) {
+            // Une ligne a été trouvée
+            return new User($user);
+        }
+        return null;
+
+    }
+
 }

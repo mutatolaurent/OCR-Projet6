@@ -1,0 +1,24 @@
+/* FOOTER GLOBAL */
+.main-footer {
+  display: flex;
+  width: 100%;
+  height: var(--footer-height);
+  max-width: var(--max-width);
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+  background: #fff;
+}
+
+/* Lien "Mentions légales" et "Contact" */
+.main-footer a {
+  text-decoration: none;
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.main-footer img {
+  padding-right: 46px;
+}

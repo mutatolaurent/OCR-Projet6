@@ -1,0 +1,183 @@
+/* 
+ * Page Mon compte 
+ */
+
+/* container principal de la page */
+.mon-cpt-main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-left: clamp(20px, 10.42vw, 150px);
+  padding-right: clamp(20px, 10.42vw, 150px);
+  padding-top: 90px;
+  padding-bottom: 102px;
+}
+
+.mon-cpt-sect1 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.form-account {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.mon-cpt-sect1-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 547px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 21.5px;
+  padding-bottom: 93px;
+}
+
+.cpt-img-profil-container a,
+.cpt-img-profil-container .link-upload {
+  color: var(--gris-texte);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  cursor: pointer;
+}
+
+.cpt-img-profil-container .input-upload {
+  display: none;
+}
+
+.info-upload {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  margin-top: 10px;
+}
+
+.cpt-img-profil-container:hover .info-upload {
+  display: block;
+}
+
+.mon-cpt-sect1-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 555px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 36px;
+  padding-bottom: 37px;
+  padding-inline: 116px;
+}
+
+.mon-cpt-sect1-right p {
+  padding-bottom: 26px;
+}
+
+.mon-cpt-sect2 {
+  width: 1140px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 33px;
+  padding-bottom: 10px;
+}
+
+/* Gestion des largeurs et des marges simulées (66px) */
+/* Colonne 1 (Image) */
+.mon-cpt-sect2 th:first-child,
+.mon-cpt-sect2 td:first-child {
+  width: 223px; /* 168px + 66px */
+  padding-left: 66px;
+}
+
+/* Colonnes centrales (Titre et Auteur) */
+.mon-cpt-sect2 th:nth-child(2),
+.mon-cpt-sect2 td:nth-child(2),
+.mon-cpt-sect2 th:nth-child(3),
+.mon-cpt-sect2 td:nth-child(3),
+.mon-cpt-sect2 th:nth-child(4),
+.mon-cpt-sect2 td:nth-child(4),
+.mon-cpt-sect2 th:nth-child(5),
+.mon-cpt-sect2 td:nth-child(5) {
+  width: 168px;
+  padding-right: 20px;
+}
+
+/* Colonne 4 (Description) */
+.mon-cpt-sect2 th:last-child,
+.mon-cpt-sect2 td:last-child {
+  width: 234px; /* 168px + 66px */
+  padding-right: 66px;
+}
+
+.mon-cpt-sect2 .edit-link {
+  padding-right: 28px;
+}
+
+/* sticker état des livres */
+/* Disponible */
+.book-state-2 {
+  display: inline-flex;
+  padding: 3.698px 13.313px;
+  border-radius: 29.583px;
+  background: #6dc5a1;
+  color: #fff;
+  font-size: 8.875px;
+  font-weight: 500;
+}
+
+/* Non Disponible */
+.book-state-1 {
+  display: inline-flex;
+  padding: 3.698px 13.313px;
+  border-radius: 29.583px;
+  background: #c56d6d;
+  color: #fff;
+  font-size: 8.875px;
+  font-weight: 500;
+}
+
+/* Style de liens spécifiques */
+.edit-link {
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.delete-link {
+  color: #cb2d2d;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}

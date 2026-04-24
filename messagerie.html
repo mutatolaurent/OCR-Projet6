@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messagerie</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <header class="site-header">
+        <a href="#" class="logo-block">
+          <div class="logo-square">
+            <img
+              src="images/logo/logoTT.svg"
+              alt="Logo Tom Troc"
+              class="logo-svg"
+            />
+          </div>
+          <span class="logo-text">Tom Troc</span>
+        </a>
+
+        <input type="checkbox" id="menu-cb" />
+        <label for="menu-cb" class="burger-menu">
+          <img src="images/icones/icon-menu.svg" alt="Menu" />
+        </label>
+
+        <nav class="navbar">
+          <a href="#" class="nav-link"
+            ><span data-text="Accueil">Accueil</span></a
+          >
+          <a href="#" class="nav-link"
+            ><span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            ></a
+          >
+
+          <a href="#" class="nav-link complex-link">
+            <img
+              src="images/icones/messagerie.svg"
+              alt=""
+              class="messagerie-icon"
+            />
+            <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
+            <div class="msg-counter">3</div>
+          </a>
+
+          <a href="#" class="nav-link complex-link">
+            <img
+              src="images/icones/mon-compte.svg"
+              alt=""
+              class="compte-icon"
+            />
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
+          </a>
+
+          <a href="#" class="nav-link"
+            ><span data-text="Connexion">Connexion</span></a
+          >
+        </nav>
+      </header>
+
+      <main>
+        <div class="msg-container">
+          <section class="sect-thread">
+            <h1>Messagerie</h1>
+            <a href="#" class="nav-thread active-thread">
+              <img
+                class="img-owner"
+                src="images/users/alexlecture.jpg"
+                alt=""
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">Alexlecture</p>
+                  <p class="thread-time">15:43</p>
+                </div>
+                <p class="thread-last-msg">Lorem ipsum dolor sit amet,...</p>
+              </div>
+            </a>
+            <a href="#" class="nav-thread">
+              <img
+                class="img-owner"
+                src="images/users/alexlecture.jpg"
+                alt=""
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">Nathalire</p>
+                  <p class="thread-time">20.08</p>
+                </div>
+                <p class="thread-last-msg">Lorem ipsum dolor sit amet,...</p>
+              </div>
+            </a>
+            <a href="#" class="nav-thread">
+              <img
+                class="img-owner"
+                src="images/users/alexlecture.jpg"
+                alt=""
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-owner">SAS634</p>
+                  <p class="thread-time">15.08</p>
+                </div>
+                <p class="thread-last-msg">Lorem ipsum dolor sit amet,...</p>
+              </div>
+            </a>
+          </section>
+
+          <section class="sect-bubbles">
+            <div class="contact-info">
+              <img
+                class="img-owner"
+                src="images/users/alexlecture.jpg"
+                alt=""
+              />
+              <span class="contact-pseudo">Alexlecture</span>
+            </div>
+            <div class="bubbles-zone">
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/alexlecture.jpg"
+                    class="msg-avatar"
+                    alt=""
+                  />
+                  <span class="msg-date">24.04</span>
+                  <span class="msg-time">10:42</span>
+                </div>
+
+                <div class="bubble bubble-left">
+                  Salut, tu as vu mon dernier message ?
+                </div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">24.04</span>
+                  <span class="msg-time">10:43</span>
+                </div>
+
+                <div class="bubble bubble-right">
+                  Oui, je te réponds juste après !
+                </div>
+              </div>
+            </div>
+            <form action="#" method="POST" class="msg-input-zone">
+              <input
+                type="text"
+                name="message"
+                id="message"
+                class="msg-input"
+                placeholder="Tapez votre message ici"
+              />
+              <button class="btn btn-filled">Envoyer</button>
+            </form>
+          </section>
+        </div>
+      </main>
+
+      <footer class="main-footer">
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">Tom Troc©</a>
+        <a href="#"
+          ><img src="images/logo/logoTT-vert.svg" alt="Logo Tom Troc vert"
+        /></a>
+      </footer>
+    </div>
+  </body>
+</html>

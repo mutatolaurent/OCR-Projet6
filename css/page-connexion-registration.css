@@ -1,0 +1,47 @@
+/* 
+ * Pages Inscription et connexion
+ */
+
+/* container principal de la page */
+.insc-main-sect {
+  display: flex;
+  background: var(--background-light);
+}
+
+.insc-part-left {
+  display: flex;
+  width: 720px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding-top: 130px;
+  padding-bottom: 205px;
+  padding-left: clamp(10px, 10.42vw, 150px);
+  padding-right: clamp(10px, 17.22vw, 248px);
+}
+
+.insc-part-left h1 {
+  padding-bottom: 56px;
+}
+
+.insc-part-left button {
+  align-self: stretch;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.insc-part-left span,
+.insc-part-left .edit-link {
+  font-size: 14px;
+}
+
+.insc-part-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.insc-part-right img {
+  width: 720px;
+  height: 100%;
+  object-fit: cover;
+}

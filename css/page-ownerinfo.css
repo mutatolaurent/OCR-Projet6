@@ -1,0 +1,145 @@
+/* 
+ * Page compte public 
+ */
+
+/* container principal de la page */
+.cpt-public-sect {
+  display: flex;
+  gap: 28px;
+  padding-left: clamp(20px, 10.42vw, 150px);
+  padding-right: clamp(20px, 10.42vw, 150px);
+  padding-top: 103px;
+  padding-bottom: 212px;
+}
+
+/* Container de la partie gauche avec les infos du propriétaire des livres*/
+.cpt-public-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 341px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 19px;
+  padding-bottom: 56px;
+}
+
+/* Container de l’image de profil du propriétaire */
+.cpt-img-profil-container {
+  width: 143px;
+  height: 193px;
+  display: flex;
+  row-gap: 5px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image de profil du propriétaire des livres, avec une taille fixe, 
+un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-radius de 50% pour la rendre ronde */
+.cpt-img-profil {
+  width: 143px;
+  height: 143px;
+  border-radius: 50%;
+  background: white;
+  object-fit: cover;
+}
+
+/* Nom du propriétaire des livres */
+.cpt-owner {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: "Playfair Display";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 89px;
+}
+
+/* Ancienneté du proriétaire sur le site */
+.cpt-time {
+  color: var(--gris-texte);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 11px;
+}
+
+/* Style du mot BIBLIOTHEQUE */
+.cpt-bib {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: Inter;
+  font-size: 11px; /* 8px sur la spec mais trop petit pour WCAG AA */
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin-top: 21px;
+}
+
+/* Container du nombre de livres dans la bibliothèque du propriétaire, avec l’icône de livre à côté */
+.cpt-count-container {
+  display: flex;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+/* Icône de livre à côté du nombre de livres dans la bibliothèque du propriétaire */
+.cpt-count-img {
+  width: 10.41px;
+  height: 13.714px;
+}
+
+/* Nombre de livres dans la bibliothèque du propriétaire */
+.cpt-count {
+  color: var(--gris-fonc);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Bouton accès page pour écrire un message au propriétaire */
+.cpt-public-left .btn {
+  margin-top: 46px;
+}
+
+/* Container de la partie droite avec la liste des livres du propriétaire */
+.cpt-public-right {
+  width: 771px;
+  border-radius: 20px;
+  background: #fff;
+  padding-top: 33px;
+  padding-bottom: 10px;
+  /* padding-inline: 66px; */
+}
+
+/* Gestion des largeurs et des marges simulées (66px) */
+/* Colonne 1 (Image) */
+.cpt-public-right th:first-child,
+.cpt-public-right td:first-child {
+  width: 225px; /* 159px + 66px */
+  padding-left: 66px;
+}
+
+/* Colonnes centrales (Titre et Auteur) */
+.cpt-public-right th:nth-child(2),
+.cpt-public-right td:nth-child(2),
+.cpt-public-right th:nth-child(3),
+.cpt-public-right td:nth-child(3) {
+  width: 159px;
+}
+
+/* Colonne 4 (Description) */
+.cpt-public-right th:last-child,
+.cpt-public-right td:last-child {
+  width: 225px; /* 159px + 66px */
+  padding-right: 66px;
+}

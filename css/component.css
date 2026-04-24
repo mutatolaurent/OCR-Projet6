@@ -1,0 +1,220 @@
+/* Boutons génériques */
+.btn {
+  display: inline-flex;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 22px 38px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Deux variantes de boutons : rempli ou vide */
+.btn-filled {
+  border: 1px solid var(--vert-principal);
+  background: var(--vert-principal);
+  color: #fff;
+}
+
+.btn-empty {
+  border: 1px solid var(--vert-principal);
+  background: var(--gris-clair);
+  color: var(--vert-principal);
+}
+
+/* Survol : foncé pour les 2 types de boutons */
+.btn-filled:hover {
+  background: var(--vert-hover);
+}
+
+.btn-empty:hover {
+  background: var(--vert-hover);
+  color: var(--gris-clair);
+}
+
+/* CARDS DES LIVRES */
+/* Container de la section des cards des livres */
+.cards-nos-livres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-row-nos-livres) var(--gap-col-nos-livres);
+  padding: 72px 0 80px;
+}
+
+/* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
+et un conteneur flex pour aligner les éléments à l’intérieur */
+.cards-nos-livres a {
+  flex: 0 1 calc(25% - (var(--gap-col-nos-livres) * 3 / 4));
+  display: flex;
+  text-decoration: none;
+}
+
+/* Contenu de chaque card : image, titre, auteur, propriétaire */
+.cards-nos-livres .card {
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
+.cards-nos-livres .card img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+/* Titre du livre : on laisse le texte s’étendre sur plusieurs lignes si besoin, 
+et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
+.cards-nos-livres .book-title {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  padding-left: 14px;
+  padding-top: 20px;
+  padding-right: 14px;
+  flex-grow: 1;
+  font-family: Inter;
+  text-align: left;
+}
+
+/* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
+et on ajoute un peu d’espace en haut pour séparer du titre */
+.cards-nos-livres .book-author {
+  padding-left: 14px;
+  padding-top: 11px;
+  padding-right: 14px;
+  color: var(--gris-texte);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Propriétaire du livre : on utilise une couleur plus claire et un style italique 
+pour différencier du titre et de l’auteur,
+et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu */
+.cards-nos-livres .book-owner {
+  padding-left: 14px;
+  padding-top: 25px;
+  padding-right: 14px;
+  padding-bottom: 23px;
+  color: var(--gris-texte);
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* FORMULAIRES */
+.champ-formulaire {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 22px;
+}
+
+.champ-formulaire label {
+  color: var(--gris-texte);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+.champ-formulaire input {
+  /* flex: 1; */
+  width: 100%;
+  /* height: 50px; */
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire select {
+  flex: 1;
+  width: 100%;
+  /* height: 50px; */
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire textarea {
+  /* flex: 1; */
+  width: 100%;
+  max-width: 100%;
+  height: 356px;
+  max-height: 356px;
+  resize: none;
+  border-radius: var(--radius);
+  border: 1px solid #f0f0f0;
+  background: #edf2f6;
+  padding-left: 14px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+  color: var(--gris-fonc, #292929);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.champ-formulaire input.input-error {
+  border: 2px solid red;
+}
+
+champ-formulaire input.input-upload {
+  /* flex: 1; */
+  height: 200px;
+}
+
+/* Style du bouton interne */
+.input-upload::file-selector-button {
+  background: var(--vert-principal);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-right: 12px;
+  border-radius: var(--radius);
+  font-family: Inter;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.text-error {
+  color: red;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  display: block;
+}
+.auth-error {
+  margin-top: -30px;
+  padding-bottom: 20px;
+}
+
+.feedback-info {
+  color: red;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 12px;
+  display: block;
+  margin-top: 20px;
+}

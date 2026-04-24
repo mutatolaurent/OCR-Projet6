@@ -195,7 +195,7 @@ class UserController
             // Mise à jour des informations du compte utilisateur
             $userChanged = $userManager->updateUser($credential);
             if ($userChanged) {
-                // $_SESSION['user'] = $userChanged;
+                $_SESSION['user'] = $userChanged;
                 $_SESSION['updated'] = true;
                 Utils::redirect("myAccount");
             } else {
