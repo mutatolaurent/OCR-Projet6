@@ -32,7 +32,7 @@
             />
             <span class="pseudo-owner"><?= $books[0]->getOwner()->getPseudo() ?></span>
         </a>
-        <a href="#" class="btn btn-filled">
+        <a href="index.php?action=showMyChatRoom&idContact=<?= $books[0]->getOwner()->getId() ?>" class="btn btn-filled">
             <span>Envoyez un message</span>
         </a>
     </div>

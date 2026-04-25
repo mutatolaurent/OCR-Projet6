@@ -98,6 +98,11 @@ try {
             $threadController->showMyChatRoom();
             break;
 
+        case 'sendMessage':
+            $threadController = new ThreadController();
+            $threadController->newMessage();
+            break;
+
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

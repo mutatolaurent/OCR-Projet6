@@ -25,6 +25,7 @@
   display: flex;
   padding: 21px 42px 21px 30px;
   text-decoration: none;
+  width: 100%;
 }
 
 .active-thread {
@@ -36,6 +37,8 @@
   flex-direction: column;
   padding-left: 12px;
   justify-content: center;
+  flex: 1; /* permet au texte de prendre tout l’espace restant */
+  min-width: 0; /* ← indispensable pour que l’ellipse fonctionne dans un flex */
 }
 
 .thread-info {

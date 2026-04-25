@@ -65,4 +65,13 @@ class DBManager
         }
         return $query;
     }
+
+    /**
+     * Méthode qui permet de récupérer l'ID du dernier enregistrement inséré.
+     * @return string : l'ID du dernier enregistrement inséré.
+     */
+    public function lastInsertId(): string
+    {
+        return $this->db->lastInsertId();
+    }
 }

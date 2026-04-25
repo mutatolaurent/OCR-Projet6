@@ -7,7 +7,7 @@ class Thread extends AbstractEntity
 {
     private int $userOneId;
     private int $userTwoId;
-    private ?string $createdAt;
+    private ?DateTime $createdAt;
 
     // public function __construct(array $data = [])
     // {

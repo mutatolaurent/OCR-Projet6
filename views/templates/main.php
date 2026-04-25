@@ -65,7 +65,7 @@ $action = Utils::request('action', 'home');
                 <?php } ?>                
 
                 <!-- Point de menu Messagerie -->                
-                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=message' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link">
+                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=showMyChatRoom' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link">
                     <img
                         src="images/icones/messagerie.svg"
                         alt=""

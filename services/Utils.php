@@ -25,6 +25,36 @@ class Utils
     }
 
     /**
+     * Formate une date pour l'affichage dans la messagerie.
+     * Si la date est celle du jour courant, retourne l'heure au format HH:MM.
+     * Sinon, retourne le jour et le mois au format JJ.MM.
+     * @param DateTime $date : la date à formater.
+     * @return string : la date formatée.
+     */
+    public static function formatMessageDate(DateTime $date): string
+    {
+        $today = new DateTime();
+
+        // Comparer uniquement les dates (sans l'heure)
+        if ($date->format('Y-m-d') === $today->format('Y-m-d')) {
+            return $date->format('H:i');
+        }
+
+        return $date->format('d.m');
+    }
+
+    /**
+     * Formate une date avec le jour, le mois et l'heure.
+     * Format de sortie : "JJ.MM  HH:MM" (deux espaces entre date et heure).
+     * @param DateTime $date : la date à formater.
+     * @return string : la date formatée.
+     */
+    public static function formatFullDateTime(DateTime $date): string
+    {
+        return $date->format('d.m  H:i');
+    }
+
+    /**
      * Calcule la différence entre deux dates et retourne une chaîne de caractères
      * indiquant la différence en jours, mois ou années.
      * @param DateTime $date1 : la première date.

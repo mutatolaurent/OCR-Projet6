@@ -9,7 +9,7 @@ class Message extends AbstractEntity
     private int $idSender;
     private string $content;
     private bool $isRead;
-    private ?string $createdAt;
+    private ?DateTime $createdAt;
 
     // public function __construct(array $data = [])
     // {
@@ -61,7 +61,7 @@ class Message extends AbstractEntity
         $this->isRead = $isRead;
     }
 
-    public function getCreatedAt(): ?string
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
