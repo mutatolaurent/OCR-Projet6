@@ -44,6 +44,7 @@ class ThreadController
                 $contact = $userManager->getOnlyUserById($idContact);
             }
         }
+        // TODO : récupérer le contact du plus vieux message non lu
 
         // On Récupère toutes les conversations avec un utilisateur et pour chaque conversation
         // récupéère des infos sur le contact et sur le dernier message échangé.

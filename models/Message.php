@@ -51,7 +51,7 @@ class Message extends AbstractEntity
         $this->content = $content;
     }
 
-    public function isRead(): bool
+    public function getIsRead(): bool
     {
         return $this->isRead;
     }

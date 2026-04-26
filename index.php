@@ -12,7 +12,12 @@ $action = Utils::request('action', 'home');
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
     switch ($action) {
-        // Pages accessibles à tous.
+
+        case 'getUnreadMessage':
+            $threadController = new ThreadController();
+            $threadController->getUnreadMessage();
+            break;
+
         case 'home':
             $bookController = new BookController();
             $bookController->showHome();

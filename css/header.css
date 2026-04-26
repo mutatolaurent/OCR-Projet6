@@ -109,6 +109,7 @@
   width: 15px;
   height: 13.129px;
 }
+
 .msg-counter {
   width: 10.5px;
   height: 15px;
@@ -121,7 +122,13 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  visibility: hidden;
 }
+
+.msg-counter.active {
+  visibility: visible;
+}
+
 .compte-icon {
   width: 9.286px;
   height: 9.286px;

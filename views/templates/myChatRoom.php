@@ -8,21 +8,23 @@
 <div class="msg-container">
     <section class="sect-thread">
         <h1>Messagerie</h1>
-        <?php foreach ($chatroom[0] as $thread) { ?>
-            <a href="index.php?action=showMyChatRoom&idContact=<?= $thread['contact']->getId() ?>" class="nav-thread <?= $thread['threadActif'] ? 'active-thread' : '' ?>">
-                <img
-                    class="img-owner"
-                    src="<?= $thread['contact']->getPhoto() ?>"
-                    alt=""
-                />
-                <div class="thread-context">
-                    <div class="thread-info">
-                        <p class="thread-member"><?= $thread['contact']->getPseudo() ?></p>
-                        <p class="thread-time"><?= Utils::formatMessageDate($thread['lastMessage']->getCreatedAt()) ?></p>
+        <?php if ($chatroom !== null) { ?>
+            <?php foreach ($chatroom[0] as $thread) { ?>
+                <a href="index.php?action=showMyChatRoom&idContact=<?= $thread['contact']->getId() ?>" class="nav-thread <?= $thread['threadActif'] ? 'active-thread' : '' ?>">
+                    <img
+                        class="img-owner"
+                        src="<?= $thread['contact']->getPhoto() ?>"
+                        alt=""
+                    />
+                    <div class="thread-context">
+                        <div class="thread-info">
+                            <p class="thread-member"><?= $thread['contact']->getPseudo() ?></p>
+                            <p class="thread-time"><?= Utils::formatMessageDate($thread['lastMessage']->getCreatedAt()) ?></p>
+                        </div>
+                        <p class="thread-last-msg"><?= $thread['lastMessage']->getContent() ?></p>
                     </div>
-                    <p class="thread-last-msg"><?= $thread['lastMessage']->getContent() ?></p>
-                </div>
-            </a>
+                </a>
+            <?php } ?>
         <?php } ?>
     </section>
 
