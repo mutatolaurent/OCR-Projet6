@@ -178,14 +178,24 @@ class BookController
         $bookInput['author'] = htmlspecialchars(Utils::request("author"));
         $bookInput['description'] = htmlspecialchars(Utils::request("description"));
         $bookInput['idstate'] = htmlspecialchars(Utils::request("idstate"));
+        $bookInput['picture'] = null; // L'init se fait plus tard dans le traitement
 
         // On vérifie s'il y a eu des changements
+        $hasChange = false;
         $hasChange = (
             $book->getTitle() !== $bookInput['title'] ||
             $book->getAuthor() !== $bookInput['author'] ||
             $book->getDescription() !== $bookInput['description'] ||
-            $book->getIdState() !== $bookInput['idstate']
+            (int)$book->getIdState() !== (int)$bookInput['idstate'] ||
+            !empty($_FILES['picture']['name'])
         );
+        //var_dump($hasChange);
+        // echo "Titre: ".$book->getTitle()." = ".$bookInput['title']."</br>";
+        // echo "Auteur: ".$book->getAuthor()." = ".$bookInput['author']."</br>";
+        // echo "Descr: ".$book->getDescription()." = ".$bookInput['description']."</br>";
+        // echo "State: ".$book->getIdState()." = ".$bookInput['idstate']."</br>";
+        //echo "Fichier upload : ".$_FILES['picture']['name'];
+        //die();
 
         // Si aucun changement on réaffiche la page des informations du livre
         if (!$hasChange) {
@@ -223,6 +233,26 @@ class BookController
             $hasError = true;
         }
 
+        // Si le champ photo a été modifié, on traite l'upload du fichier image sélectionné
+        if (!empty($_FILES['picture']['name'])) {
+            $result = Utils::uploadFile(
+                'picture',                                      // nom du champ
+                'images/books/',                                // dossier destination
+                MAX_UPLOAD_BSIZE,                               // max MO autorisés
+                ['image/jpeg', 'image/png', 'image/webp'],    // types autorisés
+                $book->getId()                                 // l'id du livre
+            );
+
+            // Si l'upload est OK on récupère le chemin et le nom du nouveau fichier
+            if (!$result['success']) {
+                $error['picture'] = $result['message'];
+                $hasError = true;
+            } else {
+                $bookInput['picture'] = $result['filename'];
+            }
+        }
+
+
         if ($hasError) {
 
             // Des erreurs ont été détectée et n'autorise pas les modifications
@@ -234,6 +264,11 @@ class BookController
             $_SESSION['bookinfo'] = $bookInput;
 
         } else {
+
+            // Si la photo du livre n'a pas changé, on récupère le nom du fichier
+            if ($bookInput['picture'] === null) {
+                $bookInput['picture'] = $book->getPhoto();
+            }
 
             // Mise à jour des informations sur le livre
             $bookManager = new BookManager();
@@ -308,40 +343,6 @@ class BookController
         if (empty($_FILES['picture']['name'])) {
             Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
         }
-
-        // Taille max 1 Mo
-        // TODO : créer une constante dans config.php
-        // $maxSize = 2 * 1024 * 1024;
-
-        // if ($_FILES['picture']['size'] > $maxSize) {
-
-        //     // TODO : remplacer 2 par la constante
-        //     $error['picture'] = "L’image ne doit pas dépasser 2 Mo.";
-        //     $hasError = true;
-        // }
-
-        // // Types autorisés
-        // $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        // if (!$hasError && !in_array($_FILES['picture']['type'], $allowedTypes)) {
-        //     $error['picture'] = "Format d’image non autorisé (jpg, png, webp).";
-        //     $hasError = true;
-        // }
-
-        // // Si pas d’erreur → on enregistre
-        // $uploadDir = 'images/books/';
-        // $extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
-
-        // // Nom unique basé sur l'id du livre
-        // $fileName = 'pict_' . $book->getId() . '.' . $extension;
-
-        // // Chemin complet d'accès à la nouvelle image de profil
-        // $destination = $uploadDir . $fileName;
-
-        // // Transfert de l'image vers le dossier cible
-        // if (!$hasError && !move_uploaded_file($_FILES['picture']['tmp_name'], $destination)) {
-        //     $error['picture'] = "Erreur lors de l’upload de l’image.";
-        //     $hasError = true;
-        // }
 
         // Appel de la méthode
         $result = Utils::uploadFile(

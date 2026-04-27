@@ -29,7 +29,7 @@
 .modif-book-infos-left {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 
 .modif-book-infos-left p {
@@ -58,4 +58,30 @@
 
 .modif-book-infos-right .btn {
   width: 246px;
+}
+
+.modif-book-infos-left a,
+.modif-book-infos-left .link-upload {
+  color: var(--gris-texte);
+  text-align: right;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  cursor: pointer;
+}
+
+.modif-book-infos-left .input-upload {
+  display: none;
+}
+
+.modif-book-infos-left .text-error {
+  text-align: right;
 }

@@ -137,12 +137,13 @@ class UserManager extends AbstractEntityManager
         $email = $credential['email'];
         $hash = $credential['password'];
         $idUser = $credential['idUser'];
+        $photo = $credential['avatar'];
 
         // Requête SQL préparée pour modification du compte en BD
-        $sql = "UPDATE user SET pseudo = :pseudo, email = :email, password = :hash WHERE id = :idUser";
+        $sql = "UPDATE user SET pseudo = :pseudo, email = :email, photo = :photo, password = :hash WHERE id = :idUser";
 
         // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
-        $this->db->query($sql, ['pseudo' => $pseudo, 'email' => $email, 'hash' => $hash, 'idUser' => $idUser]);
+        $this->db->query($sql, ['pseudo' => $pseudo, 'email' => $email, 'photo' => $photo, 'hash' => $hash, 'idUser' => $idUser]);
 
         // On retourne un objet User
         return $this->getUserByLogin($email);

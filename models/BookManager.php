@@ -164,12 +164,14 @@ class BookManager extends AbstractEntityManager
         $author = $bookInfo['author'];
         $description = $bookInfo['description'];
         $idstate = $bookInfo['idstate'];
+        $photo = $bookInfo['picture'];
 
         // Requête SQL préparée pour modification du compte en BD
         $sql = "UPDATE book SET 
             title = :title, 
             author = :author, 
             description = :description, 
+            photo = :photo, 
             id_state = :idstate
             WHERE id = :idBook";
 
@@ -180,6 +182,7 @@ class BookManager extends AbstractEntityManager
             'title' => $title,
             'author' => $author,
             'description' => $description,
+            'photo' => $photo,
             'idstate' => $idstate]
         );
     }

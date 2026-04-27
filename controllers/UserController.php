@@ -100,25 +100,29 @@ class UserController
             Utils::redirect("connectionForm");
         }
 
+        // On récupère en Session les données du compte de l'utilisateur
+        $user = $_SESSION['user'];
+
         // On récupère les données saisies dans le formulaire.
         $credential['pseudo'] = htmlspecialchars(Utils::request("pseudo"));
         $credential['email'] = htmlspecialchars(Utils::request("email"));
         $credential['password'] = htmlspecialchars(Utils::request("password"));
+        $credential['avatar'] = null; // L'init se fait plus tard dans le traitement
 
-        // On récupère en Session les données du compte de l'utilisateur
-        $user = $_SESSION['user'];
+        // On initialise l
 
         // On vérifie s'il y a eu des changements
         $emailHasChanged = ($user->getEmail() !== $credential['email']);
         $passwordHasChanged = (!empty($credential['password']));
         $pseudoHasChanged = ($user->getPseudo() != $credential['pseudo']);
+        $avatarHasChanged = (!empty($_FILES['avatar']['name']));
 
         // ($user->getEmail() != $credential['email']) ? $emailHasChanged = true : $emailHasChanged = false;
         // (!empty($credential['password'])) ? $passwordHasChanged = true : $passwordHasChanged = false;
         // ($user->getPseudo() != $credential['pseudo']) ? $pseudoHasChanged = true : $pseudoHasChanged = false;
 
         // Si aucun changement on réaffiche la page des informations du compte client
-        if (!$emailHasChanged && !$passwordHasChanged && !$pseudoHasChanged) {
+        if (!$emailHasChanged && !$passwordHasChanged && !$pseudoHasChanged && !$avatarHasChanged) {
             Utils::redirect("myAccount");
             $_SESSION['updated'] = false;
         }
@@ -168,10 +172,30 @@ class UserController
             $hasError = true;
         }
 
+        // Si le champ avatar a été modifié, on traite l'upload du fichier image sélectionné
+        if (!$hasError && $avatarHasChanged) {
+            $result = Utils::uploadFile(
+                'avatar',                                      // nom du champ
+                'images/users/',                                // dossier destination
+                MAX_UPLOAD_BSIZE,                               // max 2 Mo TODO créer une constante
+                ['image/jpeg', 'image/png', 'image/webp'],    // types autorisés
+                $user->getId()                                 // l'id de l'utilisateur
+            );
+
+            // Si l'upload est OK on récupère le chemin et le nom du nouveau fichier
+            if (!$result['success']) {
+                $error['avatar'] = $result['message'];
+                $hasError = true;
+            } else {
+                $credential['avatar'] = $result['filename'];
+            }
+        }
+
+
         // --- REDIRECTION SWITCH ---
 
         // Informations d'inscription non conformes
-        if (!empty($error)) {
+        if ($hasError) {
             // On stocke les messages d'erreurs et les données saisies en session
             // ce qui permettra au formulaire de récupérer le contexte et aisni :
             // . de conserver les données saisie par l'utilisateur de façon à ce qu'il n'ait pas à les re-saisir
@@ -190,6 +214,13 @@ class UserController
             } else {
                 $credential['password'] = password_hash($credential['password'], PASSWORD_DEFAULT);
             }
+
+            // Si la photo de l'avatar n'a pas changé, on récupère le nom du fichier
+            if ($credential['avatar'] === null) {
+                $credential['avatar'] = $user->getPhoto();
+            }
+
+            // Initialisation de l'ID de l'utilisateur
             $credential['idUser'] = $user->getId();
 
             // Mise à jour des informations du compte utilisateur

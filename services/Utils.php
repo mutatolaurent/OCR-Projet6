@@ -152,11 +152,10 @@ class Utils
 
     /**
      * Upload un fichier et le place dans le dossier de destination.
-     * @param string $fieldName : le nom du champ du formulaire contenant le fichier
+     * @param string $fieldName : le nom du champ du formulaire contenant le fichier. Sert aussi de racine au nom du fichier uploadé
      * @param string $uploadDir : le chemin du dossier de destination (ex: 'images/books/')
      * @param int $maxSize : la taille maximale en bytes (par défaut 2 Mo)
      * @param array $allowedTypes : les types MIME autorisés (ex: ['image/jpeg', 'image/png'])
-     * @param bool $useIdAsFilename : si true, utilise un id unique pour le nom du fichier
      * @param mixed $id : l'id à utiliser pour le nom du fichier (si useIdAsFilename = true)
      * @return array : ['success' => bool, 'message' => string, 'filename' => string (si succès)]
      */
@@ -165,7 +164,7 @@ class Utils
         string $uploadDir,
         int $maxSize = 2097152,
         array $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'],
-        bool $useIdAsFilename = false,
+        // bool $useIdAsFilename = false,
         mixed $id = null
     ): array {
 
@@ -178,13 +177,14 @@ class Utils
         }
 
         $file = $_FILES[$fieldName];
+        unset($_FILES[$fieldName]);
 
         // Vérifier la taille du fichier
         if ($file['size'] > $maxSize) {
             $maxSizeMb = $maxSize / (1024 * 1024);
             return [
                 'success' => false,
-                'message' => "L'image ne doit pas dépasser " . round($maxSizeMb, 1) . " Mo."
+                'message' => "❌ " . round($maxSizeMb, 1) . " Mo maxi autorisés."
             ];
         }
 
@@ -193,18 +193,21 @@ class Utils
             $typesStr = implode(', ', array_map(fn ($t) => strtoupper(explode('/', $t)[1]), $allowedTypes));
             return [
                 'success' => false,
-                'message' => "Format de fichier non autorisé ($typesStr)."
+                'message' => "❌ Format de fichier non autorisé ($typesStr)."
             ];
         }
 
         // Générer le nom du fichier
-        // TODO remplacer pict par une variable passée en paramètre
         $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $fileName = $useIdAsFilename && $id !== null
+        $fileName = $fieldName && $id !== null
             ? $fieldName . '_' . $id . '.' . $extension
             : uniqid('file_') . '.' . $extension;
+        echo "File = ".$fileName;
+
+        // Générer le nom du fichier
+        // $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
         // $fileName = $useIdAsFilename && $id !== null
-        //     ? 'pict_' . $id . '.' . $extension
+        //     ? $fieldName . '_' . $id . '.' . $extension
         //     : uniqid('file_') . '.' . $extension;
 
         $destination = $uploadDir . $fileName;

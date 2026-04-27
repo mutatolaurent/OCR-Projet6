@@ -59,13 +59,14 @@
 }
 
 .info-upload {
-  color: var(--gris-fonc);
+  color: red;
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   min-height: 12px;
   margin-top: 10px;
+  text-align: center;
 }
 
 .cpt-img-profil-container:hover .info-upload {

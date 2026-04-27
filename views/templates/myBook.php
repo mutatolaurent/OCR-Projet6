@@ -12,17 +12,30 @@
     </a>
     <h1>Modifier les informations</h1>
 
-    <div class="modif-book-infos">
+    <!-- <div class="modif-book-infos"> -->
+    <form action="index.php?action=updateBook" method="POST" enctype="multipart/form-data" class="modif-book-infos">
+
         <div class="modif-book-infos-left">
             <p>Photo</p>
             <img
             src="<?= $books[0]->getPhoto() ?>"
-            alt="Image de couverture du livre <?= $books[0]->getTitle() ?> de <?= $books[0]->getAuthor() ?>"
+            alt="Image associée au livre <?= $books[0]->getTitle() ?> de <?= $books[0]->getAuthor() ?>"
             />
-            <a href="index.php?action=showBookForUpdate&zoom=viewPicture&id=<?= $books[0]->getId() ?>" class="edit-link">Modifier la photo</a>
+            <label for="picture" class="link-upload">Modifier</label>
+            <input
+                type="file"
+                name="picture"
+                id="picture"
+                accept="image/*"
+                class="input-upload"
+                data-max-size="<?= MAX_UPLOAD_BSIZE ?>"
+            >
+            <?php if (isset($books[1]['error']['picture'])): ?>
+                <span class="text-error"><?= $books[1]['error']['picture'] ?></span>
+            <?php endif; ?>
         </div>
         <div class="modif-book-infos-right">
-            <form action="index.php?action=updateBook" method="POST">
+            <!-- <form action="index.php?action=updateBook" method="POST"> -->
 
                 <!-- Titre du livre -->
                 <div class="champ-formulaire">
@@ -82,7 +95,24 @@
                 <?php if ($books[1]['updated'] === true): ?>
                     <span class="feedback-info">! Vos informations ont bien été mises à jour</span>
                 <?php endif; ?>
-            </form>
+            <!-- </form> -->
+        </div>
+    <!-- </div> -->
+    </form>
+</section>
+<!-- Modale qui gère la prévisualisation de l'image à télécharger -->
+<div id="preview-modal" class="modal hidden">
+    <div class="modal-content">
+        <h3>Aperçu de l’image sélectionnée</h3>
+        <img id="preview-image" src="" alt="Aperçu" />
+
+        <div class="modal-buttons">
+            <button id="confirm-upload" class="btn btn-filled">Confirmer</button>
+            <button id="cancel-upload" class="btn btn-empty">Annuler</button>
         </div>
     </div>
-</section>
+</div>
+<!-- Script JS qui gère la modale de prévisualisation de l'image à télécharger -->
+<script src="js/uploadPreview.js"></script>
+
+
