@@ -2,8 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menu Responsive Tom Troc</title>
+    <title>Menu horizontal</title>
 
     <style>
       /* 1. RESET ET VARIABLES */
@@ -14,9 +13,11 @@
       }
 
       :root {
-        --gris-clair: #f5f3ef;
-        --gris-fonc: #292929;
-        --vert-principal: #00ac66;
+        --Gris-clair: #f5f3ef;
+        --Gris-fonc: #292929;
+        --Vert-principal: #00ac66;
+        --gap-col-nos-livres: 38px;
+        --gap-row-nos-livres: 48px;
       }
 
       body {
@@ -29,24 +30,23 @@
       .main-container {
         width: 100%;
         max-width: 1440px;
-        background-color: bisque;
-        position: relative;
+        background-color: bisque; /* Couleur de test pour visualiser le container */
       }
 
       /* 2. HEADER ET BARRE VERTICALE */
       .site-header {
         width: 100%;
         height: 80px;
-        background: var(--gris-clair);
+        background: var(--Gris-clair);
         display: flex;
         align-items: center;
         padding-left: clamp(40px, 10.42vw, 150px);
         padding-right: clamp(40px, 10.42vw, 150px);
-        position: relative;
+        position: relative; /* Indispensable pour positionner la barre verticale */
         white-space: nowrap;
       }
 
-      /* Barre verticale fixe à 833px (Desktop uniquement) */
+      /* La barre verticale fixe à 833px du bord gauche */
       .site-header::after {
         content: "";
         position: absolute;
@@ -55,17 +55,8 @@
         transform: translateY(-50%);
         width: 1px;
         height: 19px;
-        background-color: var(--gris-fonc);
+        background-color: var(--Gris-fonc);
         z-index: 10;
-      }
-
-      /* LOGIQUE BURGER (Caché sur Desktop) */
-      #menu-cb {
-        display: none;
-      }
-      .burger-menu {
-        display: none;
-        cursor: pointer;
       }
 
       /* 3. LOGO */
@@ -81,7 +72,7 @@
         width: 51px;
         height: 51px;
         border-radius: 8.5px;
-        background: var(--vert-principal);
+        background: var(--Vert-principal);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -96,16 +87,17 @@
         font-family: "Playfair Display", serif;
         font-size: 20px;
         font-weight: 600;
-        color: var(--vert-principal);
+        color: var(--Vert-principal);
       }
 
-      /* 4. NAVIGATION ET LIENS DESKTOP */
+      /* 4. NAVIGATION ET LIENS */
       .navbar {
         display: flex;
         align-items: center;
         flex: 1;
       }
 
+      /* Style de base des liens */
       .nav-link {
         display: inline-flex;
         align-items: center;
@@ -113,10 +105,12 @@
         color: black;
         font-weight: 400;
         font-size: 14px;
-        gap: 4px;
+        gap: 4px; /* Espace entre icône / texte / compteur */
+        transition: font-weight 0.1s ease;
       }
 
-      /* TECHNIQUE ANTI-DÉCALAGE */
+      /* TECHNIQUE ANTI-DÉCALAGE : 
+   On crée un élément invisible qui force la largeur du texte en gras (600) dès le départ. */
       .nav-link span,
       .nav-link .text-wrapper {
         display: inline-flex;
@@ -126,30 +120,32 @@
 
       .nav-link span::after,
       .nav-link .text-wrapper::after {
-        content: attr(data-text);
+        content: attr(data-text); /* Récupère dynamiquement le texte du HTML */
         height: 0;
         visibility: hidden;
         overflow: hidden;
         user-select: none;
         pointer-events: none;
-        font-weight: 600;
+        font-weight: 600; /* C'est cette ligne qui réserve l'espace */
       }
 
+      /* Changement de graisse au survol sans mouvement des voisins */
       .nav-link:hover {
         font-weight: 600;
       }
 
-      /* COMPOSANTS (Messagerie & Compte) */
+      /* 5. COMPOSANTS SPÉCIFIQUES (Messagerie & Compte) */
       .messagerie-icon {
         width: 15px;
         height: 13.129px;
       }
+
       .msg-counter {
         width: 10.5px;
         height: 15px;
         border-radius: 6.75px;
-        background: var(--gris-fonc);
-        color: var(--gris-clair);
+        background: var(--Gris-fonc);
+        color: var(--Gris-clair);
         font-size: 8.25px;
         font-weight: 700;
         display: flex;
@@ -157,6 +153,7 @@
         justify-content: center;
         flex-shrink: 0;
       }
+
       .compte-icon {
         width: 9.286px;
         height: 9.286px;
@@ -164,100 +161,33 @@
         background: #d9d9d9;
       }
 
-      /* ESPACEMENTS PRÉCIS DESKTOP */
+      /* 6. ESPACEMENTS PRÉCIS (MARGIN-LEFT) */
       .navbar .nav-link:nth-child(1) {
         margin-left: 78px;
-      }
+      } /* Accueil */
       .navbar .nav-link:nth-child(2) {
         margin-left: 44px;
-      }
+      } /* Nos livres */
       .navbar .nav-link:nth-child(3) {
         margin-left: 285px;
-      }
+      } /* Messagerie */
       .navbar .nav-link:nth-child(4) {
         margin-left: 58px;
-      }
+      } /* Mon compte */
       .navbar .nav-link:nth-child(5) {
         margin-left: 58px;
+      } /* Connexion */
+
+      /* On force la graisse à 600 pour l'élément actif */
+      .nav-link.active {
+        font-weight: 600;
+        cursor: default; /* Indique visuellement que ce n'est pas cliquable */
+        pointer-events: none; /* Sécurité pour empêcher tout événement de clic */
       }
 
-      .user-disconnected .complex-link {
-        visibility: hidden; /* Rend invisible mais garde l'espace */
-        pointer-events: none; /* Empêche de cliquer sur le lien invisible */
-        user-select: none; /* Empêche de sélectionner le texte invisible */
-      }
-
-      /* 5. VERSION MOBILE (375px) */
-      @media (max-width: 375px) {
-        .site-header {
-          height: 56px;
-          padding: 0 20px;
-          justify-content: flex-start; /* Aligne les éléments au début (gauche) */
-        }
-
-        .site-header::after {
-          display: none;
-        }
-
-        /* Affichage Burger à DROITE */
-        .burger-menu {
-          display: block;
-          margin-left: auto; /* Pousse le bouton burger tout à fait à droite */
-        }
-
-        /* Logo réduit à GAUCHE */
-        .logo-block {
-          gap: 7.55px;
-        }
-        .logo-square {
-          width: 25.665px;
-          height: 25.665px;
-          border-radius: 4.277px;
-        }
-        .logo-svg {
-          width: 16.26px;
-          height: 12.832px;
-        }
-        .logo-text {
-          font-size: 10.065px;
-        }
-
-        /* Navigation Mobile déroulante */
-        .navbar {
-          display: none;
-          position: absolute;
-          top: 56px;
-          left: 0;
-          width: 100%;
-          flex-direction: column;
-          /* background: var(--gris-clair); */
-          background: white;
-          z-index: 100;
-        }
-
-        /* Checkbox Hack pour ouvrir le menu */
-        #menu-cb:checked ~ .navbar {
-          display: flex;
-        }
-
-        .nav-link {
-          width: 100%;
-          height: 56px;
-          padding-left: 20px;
-          margin-left: 0 !important;
-          border-bottom: 1px solid #e0e0e0;
-          font-weight: 600;
-          justify-content: flex-start;
-        }
-
-        .nav-link span::after,
-        .nav-link .text-wrapper::after {
-          display: none;
-        }
-
-        .user-disconnected .complex-link {
-          display: none;
-        }
+      /* On s'assure que le survol ne change rien puisque c'est déjà en gras */
+      .nav-link.active:hover {
+        font-weight: 600;
       }
     </style>
   </head>
@@ -268,42 +198,37 @@
         <a href="#" class="logo-block">
           <div class="logo-square">
             <img
-              src="images/logo/logoTT.svg"
+              src="../images/logo/logoTT.svg"
               alt="Logo Tom Troc"
               class="logo-svg"
             />
           </div>
           <span class="logo-text">Tom Troc</span>
         </a>
-
-        <input type="checkbox" id="menu-cb" />
-        <label for="menu-cb" class="burger-menu">
-          <img src="images/icones/icon-menu.svg" alt="Menu" />
-        </label>
-
-        <nav class="navbar user-disconnected">
-          <a href="#" class="nav-link"
-            ><span data-text="Accueil">Accueil</span></a
+        <nav class="navbar">
+          <span class="nav-link active"
+            ><span data-text="Accueil">Accueil</span></span
           >
+
           <a href="#" class="nav-link"
             ><span data-text="Nos livres à l'échange"
               >Nos livres à l'échange</span
             ></a
           >
 
-          <a href="#" class="nav-link complex-link">
+          <span class="nav-link complex-link active">
             <img
-              src="images/icones/messagerie.svg"
+              src="../images/icones/messagerie.svg"
               alt=""
               class="messagerie-icon"
             />
             <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
             <div class="msg-counter">3</div>
-          </a>
+          </span>
 
           <a href="#" class="nav-link complex-link">
             <img
-              src="images/icones/mon-compte.svg"
+              src="../images/icones/mon-compte.svg"
               alt=""
               class="compte-icon"
             />
@@ -315,19 +240,6 @@
           >
         </nav>
       </header>
-
-      <main>
-        <h1>test test</h1>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-        <h2>test test</h2>
-      </main>
     </div>
   </body>
 </html>

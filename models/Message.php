@@ -11,16 +11,6 @@ class Message extends AbstractEntity
     private bool $isRead;
     private ?DateTime $createdAt;
 
-    // public function __construct(array $data = [])
-    // {
-    //     parent::__construct($data);
-    //     $this->idThread = $data['id_thread'] ?? 0;
-    //     $this->idSender = $data['id_sender'] ?? 0;
-    //     $this->content = $data['content'] ?? '';
-    //     $this->isRead = (bool) ($data['is_read'] ?? 0);
-    //     $this->createdAt = $data['created_at'] ?? null;
-    // }
-
     public function getIdThread(): int
     {
         return $this->idThread;

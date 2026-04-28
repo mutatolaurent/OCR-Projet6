@@ -9,14 +9,6 @@ class Thread extends AbstractEntity
     private int $userTwoId;
     private ?DateTime $createdAt;
 
-    // public function __construct(array $data = [])
-    // {
-    //     parent::__construct($data);
-    //     $this->userOneId = $data['user_one_id'] ?? 0;
-    //     $this->userTwoId = $data['user_two_id'] ?? 0;
-    //     $this->createdAt = $data['created_at'] ?? null;
-    // }
-
     public function getUserOneId(): int
     {
         return $this->userOneId;

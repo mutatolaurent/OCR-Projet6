@@ -11,8 +11,10 @@ define('TEMPLATE_VIEW_PATH', './views/templates/'); // Le chemin vers les templa
 define('MAIN_VIEW_PATH', TEMPLATE_VIEW_PATH . 'main.php'); // Le chemin vers le template principal.
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'blog_forteroche');
+define('DB_NAME', 'tomtroc');
 define('DB_USER', ''); // A renseigner avec votre nom d'utilisateur de base de données
 define('DB_PASS', ''); // A renseigner avec votre mot de passe de base de données
 
-define('TTL_VISIT', 20); // Durée de vie d'une visite en secondes.
+define('PSEUDO_MIN_LENGTH', 3);
+define('PASSWORD_MIN_LENGTH', 6);
+define('MAX_UPLOAD_BSIZE', 2097152); // Taille maxi autoris&é pour l'upload d'un fichier (en bytes)
