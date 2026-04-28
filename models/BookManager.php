@@ -218,4 +218,30 @@ class BookManager extends AbstractEntityManager
 
     }
 
+    /**
+     * Crée un nouveau livre en BD
+     * @param array $bookInfo : les informations du livre à créer.
+     * @param int $userId : l'ID de l'utilisateur propriétaire du livre.
+     * @return int|null : l'ID du livre créé.
+     */
+    public function createBook(array $bookInfo, int $userId): ?int
+    {
+        // Requête SQL préparée pour insertion du livre en BD
+        $sql = "INSERT INTO book (id_user, title, author, description, id_state, photo) 
+                VALUES (:idUser, :title, :author, :description, :idstate, :photo)";
+
+        // Exécution de la requête SQL
+        $this->db->query($sql, [
+            'idUser' => $userId,
+            'title' => $bookInfo['title'],
+            'author' => $bookInfo['author'],
+            'description' => $bookInfo['description'],
+            'idstate' => $bookInfo['idstate'],
+            'photo' => $bookInfo['picture'] ?? null
+        ]);
+
+        // Retourne l'ID du livre créé
+        return $this->db->lastInsertId();
+    }
+
 }

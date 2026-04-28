@@ -182,3 +182,10 @@
   text-underline-offset: auto;
   text-underline-position: from-font;
 }
+
+/* Pour centrer le bouton d'ajout d'un nouveau livre */
+.mon-cpt-main .btn-filled {
+  display: inline-block;
+  /* width: auto; */
+  margin: 0 auto;
+}

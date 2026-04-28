@@ -5,6 +5,15 @@
  */
 class ThreadController
 {
+    private ThreadManager $threadManager;
+    private UserManager $userManager;
+
+    public function __construct()
+    {
+        $this->threadManager = new ThreadManager();
+        $this->userManager = new UserManager();
+    }
+
     /**
      * Affiche la chat room de l'utilisateur
      */
@@ -21,15 +30,13 @@ class ThreadController
         $contact = null;
         $idContact = Utils::request('idContact', null);
         if ($idContact !== null) {
-            $userManager = new UserManager();
-            $contact = $userManager->getOnlyUserById($idContact);
+            $contact = $this->userManager->getOnlyUserById($idContact);
             if ($contact === null) {
                 throw new Exception("Tentative de conversation avec un membre inexistant.");
             }
         } else {
             // On récupère le contact du dernier message échangé
-            $threadManager = new ThreadManager();
-            $idContact = $threadManager->getLastMessageContactId($user->getId());
+            $idContact = $this->threadManager->getLastMessageContactId($user->getId());
             if ($idContact !== null) {
                 $userManager = new UserManager();
                 $contact = $userManager->getOnlyUserById($idContact);
@@ -38,8 +45,7 @@ class ThreadController
 
         // On Récupère toutes les conversations avec un utilisateur et pour chaque conversation
         // récupéère des infos sur le contact et sur le dernier message échangé.
-        $threadManager = new ThreadManager();
-        $chatRoomData = $threadManager->getAllThreadByUserId($user->getId(), $contact);
+        $chatRoomData = $this->threadManager->getAllThreadByUserId($user->getId(), $contact);
 
         // On affiche la page sur la messagerie de l'utilisateur
         $view = new View("Messagerie");
@@ -71,8 +77,7 @@ class ThreadController
         // On vérifie que le contact existe bien
         $contact = null;
         if ($message['idContact'] !== null) {
-            $userManager = new UserManager();
-            $contact = $userManager->getOnlyUserById($message['idContact']);
+            $contact = $this->userManager->getOnlyUserById($message['idContact']);
             if ($contact === null) {
                 throw new Exception("Tentative de conversation avec un membre inexistant.");
             }
@@ -80,8 +85,8 @@ class ThreadController
 
         // On crée le nouveau message dans la conversation avec ce contact
         $message['idSender'] = $user->getId();
-        $threadManager = new ThreadManager();
-        $result = $threadManager->newMessage($message);
+        // $threadManager = new ThreadManager();
+        $result = $this->threadManager->newMessage($message);
 
         // Retour à la page de la chat room avec prise en compte du nouveau message
         Utils::redirect("showMyChatRoom", ['idContact' => $message['idContact']]);
@@ -103,8 +108,8 @@ class ThreadController
         $user = $_SESSION['user'];
 
         // On recherche le nombre de messages non lus pour cet utilisateur
-        $threadManager = new ThreadManager();
-        $count = $threadManager->countUnreadMessages($user->getId());
+        // $threadManager = new ThreadManager();
+        $count = $this->threadManager->countUnreadMessages($user->getId());
 
         // On retourne le nombre au format JSON pour qu'il soit exploité par
         // le script javascript chargé d'afficher la pastille à côté du point de menu Messagerie

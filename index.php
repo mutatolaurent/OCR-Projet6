@@ -98,6 +98,16 @@ try {
             $bookController->deleteBook();
             break;
 
+        case 'showBookForAdd':
+            $bookController = new BookController();
+            $bookController->showBookForAdd();
+            break;
+
+        case 'createBook':
+            $bookController = new BookController();
+            $bookController->createBook();
+            break;
+
         case 'showMyChatRoom':
             $threadController = new ThreadController();
             $threadController->showMyChatRoom();

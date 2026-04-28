@@ -189,13 +189,6 @@ class BookController
             (int)$book->getIdState() !== (int)$bookInput['idstate'] ||
             !empty($_FILES['picture']['name'])
         );
-        //var_dump($hasChange);
-        // echo "Titre: ".$book->getTitle()." = ".$bookInput['title']."</br>";
-        // echo "Auteur: ".$book->getAuthor()." = ".$bookInput['author']."</br>";
-        // echo "Descr: ".$book->getDescription()." = ".$bookInput['description']."</br>";
-        // echo "State: ".$book->getIdState()." = ".$bookInput['idstate']."</br>";
-        //echo "Fichier upload : ".$_FILES['picture']['name'];
-        //die();
 
         // Si aucun changement on réaffiche la page des informations du livre
         if (!$hasChange) {
@@ -385,6 +378,127 @@ class BookController
 
         // Retour à la page de gestion de l'image du livre
         Utils::redirect("showBookForUpdate", ['zoom' => 'viewPicture', 'id' => $book->getId() ]);
+
+    }
+
+    /**
+     * Affiche le formulaire d'ajout d'un nouveau livre
+     * @return void
+     */
+    public function showBookForAdd(): void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        // On récupère les données et erreurs puis on vide la session immédiatement
+        $formData['error'] = $_SESSION['error'] ?? [];
+        $formData['bookinfo'] = $_SESSION['bookinfo'] ?? ['title' => '', 'author' => '', 'description' => '', 'idstate' => ''];
+        $formData['created'] = $_SESSION['created'] ?? false;
+
+        // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
+        unset($_SESSION['error'], $_SESSION['bookinfo'], $_SESSION['created']);
+
+        // On récupère les différents états possibles pour un livre
+        $bookManager = new BookManager();
+        $bookStates = $bookManager->getBookStates();
+
+        // On affiche la page du formulaire d'ajout d'un nouveau livre
+        $view = new View("Ajouter un livre");
+        $view->render("myNewBook", [
+            'formData' => $formData,
+            'bookStates' => $bookStates
+        ]);
+    }
+
+    /**
+     * Crée un nouveau livre en BD
+     * @return void
+     */
+    public function createBook(): void
+    {
+        // On vérifie que l'utilisateur est connecté
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+
+        // On récupère les données saisies dans le formulaire.
+        $bookInput['title'] = htmlspecialchars(Utils::request("title"));
+        $bookInput['author'] = htmlspecialchars(Utils::request("author"));
+        $bookInput['description'] = htmlspecialchars(Utils::request("description"));
+        $bookInput['idstate'] = htmlspecialchars(Utils::request("idstate"));
+        $bookInput['picture'] = null;
+
+        // RAZ du tableau des erreurs
+        $error = [];
+        $hasError = false;
+
+        // --- LOGIQUE DE VALIDATION ---
+
+        // Le champ titre doit obligatoirement être renseigné
+        if (empty($bookInput['title'])) {
+            $error['title'] = "! Le titre est obligatoire.";
+            $hasError = true;
+        }
+
+        // Le champ auteur doit obligatoirement être renseigné
+        if (empty($bookInput['author'])) {
+            $error['author'] = "! L'auteur est obligatoire.";
+            $hasError = true;
+        }
+
+        // Le champ description doit obligatoirement être renseigné
+        if (empty($bookInput['description'])) {
+            $error['description'] = "! Un commentaire sur le livre est obligatoire.";
+            $hasError = true;
+        }
+
+        // Le champ idstate doit obligatoirement être un nombre entier
+        if (filter_var($bookInput['idstate'], FILTER_VALIDATE_INT) === false) {
+            $error['idstate'] = "! Valeur inconnue.";
+            $hasError = true;
+        }
+
+        // Si le champ photo a été modifié, on traite l'upload du fichier image sélectionné
+        if (!empty($_FILES['picture']['name'])) {
+            $result = Utils::uploadFile(
+                'picture',                                      // nom du champ
+                'images/books/',                                // dossier destination
+                MAX_UPLOAD_BSIZE,                               // max MO autorisés
+                ['image/jpeg', 'image/png', 'image/webp'],    // types autorisés
+                false                                           // pas d'id car livre pas encore créé
+            );
+
+            // Si l'upload est OK on récupère le chemin et le nom du nouveau fichier
+            if (!$result['success']) {
+                $error['picture'] = $result['message'];
+                $hasError = true;
+            } else {
+                $bookInput['picture'] = $result['filename'];
+            }
+        }
+
+        if ($hasError) {
+            // Des erreurs ont été détectées
+            // On stocke les messages d'erreurs et les données saisies en session
+            $_SESSION['error'] = $error;
+            $_SESSION['bookinfo'] = $bookInput;
+
+            // On redirige vers le formulaire de création
+            Utils::redirect("showBookForAdd");
+
+        } else {
+            // Pas d'erreurs, on crée le livre en BD
+            $bookManager = new BookManager();
+            $userId = $_SESSION['user']->getId();
+            $bookId = $bookManager->createBook($bookInput, $userId);
+            $_SESSION['created'] = true;
+
+            // On redirige vers le formulaire de modification
+            Utils::redirect("showBookForUpdate", ['id' => $bookId]);
+
+        }
 
     }
 }

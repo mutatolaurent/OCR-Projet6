@@ -83,7 +83,6 @@ class ThreadManager extends AbstractEntityManager
         $chatRoom[] = $threadsContext;
         $chatRoom[] = $messagesContext;
 
-
         return $chatRoom;
 
     }

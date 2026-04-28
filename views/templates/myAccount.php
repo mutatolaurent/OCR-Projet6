@@ -142,6 +142,7 @@
         </tbody>
     </table>
     </section>
+    <a href="index.php?action=showBookForAdd" class="btn btn-filled" >Ajouter un livre</a>
 </div>
 <!-- Modale qui gère la prévisualisation de l'image à télécharger -->
 <div id="preview-modal" class="modal hidden">
