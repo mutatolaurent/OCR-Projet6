@@ -18,6 +18,7 @@
             <p>Photo</p>
             <img
             src="images/books/placeholder.png"
+            id="current-img"
             alt="Image associée au livre"
             />
             <label for="picture" class="link-upload">Ajouter une image</label>

@@ -19,6 +19,7 @@
             <p>Photo</p>
             <img
             src="<?= $books[0]->getPhoto() ?>"
+            id="current-img"
             alt="Image associée au livre <?= $books[0]->getTitle() ?> de <?= $books[0]->getAuthor() ?>"
             />
             <label for="picture" class="link-upload">Modifier</label>

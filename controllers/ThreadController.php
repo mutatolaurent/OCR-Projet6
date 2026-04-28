@@ -30,9 +30,17 @@ class ThreadController
         $contact = null;
         $idContact = Utils::request('idContact', null);
         if ($idContact !== null) {
+            // On récupère les infos sur le contact
             $contact = $this->userManager->getOnlyUserById($idContact);
             if ($contact === null) {
                 throw new Exception("Tentative de conversation avec un membre inexistant.");
+            }
+
+            // On vérifie que le contact ne tente pas de s'envoyer un message à lui-même
+            // Si c'est le cas on le redirige vers la la page de la bibliothèque
+            if ($idContact == $user->getId()) {
+                // TODO améliorer le feedback utilisateur dans ce cas de figure
+                Utils::redirect("library");
             }
         } else {
             // On récupère le contact du dernier message échangé

@@ -15,7 +15,8 @@
             <div class="cpt-img-profil-container">
                 <img
                     class="cpt-img-profil"
-                    src="<?= $user[0]->getPhoto() ?>"
+                    id="current-img"
+                    src="<?= $user[0]->getPhoto() !== null ? $user[0]->getPhoto() : 'images/users/placeholder.png'?>"
                     alt="image du profil de <?= $user[0]->getPseudo() ?>"
                 />
                 <!-- <a href="index.php?action=myAccount&zoom=viewAvatar">Modifier</a> -->

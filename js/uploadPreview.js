@@ -51,6 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Confirmer → on garde le fichier
   confirmBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
+    if (currentInput) {
+      const newSrc = previewImg.src; // l'image générée par FileReader
+      const targetImg = document.getElementById("current-img");
+
+      if (targetImg) {
+        targetImg.src = newSrc; // mise à jour immédiate dans la page
+      }
+    }
   });
 
   // Annuler → on vide l’input concerné
