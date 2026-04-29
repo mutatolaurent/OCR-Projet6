@@ -17,10 +17,13 @@
                     type="text"
                     name="email"
                     id="email"
+                    placeholder="nom@exemple.com"
+                    aria-required=true
                     <?= isset($formData['credential']['email']) ? 'value="'.$formData['credential']['email'].'"' : '' ?>
+                    <?= isset($formData['error']['email']) ? 'aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
                 />
                 <?php if (isset($formData['error']['email'])): ?>
-                    <span class="text-error"><?= $formData['error']['email'] ?></span>
+                    <span id="email-error-msg" class="text-error"><?= $formData['error']['email'] ?></span>
                 <?php endif; ?>
             </div>
 
@@ -32,17 +35,22 @@
                     type="password" 
                     name="password" 
                     id="password"
+                    placeholder="Au moins <?= PASSWORD_MIN_LENGTH ?> caractères"
+                    aria-required=true
+                    aria-describedby="pwd-hint"
                     <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
+                    <?= isset($formData['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                 />
+                <p id="pwd-hint" class="sr-only"><?= $formData['error']['password'] ?></p>
                 <?php if (isset($formData['error']['password'])): ?>
-                    <span class="text-error"><?= $formData['error']['password'] ?></span>
+                    <span id="password-error-msg" class="text-error"><?= $formData['error']['password'] ?></span>
                 <?php endif; ?>
             </div>
 
             <!-- Bouton de soumission du formulaire -->
-            <button class="btn btn-filled">Se connecter</button>
+            <button class="btn btn-filled" <?= isset($formData['error']['auth']) ? 'aria-describedby="auth-error"' : '' ?>>Se connecter</button>
             <?php if (isset($formData['error']['auth'])): ?>
-                <span class="text-error auth-error"><?= $formData['error']['auth'] ?></span>
+                <span id="auth-error" class="text-error auth-error" role="alert" aria-atomic="true"><?= $formData['error']['auth'] ?></span>
             <?php endif; ?>
 
         </form>

@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="main-container">
-      <header class="site-header">
+      <header class="site-header" role="banner">
         <a href="#" class="logo-block">
           <div class="logo-square">
             <img
@@ -25,7 +25,7 @@
           <img src="../images/icones/icon-menu.svg" alt="Menu" />
         </label>
 
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Main navigation">
           <a href="#" class="nav-link"
             ><span data-text="Accueil">Accueil</span></a
           >
@@ -64,15 +64,28 @@
         <section class="main-nos-livres">
           <div class="entete-nos-livres">
             <h1>Nos livres</h1>
-            <form class="search-form" action="#" method="get">
+            <form
+              class="search-form"
+              action="#"
+              method="get"
+              aria-label="Library"
+              role="search"
+            >
               <button type="submit" class="search-btn">
-                <img src="../images/icones/search.svg" alt="Rechercher" />
+                <img
+                  src="../images/icones/search.svg"
+                  alt="Lance la recherche"
+                />
               </button>
+              <label for="search-query" class="sr-only"
+                >Rechercher un livre</label
+              >
               <input
                 class="search-input"
                 type="search"
                 name="search-query"
                 placeholder="Rechercher un livre"
+                aria-label="Find a book…"
               />
             </form>
           </div>
@@ -152,13 +165,15 @@
         </section>
       </main>
 
-      <footer class="main-footer">
-        <a href="#">Politique de confidentialité</a>
-        <a href="#">Mentions légales</a>
-        <a href="#">Tom Troc©</a>
-        <a href="#"
-          ><img src="../images/logo/logoTT-vert.svg" alt="Logo Tom Troc vert"
-        /></a>
+      <footer>
+        <nav class="main-footer" aria-label="footer navigation">
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Mentions légales</a>
+          <a href="#">Tom Troc©</a>
+          <a href="#"
+            ><img src="../images/logo/logoTT-vert.svg" alt="Logo Tom Troc vert"
+          /></a>
+        </nav>
       </footer>
     </div>
   </body>

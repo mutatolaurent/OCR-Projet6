@@ -20,7 +20,15 @@
                     alt="image du profil de <?= $user[0]->getPseudo() ?>"
                 />
                 <!-- <a href="index.php?action=myAccount&zoom=viewAvatar">Modifier</a> -->
-                <label for="avatar" class="link-upload">Modifier</label>
+                <!-- <label for="avatar" class="link-upload">Modifier</label> -->
+                <button 
+                    type="button" 
+                    class="link-upload" 
+                    id="trigger-upload" 
+                    aria-controls="picture"
+                    aria-label="Modifier une image, ouvre le sélecteur de fichiers">
+                    Modifier
+                </button>
                 <input
                     type="file"
                     name="avatar"
@@ -41,6 +49,7 @@
                     class="cpt-count-img"
                     src="images/icones/bibliotheque.svg"
                     alt=""
+                    aria-hidden="true"
                 />
                 <p class="cpt-count"><?= count($user[0]->getBooks()) ?> livres</p>
             </div>
@@ -106,14 +115,17 @@
 
     <section class="mon-cpt-sect2">
     <table>
+        <caption class="sr-only">
+            Liste des livres partagés par le compte utilisateur
+        </caption>
         <thead>
         <tr>
-            <th>PHOTO</th>
-            <th>TITRE</th>
-            <th>AUTEUR</th>
-            <th>DESCRIPTION</th>
-            <th>DISPONIBILITE</th>
-            <th>ACTION</th>
+            <th scope="col">PHOTO</th>
+            <th scope="col">TITRE</th>
+            <th scope="col">AUTEUR</th>
+            <th scope="col">DESCRIPTION</th>
+            <th scope="col">DISPONIBILITE</th>
+            <th scope="col">ACTION</th>
         </tr>
         </thead>
         <tbody>
@@ -124,7 +136,7 @@
                             <a href="index.php?action=book&id=<?= $book->getId() ?>">
                                 <img
                                 src="<?= $book->getPhoto() ?>"
-                                alt="Image lien vers la page d'information du livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?>"
+                                alt="Photo associée au livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?> - lien vers la page d'informations sur ce livre"
                                 />
                             </a>
                         </td>
@@ -145,17 +157,10 @@
     </section>
     <a href="index.php?action=showBookForAdd" class="btn btn-filled" >Ajouter un livre</a>
 </div>
-<!-- Modale qui gère la prévisualisation de l'image à télécharger -->
-<div id="preview-modal" class="modal hidden">
-    <div class="modal-content">
-        <h3>Aperçu de l’image sélectionnée</h3>
-        <img id="preview-image" src="" alt="Aperçu" />
+<?php
 
-        <div class="modal-buttons">
-            <button id="confirm-upload" class="btn btn-filled">Confirmer</button>
-            <button id="cancel-upload" class="btn btn-empty">Annuler</button>
-        </div>
-    </div>
-</div>
-<!-- Script JS qui gère la modale de prévisualisation de l'image à télécharger -->
-<script src="js/uploadPreview.js"></script>
+/**
+ * Template du code HTML et JS qui permet de gérer une fenêtre modale pour faciliter
+ * l'expérience utilisateur lors de la sélection d'une image à uploader
+ */
+require(TEMPLATE_VIEW_PATH . 'modalUpload.php') ?>

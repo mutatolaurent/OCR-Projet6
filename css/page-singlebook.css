@@ -7,7 +7,8 @@
   background-color: var(--gris-clair);
 }
 
-.breadcrump a {
+.breadcrump a,
+.breadcrump span {
   text-decoration: none;
   color: var(--gris-text);
   font-family: Inter;
@@ -29,6 +30,7 @@
 
 .single-livre-container .livre-info {
   display: flex;
+  width: 720px;
   flex-direction: column;
   justify-content: flex-start;
   padding: 59px 150px 80px 85px;

@@ -22,6 +22,7 @@
   --header-height: 80px;
   --footer-height: 61px;
   --radius: 6px;
+  --rouge-text-error: #e60000;
 }
 
 /* Styles globaux au body de la pa */
@@ -159,4 +160,22 @@ soit cliquable,et on utilise display: inline-block pour que le lien prenne
 uniquement la place du texte et non toute la cellule */
 tbody td a {
   display: inline-block;
+}
+
+/*  Screen reader only */
+.sr-only {
+  position: absolute; /* sortir l’élément du flux normal de la page => Il ne prend plus de place dans la mise en page. */
+  width: 1px; /* réduire l’élément à une taille minuscule. */
+  height: 1px; /* réduire l’élément à une taille minuscule. */
+  padding: 0; /* éviter que l’élément “gonfle” visuellement. Pas de bordure, pas de padding → pas de risque qu’il devienne visible.*/
+  margin: -1px; /* le décaler légèrement hors de la zone visible. Avec une taille de 1px et une marge négative, il est “poussé” en dehors du flux visible */
+  overflow: hidden; /* cacher tout ce qui dépasserait de cette minuscule boîte. Si le texte est plus grand que 1px × 1px (ce qui est toujours le cas), il ne sera pas visible.*/
+  clip-path: rect(
+    0,
+    0,
+    0,
+    0
+  ); /* Couplé à position: absolute, ça rend l’élément visuellement inexistant. */
+  white-space: nowrap; /* empêcher les retours à la ligne. */
+  border: 0;
 }

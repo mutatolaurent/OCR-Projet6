@@ -14,7 +14,7 @@
                     <img
                         class="img-owner"
                         src="<?= $thread['contact']->getPhoto() ?>"
-                        alt=""
+                        alt="Image de l'avatar du correspondant"
                     />
                     <div class="thread-context">
                         <div class="thread-info">
@@ -49,7 +49,8 @@
                                 <img
                                     src="<?= $chatroom[1]['chatcontact']->getPhoto() ?>"
                                     class="msg-avatar"
-                                    alt="Image de l'avatar du correspondant"
+                                    alt=""
+                                    aria-hidden="true"
                                 />
                                 <span class="msg-date"><?= Utils::formatFullDateTime($msg->getCreatedAt()) ?></span>
                                 <!-- <span class="msg-time">10:42</span> -->

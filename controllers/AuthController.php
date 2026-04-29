@@ -85,8 +85,14 @@ class AuthController
         }
 
         // Le champ password est obligatoire
-        if (!$hasError && empty($credential['password'])) {
-            $error['password'] = "! Le mot de passe est obligatoire.";
+        // if (!$hasError && empty($credential['password'])) {
+        //     $error['password'] = "! Le mot de passe est obligatoire.";
+        //     $hasError = true;
+        // }
+
+        // Le champ password est obligatoire et doit avoir un minimum de caractères
+        if (!$hasError && mb_strlen($credential['password']) < PASSWORD_MIN_LENGTH) {
+            $error['password'] = "! Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
             $hasError = true;
         }
 

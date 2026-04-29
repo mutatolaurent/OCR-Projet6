@@ -197,7 +197,7 @@ champ-formulaire input.input-upload {
 }
 
 .text-error {
-  color: red;
+  color: var(--rouge-text-error);
   font-family: Inter;
   font-size: 10px;
   font-style: normal;

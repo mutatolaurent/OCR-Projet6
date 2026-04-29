@@ -7,7 +7,7 @@
 ?>
 <section class="modif-infos-main-sect">
     <a href="index.php?action=myAccount" class="return-link">
-        <img src="images/icones/retour.svg" alt="Lien retour" />
+        <img src="images/icones/retour.svg" alt="" aria-hidden="true" />
         <span>retour</span>
     </a>
     <h1>Ajouter un nouveau livre</h1>
@@ -19,9 +19,17 @@
             <img
             src="images/books/placeholder.png"
             id="current-img"
-            alt="Image associée au livre"
+            alt="Image à associer au livre"
             />
-            <label for="picture" class="link-upload">Ajouter une image</label>
+            <!-- <label for="picture" class="link-upload" tabindex="0">Ajouter une image</label> -->
+            <button 
+                type="button" 
+                class="link-upload" 
+                id="trigger-upload" 
+                aria-controls="picture"
+                aria-label="Ajouter une image, ouvre le sélecteur de fichiers">
+                Ajouter une image
+            </button>
             <input
                 type="file"
                 name="picture"
@@ -96,16 +104,11 @@
     </form>
 </section>
 <!-- Modale qui gère la prévisualisation de l'image à télécharger -->
-<div id="preview-modal" class="modal hidden">
-    <div class="modal-content">
-        <h3>Aperçu de l'image sélectionnée</h3>
-        <img id="preview-image" src="" alt="Aperçu" />
 
-        <div class="modal-buttons">
-            <button id="confirm-upload" class="btn btn-filled">Confirmer</button>
-            <button id="cancel-upload" class="btn btn-empty">Annuler</button>
-        </div>
-    </div>
-</div>
-<!-- Script JS qui gère la modale de prévisualisation de l'image à télécharger -->
-<script src="js/uploadPreview.js"></script>
+<?php
+
+/**
+ * Template du code HTML et JS qui permet de gérer une fenêtre modale pour faciliter
+ * l'expérience utilisateur lors de la sélection d'une image à uploader
+ */
+require(TEMPLATE_VIEW_PATH . 'modalUpload.php') ?>

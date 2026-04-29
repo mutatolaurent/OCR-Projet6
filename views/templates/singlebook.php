@@ -4,14 +4,14 @@
  * Template pour afficher la page d'information sur un livre.
  */
 ?>
-<div class="breadcrump">
-    <a href="index.php?action=library">Nos livres à l'échange</a> > <a href="index.php?action=book&id=<?= $books[0]->getId() ?>"><?= $books[0]->getTitle() ?></a>
-</div>
+<nav class="breadcrump" aria-label="breadcrumb">
+    <a href="index.php?action=library">Nos livres à l'échange</a> > <span aria-current="page"><?= $books[0]->getTitle() ?></span>
+</nav>
 <section class="single-livre-container">
     <img
         class="livre-image"
         src="<?= $books[0]->getPhoto() ?>"
-        alt="Photo de couverture du livre <?= $books[0]->getTitle() ?> écrit par <?= $books[0]->getAuthor() ?>"
+        alt="Photo associée au livre <?= $books[0]->getTitle() ?> écrit par <?= $books[0]->getAuthor() ?>"
     />
     <div class="livre-info">
         <h1><?= $books[0]->getTitle() ?></h1>
@@ -20,6 +20,7 @@
             class="line-separator"
             src="images/icones/separator1.svg"
             alt=""
+            aria-hidden="true"
         />
         <h3>DESCRIPTION</h3>
         <p><?= nl2br($books[0]->getDescription()) ?></p>
@@ -29,6 +30,7 @@
                 class="img-owner"
                 src="<?= $books[0]->getOwner()->getPhoto() ?>"
                 alt=""
+                aria-hidden="true"
             />
             <span class="pseudo-owner"><?= $books[0]->getOwner()->getPseudo() ?></span>
         </a>

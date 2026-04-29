@@ -76,6 +76,8 @@
   text-underline-offset: auto;
   text-underline-position: from-font;
   cursor: pointer;
+  background-color: white;
+  border: none;
 }
 
 .modif-book-infos-left .input-upload {

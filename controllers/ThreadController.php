@@ -30,6 +30,7 @@ class ThreadController
         $contact = null;
         $idContact = Utils::request('idContact', null);
         if ($idContact !== null) {
+
             // On récupère les infos sur le contact
             $contact = $this->userManager->getOnlyUserById($idContact);
             if ($contact === null) {

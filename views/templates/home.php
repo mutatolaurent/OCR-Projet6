@@ -32,7 +32,7 @@
                 <article class="card">
                     <img
                         src="<?= $book->getPhoto() ?>"
-                        alt="<?= $book->getTitle() ?>"
+                        alt="Photo associée au livre <?= $book->getTitle() ?> - lien vers la page d'informations sur ce livre"
                     />
                     <h3 class="book-title"><?= $book->getTitle() ?></h3>
                     <p class="book-author"><?= $book->getAuthor() ?></p>
@@ -42,19 +42,6 @@
                 </article>
             </a>
         <?php } ?>
-
-        <!-- <a href="#">
-            <article class="card">
-                <img
-                    src="./images/books/a-book-of-full-hope.jpg"
-                    alt="A book of full hope"
-                />
-                <h3 class="book-title">A book of full hope of full hope</h3>
-                <p class="book-author">Rupi Kaur</p>
-                <p class="book-owner">Vendu par : Lou&Ben50</p>
-            </article>
-        </a> -->
-
     </div>
     <a href="index.php?action=library" class="btn btn-filled"
         ><span>Voir tous les livres</span></a

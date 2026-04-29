@@ -7,7 +7,7 @@
 <section class="main-nos-livres">
     <div class="entete-nos-livres">
         <h1>Nos livres</h1>
-        <form class="search-form" action="index.php?action=library" method="post">
+        <form class="search-form" action="index.php?action=library" method="post" aria-label="Library" role="search">
             <button type="submit" class="search-btn">
                 <img src="images/icones/search.svg" alt="Rechercher" />
             </button>
@@ -16,6 +16,7 @@
                 type="search"
                 name="search-query"
                 placeholder="Rechercher un livre"
+                aria-label="Rechercher un livre.."
             />
         </form>
     </div>
@@ -35,7 +36,7 @@
                     <article class="card">
                         <img
                             src="<?= $book->getPhoto() ?>"
-                            alt="Image lien vers la page d'information du livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?>"
+                            alt="Photo associée au livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?> - lien vers la page d'informations sur ce livre"
                         />
                         <h2 class="book-title"><?= $book->getTitle() ?></h2>
                         <p class="book-author"><?= $book->getAuthor() ?></p>    

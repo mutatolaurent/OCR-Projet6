@@ -5,6 +5,7 @@
  */
 ?>
 <section class="cpt-public-sect">
+    <h1 class="sr-only">Informations générales sur <?= $user[0]->getPseudo() ?></h1>
     <div class="cpt-public-left">
         <div class="cpt-img-profil-container">
             <img
@@ -30,12 +31,15 @@
 
     <div class="cpt-public-right">
     <table>
+        <caption class="sr-only">
+            Liste des livres partagés par ce membre du site
+        </caption>
         <thead>
         <tr>
-            <th>PHOTO</th>
-            <th>TITRE</th>
-            <th>AUTEUR</th>
-            <th>DESCRIPTION</th>
+            <th scope="col">PHOTO</th>
+            <th scope="col">TITRE</th>
+            <th scope="col">AUTEUR</th>
+            <th scope="col">DESCRIPTION</th>
         </tr>
         </thead>
         <tbody>

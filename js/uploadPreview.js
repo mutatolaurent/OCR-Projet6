@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Sélectionne tous les inputs de type file
   const fileInputs = document.querySelectorAll('input[type="file"]');
 
   const modal = document.getElementById("preview-modal");
@@ -7,26 +6,93 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmBtn = document.getElementById("confirm-upload");
   const cancelBtn = document.getElementById("cancel-upload");
 
-  // Types MIME autorisés
   const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
-  let currentInput = null; // Pour savoir quel input est en cours d’aperçu
+  let currentInput = null;
+  let lastFocusedElement = null;
 
+  /* ------------------------------------------------------------
+     1) Gestion du bouton "Ajouter une image" → déclenche l’input
+     ------------------------------------------------------------ */
+  const triggerUpload = document.getElementById("trigger-upload");
+
+  if (triggerUpload) {
+    triggerUpload.addEventListener("click", () => {
+      // On cherche l’input lié : picture, avatar, etc.
+      const input =
+        document.getElementById("picture") || document.getElementById("avatar");
+
+      if (input) {
+        input.click();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------
+    2) Focus trap (accessibilité)
+     ------------------------------------------------------------ */
+  function getFocusableElements(container) {
+    return container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+  }
+
+  function activateFocusTrap() {
+    const focusables = getFocusableElements(modal);
+    const firstFocusable = focusables[0];
+    const lastFocusable = focusables[focusables.length - 1];
+
+    firstFocusable.focus();
+
+    modal.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable.focus();
+        }
+      }
+    });
+  }
+
+  function openModal() {
+    lastFocusedElement = document.activeElement;
+    modal.classList.remove("hidden");
+    modal.removeAttribute("aria-hidden");
+    activateFocusTrap();
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+  }
+
+  /* ------------------------------------------------------------
+    3) Gestion du changement de fichier
+     ------------------------------------------------------------ */
   fileInputs.forEach((input) => {
     input.addEventListener("change", () => {
       const file = input.files[0];
       if (!file) return;
 
-      currentInput = input; // On mémorise l’input concerné
+      currentInput = input;
 
-      // Vérification du type MIME
       if (!allowedTypes.includes(file.type)) {
         alert("Format non autorisé. Formats acceptés : JPG, PNG, WEBP.");
         input.value = "";
         return;
       }
 
-      // Vérification de la taille max
       const maxSize = parseInt(input.dataset.maxSize, 10);
       if (file.size > maxSize) {
         alert(
@@ -38,35 +104,41 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Lecture et affichage de l’aperçu
       const reader = new FileReader();
       reader.onload = (e) => {
         previewImg.src = e.target.result;
-        modal.classList.remove("hidden");
+        openModal();
       };
       reader.readAsDataURL(file);
     });
   });
 
-  // Confirmer → on garde le fichier
+  /* ------------------------------------------------------------
+     4) Boutons de la modale
+     ------------------------------------------------------------ */
   confirmBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
+    closeModal();
     if (currentInput) {
-      const newSrc = previewImg.src; // l'image générée par FileReader
+      const newSrc = previewImg.src;
       const targetImg = document.getElementById("current-img");
-
-      if (targetImg) {
-        targetImg.src = newSrc; // mise à jour immédiate dans la page
-      }
+      if (targetImg) targetImg.src = newSrc;
     }
   });
 
-  // Annuler → on vide l’input concerné
   cancelBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
+    closeModal();
     if (currentInput) {
       currentInput.value = "";
       currentInput = null;
+    }
+  });
+
+  /* ------------------------------------------------------------
+     5) Fermeture avec Échap
+     ------------------------------------------------------------ */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      cancelBtn.click();
     }
   });
 });
