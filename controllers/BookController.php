@@ -63,7 +63,7 @@ class BookController
         $view = new View("Nos livres");
         $view->render("library", [
             'books' => $books
-        ], $options);
+        ]);
     }
 
     /**
@@ -111,7 +111,8 @@ class BookController
         $formData['updated'] = $_SESSION['updated'] ?? false;
 
         // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
-        unset($_SESSION['error'], $_SESSION['bookinfo'], $_SESSION['updated']);
+        // unset($_SESSION['error'], $_SESSION['bookinfo'], $_SESSION['updated']);
+        unset($_SESSION['error'], $_SESSION['bookinfo']);
 
         // Si on ne récupère pas un ID de livre valide, on redirige vers la HP
         $idbook = Utils::request('id', null);
@@ -141,21 +142,12 @@ class BookController
         // On ajoute la liste des différents états aux données qui seront transmises à la vue
         $books[] = $bookStates;
 
-        // Sélection de la vue
-        if (Utils::request('zoom', null) == 'viewPicture') {
-
-            // On affiche la page de modification de l'image associée au livre
-            $view = new View("Modifications ".$books[0]->getTitle());
-            $view->render("bookPicture", [
-                'books' => $books
-            ]);
-        } else {
-            // On affiche la page d'information sur le livre
-            $view = new View("Modifications ".$books[0]->getTitle());
-            $view->render("myBook", [
-                'books' => $books
-            ]);
-        }
+        // On affiche la page d'information sur le livre
+        $view = new View("Modifications ".$books[0]->getTitle());
+        $view->render("myBook", [
+            'books' => $books
+        ]);
+        // }
     }
 
     /**
@@ -314,74 +306,6 @@ class BookController
     }
 
     /**
-     * Modification de la photo associée à un livre
-     * @return void
-     */
-    public function updateBookPicture(): void
-    {
-
-        // On vérifie que l'utilisateur est connecté
-        if (!isset($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
-        }
-
-        // On récupère l'objet Book
-        $book = $_SESSION['book'];
-
-        // RAZ du tableau des erreurs
-        $error = [];
-        $hasError = false;
-
-        // Si aucun fichier sélectionné on on retourne au formulaire de modification des informations du livre
-        if (empty($_FILES['picture']['name'])) {
-            Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
-        }
-
-        // Appel de la méthode
-        $result = Utils::uploadFile(
-            'picture',                                      // nom du champ
-            'images/books/',                                // dossier destination
-            2 * 1024 * 1024,                               // max 2 Mo TODO créer une constante
-            ['image/jpeg', 'image/png', 'image/webp'],    // types autorisés
-            true,                                           // utiliser l'id comme nom TODO à supprimer au profit du fieldname
-            $book->getId()                                 // l'id du livre
-        );
-
-        // Traiter le résultat
-        if (!$result['success']) {
-            $_SESSION['error']['picture'] = $result['message'];
-        } else {
-            // Mise à jour en BD avec le chemin retourné
-            $bookManager = new BookManager();
-            $bookManager->updatePicture($book->getId(), $result['filename']);
-            $_SESSION['error']['picture'] = $result['message'];
-
-        }
-
-        // Mise à jour en BD
-        // if (!$hasError) {
-
-        //     // Mise à jour en BD avec le chemin vers la nouvelle photo de profil
-        //     $bookManager = new BookManager();
-        //     $bookManager->updatePicture($book->getId(), $destination);
-        //     // Retour à la page de gestion de l'image du livre
-        //     // Utils::redirect("showBookForUpdate", ['id' => $book->getId() ]);
-
-        //     // TODO : message de feedback
-
-        // } else {
-
-        //     // Init variable de session pour affichage message d'erreur lors de l'affichage du formulaire
-        //     $_SESSION['error'] = $error;
-        //     // Retour à la page de gestion de l'image du livre
-        // }
-
-        // Retour à la page de gestion de l'image du livre
-        Utils::redirect("showBookForUpdate", ['zoom' => 'viewPicture', 'id' => $book->getId() ]);
-
-    }
-
-    /**
      * Affiche le formulaire d'ajout d'un nouveau livre
      * @return void
      */
@@ -395,10 +319,11 @@ class BookController
         // On récupère les données et erreurs puis on vide la session immédiatement
         $formData['error'] = $_SESSION['error'] ?? [];
         $formData['bookinfo'] = $_SESSION['bookinfo'] ?? ['title' => '', 'author' => '', 'description' => '', 'idstate' => ''];
-        $formData['created'] = $_SESSION['created'] ?? false;
+        $formData['updated'] = $_SESSION['updated'] ?? false;
 
         // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
-        unset($_SESSION['error'], $_SESSION['bookinfo'], $_SESSION['created']);
+        // unset($_SESSION['error'], $_SESSION['bookinfo'], $_SESSION['updated']);
+        unset($_SESSION['error'], $_SESSION['bookinfo']);
 
         // On récupère les différents états possibles pour un livre
         $bookManager = new BookManager();
@@ -438,25 +363,25 @@ class BookController
 
         // Le champ titre doit obligatoirement être renseigné
         if (empty($bookInput['title'])) {
-            $error['title'] = "! Le titre est obligatoire.";
+            $error['title'] = "Le titre est obligatoire.";
             $hasError = true;
         }
 
         // Le champ auteur doit obligatoirement être renseigné
         if (empty($bookInput['author'])) {
-            $error['author'] = "! L'auteur est obligatoire.";
+            $error['author'] = "L'auteur est obligatoire.";
             $hasError = true;
         }
 
         // Le champ description doit obligatoirement être renseigné
         if (empty($bookInput['description'])) {
-            $error['description'] = "! Un commentaire sur le livre est obligatoire.";
+            $error['description'] = "Un commentaire sur le livre est obligatoire.";
             $hasError = true;
         }
 
         // Le champ idstate doit obligatoirement être un nombre entier
         if (filter_var($bookInput['idstate'], FILTER_VALIDATE_INT) === false) {
-            $error['idstate'] = "! Valeur inconnue.";
+            $error['idstate'] = "Valeur inconnue.";
             $hasError = true;
         }
 
@@ -493,7 +418,7 @@ class BookController
             $bookManager = new BookManager();
             $userId = $_SESSION['user']->getId();
             $bookId = $bookManager->createBook($bookInput, $userId);
-            $_SESSION['created'] = true;
+            $_SESSION['updated'] = true;
 
             // On redirige vers le formulaire de modification
             Utils::redirect("showBookForUpdate", ['id' => $bookId]);

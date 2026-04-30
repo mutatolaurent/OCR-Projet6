@@ -65,12 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
     lastFocusedElement = document.activeElement;
     modal.classList.remove("hidden");
     modal.removeAttribute("aria-hidden");
+    // console.log("Open modal");
+
+    // // Afficher les attributs HTML du modal
+    // console.log("--- Attributs HTML du modal ---");
+    // const attrs = modal.attributes;
+    // for (let i = 0; i < attrs.length; i++) {
+    //   console.log(`${attrs[i].name}: ${attrs[i].value}`);
+    // }
+
     activateFocusTrap();
   }
 
   function closeModal() {
     modal.classList.add("hidden");
     modal.setAttribute("aria-hidden", "true");
+
+    // Afficher les attributs HTML du modal
+    // console.log("Close modal");
+    // console.log("--- Attributs HTML du modal ---");
+    // const attrs = modal.attributes;
+    // for (let i = 0; i < attrs.length; i++) {
+    //   console.log(`${attrs[i].name}: ${attrs[i].value}`);
+    // }
 
     if (lastFocusedElement) {
       lastFocusedElement.focus();

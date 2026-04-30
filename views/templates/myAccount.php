@@ -66,10 +66,12 @@
                         type="text"
                         name="email"
                         id="email"
+                        aria-required="true"
                         value="<?= isset($user[1]['error']['email']) ? $user[1]['credential']['email'] : $user[0]->getEmail() ?>"
+                        <?= isset($user[1]['error']['email']) ? 'aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['email'])): ?>
-                        <span class="text-error"><?= $user[1]['error']['email'] ?></span>
+                        <span id="email-error-msg" class="text-error"><?= $user[1]['error']['email'] ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -81,11 +83,15 @@
                         type="password"
                         name="password"
                         id="password"
+                        aria-required="true"
                         placeholder="******"
+                        aria-describedby="pwd-hint"
                         value="<?= isset($user[1]['error']['password']) ? $user[1]['credential']['password'] : '' ?>"
+                        <?= isset($user[1]['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['password'])): ?>
-                        <span class="text-error"><?= $user[1]['error']['password'] ?></span>
+                        <p id="pwd-hint" class="sr-only"><?= $user[1]['error']['password'] ?></p>
+                        <span id="password-error-msg" class="text-error"><?= $user[1]['error']['password'] ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -97,16 +103,21 @@
                         type="text"
                         name="pseudo"
                         id="pseudo"
+                        aria-required="true"
+                        aria-describedby="pseudo-hint"
                         value="<?= isset($user[1]['error']['pseudo']) ? $user[1]['credential']['pseudo'] : $user[0]->getPseudo() ?>"
+                        <?= isset($user[1]['error']['pseudo']) ? 'aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['pseudo'])): ?>
-                        <span class="text-error"><?= $user[1]['error']['pseudo'] ?></span>
+                        <p id="pseudo-hint" class="sr-only"><?= $user[1]['error']['pseudo'] ?></p>
+                        <span id="pseudo-error-msg" class="text-error"><?= $user[1]['error']['pseudo'] ?></span>
                     <?php endif; ?>
                 </div>
-                <button class="btn btn-empty" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir enregistrer ces modifications ?") ?>>Enregistrer</button>
-                <?php if ($user[1]['updated'] === true): ?>
+                <!-- <button class="btn btn-empty" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir enregistrer ces modifications ?") ?>>Enregistrer</button> -->
+                <button type="submit" class="btn btn-empty">Enregistrer</button>
+                <!-- <?php if ($user[1]['updated'] === true): ?>
                     <span class="feedback-info">Vos informations ont bien été mises à jour</span>
-                <?php endif; ?>
+                <?php endif; ?> -->
 
             <!-- </form> -->
         </div>
@@ -133,12 +144,10 @@
                 <?php foreach ($user[0]->getBooks() as $book) { ?>
                     <tr>
                         <td>            
-                            <a href="index.php?action=book&id=<?= $book->getId() ?>">
-                                <img
-                                src="<?= $book->getPhoto() ?>"
-                                alt="Photo associée au livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?> - lien vers la page d'informations sur ce livre"
-                                />
-                            </a>
+                            <img
+                            src="<?= $book->getPhoto() ? $book->getPhoto() : 'images/books/placeholder.png' ?>"
+                            alt="Photo associée au livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?> - lien vers la page d'informations sur ce livre"
+                            />
                         </td>
                         <td><?= $book->getTitle() ?></td>
                         <td><?= $book->getAuthor() ?></td>
@@ -164,3 +173,9 @@
  * l'expérience utilisateur lors de la sélection d'une image à uploader
  */
 require(TEMPLATE_VIEW_PATH . 'modalUpload.php') ?>
+
+<!-- Script JS qui gère la modale de prévisualisation de l'image à télécharger -->
+<script src="js/uploadPreview.js"></script>
+
+<!-- Script JS qui gère l'affichage du message de succès de l'enregistrement d'un formulaire -->
+<script src="js/displaySuccessBanner.js"></script>

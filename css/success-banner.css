@@ -1,0 +1,54 @@
+.success-banner {
+  position: fixed;
+  max-width: 1440px;
+  /* top: 0; */
+  /* left: 0; */
+  width: 100%;
+  background-color: var(--vert-principal);
+  color: white;
+  z-index: 9999; /* Toujours au-dessus du header */
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  /* État initial : caché en haut */
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+/* Classe ajoutée par JS pour l'apparition */
+.success-banner.is-visible {
+  transform: translateY(0);
+}
+
+/* Classe ajoutée par JS pour la disparition */
+.success-banner.is-hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in;
+}
+
+.banner-content {
+  /* max-width: 1440px; */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  color: white;
+}
+
+.banner-content p {
+  color: white;
+}
+
+.icon {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}

@@ -22,6 +22,3 @@
         </div>
     </div>
 </div>
-
-<!-- Script JS qui gère la modale de prévisualisation de l'image à télécharger -->
-<script src="js/uploadPreview.js"></script>

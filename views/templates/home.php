@@ -31,7 +31,7 @@
             <a href="indexphp?action=book&id=<?= $book->getId() ?>">
                 <article class="card">
                     <img
-                        src="<?= $book->getPhoto() ?>"
+                        src="<?= $book->getPhoto() ? $book->getPhoto() : 'images/books/placeholder.png' ?>"
                         alt="Photo associée au livre <?= $book->getTitle() ?> - lien vers la page d'informations sur ce livre"
                     />
                     <h3 class="book-title"><?= $book->getTitle() ?></h3>

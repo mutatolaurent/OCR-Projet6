@@ -7,7 +7,7 @@
   text-decoration: none;
   padding: 22px 38px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
 }
 
@@ -72,7 +72,7 @@ et un conteneur flex pour aligner les éléments à l’intérieur */
 et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
 .cards-nos-livres .book-title {
   color: #000;
-  font-size: 16px;
+  font-size: 1em;
   font-weight: 400;
   padding-left: 14px;
   padding-top: 20px;
@@ -89,7 +89,7 @@ et on ajoute un peu d’espace en haut pour séparer du titre */
   padding-top: 11px;
   padding-right: 14px;
   color: var(--gris-texte);
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
 }
 
@@ -118,7 +118,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
 .champ-formulaire label {
   color: var(--gris-texte);
   font-family: Inter;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
   padding-bottom: 10px;
 }
@@ -135,7 +135,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   padding-bottom: 17px;
   color: var(--gris-fonc);
   font-family: Inter;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
 }
 
@@ -151,7 +151,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   padding-bottom: 17px;
   color: var(--gris-fonc);
   font-family: Inter;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 }
 
@@ -170,7 +170,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   padding-bottom: 17px;
   color: var(--gris-fonc, #292929);
   font-family: Inter;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
 }
 
@@ -183,26 +183,13 @@ champ-formulaire input.input-upload {
   height: 200px;
 }
 
-/* Style du bouton interne */
-.input-upload::file-selector-button {
-  background: var(--vert-principal);
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  margin-right: 12px;
-  border-radius: var(--radius);
-  font-family: Inter;
-  font-size: 14px;
-  cursor: pointer;
-}
-
 .text-error {
   color: var(--rouge-text-error);
   font-family: Inter;
-  font-size: 10px;
+  font-size: 0.75em;
   font-style: normal;
   font-weight: 400;
-  min-height: 12px;
+  /* min-height: 12px; */
   display: block;
 }
 .auth-error {
@@ -211,12 +198,12 @@ champ-formulaire input.input-upload {
 }
 
 .feedback-info {
-  color: red;
+  color: var(--vert-principal);
   font-family: Inter;
-  font-size: 12px;
+  font-size: 0.75em;
   font-style: normal;
   font-weight: 400;
-  min-height: 12px;
+  /* min-height: 12px; */
   display: block;
   margin-top: 20px;
 }

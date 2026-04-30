@@ -22,6 +22,16 @@ $action = Utils::request('action', 'home');
 </head>
 
 <body>
+    <?php if (isset($_SESSION['updated']) && $_SESSION['updated'] === true) {?>
+        <?php unset($_SESSION['updated'])?>
+        <!-- Ce bloc n'est présent dans le HTML que si le succès est confirmé côté serveur -->
+        <div id="success-toast" class="success-banner" role="status" tabindex="-1">
+            <div class="banner-content">
+                <span class="icon" aria-hidden="true">✓</span>
+                <p>Vos informations ont bien été enregistrées !</p>
+            </div>
+        </div>
+    <?php }?>
     <div class="main-container">
         <header class="site-header" role="banner">
             <a href="index.php?action=home" class="logo-block" aria-label="Tom Troc">

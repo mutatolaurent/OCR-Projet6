@@ -75,12 +75,6 @@ class BookManager extends AbstractEntityManager
             WHERE MATCH(a.title, a.author) AGAINST(:terms IN BOOLEAN MODE)
             ORDER BY score DESC";
 
-        // $sql = "SELECT a.*, u.id as user_id, u.pseudo, u.email, u.photo as profilpict,
-        //     MATCH(a.title, a.author) AGAINST(:terms) AS score
-        //     FROM book a
-        //     INNER JOIN user u ON a.id_user = u.id
-        //     WHERE MATCH(a.title, a.author) AGAINST(:terms IN NATURAL LANGUAGE MODE)
-        //     ORDER BY score DESC";
 
         $result = $this->db->query($sql, ['terms' => $terms]);
 
@@ -189,7 +183,6 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Supprime un livre de la BD
-     * @param array $credential Informations récupérées du formulaire de modification
      * @param int îd ID du livre en BD
      */
     public function deleteBook(int $id): void
@@ -200,22 +193,6 @@ class BookManager extends AbstractEntityManager
 
         // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
         $this->db->query($sql, ['idBook' => $id]);
-    }
-
-    /**
-     * Met à jour la photo de profil utilisateur
-     * @param int $idUser Identifiant de l'utilisateur en BD
-     * @param string $avatarPathFile Chemin d'accès à la photo
-     */
-    public function updatePicture(int $idBook, string $photoPathFile): void
-    {
-
-        // Requête SQL préparée pour modification du compte en BD
-        $sql = "UPDATE book SET photo = :photo WHERE id = :idBook";
-
-        // Exécution de la requête SQL en lui passant en paramètres les valeurs des champs à insérer en BD
-        $this->db->query($sql, ['photo' => $photoPathFile, 'idBook' => $idBook]);
-
     }
 
     /**

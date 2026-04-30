@@ -6,10 +6,6 @@
  */
 ?>
 <section class="modif-infos-main-sect">
-    <?php if ($books[1]['updated'] === true): ?>
-        <span class="feedback-info" role="status" >! Vos informations ont bien été mises à jour</span>
-    <?php endif; ?>
-
     <a href="index.php?action=myAccount" class="return-link">
         <img src="images/icones/retour.svg" alt="" aria-hidden="true"/>
         <span>retour</span>
@@ -23,11 +19,10 @@
         <div class="modif-book-infos-left">
             <p>Photo</p>
             <img
-            src="<?= $books[0]->getPhoto() ?>"
+            src="<?= $books[0]->getPhoto() ? $books[0]->getPhoto() : 'images/books/placeholder.png' ?>"
             id="current-img"
             alt="Image associée au livre <?= $books[0]->getTitle() ?> de <?= $books[0]->getAuthor() ?>"
             />
-            <!-- <label for="picture" class="link-upload">Modifier</label>    -->
             <button 
                 type="button" 
                 class="link-upload" 
@@ -36,6 +31,8 @@
                 aria-label="Modifier la photo, ouvre le sélecteur de fichiers">
                 Modifier la photo
             </button>
+            <!-- <label for="picture" class="link-upload">Modifier</label> -->
+            <label for="picture" class="sr-only">Modifier la photo</label>
             <input
                 type="file"
                 name="picture"
@@ -73,7 +70,7 @@
                         type="text" 
                         name="author" 
                         id="author"
-                        aria-required=true
+                        aria-required="true"
                         <?= isset($books[1]['error']['author']) ? 'value="'.$books[1]['bookinfo']['author'].'" aria-invalid="true" aria-describedby="author-error-msg"' : 'value="'.$books[0]->getAuthor().'"' ?>
                         value="<?= isset($books[1]['error']['author']) ? $books[1]['bookinfo']['author'] : $books[0]->getAuthor() ?>" 
                     />
@@ -88,7 +85,7 @@
                     <textarea
                         name="description"
                         id="description"
-                        aria-required=true
+                        aria-required="true"
                         <?= isset($books[1]['error']['description']) ? 'aria-invalid="true" aria-describedby="descr-error-msg"' : '' ?>
                         ><?= isset($books[1]['error']['description']) ? $books[1]['bookinfo']['description'] : $books[0]->getDescription() ?></textarea>
                     <?php if (isset($books[1]['error']['description'])): ?>
@@ -99,7 +96,7 @@
                 <!-- Disponibilité du livre -->
                 <div class="champ-formulaire">
                     <label for="idstate">Disponibilité</label>
-                    <select name="idstate" id="idstate" aria-required="true>
+                    <select name="idstate" id="idstate" aria-required="true">
                     <?php foreach ($books[2] as $bookState) { ?>
                         <option 
                             value="<?= $bookState->getId() ?>" 
@@ -110,12 +107,17 @@
                     <?php } ?>
                     </select>
                 </div>
-                <button class="btn btn-filled" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir enregistrer ces modifications ?") ?>>Valider</button>
+                <!-- <button class="btn btn-filled" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir enregistrer ces modifications ?") ?>>Valider</button> -->
+                <button type="submit" class="btn btn-filled">Valider</button>
+                <!-- <?php if ($books[1]['updated'] === true): ?>
+                    <span class="feedback-info" id="success-message" role="status" >Vos informations ont bien été mises à jour</span>
+                <?php endif; ?> -->
             <!-- </form> -->
         </div>
     <!-- </div> -->
     </form>
 </section>
+
 <?php
 
 /**
@@ -124,4 +126,8 @@
  */
 require(TEMPLATE_VIEW_PATH . 'modalUpload.php') ?>
 
+<!-- Script JS qui gère la modale de prévisualisation de l'image à télécharger -->
+<script src="js/uploadPreview.js"></script>
 
+<!-- Script JS qui gère l'affichage du message de succès de l'enregistrement d'un formulaire -->
+<script src="js/displaySuccessBanner.js"></script>

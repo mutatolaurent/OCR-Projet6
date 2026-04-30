@@ -73,11 +73,6 @@ try {
             $userController->updateMyAccount();
             break;
 
-        case 'updateMyAvatar':
-            $userController = new UserController();
-            $userController->updateMyAvatar();
-            break;
-
         case 'showBookForUpdate':
             $bookController = new BookController();
             $bookController->showBookForUpdate();
@@ -86,11 +81,6 @@ try {
         case 'updateBook':
             $bookController = new BookController();
             $bookController->updateBookInfo();
-            break;
-
-        case 'updateBookPicture':
-            $bookController = new BookController();
-            $bookController->updateBookPicture();
             break;
 
         case 'deleteBook':

@@ -53,7 +53,8 @@ class UserController
         $formData['updated'] = $_SESSION['updated'] ?? false;
 
         // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
-        unset($_SESSION['error'], $_SESSION['credential'], $_SESSION['updated']);
+        // unset($_SESSION['error'], $_SESSION['credential'], $_SESSION['updated']);
+        unset($_SESSION['error'], $_SESSION['credential']);
 
 
         // On récupère toutes les informations sur ce User
@@ -138,37 +139,37 @@ class UserController
 
         // Le champ pseudo doit obligatoirement être renseigné et avoir au moins 3 caratères
         if (mb_strlen($credential['pseudo']) < PSEUDO_MIN_LENGTH) {
-            $error['pseudo'] = "! Le pseudo doit contenir au moins ".PSEUDO_MIN_LENGTH." caractères";
+            $error['pseudo'] = "Le pseudo doit contenir au moins ".PSEUDO_MIN_LENGTH." caractères";
             $hasError = true;
         }
 
         // Si le pseudo a été changé, il ne doit pas être déjà utilisé par un autre compte
         if (!$hasError && $pseudoHasChanged && $userManager->getUserByPseudo($credential['pseudo']) !== null) {
-            $error['pseudo'] = "! Ce pseudo est déjà utilisé";
+            $error['pseudo'] = "Ce pseudo est déjà utilisé";
             $hasError = true;
         }
 
         // Le champ email doit obligatoirement être renseigné
         if (!$hasError && empty($credential['email'])) {
-            $error['email'] = "! L'email est obligatoire.";
+            $error['email'] = "L'email est obligatoire.";
             $hasError = true;
         }
 
         // Le champ email doit respecter le pattern d'un email
         if (!$hasError && !filter_var(trim($credential['email']), FILTER_VALIDATE_EMAIL)) {
-            $error['email'] = "! L'email n'est pas correct.";
+            $error['email'] = "L'email n'est pas correct.";
             $hasError = true;
         }
 
         // L'email ne doit pas être déjà utilisé
         if (!$hasError && $emailHasChanged && $userManager->getUserByLogin($credential['email']) !== null) {
-            $error['email'] = "! Cet email est déjà utilisé";
+            $error['email'] = "Cet email est déjà utilisé";
             $hasError = true;
         }
 
         // Si le champ password a été modifié, il doit obligatoirement avoir un minimum de caractères
         if (!$hasError && $passwordHasChanged && mb_strlen($credential['password']) < PASSWORD_MIN_LENGTH) {
-            $error['password'] = "! Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
+            $error['password'] = "Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
             $hasError = true;
         }
 
@@ -233,81 +234,5 @@ class UserController
                 throw new Exception("Echec modification du compte utilisateur.");
             }
         }
-    }
-
-
-    /**
-     * Modification de la photo de profil d'un utilisateur
-     * @return void
-     */
-    public function updateMyAvatar(): void
-    {
-
-        // On vérifie que l'utilisateur est connecté
-        if (!isset($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
-        }
-
-        //
-        $user = $_SESSION['user'];
-
-        // RAZ du tableau des erreurs
-        $error = [];
-        $hasError = false;
-
-
-        if (!empty($_FILES['avatar']['name'])) {
-
-            // Taille max 1 Mo
-            // TODO : créer une constante dans config.php
-            $maxSize = 2 * 1024 * 1024;
-
-            if ($_FILES['avatar']['size'] > $maxSize) {
-
-                // TODO : remplacer 2 par la constante
-                $error['avatar'] = "L’image ne doit pas dépasser 2 Mo.";
-                $hasError = true;
-            }
-
-            // Types autorisés
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-            if (!$hasError && !in_array($_FILES['avatar']['type'], $allowedTypes)) {
-                $error['avatar'] = "Format d’image non autorisé (jpg, png, webp).";
-                $hasError = true;
-            }
-
-            // Si pas d’erreur → on enregistre
-            $uploadDir = 'images/users/';
-            $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
-
-            // Nom unique basé sur l'utilisateur
-            $fileName = 'user_' . $user->getId() . '.' . $extension;
-
-            // Chemin complet d'accès à la nouvelle image de profil
-            $destination = $uploadDir . $fileName;
-
-            // Transfert de l'image vers le dossier cible
-            if (!$hasError && !move_uploaded_file($_FILES['avatar']['tmp_name'], $destination)) {
-                $error['avatar'] = "Erreur lors de l’upload de l’image.";
-                $hasError = true;
-            }
-
-            // Mise à jour en BD
-            if (!$hasError) {
-
-                // Mise à jour en BD avec le chemin vers la nouvelle photo de profil
-                $userManager = new UserManager();
-                $userManager->updateAvatar($user->getId(), $destination);
-            } else {
-
-                // Init variable de session pour affichage message d'erreur lors de l'affichage du formulaire
-                $_SESSION['error'] = $error;
-            }
-
-        }
-
-        // Retour à la page de gestion de l'avatar
-        Utils::redirect("myAccount", ['zoom' => 'viewAvatar']);
-
     }
 }

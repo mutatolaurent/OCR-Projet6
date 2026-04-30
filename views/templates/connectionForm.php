@@ -18,7 +18,7 @@
                     name="email"
                     id="email"
                     placeholder="nom@exemple.com"
-                    aria-required=true
+                    aria-required="true"
                     <?= isset($formData['credential']['email']) ? 'value="'.$formData['credential']['email'].'"' : '' ?>
                     <?= isset($formData['error']['email']) ? 'aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
                 />
@@ -36,13 +36,13 @@
                     name="password" 
                     id="password"
                     placeholder="Au moins <?= PASSWORD_MIN_LENGTH ?> caractères"
-                    aria-required=true
+                    aria-required="true"
                     aria-describedby="pwd-hint"
                     <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
                     <?= isset($formData['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                 />
-                <p id="pwd-hint" class="sr-only"><?= $formData['error']['password'] ?></p>
                 <?php if (isset($formData['error']['password'])): ?>
+                    <p id="pwd-hint" class="sr-only"><?= $formData['error']['password'] ?></p>
                     <span id="password-error-msg" class="text-error"><?= $formData['error']['password'] ?></span>
                 <?php endif; ?>
             </div>
