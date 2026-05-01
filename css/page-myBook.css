@@ -13,7 +13,7 @@
 .return-link {
   text-decoration: none;
   color: var(--gris-text);
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
 }
 
@@ -65,15 +65,8 @@
   color: var(--gris-texte);
   text-align: right;
   font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-size: 0.875em;
   text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: none;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
   text-underline-position: from-font;
   cursor: pointer;
   background-color: white;

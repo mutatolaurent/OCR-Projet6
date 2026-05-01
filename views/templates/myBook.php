@@ -7,7 +7,7 @@
 ?>
 <section class="modif-infos-main-sect">
     <a href="index.php?action=myAccount" class="return-link">
-        <img src="images/icones/retour.svg" alt="" aria-hidden="true"/>
+        <img src="images/icones/retour.svg" alt="Lien de retour vers mon compte" aria-hidden="true"/>
         <span>retour</span>
     </a>
 
@@ -72,7 +72,6 @@
                         id="author"
                         aria-required="true"
                         <?= isset($books[1]['error']['author']) ? 'value="'.$books[1]['bookinfo']['author'].'" aria-invalid="true" aria-describedby="author-error-msg"' : 'value="'.$books[0]->getAuthor().'"' ?>
-                        value="<?= isset($books[1]['error']['author']) ? $books[1]['bookinfo']['author'] : $books[0]->getAuthor() ?>" 
                     />
                     <?php if (isset($books[1]['error']['author'])): ?>
                         <span id="author-error-msg" class="text-error"><?= $books[1]['error']['author'] ?></span>

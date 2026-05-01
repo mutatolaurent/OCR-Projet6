@@ -20,7 +20,6 @@
   align-items: center;
   width: 322px;
   height: 50px;
-  /* box-sizing: border-box; */
   border-radius: var(--radius);
   border: 1px solid #f0f0f0;
   background: #fff;
@@ -51,9 +50,8 @@
 
 /* Champ de saisie des critères de recherche */
 .search-input {
-  color: var(--Gris-texte, #a6a6a6);
-  font-size: 14px;
-  font-weight: 400;
+  color: var(--gris-texte);
+  font-size: 0.875em;
   border: none;
   outline: none;
   width: 100%;
@@ -61,13 +59,11 @@
 }
 
 /* Style du placeholder de la balise INPUT */
-.search-form input::placeholder {
-  color: var(--Gris-texte, #a6a6a6);
-  font-family: Inter;
-  font-size: 14px;
-  /* font-style: normal; */
-  font-weight: 400;
-}
+/* .search-form input::placeholder { */
+/* color: var(--gris-texte); */
+/* font-family: Inter; */
+/* font-weight: 400; */
+/* } */
 
 .search-info strong {
   font-weight: 600;

@@ -7,7 +7,7 @@
 ?>
 <section class="modif-infos-main-sect">
     <a href="index.php?action=myAccount" class="return-link">
-        <img src="images/icones/retour.svg" alt="" aria-hidden="true" />
+        <img src="images/icones/retour.svg" alt="Lien de retour vers mon compte" aria-hidden="true" />
         <span>retour</span>
     </a>
     <h1>Ajouter un nouveau livre</h1>

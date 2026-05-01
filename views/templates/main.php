@@ -33,14 +33,13 @@ $action = Utils::request('action', 'home');
         </div>
     <?php }?>
     <div class="main-container">
-        <header class="site-header" role="banner">
+        <header class="site-header">
             <a href="index.php?action=home" class="logo-block" aria-label="Tom Troc">
                 <div class="logo-square">
                     <img
                         src="images/logo/logoTT.svg"
                         alt="Logo Tom Troc"
                         class="logo-svg"
-                        aria-hidden=”true”
                     />
                 </div>
                 <span class="logo-text">Tom Troc</span>
@@ -51,7 +50,7 @@ $action = Utils::request('action', 'home');
                 <img src="images/icones/icon-menu.svg" alt="Menu" />
             </label>
 
-            <nav class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>" aria-label="Main navigation" role="navigation">
+            <nav class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>" aria-label="Main navigation">
 
                 <!-- Point de menu Accueil-->
                 <?php if ($action === "home") { ?>
@@ -82,23 +81,23 @@ $action = Utils::request('action', 'home');
                     <span class="nav-link complex-link active">
                         <img
                             src="images/icones/messagerie.svg"
-                            alt=""
+                            alt="Icone qui représente une messagerie de type chat"
                             class="messagerie-icon"
                             aria-hidden="true"
                         />
                         <span class="text-wrapper" data-text="Messagerie" aria-current="page">Messagerie</span>
-                        <div class="msg-counter">3</div>
+                        <span class="msg-counter">3</span>
                     </span>
                 <?php } else { ?>
                     <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=showMyChatRoom' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link" aria-label="Messages échangés avec les autres membres du site">
                         <img
                             src="images/icones/messagerie.svg"
-                            alt=""
+                            alt="Icone qui représente une messagerie de type chat"
                             class="messagerie-icon"
                             aria-hidden="true"
                         />
                         <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
-                        <div class="msg-counter">3</div>
+                        <span class="msg-counter">3</span>
                     </a>
                 <?php } ?> 
 
@@ -108,7 +107,7 @@ $action = Utils::request('action', 'home');
                     <span class="nav-link complex-link active">
                         <img
                             src="images/icones/mon-compte.svg"
-                            alt=""
+                            alt="Icone qui représente un compte utilisateur"
                             class="compte-icon"
                             aria-hidden="true"
                         />
@@ -118,7 +117,7 @@ $action = Utils::request('action', 'home');
                     <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=myAccount' : 'index.php?action=connectionForm' ?>" class="nav-link complex-link" aria-label="Les informations de votre compte">
                         <img
                             src="images/icones/mon-compte.svg"
-                            alt=""
+                            alt="Icone qui représente un compte utilisateur"
                             class="compte-icon"
                             aria-hidden="true"
                         />

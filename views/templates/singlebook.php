@@ -10,7 +10,7 @@
 <section class="single-livre-container">
     <img
         class="livre-image"
-        src="<?= $books[0]->getPhoto() ?>"
+        src="<?= $books[0]->getPhoto() ? $books[0]->getPhoto() : 'images/books/placeholder.png' ?>"
         alt="Photo associée au livre <?= $books[0]->getTitle() ?> écrit par <?= $books[0]->getAuthor() ?>"
     />
     <div class="livre-info">
@@ -29,8 +29,7 @@
             <img
                 class="img-owner"
                 src="<?= $books[0]->getOwner()->getPhoto() ?>"
-                alt=""
-                aria-hidden="true"
+                alt="Avatar du propriétaire"
             />
             <span class="pseudo-owner"><?= $books[0]->getOwner()->getPseudo() ?></span>
         </a>

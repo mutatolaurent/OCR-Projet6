@@ -5,18 +5,25 @@
   display: flex;
   padding-inline: 150px;
   background-color: var(--gris-clair);
+  /* min-height: 0; */
+  height: calc(100vh - 80px - 61px);
+  overflow: hidden; /* Empêche le scroll global de la page */
 }
 
+/* Container de la liste des conversations */
 .sect-thread {
   display: flex;
   flex-direction: column;
   padding-top: 55px;
   background-color: var(--background-light);
   width: 308px;
+  /* On ajoute le scroll interne */
+  overflow-y: auto;
+  height: 100%;
 }
 
 .sect-thread h1 {
-  font-size: 26px;
+  font-size: 1.625em;
   padding-left: 34px;
   padding-bottom: 27px;
 }
@@ -38,7 +45,7 @@
   padding-left: 12px;
   justify-content: center;
   flex: 1; /* permet au texte de prendre tout l’espace restant */
-  min-width: 0; /* ← indispensable pour que l’ellipse fonctionne dans un flex */
+  min-width: 0; /* indispensable pour que l’ellipse fonctionne dans un flex */
 }
 
 .thread-info {
@@ -47,30 +54,35 @@
 }
 
 .thread-info .thread-owner {
-  font-size: 14px;
+  font-size: 0.875em;
   color: var(--gris-fonc);
 }
 
 .thread-info .thread-time {
-  font-size: 12px;
+  font-size: 0.75em;
   color: var(--gris-fonc);
 }
 
 .thread-context .thread-last-msg {
-  font-size: 12px;
+  font-size: 0.75em;
   color: var(--gris-texte);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* Container des bulles de messages */
 .sect-bubbles {
   display: flex;
   flex: 1;
   flex-direction: column;
   background-color: var(--gris-clair);
   padding-left: 44px;
-  height: calc(100vh - 61px - 80px); /* 61px = footer , 80px = headeer */
+  /* height: calc(100vh - 61px - 80px); */
+  /* min-height: 0; */
+  /* Plus besoin du calc ici, on prend 100% du parent verrouillé */
+  height: 100%;
+  min-width: 0;
 }
 
 .contact-info {
@@ -87,12 +99,14 @@
 }
 
 .bubbles-zone {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
   overflow-y: auto;
   display: flex;
-  flex-direction: column-reverse; /* messages en bas */
+  flex-direction: column-reverse;
   gap: 12px;
-  margin-bottom: 98px;
+  /* margin-bottom: 98px; */
 }
 
 /* Bloc message (gauche ou droite) */
@@ -140,7 +154,7 @@
 /* Date + heure */
 .msg-date,
 .msg-time {
-  font-size: 12px;
+  font-size: 0.75em;
   color: var(--gris-texte);
 }
 
@@ -149,7 +163,7 @@
   max-width: 500px;
   padding: 10px 18px 9px 18px;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 0.75em;
   line-height: normal;
   word-wrap: break-word;
 }
@@ -158,20 +172,21 @@
 .bubble-left {
   align-self: flex-start;
   background: white;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--bleu-border-border-left);
 }
 
 /* Messages émetteur (à droite) */
 .bubble-right {
   align-self: flex-end;
-  background: #edf2f6;
-  border: 1px solid #d8dfe6;
+  background: var(--bleu-input);
+  border: 1px solid var(--bleu-border-bubble-right);
 }
 
 .msg-input-zone {
   display: flex;
   gap: 21px;
   height: 49px;
+  margin-top: 98px;
   margin-bottom: 98px;
 }
 
@@ -182,6 +197,6 @@
   flex: 1;
   padding-left: 42px;
   color: var(--gris-texte);
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
 }

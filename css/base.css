@@ -23,6 +23,18 @@
   --footer-height: 61px;
   --radius: 6px;
   --rouge-text-error: #e60000;
+  --bleu-input: #edf2f6;
+  --rouge-border-error: #f0f0f0;
+  --bleu-border-bubble-right: #d8dfe6;
+  --bleu-border-border-left: #e5e5e5;
+  --rouge-delete-link: #cb2d2d;
+  --em-for-36px: 2.25em;
+  --em-for-32px: 2em;
+  --em-for-16px: 1em;
+  --em-for-14px: 0.875em;
+  --em-for-12px: 0.75em;
+  --em-for-10px: 0.625em;
+  --em-for-8px: 0.5em; /* ATTENTION trop petit pour WCAG AA */
 }
 
 /* Styles globaux au body de la pa */
@@ -44,7 +56,7 @@ body {
 /* Titre principale de la page */
 h1 {
   font-family: "Playfair Display";
-  font-size: 2.25em;
+  font-size: var(--em-for-36px);
   font-weight: 400;
 }
 
@@ -53,7 +65,7 @@ h2 {
   color: var(--gris-fonc, #292929);
   text-align: center;
   font-family: "Playfair Display";
-  font-size: 2em;
+  font-size: var(--em-for-32px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -63,7 +75,7 @@ h2 {
 h3 {
   color: var(--gris-texte);
   font-family: Inter;
-  font-size: 1em;
+  font-size: var(--em-for-16px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -73,7 +85,7 @@ h3 {
 h4 {
   color: var(--Gris-fonc);
   font-family: Inter;
-  font-size: 0.5em;
+  font-size: var(--em-for-8px);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -84,7 +96,7 @@ h4 {
 p {
   color: var(--gris-fonc, #292929);
   /* font-family: Inter; */
-  font-size: 1em;
+  font-size: var(--em-for-16px);
   font-style: normal;
   font-weight: 300;
   line-height: normal;
@@ -118,7 +130,7 @@ thead tr {
 th {
   color: var(--gris-fonc);
   font-family: "Inter", sans-serif;
-  font-size: 0.5em; /* ATTENTION trop petit pour WCAG AA */
+  font-size: var(--em-for-8px); /* ATTENTION trop petit pour WCAG AA */
   font-weight: 600;
   letter-spacing: 0.64px;
   padding-bottom: 9px;
@@ -139,7 +151,7 @@ tbody tr:nth-child(even) {
 tbody td {
   color: var(--gris-fonc, #292929);
   font-family: "Inter", sans-serif;
-  font-size: 0.75em;
+  font-size: var(--em-for-12px);
   font-weight: 400;
 }
 

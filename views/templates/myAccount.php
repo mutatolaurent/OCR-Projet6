@@ -25,10 +25,11 @@
                     type="button" 
                     class="link-upload" 
                     id="trigger-upload" 
-                    aria-controls="picture"
+                    aria-controls="avatar"
                     aria-label="Modifier une image, ouvre le sélecteur de fichiers">
                     Modifier
                 </button>
+                <label for="avatar" class="sr-only">Modifier votre avatar</label>
                 <input
                     type="file"
                     name="avatar"
@@ -85,12 +86,10 @@
                         id="password"
                         aria-required="true"
                         placeholder="******"
-                        aria-describedby="pwd-hint"
                         value="<?= isset($user[1]['error']['password']) ? $user[1]['credential']['password'] : '' ?>"
                         <?= isset($user[1]['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['password'])): ?>
-                        <p id="pwd-hint" class="sr-only"><?= $user[1]['error']['password'] ?></p>
                         <span id="password-error-msg" class="text-error"><?= $user[1]['error']['password'] ?></span>
                     <?php endif; ?>
                 </div>
@@ -104,12 +103,10 @@
                         name="pseudo"
                         id="pseudo"
                         aria-required="true"
-                        aria-describedby="pseudo-hint"
                         value="<?= isset($user[1]['error']['pseudo']) ? $user[1]['credential']['pseudo'] : $user[0]->getPseudo() ?>"
                         <?= isset($user[1]['error']['pseudo']) ? 'aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['pseudo'])): ?>
-                        <p id="pseudo-hint" class="sr-only"><?= $user[1]['error']['pseudo'] ?></p>
                         <span id="pseudo-error-msg" class="text-error"><?= $user[1]['error']['pseudo'] ?></span>
                     <?php endif; ?>
                 </div>
@@ -125,6 +122,7 @@
     <!-- </section> -->
 
     <section class="mon-cpt-sect2">
+        <h2 class="sr-only">Liste des livres associés à ce compte utilisateur</h2>
     <table>
         <caption class="sr-only">
             Liste des livres partagés par le compte utilisateur
@@ -153,10 +151,10 @@
                         <td><?= $book->getAuthor() ?></td>
 
                         <td class="description-td"><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
-                        <td><span class="book-state-<?= $book->getIdState() ?>"><?= $book->getStateLabel() ?></span></td>
+                        <td><span class="book-state book-state-<?= $book->getIdState() ?>"><?= $book->getStateLabel() ?></span></td>
                         <td>
-                            <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="edit-link">Editer</a>
-                            <a href="index.php?action=deleteBook&id=<?= $book->getId() ?>" class="delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>Supprimer</a>
+                            <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="action-link edit-link">Editer</a>
+                            <a href="index.php?action=deleteBook&id=<?= $book->getId() ?>" class="action-link delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>Supprimer</a>
                         </td>
                     </tr>
                 <?php } ?>

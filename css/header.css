@@ -77,7 +77,7 @@
   text-decoration: none;
   color: black;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 0.875em;
   gap: 4px;
 }
 
@@ -116,7 +116,7 @@
   border-radius: 6.75px;
   background: var(--gris-fonc);
   color: var(--gris-clair);
-  font-size: 8.25px;
+  font-size: 0.516em;
   font-weight: 700;
   display: flex;
   align-items: center;

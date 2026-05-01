@@ -13,7 +13,7 @@
                 <a href="index.php?action=showMyChatRoom&idContact=<?= $thread['contact']->getId() ?>" class="nav-thread <?= $thread['threadActif'] ? 'active-thread' : '' ?>">
                     <img
                         class="img-owner"
-                        src="<?= $thread['contact']->getPhoto() ?>"
+                        src="<?= $thread['contact']->getPhoto() ? $thread['contact']->getPhoto() : 'images/books/placeholder.png' ?>"
                         alt="Image de l'avatar du correspondant"
                     />
                     <div class="thread-context">
@@ -29,11 +29,12 @@
     </section>
 
     <section class="sect-bubbles">
+        <h2 class="sr-only">Zone d'affichage des messages</h2>
         <?php if (!empty($chatroom[1]['chatcontact'])) {?>
             <div class="contact-info">
                 <img
                     class="img-owner"
-                    src="<?= $chatroom[1]['chatcontact']->getPhoto() ?>"
+                    src="<?= $chatroom[1]['chatcontact']->getPhoto() ? $chatroom[1]['chatcontact']->getPhoto() : 'images/books/placeholder.png' ?>"
                     alt="Image de l'avatar du correspondant"
                 />
                 <span class="contact-pseudo"><?= $chatroom[1]['chatcontact']->getPseudo() ?></span>
@@ -74,6 +75,7 @@
             <?php } ?>
         </div>
         <form action="<?= !empty($chatroom[1]['chatcontact']) ? 'index.php?action=sendMessage&idContact='.$chatroom[1]['chatcontact']->getId() : '#' ?>" method="POST" class="msg-input-zone">
+            <label for="content" class="sr-only">Tapez votre message ici</label>
             <input
                 type="text"
                 name="content"

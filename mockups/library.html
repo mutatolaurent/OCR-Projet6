@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Innovation</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="js/checkUnreadMessages.js"></script>
+  </head>
+
+  <body>
+    <div class="main-container">
+      <header class="site-header">
+        <a
+          href="index.php?action=home"
+          class="logo-block"
+          aria-label="Tom Troc"
+        >
+          <div class="logo-square">
+            <img
+              src="images/logo/logoTT.svg"
+              alt="Logo Tom Troc"
+              class="logo-svg"
+            />
+          </div>
+          <span class="logo-text">Tom Troc</span>
+        </a>
+
+        <input type="checkbox" id="menu-cb" />
+        <label for="menu-cb" class="burger-menu">
+          <img src="images/icones/icon-menu.svg" alt="Menu" />
+        </label>
+
+        <nav class="navbar" aria-label="Main navigation">
+          <!-- Point de menu Accueil-->
+          <a
+            href="index.php?action=home"
+            class="nav-link"
+            aria-label="Page d'accueil du site"
+          >
+            <span data-text="Accueil">Accueil</span>
+          </a>
+
+          <!-- Point de menu Nos livres -->
+          <a
+            href="index.php?action=library"
+            class="nav-link"
+            aria-label="Bibliothèque des livres partagés sur ce site"
+          >
+            <span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            >
+          </a>
+
+          <!-- Point de menu Messagerie -->
+          <a
+            href="index.php?action=showMyChatRoom"
+            class="nav-link complex-link"
+            aria-label="Messages échangés avec les autres membres du site"
+          >
+            <img
+              src="images/icones/messagerie.svg"
+              alt="Icone qui représente une messagerie de type chat"
+              class="messagerie-icon"
+              aria-hidden="true"
+            />
+            <span class="text-wrapper" data-text="Messagerie">Messagerie</span>
+            <div class="msg-counter">3</div>
+          </a>
+
+          <!-- Point de menu Mon compte -->
+          <a
+            href="index.php?action=myAccount"
+            class="nav-link complex-link"
+            aria-label="Les informations de votre compte"
+          >
+            <img
+              src="images/icones/mon-compte.svg"
+              alt="Icone qui représente un compte utilisateur"
+              class="compte-icon"
+              aria-hidden="true"
+            />
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
+          </a>
+
+          <!-- Point de menu Connexion -->
+          <a
+            href="index.php?action=disconnectUser"
+            class="nav-link"
+            aria-label="Connexion / déconnexion à votre compte"
+          >
+            <span data-text="Connexion">Déconnexion</span>
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <nav class="breadcrump" aria-label="breadcrumb">
+          <a href="index.php?action=library">Nos livres à l'échange</a> >
+          <span aria-current="page">Innovation</span>
+        </nav>
+        <section class="single-livre-container">
+          <img
+            class="livre-image"
+            src="images/books/innovation.jpg"
+            alt="Photo associée au livre Innovation écrit par Matt Ridley"
+          />
+          <div class="livre-info">
+            <h1>Innovation</h1>
+            <h2>Matt Ridley</h2>
+            <img
+              class="line-separator"
+              src="images/icones/separator1.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <h3>DESCRIPTION</h3>
+            <p>
+              Dans cet essai magistral, Matt Ridley analyse l'histoire de
+              l'innovation humaine et démontre qu'elle n'est pas le fruit d'un
+              génie isolé, mais un processus collectif et évolutif. L'innovation
+              survient lorsque les idées se rencontrent et "font l'amour",
+              créant ainsi de nouvelles solutions aux problèmes de l'humanité.
+              L'auteur parcourt des millénaires de progrès, de l'invention de
+              l'agriculture à l'intelligence artificielle, en passant par la
+              machine à vapeur et les vaccins. Il souligne l'importance de la
+              liberté d'échange et de la collaboration pour favoriser la
+              créativité. Ridley plaide pour une vision optimiste du futur,
+              affirmant que tant que nous permettrons aux idées de circuler
+              librement, nous trouverons les moyens de surmonter les défis
+              énergétiques, environnementaux et sanitaires auxquels nous faisons
+              face.
+            </p>
+            <h3>PROPRIETAIRE</h3>
+            <a href="index.php?action=owner&id=1" class="picto-owner">
+              <img
+                class="img-owner"
+                src="images/users/nathalire.jpg"
+                alt=""
+                aria-hidden="true"
+              />
+              <span class="pseudo-owner">Nathalire</span>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=1"
+              class="btn btn-filled"
+            >
+              <span>Envoyez un message</span>
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <nav class="main-footer" aria-label="footer navigation">
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Mentions légales</a>
+          <a href="index.php?action=home" aria-label="Page d'accueil du site"
+            >Tom Troc©</a
+          >
+          <a href="index.php?action=home" aria-label="Page d'accueil du site">
+            <img src="images/logo/logoTT-vert.svg" alt="Logo Tom Troc vert" />
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>

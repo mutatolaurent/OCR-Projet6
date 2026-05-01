@@ -19,12 +19,10 @@
                 id="pseudo"
                 placeholder="ex: YvreDeLivres (<?= PSEUDO_MIN_LENGTH ?> caractères minimum)"
                 aria-required="true"
-                aria-describedby="pseudo-hint"
                 <?= isset($formData['credential']['pseudo']) ? 'value="'.$formData['credential']['pseudo'].'"' : '' ?>
                 <?= isset($formData['error']['pseudo']) ? 'aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
             />
             <?php if (isset($formData['error']['pseudo'])): ?>
-                <p id="pseudo-hint" class="sr-only"><?= $formData['error']['pseudo'] ?></p>
                 <span id="pseudo-error-msg" class="text-error"><?= $formData['error']['pseudo'] ?></span>
             <?php endif; ?>
         </div>
@@ -57,12 +55,10 @@
                 id="password"
                 placeholder="Au moins <?= PASSWORD_MIN_LENGTH ?> caractères"
                 aria-required="true"
-                aria-describedby="pwd-hint"
                 <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
                 <?= isset($formData['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
             />
             <?php if (isset($formData['error']['password'])): ?>
-                <p id="pwd-hint" class="sr-only"><?= $formData['error']['password'] ?></p>
                 <span id="password-error-msg" class="text-error"><?= $formData['error']['password'] ?></span>
             <?php endif; ?>
         </div>

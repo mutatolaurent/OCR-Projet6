@@ -11,10 +11,12 @@
             <button type="submit" class="search-btn">
                 <img src="images/icones/search.svg" alt="Rechercher" />
             </button>
+            <label for="search-query" class="sr-only">Rechercher un livre</label>
             <input
                 class="search-input"
                 type="search"
                 name="search-query"
+                id="search-query"
                 placeholder="Rechercher un livre"
                 aria-label="Rechercher un livre.."
             />

@@ -41,15 +41,9 @@
   color: var(--gris-texte);
   text-align: center;
   font-family: Inter;
-  font-size: 14px;
+  font-size: 0.875em;
   font-style: normal;
-  font-weight: 400;
-  line-height: normal;
   text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: none;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
   text-underline-position: from-font;
   cursor: pointer;
   background-color: white;
@@ -63,7 +57,7 @@
 .info-upload {
   color: red;
   font-family: Inter;
-  font-size: 12px;
+  font-size: 0.75em;
   font-style: normal;
   font-weight: 400;
   min-height: 12px;
@@ -133,56 +127,35 @@
 
 /* sticker état des livres */
 /* Disponible */
-.book-state-2 {
+.book-state {
   display: inline-flex;
   padding: 3.698px 13.313px;
   border-radius: 29.583px;
-  background: #6dc5a1;
   color: #fff;
   font-size: 8.875px;
   font-weight: 500;
+}
+
+.book-state-2 {
+  background: #6dc5a1;
 }
 
 /* Non Disponible */
 .book-state-1 {
-  display: inline-flex;
-  padding: 3.698px 13.313px;
-  border-radius: 29.583px;
   background: #c56d6d;
-  color: #fff;
-  font-size: 8.875px;
-  font-weight: 500;
 }
 
 /* Style de liens spécifiques */
+.action-link {
+  font-size: 0.75rem;
+  text-underline-position: from-font;
+}
 .edit-link {
   color: var(--gris-fonc);
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: none;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
-  text-underline-position: from-font;
 }
 
 .delete-link {
-  color: #cb2d2d;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: none;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
-  text-underline-position: from-font;
+  color: var(--rouge-delete-link);
 }
 
 /* Pour centrer le bouton d'ajout d'un nouveau livre */

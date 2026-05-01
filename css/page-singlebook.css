@@ -3,7 +3,6 @@
  */
 .breadcrump {
   padding: 16px 150px 16px 150px;
-  /* width: 100%; */
   background-color: var(--gris-clair);
 }
 
@@ -11,18 +10,16 @@
 .breadcrump span {
   text-decoration: none;
   color: var(--gris-text);
-  font-family: Inter;
-  font-size: 12px;
+  /* font-family: Inter; */
+  font-size: 0.75em;
   font-weight: 300;
 }
 
 .single-livre-container {
   display: flex;
-  /* width: 100%; */
 }
 
 .single-livre-container .livre-image {
-  /* display: flex; */
   width: 720px;
   height: auto;
   object-fit: cover;
@@ -44,8 +41,7 @@
   padding-bottom: 32.5px;
   color: var(--gris-texte);
   font-family: Inter;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 1em;
   text-align: left;
 }
 
@@ -53,7 +49,7 @@
   padding-bottom: 32.5px;
   color: var(--gris-fonc);
   font-family: Inter;
-  font-size: 11px; /* 8px dans la spec mais trop petit pour WCAG AA */
+  font-size: 0.5em; /* Trop petit pour WCAG AA */
   font-weight: 600;
   letter-spacing: 0.64px;
 }
@@ -80,7 +76,6 @@
   border-radius: 114px;
   background: #fff;
   height: 60px;
-  /* align-self: flex-start; */
   width: fit-content;
   text-decoration: none;
   position: relative;
@@ -98,13 +93,12 @@
   background: #d9d9d9;
   object-fit: cover;
   flex-shrink: 0;
-  /* transition: filter 0.3s ease;  */
 }
 
 .pseudo-owner {
   color: var(--gris-fonc);
-  font-family: Inter;
-  font-size: 14px;
+  /* font-family: Inter; */
+  font-size: 0.875em;
   font-weight: 400;
   font-weight: 400;
 }

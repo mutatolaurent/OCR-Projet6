@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messagerie</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="js/checkUnreadMessages.js"></script>
+  </head>
+
+  <body>
+    <div class="main-container">
+      <header class="site-header">
+        <a
+          href="index.php?action=home"
+          class="logo-block"
+          aria-label="Tom Troc"
+        >
+          <div class="logo-square">
+            <img
+              src="images/logo/logoTT.svg"
+              alt="Logo Tom Troc"
+              class="logo-svg"
+            />
+          </div>
+          <span class="logo-text">Tom Troc</span>
+        </a>
+
+        <input type="checkbox" id="menu-cb" />
+        <label for="menu-cb" class="burger-menu">
+          <img src="images/icones/icon-menu.svg" alt="Menu" />
+        </label>
+
+        <nav class="navbar" aria-label="Main navigation">
+          <!-- Point de menu Accueil-->
+          <a
+            href="index.php?action=home"
+            class="nav-link"
+            aria-label="Page d'accueil du site"
+          >
+            <span data-text="Accueil">Accueil</span>
+          </a>
+
+          <!-- Point de menu Nos livres -->
+          <a
+            href="index.php?action=library"
+            class="nav-link"
+            aria-label="Bibliothèque des livres partagés sur ce site"
+          >
+            <span data-text="Nos livres à l'échange"
+              >Nos livres à l'échange</span
+            >
+          </a>
+
+          <!-- Point de menu Messagerie -->
+          <span class="nav-link complex-link active">
+            <img
+              src="images/icones/messagerie.svg"
+              alt="Icone qui représente une messagerie de type chat"
+              class="messagerie-icon"
+              aria-hidden="true"
+            />
+            <span
+              class="text-wrapper"
+              data-text="Messagerie"
+              aria-current="page"
+              >Messagerie</span
+            >
+            <span class="msg-counter">3</span>
+          </span>
+
+          <!-- Point de menu Mon compte -->
+          <a
+            href="index.php?action=myAccount"
+            class="nav-link complex-link"
+            aria-label="Les informations de votre compte"
+          >
+            <img
+              src="images/icones/mon-compte.svg"
+              alt="Icone qui représente un compte utilisateur"
+              class="compte-icon"
+              aria-hidden="true"
+            />
+            <span class="text-wrapper" data-text="Mon compte">Mon compte</span>
+          </a>
+
+          <!-- Point de menu Connexion -->
+          <a
+            href="index.php?action=disconnectUser"
+            class="nav-link"
+            aria-label="Connexion / déconnexion à votre compte"
+          >
+            <span data-text="Connexion">Déconnexion</span>
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="msg-container">
+          <section class="sect-thread">
+            <h1>Messagerie</h1>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=13"
+              class="nav-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/users/avatar_13.webp"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">mutato63</p>
+                  <p class="thread-time">29.04</p>
+                </div>
+                <p class="thread-last-msg">Un petit message pour le fun !</p>
+              </div>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=12"
+              class="nav-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/users/avatar_12.webp"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">mutato62</p>
+                  <p class="thread-time">29.04</p>
+                </div>
+                <p class="thread-last-msg">Hello comment ca va toi ?</p>
+              </div>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=11"
+              class="nav-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/users/avatar_11.webp"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">mutato61</p>
+                  <p class="thread-time">26.04</p>
+                </div>
+                <p class="thread-last-msg">toujours là ?</p>
+              </div>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=8"
+              class="nav-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/books/placeholder.png"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">mutato</p>
+                  <p class="thread-time">25.04</p>
+                </div>
+                <p class="thread-last-msg">Salut tu vas bien ?</p>
+              </div>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=1"
+              class="nav-thread active-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/users/nathalire.jpg"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">Nathalire</p>
+                  <p class="thread-time">11:36</p>
+                </div>
+                <p class="thread-last-msg">Bien reçu</p>
+              </div>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=3"
+              class="nav-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/users/alexlecture.jpg"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">SerialLiseuse</p>
+                  <p class="thread-time">28.04</p>
+                </div>
+                <p class="thread-last-msg">nouveau test de message</p>
+              </div>
+            </a>
+            <a
+              href="index.php?action=showMyChatRoom&idContact=4"
+              class="nav-thread"
+            >
+              <img
+                class="img-owner"
+                src="images/users/alexlecture.jpg"
+                alt="Image de l'avatar du correspondant"
+              />
+              <div class="thread-context">
+                <div class="thread-info">
+                  <p class="thread-member">YvreDeLivres</p>
+                  <p class="thread-time">25.04</p>
+                </div>
+                <p class="thread-last-msg">bon on y va ou pas ?</p>
+              </div>
+            </a>
+          </section>
+
+          <section class="sect-bubbles">
+            <h2 class="sr-only">Zone d'affichage des messages</h2>
+            <div class="contact-info">
+              <img
+                class="img-owner"
+                src="images/users/nathalire.jpg"
+                alt="Image de l'avatar du correspondant"
+              />
+              <span class="contact-pseudo">Nathalire</span>
+            </div>
+
+            <div class="bubbles-zone">
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">01.05 11:36</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">Bien reçu</div>
+              </div>
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/nathalire.jpg"
+                    class="msg-avatar"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="msg-date">01.05 11:35</span>
+                  <!-- <span class="msg-time">10:42</span> -->
+                </div>
+                <div class="bubble bubble-left">
+                  Test d&#039;un nouveau message
+                </div>
+              </div>
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/nathalire.jpg"
+                    class="msg-avatar"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="msg-date">26.04 21:29</span>
+                  <!-- <span class="msg-time">10:42</span> -->
+                </div>
+                <div class="bubble bubble-left">Allez, ! encore 1</div>
+              </div>
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/nathalire.jpg"
+                    class="msg-avatar"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="msg-date">26.04 21:29</span>
+                  <!-- <span class="msg-time">10:42</span> -->
+                </div>
+                <div class="bubble bubble-left">
+                  Salut, voici un nouveau message pour toi
+                </div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">26.04 08:52</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">Quoi de neuf ?</div>
+              </div>
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/nathalire.jpg"
+                    class="msg-avatar"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="msg-date">26.04 08:51</span>
+                  <!-- <span class="msg-time">10:42</span> -->
+                </div>
+                <div class="bubble bubble-left">Message bien reçu</div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">25.04 21:10</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">dernier message</div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">25.04 20:50</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">
+                  encore un nouveau message svp
+                </div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">25.04 20:47</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">
+                  test d&#039;envoi d&#039;un nouveau message
+                </div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">25.04 20:41</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">test nouveau message</div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">25.04 20:36</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">test nouveau message</div>
+              </div>
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/nathalire.jpg"
+                    class="msg-avatar"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="msg-date">24.04 17:29</span>
+                  <!-- <span class="msg-time">10:42</span> -->
+                </div>
+                <div class="bubble bubble-left">
+                  Salut ! As-tu terminé "Le Nom du Vent" ? Je serais curieux
+                  d’avoir ton avis.
+                </div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">24.04 17:29</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">
+                  Oui, j’ai adoré. L’univers est incroyable et Kvothe est
+                  fascinant.
+                </div>
+              </div>
+              <div class="bubble-block left">
+                <div class="msg-meta">
+                  <img
+                    src="images/users/nathalire.jpg"
+                    class="msg-avatar"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="msg-date">24.04 17:29</span>
+                  <!-- <span class="msg-time">10:42</span> -->
+                </div>
+                <div class="bubble bubble-left">
+                  Super ! Je pensais commencer le tome 2 bientôt.
+                </div>
+              </div>
+              <div class="bubble-block right">
+                <div class="msg-meta">
+                  <span class="msg-date">24.04 17:29</span>
+                  <!-- <span class="msg-time">10:43</span> -->
+                </div>
+                <div class="bubble bubble-right">
+                  Tu vas te régaler, il est encore meilleur.
+                </div>
+              </div>
+            </div>
+            <form
+              action="index.php?action=sendMessage&idContact=1"
+              method="POST"
+              class="msg-input-zone"
+            >
+              <label for="content" class="sr-only"
+                >Tapez votre message ici</label
+              >
+              <input
+                type="text"
+                name="content"
+                id="content"
+                class="msg-input"
+                placeholder="Tapez votre message ici"
+              />
+              <button class="btn btn-filled">Envoyer</button>
+            </form>
+          </section>
+        </div>
+      </main>
+      <footer>
+        <nav class="main-footer" aria-label="footer navigation">
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Mentions légales</a>
+          <a href="index.php?action=home" aria-label="Page d'accueil du site"
+            >Tom Troc©</a
+          >
+          <a href="index.php?action=home" aria-label="Page d'accueil du site">
+            <img src="images/logo/logoTT-vert.svg" alt="Logo Tom Troc vert" />
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
