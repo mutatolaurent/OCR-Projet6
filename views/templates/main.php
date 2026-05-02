@@ -34,7 +34,7 @@ $action = Utils::request('action', 'home');
     <?php }?>
     <div class="main-container">
         <header class="site-header">
-            <a href="index.php?action=home" class="logo-block" aria-label="Tom Troc">
+            <a href="index.php?action=home" class="logo-block" aria-label="Logo Tom Troc">
                 <div class="logo-square">
                     <img
                         src="images/logo/logoTT.svg"
@@ -50,7 +50,7 @@ $action = Utils::request('action', 'home');
                 <img src="images/icones/icon-menu.svg" alt="Menu" />
             </label>
 
-            <nav class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>" aria-label="Main navigation">
+            <nav class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>" aria-label="Menu principal de navigation">
 
                 <!-- Point de menu Accueil-->
                 <?php if ($action === "home") { ?>
@@ -127,7 +127,7 @@ $action = Utils::request('action', 'home');
                 
 
                 <!-- Point de menu Connexion -->                
-                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=disconnectUser' : 'index.php?action=connectionForm' ?>" class="nav-link" aria-label="Connexion / déconnexion à votre compte">
+                <a href="<?= (isset($_SESSION['user'])) ? 'index.php?action=disconnectUser' : 'index.php?action=connectionForm' ?>" class="nav-link" aria-label="Connexion ou déconnexion à votre compte">
                     <span data-text="Connexion"><?= (isset($_SESSION['user'])) ? 'Déconnexion' : 'Connexion' ?></span>
                 </a>
             </nav>

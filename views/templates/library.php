@@ -6,10 +6,10 @@
 ?>
 <section class="main-nos-livres">
     <div class="entete-nos-livres">
-        <h1>Nos livres</h1>
+        <h1>Nos livres à l'échange</h1>
         <form class="search-form" action="index.php?action=library" method="post" aria-label="Library" role="search">
             <button type="submit" class="search-btn">
-                <img src="images/icones/search.svg" alt="Rechercher" />
+                <img src="images/icones/search.svg" alt="Rechercher un livre dans notre bibliothèque" />
             </button>
             <label for="search-query" class="sr-only">Rechercher un livre</label>
             <input

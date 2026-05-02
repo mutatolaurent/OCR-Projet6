@@ -13,7 +13,7 @@
             d'autres amoureux de la lecture. Nous croyons en la magie du
             partage de connaissances et d'histoires à travers les livres.
         </p>
-        <a href="index.php?action=library" class="btn btn-filled btn-sect1">
+        <a href="index.php?action=library" class="btn btn-filled btn-sect1" aria-label="Découvrir notre bibliothèque de livres">
             <span>Découvrir</span>
         </a>
     </div>
@@ -43,9 +43,9 @@
             </a>
         <?php } ?>
     </div>
-    <a href="index.php?action=library" class="btn btn-filled"
-        ><span>Voir tous les livres</span></a
-    >
+    <a href="index.php?action=library" class="btn btn-filled">
+        <span>Voir tous les livres</span>
+    </a>
 </section>
 
 <section class="home-sect3">

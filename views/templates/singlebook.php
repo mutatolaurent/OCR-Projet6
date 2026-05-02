@@ -33,7 +33,7 @@
             />
             <span class="pseudo-owner"><?= $books[0]->getOwner()->getPseudo() ?></span>
         </a>
-        <a href="index.php?action=showMyChatRoom&idContact=<?= $books[0]->getOwner()->getId() ?>" class="btn btn-filled">
+        <a href="index.php?action=showMyChatRoom&idContact=<?= $books[0]->getOwner()->getId() ?>" class="btn btn-filled" aria-label="Envoyer un message au propriétaire du livre">
             <span>Envoyez un message</span>
         </a>
     </div>

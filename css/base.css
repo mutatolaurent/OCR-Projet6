@@ -10,12 +10,13 @@
 :root {
   --gris-clair: #f5f3ef;
   --gris-fonc: #292929;
-  --vert-principal-spec: #00ac66;
-  --vert-principal: #00804d; /* Contraste OK WCAG AA */
+  --vert-principal: #00ac66; /* Contraste KO WCAG AA */
+  --vert-principal-ok-wcag: #00804d; /* Contraste OK WCAG AA */
   --vert-hover: #006d41;
-  --gris-texte-spec: #a6a6a6;
-  --gris-texte: #737373; /* Contraste OK WCAG AA */
+  --gris-texte: #a6a6a6; /* Contraste KO WCAG AA */
+  --gris-texte-ok-wcag: #737373; /* Contraste OK WCAG AA */
   --gap-col-nos-livres: 38px;
+  --gap-col-nos-livres-small-screen: 14px;
   --gap-row-nos-livres: 48px;
   --background-light: #faf9f7;
   --max-width: 1440px;

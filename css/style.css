@@ -13,7 +13,7 @@
 @import "page-chat.css";
 
 /* VERSION MOBILE (375px) */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   .site-header {
     height: 56px;
     padding: 0 20px;
@@ -91,13 +91,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
-    padding: 34px 0px 80.8px;
+    /* padding: 34px 0px 80.8px; */
+    padding: 34px 0px 0px;
   }
 
   /* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
 et un conteneur flex pour aligner les éléments à l’intérieur */
   .cards-nos-livres a {
-    flex: 0 1 calc(50% - (var(--gap-col-nos-livres) * 1 / 2));
+    /* flex: 0 1 calc(50% - (var(--gap-col-nos-livres) * 1 / 2)); */
+    flex: 0 1 calc(50% - (var(--gap-col-nos-livres-small-screen) * 1 / 2));
     display: flex;
     text-decoration: none;
   }
@@ -113,7 +115,7 @@ et un conteneur flex pour aligner les éléments à l’intérieur */
   /* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
   .cards-nos-livres .card img {
     object-fit: cover;
-    width: 160px;
+    width: 100%;
     height: 160px;
   }
 
@@ -159,6 +161,19 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
     align-self: stretch;
   }
 
+  /* Adaptation du footer */
+  .main-footer {
+    height: 100%;
+    gap: 20px;
+    padding-top: 31px;
+    padding-bottom: 31px;
+    flex-direction: column;
+  }
+
+  .main-footer img {
+    padding: 0;
+  }
+
   /* Adaptations Page d'accueil */
   .home-sect1 {
     flex-direction: column-reverse;
@@ -170,7 +185,8 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   }
 
   .home-sect1-right img {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
   }
 
   .home-sect1-right p {
@@ -181,19 +197,72 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
     padding: 48px 21px 80.8px 20px;
   }
 
-  .home-sect3 {
+  .home-sect2 .btn {
     display: none;
+  }
+
+  .home-sect3 {
+    padding: 48px 20px 47px 20px;
+  }
+
+  .home-sect3 p {
+    width: 100%;
+  }
+
+  .howto-home-sect3 {
+    /* display: flex; */
+    flex-direction: column;
+    row-gap: 16px;
+    margin-bottom: 32px;
+    margin-top: 32px;
   }
 
   .home-sect4 {
-    display: none;
+    height: 436px;
+    width:100%
+    background-image: url("../images/home/home2-banniere.jpg");
+    background-repeat: no-repeat;
+    /* Décalage du point d'origine visible */
+    background-position: -244px -1px;
+    /* Redimensionnement pour compenser les masques droite/bas */
+    background-size: calc(100% + 244px + 35px) calc(100% + 1px + 10px);
   }
 
   .home-sect5 {
-    display: none;
+    padding: 23px 20px 32px 20px;
   }
 
-  .main-footer {
-    display: none;
+  .home-sect5 p {
+    width: 100%;
+  }
+
+  .signature-home-sect5 {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .signature-home-sect5 img {
+    width: 120px;
+    height: 102px;
+    align-self: center;
+  }
+
+  /* Adaptation page nos livres */
+  .main-nos-livres {
+    margin: 55px 20px 55px 20px;
+  }
+
+  /* Container du titre et du formulaire de recherche */
+  .entete-nos-livres {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .entete-nos-livres h1 {
+    align-self: flex-start;
+    padding-bottom: 28px;
+  }
+  .entete-nos-livres form {
+    width: 100%;
   }
 }
