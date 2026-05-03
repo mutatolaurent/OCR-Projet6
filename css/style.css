@@ -219,7 +219,7 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
 
   .home-sect4 {
     height: 436px;
-    width:100%
+    /* width: 100%; */
     background-image: url("../images/home/home2-banniere.jpg");
     background-repeat: no-repeat;
     /* Décalage du point d'origine visible */
@@ -247,7 +247,9 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
     align-self: center;
   }
 
-  /* Adaptation page nos livres */
+  /* 
+   * Adaptation page nos livres 
+   */
   .main-nos-livres {
     margin: 55px 20px 55px 20px;
   }
@@ -264,5 +266,50 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   }
   .entete-nos-livres form {
     width: 100%;
+  }
+
+  /* 
+   * Adaptations page livre 
+   */
+  .breadcrump {
+    display: none;
+  }
+
+  .single-livre-container {
+    flex-direction: column;
+  }
+
+  .single-livre-container .livre-image {
+    width: 100%;
+    height: 618px;
+    object-fit: cover;
+  }
+
+  .single-livre-container .livre-info {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 40px 20px 80px 20px;
+  }
+
+  /* 
+   * Adaptations page formulaire connexion et en registrement
+   */
+  .insc-main-sect {
+    flex-direction: column;
+  }
+
+  .insc-part-left {
+    width: 100%;
+    padding: 78px 20px 80px 20px;
+  }
+
+  .insc-part-left button {
+    margin-bottom: 32px;
+  }
+
+  .insc-part-right img {
+    width: 100%;
+    height: 462px;
+    object-fit: cover;
   }
 }
