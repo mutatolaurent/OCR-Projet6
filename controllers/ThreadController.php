@@ -43,23 +43,34 @@ class ThreadController
                 // TODO améliorer le feedback utilisateur dans ce cas de figure
                 Utils::redirect("library");
             }
+
+            // On mémorise le contexte d'accès à la messagerie
+            $context = 'thread-access';
+
         } else {
+
             // On récupère le contact du dernier message échangé
             $idContact = $this->threadManager->getLastMessageContactId($user->getId());
             if ($idContact !== null) {
                 $userManager = new UserManager();
                 $contact = $userManager->getOnlyUserById($idContact);
             }
+
+            // On mémorise le contexte d'accès direct à la messagerie
+            $context = 'nothread-access';
         }
 
         // On Récupère toutes les conversations avec un utilisateur et pour chaque conversation
         // récupéère des infos sur le contact et sur le dernier message échangé.
         $chatRoomData = $this->threadManager->getAllThreadByUserId($user->getId(), $contact);
 
+        // Est ce qu'il est nécéessaire de cacher la zone des message (uniquement pour les petits écrans)
+        $bubbleZoneAspect = Utils::request('bubble-zone', null);
+
         // On affiche la page sur la messagerie de l'utilisateur
         $view = new View("Messagerie");
         $view->render("myChatRoom", [
-            'chatroom' => $chatRoomData
+            'chatroom' => $chatRoomData, 'context' => $context, 'bublezone-aspect' => $bubbleZoneAspect
         ]);
     }
 

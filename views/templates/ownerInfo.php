@@ -14,7 +14,7 @@
             alt="image du profil de <?= $user[0]->getPseudo() ?>"
             />
         </div>
-
+        <div class="separator"></div>
         <h2 class="cpt-owner"><?= $user[0]->getPseudo() ?></h2>
         <p class="cpt-time">Membre depuis <?= Utils::formatDateDiff($user[0]->getCreatedAt()) ?></p>
         <p class="cpt-bib">BIBLIOTHEQUE</p>
@@ -66,4 +66,26 @@
         </tbody>
     </table>
     </div>
+
+    <!-- Zone qui s'affiche uniquement sur les petits écrans -->
+    <div class="cpt-public-right-sc">
+        <?php if ($user[0]->getBooks() !== false) { ?>     
+            <?php foreach ($user[0]->getBooks() as $book) { ?>
+                <article class="card-book-sc">
+                    <a class="card-book-sc-info" href="index.php?action=book&id=<?= $book->getId() ?>">
+                        <img
+                            src="<?= $book->getPhoto() ?>"
+                            alt="Image lien vers la page d'information du livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?>"
+                        />
+                        <div class="card-book-sc-owner-info">
+                            <p><?= $book->getTitle() ?></p>
+                            <p><?= $book->getAuthor() ?></p>
+                        </div>
+                    </a>
+                    <p><?= mb_substr($book->getDescription(), 0, 100).'...' ?></p>
+                </article>
+            <?php } ?>
+        <?php } ?>
+    </div>  
+
 </section>

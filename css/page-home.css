@@ -151,3 +151,79 @@ que l’image remplisse tout le container sans déformation, en masquant tout ce
 .signature-home-sect5 img {
   padding-top: 25px;
 }
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* Adaptations Page d'accueil */
+  .home-sect1 {
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+
+  .home-sect1-left {
+    padding: 52px 20px 48px 20px;
+  }
+
+  .home-sect1-right img {
+    /* width: 375px; */
+    width: 100%;
+  }
+
+  .home-sect1-right p {
+    margin-right: 27px;
+  }
+
+  .home-sect2 {
+    padding: 48px 21px 80.8px 20px;
+  }
+
+  .home-sect2 .btn {
+    display: none;
+  }
+
+  .home-sect3 {
+    padding: 48px 20px 47px 20px;
+  }
+
+  .home-sect3 p {
+    width: 100%;
+  }
+
+  .howto-home-sect3 {
+    /* display: flex; */
+    flex-direction: column;
+    row-gap: 16px;
+    margin-bottom: 32px;
+    margin-top: 32px;
+  }
+
+  .home-sect4 {
+    height: 436px;
+    /* width: 100%; */
+    background-image: url("../images/home/home2-banniere.jpg");
+    background-repeat: no-repeat;
+    /* Décalage du point d'origine visible */
+    background-position: -244px -1px;
+    /* Redimensionnement pour compenser les masques droite/bas */
+    background-size: calc(100% + 244px + 35px) calc(100% + 1px + 10px);
+  }
+
+  .home-sect5 {
+    padding: 23px 20px 32px 20px;
+  }
+
+  .home-sect5 p {
+    width: 100%;
+  }
+
+  .signature-home-sect5 {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .signature-home-sect5 img {
+    width: 120px;
+    height: 102px;
+    align-self: center;
+  }
+}

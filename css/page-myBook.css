@@ -80,3 +80,51 @@
 .modif-book-infos-left .text-error {
   text-align: right;
 }
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* 
+   * Adaptations page modification des infos d'un livre
+   */
+  /* container principal de la page */
+  .modif-infos-main-sect {
+    row-gap: 0px;
+    padding: 54px 0px 80px 0px;
+  }
+
+  .modif-infos-main-sect a,
+  .modif-infos-main-sect h1 {
+    padding-left: 20px;
+  }
+
+  .modif-infos-main-sect h1 {
+    padding-top: 7px;
+  }
+
+  .modif-book-infos {
+    flex-direction: column;
+    width: 100%;
+    /* column-gap: 117px; */
+    padding: 42px 20px 47px 20px;
+  }
+
+  .modif-book-infos-left p {
+    padding-bottom: 5px;
+    font-size: 11px;
+  }
+
+  .modif-book-infos-left img {
+    width: 100%;
+    height: 334px;
+    object-fit: cover;
+    padding-bottom: 27px;
+  }
+
+  .modif-book-infos-left .edit-link {
+    font-size: 1em;
+  }
+
+  .modif-book-infos-right .btn {
+    width: 100%;
+  }
+}

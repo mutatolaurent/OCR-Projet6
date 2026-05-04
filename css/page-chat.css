@@ -200,3 +200,56 @@
   font-size: 0.875em;
   font-weight: 400;
 }
+
+.sect-bubbles .return-link {
+  display: none;
+}
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* 
+   * Adaptations page messagerie
+   */
+  /* Container principal de la page */
+  .msg-container {
+    flex-direction: column;
+    padding: 0px 0px 42px 0px;
+    height: 100%;
+    overflow: visible;
+  }
+  .sect-thread {
+    width: 100%;
+  }
+
+  .thread-invisible {
+    display: none;
+  }
+
+  .sect-bubbles {
+    padding-inline: 20px;
+    /* height: 400px; */
+    /* overflow-y: auto; */
+    /* min-height: 0; */
+    /* Plus besoin du calc ici, on prend 100% du parent verrouillé */
+    /* height: 100%; */
+    /* min-width: 0; */
+  }
+
+  .bubbles-invisible {
+    display: none;
+  }
+
+  .msg-input-zone {
+    flex-direction: column;
+  }
+
+  .msg-input {
+    padding-left: 22px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .sect-bubbles .return-link {
+    display: block;
+  }
+}

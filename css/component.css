@@ -107,6 +107,38 @@ et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu *
   /* font-weight: 400; */
 }
 
+/* Cartes des livres dédiés aux pages comptes public et compte privé sur petits écrans */
+.card-book-sc {
+  display: flex;
+  flex-direction: column;
+  padding: 55px 57px 37px 56px;
+  row-gap: 22px;
+  border-radius: 20px;
+  background-color: white;
+  width: 100%;
+}
+
+.card-book-sc-info {
+  display: flex;
+  column-gap: 18px;
+  text-decoration: none;
+}
+
+.card-book-sc-info img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.card-book-sc p {
+  font-style: italic;
+}
+
+.card-book-sc-owner-info {
+  display: flex;
+  flex-direction: column;
+}
+
 /* FORMULAIRES */
 .champ-formulaire {
   display: flex;
@@ -228,4 +260,74 @@ champ-formulaire input.input-upload {
   max-width: 100%;
   margin: 15px 0;
   border-radius: 6px;
+}
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* CARDS DES LIVRES */
+  /* Container de la section des cards des livres */
+  .cards-nos-livres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 34px 0px 0px;
+  }
+
+  /* Chaque card est un lien, avec une largeur fixe pour 4 cards par ligne,
+et un conteneur flex pour aligner les éléments à l’intérieur */
+  .cards-nos-livres a {
+    /* flex: 0 1 calc(50% - (var(--gap-col-nos-livres) * 1 / 2)); */
+    flex: 0 1 calc(50% - (var(--gap-col-nos-livres-small-screen) * 1 / 2));
+    display: flex;
+    text-decoration: none;
+  }
+
+  /* Contenu de chaque card : image, titre, auteur, propriétaire */
+  .cards-nos-livres .card {
+    background-color: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image de la card : on utilise object-fit pour que l’image remplisse le cadre sans déformation */
+  .cards-nos-livres .card img {
+    object-fit: cover;
+    width: 100%;
+    height: 160px;
+  }
+
+  /* Titre du livre : on laisse le texte s’étendre sur plusieurs lignes si besoin, 
+et on utilise flex-grow pour que ce bloc prenne tout l’espace disponible */
+  .cards-nos-livres .book-title {
+    font-size: 13px;
+    padding-left: 11.2px;
+    padding-top: 16px;
+    /* padding-right: 14px; */
+    text-align: left;
+  }
+
+  /* Auteur du livre : on utilise une couleur plus claire pour différencier du titre, 
+et on ajoute un peu d’espace en haut pour séparer du titre */
+  .cards-nos-livres .book-author {
+    padding-left: 11.2px;
+    padding-top: 4px;
+    /* padding-right: 14px; */
+    font-size: 13px;
+  }
+
+  /* Propriétaire du livre : on utilise une couleur plus claire et un style italique 
+pour différencier du titre et de l’auteur,
+et on ajoute de l’espace en haut et en bas pour séparer du reste du contenu */
+  .cards-nos-livres .book-owner {
+    padding-left: 11.2px;
+    padding-top: 18.2px;
+    /* padding-right: 14px; */
+    padding-bottom: 18.4px;
+    font-size: 8px;
+  }
+
+  .btn {
+    align-self: stretch;
+  }
 }

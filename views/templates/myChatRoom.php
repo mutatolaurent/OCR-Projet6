@@ -6,11 +6,11 @@
  */
 ?>
 <div class="msg-container">
-    <section class="sect-thread">
+    <section class="sect-thread <?= $context == 'thread-access' ? ' thread-invisible' : '' ?>" >
         <h1>Messagerie</h1>
         <?php if ($chatroom !== null) { ?>
             <?php foreach ($chatroom[0] as $thread) { ?>
-                <a href="index.php?action=showMyChatRoom&idContact=<?= $thread['contact']->getId() ?>" class="nav-thread <?= $thread['threadActif'] ? 'active-thread' : '' ?>">
+                <a href="index.php?action=showMyChatRoom&idContact=<?= $thread['contact']->getId() ?>#content" class="nav-thread <?= $thread['threadActif'] ? 'active-thread' : '' ?>">
                     <img
                         class="img-owner"
                         src="<?= $thread['contact']->getPhoto() ? $thread['contact']->getPhoto() : 'images/books/placeholder.png' ?>"
@@ -28,8 +28,12 @@
         <?php } ?>
     </section>
 
-    <section class="sect-bubbles">
+    <section class="sect-bubbles <?= $context == 'nothread-access' ? ' bubbles-invisible' : '' ?>">
         <h2 class="sr-only">Zone d'affichage des messages</h2>
+        <a href="index.php?action=showMyChatRoom&bubble-zone=hidden" class="return-link">
+            <img src="images/icones/retour.svg" alt="Lien de retour vers la liste des conversations" aria-hidden="true"/>
+            <span>retour</span>
+        </a>
         <?php if (!empty($chatroom[1]['chatcontact'])) {?>
             <div class="contact-info">
                 <img
@@ -82,6 +86,7 @@
                 id="content"
                 class="msg-input"
                 placeholder="Tapez votre message ici"
+                autocomplete="off"
             />
             <button class="btn btn-filled">Envoyer</button>
         </form>

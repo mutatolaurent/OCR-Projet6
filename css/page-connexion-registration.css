@@ -45,3 +45,32 @@
   height: 100%;
   object-fit: cover;
 }
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* 
+   * Adaptations page formulaire connexion et en registrement
+   */
+  .insc-main-sect {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .insc-part-left {
+    width: 100%;
+    padding: 78px 20px 80px 20px;
+  }
+
+  .insc-part-left button {
+    margin-bottom: 32px;
+  }
+
+  .insc-part-right img {
+    width: 100%;
+    height: 462px;
+    object-fit: cover;
+  }
+
+  .insc-part-left .edit-link {
+    font-size: 1em;
+  }
+}

@@ -22,3 +22,19 @@
 .main-footer img {
   padding-right: 46px;
 }
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* Adaptation du footer */
+  .main-footer {
+    height: 100%;
+    gap: 20px;
+    padding-top: 31px;
+    padding-bottom: 31px;
+    flex-direction: column;
+  }
+
+  .main-footer img {
+    padding: 0;
+  }
+}

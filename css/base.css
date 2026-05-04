@@ -36,6 +36,7 @@
   --em-for-12px: 0.75em;
   --em-for-10px: 0.625em;
   --em-for-8px: 0.5em; /* ATTENTION trop petit pour WCAG AA */
+  --sc-size: 480px; /* Taille d'écran pour basculer en mode responsive */
 }
 
 /* Styles globaux au body de la pa */
@@ -48,7 +49,7 @@ body {
 
 /* Container global de la page, pour limiter la largeur et centrer le contenu */
 .main-container {
-  /* width: 100%; */
+  width: 100%;
   max-width: var(--max-width);
   background: var(--background-light);
 }
@@ -191,4 +192,15 @@ tbody td a {
   ); /* Couplé à position: absolute, ça rend l’élément visuellement inexistant. */
   white-space: nowrap; /* empêcher les retours à la ligne. */
   border: 0;
+}
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
 }

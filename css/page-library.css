@@ -68,3 +68,27 @@
 .search-info strong {
   font-weight: 600;
 }
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* 
+   * Adaptation page nos livres 
+   */
+  .main-nos-livres {
+    margin: 55px 20px 55px 20px;
+  }
+
+  /* Container du titre et du formulaire de recherche */
+  .entete-nos-livres {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .entete-nos-livres h1 {
+    align-self: flex-start;
+    padding-bottom: 28px;
+  }
+  .entete-nos-livres form {
+    width: 100%;
+  }
+}

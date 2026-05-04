@@ -1,7 +1,6 @@
 /* 
  * Page Mon compte 
  */
-
 /* container principal de la page */
 .mon-cpt-main {
   display: flex;
@@ -150,6 +149,12 @@
   font-size: 0.75rem;
   text-underline-position: from-font;
 }
+
+.action-link-sc {
+  font-size: 1rem;
+  text-underline-position: from-font;
+}
+
 .edit-link {
   color: var(--gris-fonc);
 }
@@ -163,4 +168,63 @@
   display: inline-block;
   /* width: auto; */
   margin: 0 auto;
+}
+
+/* Container dédié uniquement aux petits écrans */
+.mon-cpt-sect2-sc {
+  display: none;
+  flex-direction: column;
+  padding: 33px 0px 62px 0px;
+  row-gap: 16px;
+}
+
+/* Organisation des liens Editer et Supprimer sur petit écran */
+.card-book-sc-link {
+  display: flex;
+  margin-top: 43px;
+  gap: 43px;
+}
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* 
+   * Adaptations page compte utilisateur 
+   */
+  /* container principal de la page */
+  .mon-cpt-main {
+    padding: 78px 20px 62px 20px;
+  }
+
+  .mon-cpt-sect2 {
+    display: none;
+  }
+
+  .mon-cpt-sect1 {
+    flex-direction: column;
+    row-gap: 32px;
+  }
+
+  .mon-cpt-sect1-left {
+    width: 100%;
+    padding-top: 21.5px;
+    padding-bottom: 36px;
+  }
+
+  .mon-cpt-sect1-right {
+    align-items: stretch;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 48px;
+    padding-inline: 32px;
+  }
+
+  /* Container dédié uniquement aux petits écrans */
+  .mon-cpt-sect2-sc {
+    display: flex;
+  }
+
+  .card-book-sc-owner-info span {
+    align-self: flex-start;
+    margin-top: 16px;
+    /* width: fit-content; */
+  }
 }

@@ -18,6 +18,7 @@ $action = Utils::request('action', 'home');
     <title><?= $title ?></title>
     <link rel="stylesheet" href="./css/style.css" />
     <script src="js/checkUnreadMessages.js"></script>
+    <script src="js/toggleMenu.js"></script>
 
 </head>
 
@@ -32,7 +33,11 @@ $action = Utils::request('action', 'home');
             </div>
         </div>
     <?php }?>
+
+    <!-- Container principal de chaque page -->
     <div class="main-container">
+
+        <!-- Entête de toutes le spages du site -->
         <header class="site-header">
             <a href="index.php?action=home" class="logo-block" aria-label="Logo Tom Troc">
                 <div class="logo-square">
@@ -45,12 +50,24 @@ $action = Utils::request('action', 'home');
                 <span class="logo-text">Tom Troc</span>
             </a>
 
-            <input type="checkbox" id="menu-cb" />
+            <!-- Technique de menu burger responsive sans JS
+            Abandonné au profit d'une technique avce JS car 
+            incompatible avec les contraintes de l'accessibilité. -->
+            <!-- <input type="checkbox" id="menu-cb" />
             <label for="menu-cb" class="burger-menu">
                 <img src="images/icones/icon-menu.svg" alt="Menu" />
-            </label>
+            </label> -->
 
-            <nav class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>" aria-label="Menu principal de navigation">
+            <!-- Bouton menu burger pour petits écrans uniquement -->
+            <button class="burger-menu" 
+                aria-controls="main-nav" 
+                aria-expanded="false" 
+                aria-label="Ouvrir le menu de navigation">
+                <img src="images/icones/icon-menu.svg" alt="" aria-hidden="true" />
+            </button>
+
+            <!-- Barre principale de navigation -->
+            <nav id="main-nav" class="navbar<?= (!isset($_SESSION['user'])) ? ' user-disconnected' : '' ?>" aria-label="Menu principal de navigation">
 
                 <!-- Point de menu Accueil-->
                 <?php if ($action === "home") { ?>
@@ -133,9 +150,12 @@ $action = Utils::request('action', 'home');
             </nav>
         </header>
 
+        <!-- Corp de la page -->
         <main>
             <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
         </main>
+
+        <!-- Pied de page commun à toutes les pages du site -->
         <footer>
             <nav class="main-footer" aria-label="footer navigation">
                 <a href="#">Politique de confidentialité</a>

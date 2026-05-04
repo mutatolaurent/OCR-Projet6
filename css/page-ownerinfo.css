@@ -2,6 +2,14 @@
  * Page compte public 
  */
 
+/* Séparateur */
+.separator {
+  width: 242px;
+  height: 1px;
+  background: var(--gris-clair);
+  margin-top: 48px;
+}
+
 /* container principal de la page */
 .cpt-public-sect {
   display: flex;
@@ -51,7 +59,8 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
   text-align: center;
   font-family: "Playfair Display";
   font-size: 1.5em;
-  margin-top: 89px;
+  /* margin-top: 89px; */
+  margin-top: 48px;
 }
 
 /* Ancienneté du proriétaire sur le site */
@@ -128,4 +137,40 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
 .cpt-public-right td:last-child {
   width: 225px; /* 159px + 66px */
   padding-right: 66px;
+}
+
+/* Container dédié uniquement aux petits écrans */
+.cpt-public-right-sc {
+  display: none;
+  flex-direction: column;
+  padding: 33px 0px 43px 0px;
+  row-gap: 16px;
+}
+
+/* VERSION MOBILE */
+@media (max-width: 480px) {
+  /* 
+   * Adaptations page infos publiques sur un membre 
+   */
+  /* container principal de la page */
+  .cpt-public-sect {
+    flex-direction: column;
+    padding: 73px 20px 43px 22px;
+  }
+
+  /* Container de la partie gauche avec les infos du propriétaire des livres*/
+  .cpt-public-left {
+    width: 100%;
+    padding: 48px 55px 56px 55px;
+  }
+
+  /* Container de la partie droite avec la liste des livres du propriétaire */
+  .cpt-public-right {
+    display: none;
+  }
+
+  /* Container dédié uniquement aux petits écrans */
+  .cpt-public-right-sc {
+    display: flex;
+  }
 }

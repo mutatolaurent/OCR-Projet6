@@ -41,7 +41,7 @@
                     <span class="info-upload"><?= $user[1]['error']['avatar'] ?></span>
                 <?php endif; ?>
             </div>
-
+            <div class="separator"></div>
             <h2 class="cpt-owner"><?= $user[0]->getPseudo() ?></h2>
             <p class="cpt-time">Membre depuis <?= Utils::formatDateDiff($user[0]->getCreatedAt()) ?></p>
             <p class="cpt-bib">BIBLIOTHEQUE</p>
@@ -162,6 +162,33 @@
         </tbody>
     </table>
     </section>
+    
+    <!-- Zone qui s'affiche uniquement sur les petits écrans -->
+    <section class="mon-cpt-sect2-sc">
+        <?php if ($user[0]->getBooks() !== false) { ?>     
+            <?php foreach ($user[0]->getBooks() as $book) { ?>
+                <article class="card-book-sc">
+                    <a class="card-book-sc-info" href="index.php?action=book&id=<?= $book->getId() ?>">
+                        <img
+                            src="<?= $book->getPhoto() ? $book->getPhoto() : 'images/books/placeholder.png' ?>"
+                            alt="Image lien vers la page d'information du livre <?= $book->getTitle() ?> de <?= $book->getAuthor() ?>"
+                        />
+                        <div class="card-book-sc-owner-info">
+                            <p><?= $book->getTitle() ?></p>
+                            <p><?= $book->getAuthor() ?></p>
+                            <span class="book-state book-state-<?= $book->getIdState() ?>"><?= $book->getStateLabel() ?>
+                        </div>
+                    </a>
+                    <p><?= mb_substr($book->getDescription(), 0, 100).'...' ?></p>
+                    <div class="card-book-sc-link">                    
+                        <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="action-link-sc edit-link">Editer</a>
+                        <a href="index.php?action=deleteBook&id=<?= $book->getId() ?>" class="action-link-sc delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>Supprimer</a>
+                    </div>
+                </article>
+            <?php } ?>
+        <?php } ?>
+    </section>  
+
     <a href="index.php?action=showBookForAdd" class="btn btn-filled" >Ajouter un livre</a>
 </div>
 <?php
