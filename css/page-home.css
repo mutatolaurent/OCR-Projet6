@@ -153,7 +153,7 @@ que l’image remplisse tout le container sans déformation, en masquant tout ce
 }
 
 /* VERSION MOBILE */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   /* Adaptations Page d'accueil */
   .home-sect1 {
     flex-direction: column-reverse;
@@ -171,6 +171,10 @@ que l’image remplisse tout le container sans déformation, en masquant tout ce
 
   .home-sect1-right p {
     margin-right: 27px;
+  }
+
+  .btn-sect1 {
+    align-self: stretch;
   }
 
   .home-sect2 {

@@ -17,4 +17,4 @@ define('DB_PASS', ''); // A renseigner avec votre mot de passe de base de donné
 
 define('PSEUDO_MIN_LENGTH', 3);
 define('PASSWORD_MIN_LENGTH', 6);
-define('MAX_UPLOAD_BSIZE', 2097152); // Taille maxi autoris&é pour l'upload d'un fichier (en bytes)
+define('MAX_UPLOAD_BSIZE', 2097152); // Taille maxi autorisée pour l'upload d'un fichier (en bytes)

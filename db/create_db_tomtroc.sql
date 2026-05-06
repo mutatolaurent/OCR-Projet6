@@ -1,4 +1,4 @@
--- Création de la base de données `blog_forteroche`
+-- Création de la base de données `tomtroc`
 CREATE DATABASE IF NOT EXISTS tomtroc CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE tomtroc;

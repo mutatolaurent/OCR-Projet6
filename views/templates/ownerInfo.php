@@ -26,7 +26,7 @@
             />
             <p class="cpt-count"><?= count($user[0]->getBooks()) ?> livres</p>
         </div>
-        <a href="index.php?action=showMyChatRoom&idContact=<?= $user[0]->getId() ?>" class="btn btn-empty" aria-label="Ecrire un message au propriétaire du livre">
+        <a href="index.php?action=showMyChatRoom&idContact=<?= $user[0]->getId() ?>#content" class="btn btn-empty" aria-label="Ecrire un message au propriétaire du livre">
             <span>Ecrire un message</span>
         </a>
     </div>

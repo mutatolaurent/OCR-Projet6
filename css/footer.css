@@ -24,7 +24,7 @@
 }
 
 /* VERSION MOBILE */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   /* Adaptation du footer */
   .main-footer {
     height: 100%;

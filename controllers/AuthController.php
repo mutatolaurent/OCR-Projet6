@@ -74,13 +74,13 @@ class AuthController
 
         // Le champ email doit obligatoirement être renseigné
         if (empty($credential['email'])) {
-            $error['email'] = "! L'email est obligatoire.";
+            $error['email'] = "L'email est obligatoire.";
             $hasError = true;
         }
 
         // Le champ email doit respecter le pattern d'un email
         if (!$hasError && !filter_var(trim($credential['email']), FILTER_VALIDATE_EMAIL)) {
-            $error['email'] = "! L'email n'est pas correct.";
+            $error['email'] = "L'email n'est pas correct.";
             $hasError = true;
         }
 
@@ -92,7 +92,7 @@ class AuthController
 
         // Le champ password est obligatoire et doit avoir un minimum de caractères
         if (!$hasError && mb_strlen($credential['password']) < PASSWORD_MIN_LENGTH) {
-            $error['password'] = "! Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
+            $error['password'] = "Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
             $hasError = true;
         }
 
@@ -101,7 +101,7 @@ class AuthController
             $userManager = new UserManager();
             $user = $userManager->getUserByLogin($credential['email']);
             if (!$user) {
-                $error['auth'] = "! Hum… Mot de passe ou email incorrect";
+                $error['auth'] = "Mot de passe ou email incorrect";
                 $hasError = true;
             }
         }
@@ -110,7 +110,7 @@ class AuthController
         if (!$hasError && !password_verify($credential['password'], $user->getPassword())) {
             // $hash = password_hash($password, PASSWORD_DEFAULT);
             // throw new Exception("Le mot de passe est incorrect : $hash");
-            $error['auth'] = "! Hum… Mot de passe ou email incorrect";
+            $error['auth'] = "Mot de passe ou email incorrect";
             $hasError = true;
         }
 
@@ -162,37 +162,37 @@ class AuthController
 
         // Le champ pseudo doit obligatoirement être renseigné et avoir au moins 3 caratères
         if (mb_strlen($credential['pseudo']) < PSEUDO_MIN_LENGTH) {
-            $error['pseudo'] = "! Le pseudo doit contenir au moins ".PSEUDO_MIN_LENGTH." caractères";
+            $error['pseudo'] = "Le pseudo doit contenir au moins ".PSEUDO_MIN_LENGTH." caractères";
             $hasError = true;
         }
 
         // Le pseudo ne doit pas être déjà utilisé
         if (!$hasError && $userManager->getUserByPseudo($credential['pseudo']) !== null) {
-            $error['pseudo'] = "! Ce pseudo est déjà utilisé";
+            $error['pseudo'] = "Ce pseudo est déjà utilisé";
             $hasError = true;
         }
 
         // Le champ email doit obligatoirement être renseigné
         if (!$hasError && empty($credential['email'])) {
-            $error['email'] = "! L'email est obligatoire.";
+            $error['email'] = "L'email est obligatoire.";
             $hasError = true;
         }
 
         // Le champ email doit respecter le pattern d'un email
         if (!$hasError && !filter_var(trim($credential['email']), FILTER_VALIDATE_EMAIL)) {
-            $error['email'] = "! L'email n'est pas correct.";
+            $error['email'] = "L'email n'est pas correct.";
             $hasError = true;
         }
 
         // L'email ne doit pas être déjà utilisé
         if (!$hasError && $userManager->getUserByLogin($credential['email']) !== null) {
-            $error['email'] = "! Cet email est déjà utilisé";
+            $error['email'] = "Cet email est déjà utilisé";
             $hasError = true;
         }
 
         // Le champ password est obligatoire et doit avoir un minimum de caractères
         if (!$hasError && mb_strlen($credential['password']) < PASSWORD_MIN_LENGTH) {
-            $error['password'] = "! Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
+            $error['password'] = "Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
             $hasError = true;
         }
 

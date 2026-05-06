@@ -148,7 +148,7 @@ un fond blanc pour créer un effet de "cadre" autour de l’image, et un border-
 }
 
 /* VERSION MOBILE */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   /* 
    * Adaptations page infos publiques sur un membre 
    */

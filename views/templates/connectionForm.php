@@ -20,7 +20,7 @@
                     placeholder="nom@exemple.com"
                     aria-required="true"
                     <?= isset($formData['credential']['email']) ? 'value="'.$formData['credential']['email'].'"' : '' ?>
-                    <?= isset($formData['error']['email']) ? 'aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
+                    <?= isset($formData['error']['email']) ? 'role="alert" aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
                 />
                 <?php if (isset($formData['error']['email'])): ?>
                     <span id="email-error-msg" class="text-error"><?= $formData['error']['email'] ?></span>
@@ -38,7 +38,7 @@
                     placeholder="Au moins <?= PASSWORD_MIN_LENGTH ?> caractères"
                     aria-required="true"
                     <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
-                    <?= isset($formData['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
+                    <?= isset($formData['error']['password']) ? 'role="alert" aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                 />
                 <?php if (isset($formData['error']['password'])): ?>
                     <span id="password-error-msg" class="text-error"><?= $formData['error']['password'] ?></span>

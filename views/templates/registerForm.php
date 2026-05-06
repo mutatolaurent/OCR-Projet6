@@ -20,7 +20,7 @@
                 placeholder="ex: YvreDeLivres (<?= PSEUDO_MIN_LENGTH ?> caractères minimum)"
                 aria-required="true"
                 <?= isset($formData['credential']['pseudo']) ? 'value="'.$formData['credential']['pseudo'].'"' : '' ?>
-                <?= isset($formData['error']['pseudo']) ? 'aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
+                <?= isset($formData['error']['pseudo']) ? ' role="alert" aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
             />
             <?php if (isset($formData['error']['pseudo'])): ?>
                 <span id="pseudo-error-msg" class="text-error"><?= $formData['error']['pseudo'] ?></span>
@@ -38,7 +38,7 @@
                 placeholder="nom@exemple.com"
                 aria-required="true"
                 <?= isset($formData['credential']['email']) ? 'value="'.$formData['credential']['email'].'"' : '' ?>
-                <?= isset($formData['error']['email']) ? 'aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
+                <?= isset($formData['error']['email']) ? ' role="alert" aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
             />
             <?php if (isset($formData['error']['email'])): ?>
                 <span id="email-error-msg" class="text-error"><?= $formData['error']['email'] ?></span>
@@ -56,7 +56,7 @@
                 placeholder="Au moins <?= PASSWORD_MIN_LENGTH ?> caractères"
                 aria-required="true"
                 <?= isset($formData['credential']['password']) ? 'value="'.$formData['credential']['password'].'"' : '' ?>
-                <?= isset($formData['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
+                <?= isset($formData['error']['password']) ? ' role="alert" aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
             />
             <?php if (isset($formData['error']['password'])): ?>
                 <span id="password-error-msg" class="text-error"><?= $formData['error']['password'] ?></span>

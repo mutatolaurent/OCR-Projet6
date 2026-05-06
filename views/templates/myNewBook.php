@@ -53,7 +53,7 @@
                     id="title"
                     aria-required="true"
                     <?= isset($formData['bookinfo']['title']) ? 'value="'.$formData['bookinfo']['title'].'"' : '' ?>
-                    <?= isset($formData['error']['title']) ? 'aria-invalid="true" aria-describedby="title-error-msg"' : '' ?>
+                    <?= isset($formData['error']['title']) ? ' role="alert" aria-invalid="true" aria-describedby="title-error-msg"' : '' ?>
                 />
                 <?php if (isset($formData['error']['title'])): ?>
                     <span id="title-error-msg" class="text-error"><?= $formData['error']['title'] ?></span>
@@ -69,7 +69,7 @@
                     id="author"
                     aria-required="true" 
                     <?= isset($formData['bookinfo']['author']) ? 'value="'.$formData['bookinfo']['author'].'"' : '' ?>
-                    <?= isset($formData['error']['author']) ? 'aria-invalid="true" aria-describedby="author-error-msg"' : '' ?>
+                    <?= isset($formData['error']['author']) ? ' role="alert" aria-invalid="true" aria-describedby="author-error-msg"' : '' ?>
                 />
                 <?php if (isset($formData['error']['author'])): ?>
                     <span id="author-error-msg" class="text-error"><?= $formData['error']['author'] ?></span>
@@ -83,7 +83,7 @@
                     name="description"
                     id="description"
                     aria-required="true"
-                    <?= isset($formData['error']['description']) ? 'aria-invalid="true" aria-describedby="descr-error-msg"' : '' ?>
+                    <?= isset($formData['error']['description']) ? ' role="alert" aria-invalid="true" aria-describedby="descr-error-msg"' : '' ?>
                     ><?= $formData['bookinfo']['description'] ?? '' ?></textarea>
                 <?php if (isset($formData['error']['description'])): ?>
                     <span id="descr-error-msg" class="text-error"><?= $formData['error']['description'] ?></span>

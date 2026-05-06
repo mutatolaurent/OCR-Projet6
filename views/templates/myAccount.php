@@ -69,7 +69,7 @@
                         id="email"
                         aria-required="true"
                         value="<?= isset($user[1]['error']['email']) ? $user[1]['credential']['email'] : $user[0]->getEmail() ?>"
-                        <?= isset($user[1]['error']['email']) ? 'aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
+                        <?= isset($user[1]['error']['email']) ? 'role="alert" aria-invalid="true" aria-describedby="email-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['email'])): ?>
                         <span id="email-error-msg" class="text-error"><?= $user[1]['error']['email'] ?></span>
@@ -87,7 +87,7 @@
                         aria-required="true"
                         placeholder="******"
                         value="<?= isset($user[1]['error']['password']) ? $user[1]['credential']['password'] : '' ?>"
-                        <?= isset($user[1]['error']['password']) ? 'aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
+                        <?= isset($user[1]['error']['password']) ? 'role="alert" aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['password'])): ?>
                         <span id="password-error-msg" class="text-error"><?= $user[1]['error']['password'] ?></span>
@@ -104,7 +104,7 @@
                         id="pseudo"
                         aria-required="true"
                         value="<?= isset($user[1]['error']['pseudo']) ? $user[1]['credential']['pseudo'] : $user[0]->getPseudo() ?>"
-                        <?= isset($user[1]['error']['pseudo']) ? 'aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
+                        <?= isset($user[1]['error']['pseudo']) ? 'role="alert" aria-invalid="true" aria-describedby="pseudo-error-msg"' : '' ?>
                     />
                     <?php if (isset($user[1]['error']['pseudo'])): ?>
                         <span id="pseudo-error-msg" class="text-error"><?= $user[1]['error']['pseudo'] ?></span>
@@ -153,7 +153,7 @@
                         <td class="description-td"><?= mb_substr($book->getDescription(), 0, 100).'...' ?></td>
                         <td><span class="book-state book-state-<?= $book->getIdState() ?>"><?= $book->getStateLabel() ?></span></td>
                         <td>
-                            <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="action-link edit-link">Editer</a>
+                            <a href="index.php?action=showBookForUpdate&id=<?= $book->getId() ?>" class="action-link edit-link aria-label=">Editer</a>
                             <a href="index.php?action=deleteBook&id=<?= $book->getId() ?>" class="action-link delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>Supprimer</a>
                         </td>
                     </tr>
