@@ -5,45 +5,48 @@
  */
 class AuthController
 {
-    /**TODO
+    /**
+     * Prépare les données et les erreurs de formulaire stockées en session
+     * puis affiche la vue correspondante.
+     * @param string $title : le titre de la page à afficher
+     * @param string $formview : la vue du formulaire à afficher
+     * @return void
+     */
+    private function checkFormInputForDisplay(string $title, string $formview): void
+    {
+        // On récupère les données et erreurs puis on vide la session immédiatement
+        $formData['error'] = $_SESSION['error'] ?? [];
+        $formData['credential'] = $_SESSION['credential'] ?? ['email' => '', 'password' => ''];
+
+        // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
+        unset($_SESSION['error'], $_SESSION['credential']);
+
+        // On affiche la vue du formulaire
+        $view = new View($title);
+        $view->render($formview, [
+            'formData' => $formData
+        ]);
+    }
+
+    /**
      * Affichage du formulaire de connexion.
      * @return void
      */
     public function showConnectionForm(): void
     {
-        // On récupère les données et erreurs puis on vide la session immédiatement
-        $formData['error'] = $_SESSION['error'] ?? [];
-        $formData['credential'] = $_SESSION['credential'] ?? ['email' => '', 'password' => ''];
-
-        // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
-        unset($_SESSION['error'], $_SESSION['credential']);
-
-        $view = new View("Connexion");
-        $view->render("connectionForm", [
-            'formData' => $formData
-        ]);
+        $this->checkFormInputForDisplay('Connexion', 'connectionForm');
     }
 
-    /**TODO
+    /**
      * Affichage du formulaire d'inscription.
      * @return void
      */
     public function showRegisterForm(): void
     {
-        // On récupère les données et erreurs puis on vide la session immédiatement
-        $formData['error'] = $_SESSION['error'] ?? [];
-        $formData['credential'] = $_SESSION['credential'] ?? ['email' => '', 'password' => ''];
-
-        // On nettoie la session pour que les messages ne restent pas au prochain rafraîchissement
-        unset($_SESSION['error'], $_SESSION['credential']);
-
-        $view = new View("Inscription");
-        $view->render("registerForm", [
-            'formData' => $formData
-        ]);
+        $this->checkFormInputForDisplay('Inscription', 'registerForm');
     }
 
-    /**TODO
+    /**
      * Déconnexion de l'utilisateur.
      * @return void
      */
@@ -64,7 +67,8 @@ class AuthController
     {
         // On récupère les données du formulaire.
         $credential['email'] = htmlspecialchars(Utils::request("email"));
-        $credential['password'] = htmlspecialchars(Utils::request("password"));
+        // $credential['password'] = htmlspecialchars(Utils::request("password"));
+        $credential['password'] = Utils::request("password");
 
         // RAZ du tableau des erreurs
         $error = [];
@@ -144,7 +148,8 @@ class AuthController
         // On récupère les données du formulaire.
         $credential['pseudo'] = htmlspecialchars(Utils::request("pseudo"));
         $credential['email'] = htmlspecialchars(Utils::request("email"));
-        $credential['password'] = htmlspecialchars(Utils::request("password"));
+        // $credential['password'] = htmlspecialchars(Utils::request("password"));
+        $credential['password'] = Utils::request("password");
 
         // RAZ du tableau des erreurs
         $error = [];

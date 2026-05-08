@@ -102,20 +102,16 @@ class UserController
         // On récupère les données saisies dans le formulaire.
         $credential['pseudo'] = htmlspecialchars(Utils::request("pseudo"));
         $credential['email'] = htmlspecialchars(Utils::request("email"));
-        $credential['password'] = htmlspecialchars(Utils::request("password"));
+        // $credential['password'] = htmlspecialchars(Utils::request("password"));
+        $credential['password'] = Utils::request("password");
         $credential['avatar'] = null; // L'init se fait plus tard dans le traitement
 
-        // On initialise l
 
         // On vérifie s'il y a eu des changements
         $emailHasChanged = ($user->getEmail() !== $credential['email']);
         $passwordHasChanged = (!empty($credential['password']));
         $pseudoHasChanged = ($user->getPseudo() != $credential['pseudo']);
         $avatarHasChanged = (!empty($_FILES['avatar']['name']));
-
-        // ($user->getEmail() != $credential['email']) ? $emailHasChanged = true : $emailHasChanged = false;
-        // (!empty($credential['password'])) ? $passwordHasChanged = true : $passwordHasChanged = false;
-        // ($user->getPseudo() != $credential['pseudo']) ? $pseudoHasChanged = true : $pseudoHasChanged = false;
 
         // Si aucun changement on réaffiche la page des informations du compte client
         if (!$emailHasChanged && !$passwordHasChanged && !$pseudoHasChanged && !$avatarHasChanged) {

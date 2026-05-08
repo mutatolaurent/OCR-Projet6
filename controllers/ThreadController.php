@@ -90,8 +90,9 @@ class ThreadController
         $message['content'] = htmlspecialchars(Utils::request("content", null));
 
         // Si le message est vide on ne fait rien
-        if ($message['content'] === null) {
-            return;
+        if (empty($message['content'])) {
+            // return;
+            Utils::redirect("showMyChatRoom", ['idContact' => $message['idContact']]);
         }
 
         // On vérifie que le contact existe bien
