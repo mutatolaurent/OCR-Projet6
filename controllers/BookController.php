@@ -5,6 +5,13 @@
  */
 class BookController
 {
+    private BookManager $bookManager;
+
+    public function __construct()
+    {
+        $this->bookManager = new BookManager();
+    }
+
     /**
      * Affiche la page d'accueil
      * @return void
@@ -15,9 +22,10 @@ class BookController
         // $this->checkIfUserIsConnected();
 
         // On récupère les 4 derniers livres partagés.
-        $bookManager = new BookManager();
+        // $bookManager = new BookManager();
         $filterOnBookState = 1;
-        $books = $bookManager->getAllBooks(4, $filterOnBookState);
+        // $books = $bookManager->getAllBooks(4, $filterOnBookState);
+        $books = $this->bookManager->getAllBooks(4, $filterOnBookState);
 
         // On affiche la page d'accueil
         $view = new View("Accueil Tom Troc");
@@ -44,17 +52,17 @@ class BookController
 
         if ($searchTerms) {
             // Si une recherche a été effectuée, on récupère les livres correspondants.
-            $bookManager = new BookManager();
-            $list = $bookManager->searchBooks($searchTerms);
+            // $bookManager = new BookManager();
+            $list = $this->bookManager->searchBooks($searchTerms);
             $options = [
                 'resultcount' => ($list) ? count($list) : 0,
                 'searchterms' => $searchTerms
                 ];
         } else {
             // Sinon, on récupère tous les livres.
-            $bookManager = new BookManager();
+            // $bookManager = new BookManager();
             $excludeStateFilter = 1;
-            $list = $bookManager->getAllBooks(null, $excludeStateFilter);
+            $list = $this->bookManager->getAllBooks(null, $excludeStateFilter);
         }
         $books['list'] = $list;
         $books['options'] = $options;
@@ -79,8 +87,8 @@ class BookController
         }
 
         // On récupère les infos du livre.
-        $bookManager = new BookManager();
-        $books = $bookManager->getBookById($idbook);
+        // $bookManager = new BookManager();
+        $books = $this->bookManager->getBookById($idbook);
 
         // Si aucun livre trouvé ALORS on redirige vers la HP
         if ($books === false) {
@@ -121,8 +129,8 @@ class BookController
         }
 
         // On récupère les infos du livre.
-        $bookManager = new BookManager();
-        $books = $bookManager->getBookById($idbook);
+        // $bookManager = new BookManager();
+        $books = $this->bookManager->getBookById($idbook);
 
         // Si aucun livre trouvé ALORS on redirige vers la HP
         if ($books[0] === false) {
@@ -137,7 +145,7 @@ class BookController
         $books[] = $formData;
 
         // On récupère les différents états possibles pour un livre
-        $bookStates = $bookManager->getBookStates();
+        $bookStates = $this->bookManager->getBookStates();
 
         // On ajoute la liste des différents états aux données qui seront transmises à la vue
         $books[] = $bookStates;
@@ -256,8 +264,8 @@ class BookController
             }
 
             // Mise à jour des informations sur le livre
-            $bookManager = new BookManager();
-            $bookManager->updateBook($bookInput, $book->getId());
+            // $bookManager = new BookManager();
+            $this->bookManager->updateBook($bookInput, $book->getId());
             $_SESSION['updated'] = true;
         }
 
@@ -272,8 +280,6 @@ class BookController
      */
     public function deleteBook(): void
     {
-        echo "<H3>bookController->deleteBook</h3>";
-
         // On vérifie que l'utilisateur est connecté
         if (!isset($_SESSION['user'])) {
             Utils::redirect("connectionForm");
@@ -286,8 +292,8 @@ class BookController
         }
 
         // On récupère les infos du livre.
-        $bookManager = new BookManager();
-        $books = $bookManager->getBookById($idbook);
+        // $bookManager = new BookManager();
+        $books = $this->bookManager->getBookById($idbook);
 
         // Si aucun livre trouvé ALORS on redirige vers la HP
         if ($books === false) {
@@ -300,7 +306,7 @@ class BookController
         }
 
         // On supprime l'enregistrement du livre en BD
-        $bookManager->deleteBook($idbook);
+        $this->bookManager->deleteBook($idbook);
         Utils::redirect("myAccount");
 
     }
@@ -326,8 +332,8 @@ class BookController
         unset($_SESSION['error'], $_SESSION['bookinfo']);
 
         // On récupère les différents états possibles pour un livre
-        $bookManager = new BookManager();
-        $bookStates = $bookManager->getBookStates();
+        // $bookManager = new BookManager();
+        $bookStates = $this->bookManager->getBookStates();
 
         // On affiche la page du formulaire d'ajout d'un nouveau livre
         $view = new View("Ajouter un livre");
@@ -415,9 +421,9 @@ class BookController
 
         } else {
             // Pas d'erreurs, on crée le livre en BD
-            $bookManager = new BookManager();
+            // $bookManager = new BookManager();
             $userId = $_SESSION['user']->getId();
-            $bookId = $bookManager->createBook($bookInput, $userId);
+            $bookId = $this->bookManager->createBook($bookInput, $userId);
             $_SESSION['updated'] = true;
 
             // On redirige vers le formulaire de modification

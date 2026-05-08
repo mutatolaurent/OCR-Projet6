@@ -12,6 +12,6 @@ window.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       toast.classList.remove("is-visible");
       toast.classList.add("is-hidden");
-    }, 4000);
+    }, 3000);
   }
 });

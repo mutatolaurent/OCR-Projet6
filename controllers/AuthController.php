@@ -84,12 +84,6 @@ class AuthController
             $hasError = true;
         }
 
-        // Le champ password est obligatoire
-        // if (!$hasError && empty($credential['password'])) {
-        //     $error['password'] = "! Le mot de passe est obligatoire.";
-        //     $hasError = true;
-        // }
-
         // Le champ password est obligatoire et doit avoir un minimum de caractères
         if (!$hasError && mb_strlen($credential['password']) < PASSWORD_MIN_LENGTH) {
             $error['password'] = "Le mot de passe doit contenir au moins ".PASSWORD_MIN_LENGTH." caractères";
@@ -118,7 +112,7 @@ class AuthController
         // --- REDIRECTION SWITCH ---
 
         // Connexion refusée
-        if (!empty($error)) {
+        if ($hasError) {
             // On stocke les messages d'erreurs et les données saisies en session
             // ce qui permettra au formulaire de récupérer le contexte et aisni :
             // . de conserver les données saisie par l'utilisateur de façon à ce qu'il n'ait pas à les re-saisir

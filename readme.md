@@ -50,6 +50,8 @@ et alors le site est accessible à l’adresse :
 
 1. Le moteur de recherche disponible sur la page "Nos livres à l'échange" effectue une recherche à la fois sur le titre et l'auteur du livre.
 
-2. Pour les tests d'upload des images, de livres et d'avatars utilisateurs, sont disponibles dans le dossier images/test-upload.
+2. Pour les tests d'upload, des images, de livres et d'avatars utilisateurs, sont disponibles dans le dossier images/test-upload.
 
 3. Il existe une version responsive du site qui se déclenche pour les écrans de largeur inférieure à 767px.
+
+4. Dans les maquettes Figma je n'ai pas trouvé de CTA pour l'ajout d'un nouveau livre. J'ai donc placé un bouton "Ajouter un livre" en bas de la page "Mon compte". Un clic sur ce bouton permet d'accéder au formulaire de création d'un nouveau livre.

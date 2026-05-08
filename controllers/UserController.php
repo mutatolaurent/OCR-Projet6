@@ -5,6 +5,13 @@
  */
 class UserController
 {
+    private UserManager $userManager;
+
+    public function __construct()
+    {
+        $this->userManager = new UserManager();
+    }
+
     /**
      * Affiche la page d'informations publiques sur un propriétaire de livres
      * @return void
@@ -19,16 +26,16 @@ class UserController
         }
 
         // On récupère les infos sur le propriétaire y compris les livres qui luis sont rattachés
-        $userManager = new UserManager();
+        // $userManager = new UserManager();
         $filterOnBookState = 1;
-        $user = $userManager->getUserById($idowner, $filterOnBookState);
+        $user = $this->userManager->getUserById($idowner, $filterOnBookState);
 
         // Si aucun propriétaire trouvé ALORS on redirige vers la HP
         if ($user === false) {
             Utils::redirect("home");
         }
 
-        // On affiche la page d'information sur le livre
+        // On affiche la page d'information sur le propriétaire d'un livre
         $view = new View($user[0]->getPseudo());
         $view->render("ownerInfo", [
             'user' => $user
@@ -59,8 +66,8 @@ class UserController
 
         // On récupère toutes les informations sur ce User
         // On récupère les infos sur le propriétaire y compris les livres qui luis sont rattachés
-        $userManager = new UserManager();
-        $user = $userManager->getUserById($_SESSION['user']->getId());
+        // $userManager = new UserManager();
+        $user = $this->userManager->getUserById($_SESSION['user']->getId());
 
         // Si aucun propriétaire trouvé ALORS on déconnecte et on redirige vers la HP
         if ($user === false) {
@@ -70,23 +77,11 @@ class UserController
         // On ajoute les valeurs des champs du formulaire au données transmises à la vue
         $user[] = $formData;
 
-        // Sélection de la vue
-        if (Utils::request('zoom', null) == 'viewAvatar') {
-
-            // On affiche la page d'information sur le livre
-            $view = new View("Avatar ".$user[0]->getPseudo());
-            $view->render("myAvatar", [
-                'user' => $user
-            ]);
-
-        } else {
-
-            // On affiche la page d'information sur le livre
-            $view = new View("Compte ".$user[0]->getPseudo());
-            $view->render("myAccount", [
-                'user' => $user
-            ]);
-        }
+        // On affiche la page d'information sur le livre
+        $view = new View("Compte ".$user[0]->getPseudo());
+        $view->render("myAccount", [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -135,7 +130,7 @@ class UserController
         $hasError = false;
 
         // Init du manager des user
-        $userManager = new UserManager();
+        // $userManager = new UserManager();
 
         // Le champ pseudo doit obligatoirement être renseigné et avoir au moins 3 caratères
         if (mb_strlen($credential['pseudo']) < PSEUDO_MIN_LENGTH) {
@@ -144,7 +139,7 @@ class UserController
         }
 
         // Si le pseudo a été changé, il ne doit pas être déjà utilisé par un autre compte
-        if (!$hasError && $pseudoHasChanged && $userManager->getUserByPseudo($credential['pseudo']) !== null) {
+        if (!$hasError && $pseudoHasChanged && $this->userManager->getUserByPseudo($credential['pseudo']) !== null) {
             $error['pseudo'] = "Ce pseudo est déjà utilisé";
             $hasError = true;
         }
@@ -162,7 +157,7 @@ class UserController
         }
 
         // L'email ne doit pas être déjà utilisé
-        if (!$hasError && $emailHasChanged && $userManager->getUserByLogin($credential['email']) !== null) {
+        if (!$hasError && $emailHasChanged && $this->userManager->getUserByLogin($credential['email']) !== null) {
             $error['email'] = "Cet email est déjà utilisé";
             $hasError = true;
         }
@@ -225,7 +220,7 @@ class UserController
             $credential['idUser'] = $user->getId();
 
             // Mise à jour des informations du compte utilisateur
-            $userChanged = $userManager->updateUser($credential);
+            $userChanged = $this->userManager->updateUser($credential);
             if ($userChanged) {
                 $_SESSION['user'] = $userChanged;
                 $_SESSION['updated'] = true;

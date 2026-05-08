@@ -39,6 +39,15 @@
   --sc-size: 480px; /* Taille d'écran pour basculer en mode responsive */
 }
 
+/* Chargement en local de la Font Inter pour qu'elle soit également prise en compte en navigation privée */
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/inter/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Styles globaux au body de la pa */
 body {
   display: flex;

@@ -64,9 +64,11 @@ class BookManager extends AbstractEntityManager
     {
         $books = [];
 
+        // Ajoute le caractère * à la fin de chaque mot pour permettre
+        // la recherche par racine (ex: "Pol*" trouve "Policier", "Polar").
         $terms = implode('* ', explode(' ', $terms)) . '*';
 
-        // 1. Préparation de la requête avec jointure pour l'utilisateur
+        // Préparation de la requête avec jointure pour l'utilisateur
         // On récupère le score pour pouvoir trier
         $sql = "SELECT a.*, u.id as user_id, u.pseudo, u.email, u.photo as profilpict,
             MATCH(a.title, a.author) AGAINST(:terms) AS score
@@ -75,7 +77,7 @@ class BookManager extends AbstractEntityManager
             WHERE MATCH(a.title, a.author) AGAINST(:terms IN BOOLEAN MODE)
             ORDER BY score DESC";
 
-
+        // On lance la requête de recherche avec les termes de recherche en paramètre
         $result = $this->db->query($sql, ['terms' => $terms]);
 
         // --- LA LOGIQUE DE RETOUR ---
@@ -146,9 +148,8 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Met à jour les informations sur un livre
-     * @param array $credential Informations récupérées du formulaire de modification
-     * @param int îd ID du livre en BD
-     * @return ?Book
+     * @param array $bookInfo Informations récupérées du formulaire de modification
+     * @param int id ID du livre en BD
      */
     public function updateBook(array $bookInfo, int $id): void
     {

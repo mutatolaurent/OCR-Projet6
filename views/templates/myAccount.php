@@ -85,7 +85,7 @@
                         name="password"
                         id="password"
                         aria-required="true"
-                        placeholder="******"
+                        placeholder="••••••••"
                         value="<?= isset($user[1]['error']['password']) ? $user[1]['credential']['password'] : '' ?>"
                         <?= isset($user[1]['error']['password']) ? 'role="alert" aria-invalid="true" aria-describedby="password-error-msg"' : '' ?>
                     />
