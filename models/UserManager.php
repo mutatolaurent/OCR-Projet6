@@ -6,7 +6,7 @@
 class UserManager extends AbstractEntityManager
 {
     /**
-     * Récupère un user par son login = som email
+     * Récupère un user par son login = son email
      * @param string $email
      * @return ?User
      */
@@ -40,9 +40,9 @@ class UserManager extends AbstractEntityManager
 
     /**
      * Récupère un user et ses livres associés, par son ID.
-     * @param int $id
-     * @param int $excludeStateFilter
-     * @return ?User
+     * @param int $id ID de l'utilisateur
+     * @param int $excludeStateFilter filtre pour exclure les livres d'un certain état (par exemple les livres non disponibles)
+     * @return ?array Un tableau contenant l'objet User avec les livres associés, ou false si aucun utilisateur trouvé
      */
     public function getUserById(int $id, int $excludeStateFilter = 0): array|bool
     {

@@ -17,8 +17,6 @@ $action = Utils::request('action', 'home');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= $title ?></title>
     <link rel="stylesheet" href="./css/style.css" />
-    <script src="js/checkUnreadMessages.js"></script>
-    <script src="js/toggleMenu.js"></script>
 
 </head>
 
@@ -51,7 +49,7 @@ $action = Utils::request('action', 'home');
             </a>
 
             <!-- Technique de menu burger responsive sans JS
-            Abandonné au profit d'une technique avce JS car 
+            Abandonné au profit d'une technique avec JS car 
             incompatible avec les contraintes de l'accessibilité. -->
             <!-- <input type="checkbox" id="menu-cb" />
             <label for="menu-cb" class="burger-menu">
@@ -167,5 +165,7 @@ $action = Utils::request('action', 'home');
             </nav>
         </footer>
     </div>
+    <script src="js/checkUnreadMessages.js"></script>
+    <script src="js/toggleMenu.js"></script>
 </body>
 </html>

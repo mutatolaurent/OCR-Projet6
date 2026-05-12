@@ -7,9 +7,9 @@ class ThreadManager extends AbstractEntityManager
 {
     /**
      * Récupère toutes les conversations avec un utilisateur et pour chaque conversation
-     * récupéère des infos sur le contact et sur le dernier message échangé.
+     * récupère des infos sur le contact et sur le dernier message échangé.
      * @param int $id
-     * @param int $idOther
+     * @param User|null $chatContact
      * @return ?array
      */
     public function getAllThreadByUserId(int $id, User|null $chatContact): ?array
@@ -39,7 +39,7 @@ class ThreadManager extends AbstractEntityManager
             }
 
             // On repère le contact de cette conversation si c'est celui de la conversation en cours
-            // Ca nous servira a univeau de la vue
+            // Ca nous servira au niveau de la vue
             // On récupère également l'ID du thread pour récupérer les messages associés
             $threadActif = false;
             if ($chatContact !== null && $chatContact->getId() == $idContact) {
@@ -66,6 +66,7 @@ class ThreadManager extends AbstractEntityManager
             // Si des messages ont déjà été échangés avec ce contact, on les récupère
             if ($threadId !== null) {
                 $messages = $this->getMessagesByThreadId($threadId);
+
                 if (!empty($messages)) {
                     $messagesContext['messages'] = $messages;
 

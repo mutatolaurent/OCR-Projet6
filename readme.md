@@ -8,11 +8,11 @@
 
 Grâce à **phpMyAdmin** ou un autre outil d'administration de MySQL, importez successivement les scripts SQL suivants :
 
-    **db/create_db_tomtroc.sql**
+    db/create_db_tomtroc.sql
 
 et
 
-    **db/populate_db_tomtroc.sql**
+    db/populate_db_tomtroc.sql
 
 Le premier crée la structure de la base de données, et le second crée un jeu de données qui permet de tester toutes les fonctionnalités du site.
 
